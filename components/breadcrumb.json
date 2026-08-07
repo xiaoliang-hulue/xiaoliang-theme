@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Breadcrumb",
+  "slug": "breadcrumb",
+  "confidence": "high",
+  "semanticTypeCandidates": ["navigation", "status"],
+  "variantDimensions": ["separator"],
+  "representativeVariants": [
+    { "separator": "slash" },
+    { "separator": "chevron" }
+  ],
+  "anatomy": ["root", "list", "item", "link", "current"],
+  "structurePatterns": ["nav-with-ol", "aria-current-on-last", "separator-pseudo-element"],
+  "usageHints": ["层级导航", "返回上级路径", "页面定位"],
+  "doNotInvent": ["multi-line breadcrumb", "dropdown breadcrumb truncation"],
+  "unknowns": []
+}

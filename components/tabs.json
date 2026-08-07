@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Tabs",
+  "slug": "tabs",
+  "confidence": "high",
+  "semanticTypeCandidates": ["navigation", "disclosure"],
+  "variantDimensions": ["activation"],
+  "representativeVariants": [
+    { "activation": "automatic" }
+  ],
+  "anatomy": ["root", "tablist", "tab", "tabpanel"],
+  "structurePatterns": ["tablist-role", "aria-selected-roving-tabindex", "panel-hidden-toggle", "js-keyboard-nav"],
+  "usageHints": ["内容分区切换", "设置分组", "同页多视图"],
+  "doNotInvent": ["vertical tabs", "manual-activation mode", "nested tabs"],
+  "unknowns": []
+}

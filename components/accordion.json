@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Accordion",
+  "slug": "accordion",
+  "confidence": "high",
+  "semanticTypeCandidates": ["disclosure", "container"],
+  "variantDimensions": ["defaultOpen"],
+  "representativeVariants": [
+    { "defaultOpen": true },
+    { "defaultOpen": false }
+  ],
+  "anatomy": ["root", "item", "trigger", "content"],
+  "structurePatterns": ["details-summary", "native-disclosure", "chevron-rotate-on-open"],
+  "usageHints": ["折叠 FAQ", "分组设置", "分层内容"],
+  "doNotInvent": ["independent multi-open mode", "animated height transitions"],
+  "unknowns": []
+}

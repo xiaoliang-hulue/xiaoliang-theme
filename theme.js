@@ -1,6 +1,6 @@
 // theme.js — 小亮主题零依赖交互增强
-// 仅提供交互组件所需的最小 JS：Modal（ESC / 焦点陷阱 / 点击外部关闭）、Toast（固定容器 / 自动消失 / 关闭）。
-// 纯 CSS 组件（Button / Input / Card / Tag / Alert / Table / Tooltip / Dropdown / Pagination / Nav）无需本文件。
+// 仅提供交互组件所需的最小 JS：Modal（ESC / 焦点陷阱 / 点击外部关闭）、Toast（固定容器 / 自动消失 / 关闭）、Tabs（ARIA 标签切换 + 键盘导航）。
+// 纯 CSS 组件（Button / Input / Card / Tag / Alert / Table / Tooltip / Dropdown / Pagination / Nav / Breadcrumb / Accordion）无需本文件。
 // 全局命名空间：window.XL
 (function () {
   'use strict';
@@ -118,6 +118,55 @@
     return el;
   }
 
+  /* ── Tabs ── */
+  function initTabs(root) {
+    var tablist = root.querySelector('[role="tablist"]');
+    if (!tablist) return;
+    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+
+    function selectTab(tab, setFocus) {
+      tabs.forEach(function (t) {
+        var selected = t === tab;
+        t.setAttribute('aria-selected', selected ? 'true' : 'false');
+        t.tabIndex = selected ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !selected;
+      });
+      if (setFocus && typeof tab.focus === 'function') tab.focus();
+    }
+
+    tablist.addEventListener('click', function (e) {
+      var tab = e.target.closest('[role="tab"]');
+      if (tab && tablist.contains(tab)) selectTab(tab, false);
+    });
+
+    tablist.addEventListener('keydown', function (e) {
+      var idx = tabs.indexOf(document.activeElement);
+      if (idx < 0) return;
+      var next = -1;
+      if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      if (next >= 0) {
+        e.preventDefault();
+        selectTab(tabs[next], true);
+      }
+    });
+  }
+
+  function initAllTabs() {
+    var roots = document.querySelectorAll('[data-tabs]');
+    Array.prototype.forEach.call(roots, initTabs);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllTabs);
+  } else {
+    initAllTabs();
+  }
+
   /* ── 事件委托：data-modal-open / data-modal-close ── */
   document.addEventListener('click', function (e) {
     var opener = e.target.closest('[data-modal-open]');
@@ -140,6 +189,7 @@
   window.XL = {
     openModal: openModal,
     closeModal: closeModal,
-    showToast: showToast
+    showToast: showToast,
+    initTabs: initTabs
   };
 })();

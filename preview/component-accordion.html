@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 560px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: start; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { min-width: 0; }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden; }
+.accordion-item { border-bottom: 1px solid var(--color-border-subtle); }
+.accordion-item:last-child { border-bottom: none; }
+.accordion-trigger {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
+  width: 100%; padding: var(--space-3) var(--space-4);
+  background: var(--color-surface); color: var(--color-text);
+  font-family: var(--font-sans); font-size: var(--text-sm); font-weight: var(--font-medium);
+  text-align: left; cursor: pointer; border: none; outline: none;
+  transition: background-color .15s;
+}
+.accordion-trigger:hover { background: var(--color-surface-muted); }
+.accordion-trigger:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+.accordion-trigger::-webkit-details-marker { display: none; }
+.accordion-trigger::after {
+  content: ""; flex-shrink: 0; width: 16px; height: 16px;
+  background: currentColor; opacity: .6;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>") center / contain no-repeat;
+  transition: transform .2s ease;
+}
+.accordion-item[open] > .accordion-trigger::after { transform: rotate(180deg); }
+.accordion-content { padding: 0 var(--space-4) var(--space-3); color: var(--color-text-subtle); font-size: var(--text-sm); line-height: 1.6; }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail">
+<div class="accordion">
+  <details class="accordion-item" open>
+    <summary class="accordion-trigger">如何修改主题配色？</summary>
+    <div class="accordion-content">编辑 css.json 中的 Token 后运行 npm run build，即可重新生成 colors_and_type.css 的浅色与深色变量。</div>
+  </details>
+  <details class="accordion-item">
+    <summary class="accordion-trigger">组件样式在哪里维护？</summary>
+    <div class="accordion-content">各组件的 <style> 定义在 preview/component-*.html 的 @component-css-start / @component-css-end 之间，由 extract-components-css.mjs 聚合到 components.css。</div>
+  </details>
+  <details class="accordion-item">
+    <summary class="accordion-trigger">深色模式如何触发？</summary>
+    <div class="accordion-content">通过给根元素设置 data-theme="dark" 或依赖系统偏好 @media (prefers-color-scheme: dark) 自动切换。</div>
+  </details>
+</div>
+</div></section>
+</div>
+</main>
+</body>
+</html>

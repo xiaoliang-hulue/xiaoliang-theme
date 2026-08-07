@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; min-width: 0; gap: var(--space-2); flex-wrap: wrap; align-items: center; padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.breadcrumb { font-size: var(--text-sm); color: var(--color-text-secondary); }
+.breadcrumb-list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.breadcrumb-item { display: inline-flex; align-items: center; gap: var(--space-1); }
+.breadcrumb-item:not(:last-child)::after {
+  content: "/";
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+.breadcrumb-link { color: var(--color-text-secondary); text-decoration: none; border-radius: var(--radius-sm); transition: color .15s; }
+.breadcrumb-link:hover { color: var(--color-primary); text-decoration: underline; }
+.breadcrumb-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.breadcrumb-item[aria-current="page"] { color: var(--color-text); font-weight: var(--font-medium); }
+
+/* 变体：chevron 分隔符 */
+.breadcrumb.chevron .breadcrumb-item:not(:last-child)::after {
+  content: "";
+  width: 14px; height: 14px;
+  background: currentColor;
+  opacity: .5;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='9 18 15 12 9 6'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='9 18 15 12 9 6'/></svg>") center / contain no-repeat;
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail">
+<nav class="breadcrumb" aria-label="面包屑">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">首页</a></li>
+    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">产品</a></li>
+    <li class="breadcrumb-item" aria-current="page">当前页</li>
+  </ol>
+</nav>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="chevron"><span class="story-label">Chevron</span><div class="rail">
+<nav class="breadcrumb chevron" aria-label="面包屑">
+  <ol class="breadcrumb-list">
+    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">首页</a></li>
+    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">产品中心</a></li>
+    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">手机</a></li>
+    <li class="breadcrumb-item" aria-current="page">详情</li>
+  </ol>
+</nav>
+</div></section>
+</div>
+</main>
+</body>
+</html>

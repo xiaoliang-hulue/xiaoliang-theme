@@ -283,13 +283,13 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 |------|------|
 | `colors_and_type.css` | Token 定义与排版工具类（浅色/深色双模式） |
 | `css.json` | Token 的 JSON 投影（含 light / dark） |
-| `components.css` | 聚合后的组件样式（18 个组件，类名 `.btn` / `.alert` 等） |
+| `components.css` | 聚合后的组件样式（21 个组件，类名 `.btn` / `.alert` 等） |
 | `utilities.css` | 工具类（间距/圆角/阴影/容器/弹性/栅格，由 `build-utilities.mjs` 生成） |
 | `components/` | 各组件的结构化定义（`index.json` + `*.json`） |
 | `theme.js` | 零依赖交互脚本（Modal / Toast，暴露 `window.XL`） |
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `preview/index.html` | 主题总览预览页 |
-| `preview/component-*.html` | 18 个组件预览页 |
+| `preview/component-*.html` | 21 个组件预览页 |
 | `preview/page-list.html` | 列表页模板 |
 | `preview/page-detail.html` | 详情页模板 |
 | `preview/page-form.html` | 表单页模板 |
@@ -303,7 +303,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
 ## 组件清单
 
-已提供预览页的组件（共 18 个）：
+已提供预览页的组件（共 21 个）：
 
 | 组件 | 预览文件 | 说明 |
 |------|----------|------|
@@ -325,6 +325,9 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Toast | `preview/component-toast.html` | Success / Error / Info |
 | TopNav | `preview/component-topnav.html` | 品牌 / 导航链接 / 激活态 |
 | SideNav | `preview/component-sidenav.html` | 分区 / 链接 / 激活态 |
+| Tabs | `preview/component-tabs.html` | 概览 / 详情 / 设置（ARIA + 方向键，依赖 theme.js） |
+| Accordion | `preview/component-accordion.html` | 折叠 / 默认展开（原生 details，零 JS） |
+| Breadcrumb | `preview/component-breadcrumb.html` | 默认 / Chevron 分隔符 |
 
 组件样式已聚合到 `components.css`（类名规范：`.btn` / `.alert` / `.input` / `.card` / `.tag` 等），可直接引入或按需复制。各组件的结构化定义见 `components/*.json`。
 
@@ -338,7 +341,7 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 
 - 页面模板（列表页、详情页、表单页、仪表盘）—— 已完成
 - UI Kit 展示页 —— 已完成
-- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Tooltip、Toast、TopNav、SideNav（共 18 个）—— 已完成
+- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb（共 21 个）—— 已完成
 
 ## 许可
 
