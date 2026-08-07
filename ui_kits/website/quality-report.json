@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "screensGenerated": 3,
+  "coreComponentsUsed": [
+    "button",
+    "input",
+    "card",
+    "tag",
+    "alert",
+    "table",
+    "modal",
+    "tooltip",
+    "toast",
+    "dropdown",
+    "topnav",
+    "sidenav",
+    "form",
+    "pagination"
+  ],
+  "supportComponentsUsed": [],
+  "previewClassReuseRate": 0.88,
+  "hasProductContext": true,
+  "inventedComponents": [],
+  "renderedFromEvidence": [],
+  "interactiveStatesRendered": [
+    "hover",
+    "active",
+    "focus",
+    "disabled",
+    "selected",
+    "loading",
+    "open",
+    "error",
+    "success"
+  ],
+  "primaryActionPerScreen": true,
+  "mockDataDensity": { "tableRows": 8, "chartPoints": 12 },
+  "warnings": []
+}

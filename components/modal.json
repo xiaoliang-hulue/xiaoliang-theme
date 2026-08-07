@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Modal",
+  "slug": "modal",
+  "confidence": "high",
+  "semanticTypeCandidates": ["overlay", "dialog"],
+  "variantDimensions": ["size", "intent"],
+  "representativeVariants": [
+    { "size": "default", "intent": "default" },
+    { "size": "default", "intent": "confirm" }
+  ],
+  "anatomy": ["overlay", "panel", "header", "title", "close", "body", "footer", "actions"],
+  "structurePatterns": ["fixed-overlay", "centered-panel", "header-body-footer"],
+  "usageHints": ["二次确认", "重要信息展示", "表单弹窗"],
+  "doNotInvent": ["nested modals", "full-screen galleries"],
+  "unknowns": []
+}

@@ -1,0 +1,251 @@
+/* @group-priority: primary, gray, success, warning, error */
+
+:root {
+  color-scheme: light dark;
+
+  /* primary */
+  --primary-50: #f0f5ff; /* Source: structured-spec */
+  --primary-100: #dbe6ff; /* Source: structured-spec */
+  --primary-200: #b3cdff; /* Source: structured-spec */
+  --primary-300: #85adff; /* Source: structured-spec */
+  --primary-400: #5b8ff9; /* Source: structured-spec */
+  --primary-500: #3b82f6; /* Source: structured-spec */
+  --primary-600: #2563eb; /* Source: structured-spec */
+  --primary-700: #1d4ed8; /* Source: structured-spec */
+  --primary-800: #1e40af; /* Source: structured-spec */
+  --primary-900: #1e3a8a; /* Source: structured-spec */
+  --primary-950: #172554; /* Source: structured-spec */
+
+  /* gray */
+  --gray-0: #ffffff; /* Source: structured-spec */
+  --gray-50: #fafafa; /* Source: structured-spec */
+  --gray-100: #f5f5f5; /* Source: structured-spec */
+  --gray-200: #e5e5e5; /* Source: structured-spec */
+  --gray-300: #d4d4d4; /* Source: structured-spec */
+  --gray-400: #a3a3a3; /* Source: structured-spec */
+  --gray-500: #737373; /* Source: structured-spec */
+  --gray-600: #525252; /* Source: structured-spec */
+  --gray-700: #404040; /* Source: structured-spec */
+  --gray-800: #262626; /* Source: structured-spec */
+  --gray-900: #171717; /* Source: structured-spec */
+  --gray-950: #0a0a0a; /* Source: structured-spec */
+
+  /* semantic */
+  --success: #15803d; /* Source: structured-spec */
+  --success-bg: #f0fdf4; /* Source: structured-spec */
+  --warning: #b45309; /* Source: structured-spec */
+  --warning-bg: #fffbeb; /* Source: structured-spec */
+  --error: #b91c1c; /* Source: structured-spec */
+  --error-bg: #fef2f2; /* Source: structured-spec */
+  --info: var(--primary-600); /* Source: structured-spec */
+  --info-bg: var(--primary-50); /* Source: structured-spec */
+
+  /* semantic-aliases */
+  --color-background: var(--gray-0); /* Source: structured-spec */
+  --color-surface: var(--gray-0); /* Source: structured-spec */
+  --color-surface-elevated: var(--gray-0); /* Source: structured-spec */
+  --color-surface-muted: var(--gray-50); /* Source: structured-spec */
+  --color-border: var(--gray-200); /* Source: structured-spec */
+  --color-border-subtle: var(--gray-100); /* Source: structured-spec */
+  --color-text: var(--gray-900); /* Source: structured-spec */
+  --color-text-secondary: var(--gray-600); /* Source: structured-spec */
+  --color-text-muted: var(--gray-400); /* Source: structured-spec */
+  --color-primary: var(--primary-600); /* Source: structured-spec */
+  --color-primary-hover: var(--primary-700); /* Source: structured-spec */
+  --color-primary-subtle: var(--primary-50); /* Source: structured-spec */
+  --color-on-primary: #ffffff; /* Source: structured-spec */
+
+  /* typography */
+  --font-sans:
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    "Helvetica Neue",
+    Arial,
+    sans-serif; /* Source: structured-spec */
+  --font-mono:
+    "SFMono-Regular",
+    "SF Mono",
+    "Roboto Mono",
+    "Consolas",
+    "Liberation Mono",
+    monospace; /* Source: structured-spec */
+  --text-xs: 12px; /* Source: structured-spec */
+  --text-sm: 14px; /* Source: structured-spec */
+  --text-base: 16px; /* Source: structured-spec */
+  --text-lg: 18px; /* Source: structured-spec */
+  --text-xl: 20px; /* Source: structured-spec */
+  --text-2xl: 24px; /* Source: structured-spec */
+  --text-3xl: 30px; /* Source: structured-spec */
+  --text-4xl: 36px; /* Source: structured-spec */
+  --text-5xl: 48px; /* Source: structured-spec */
+  --font-normal: 400; /* Source: structured-spec */
+  --font-medium: 500; /* Source: structured-spec */
+  --font-semibold: 600; /* Source: structured-spec */
+  --font-bold: 700; /* Source: structured-spec */
+
+  /* spacing */
+  --space-0: 0px; /* Source: structured-spec */
+  --space-1: 4px; /* Source: structured-spec */
+  --space-2: 8px; /* Source: structured-spec */
+  --space-3: 12px; /* Source: structured-spec */
+  --space-4: 16px; /* Source: structured-spec */
+  --space-5: 20px; /* Source: structured-spec */
+  --space-6: 24px; /* Source: structured-spec */
+  --space-8: 32px; /* Source: structured-spec */
+  --space-10: 40px; /* Source: structured-spec */
+  --space-12: 48px; /* Source: structured-spec */
+  --space-16: 64px; /* Source: structured-spec */
+  --space-20: 80px; /* Source: structured-spec */
+  --space-24: 96px; /* Source: structured-spec */
+
+  /* radius */
+  --radius-none: 0px; /* Source: structured-spec */
+  --radius-sm: 4px; /* Source: structured-spec */
+  --radius-md: 8px; /* Source: structured-spec */
+  --radius-lg: 12px; /* Source: structured-spec */
+  --radius-xl: 16px; /* Source: structured-spec */
+  --radius-full: 9999px; /* Source: structured-spec */
+
+  /* shadow */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.03); /* Source: structured-spec */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05); /* Source: structured-spec */
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06); /* Source: structured-spec */
+  --shadow-lg: 0 12px 28px -6px rgba(0, 0, 0, 0.08); /* Source: structured-spec */
+  --shadow-xl: 0 24px 48px -10px rgba(0, 0, 0, 0.10); /* Source: structured-spec */
+
+  /* breakpoints */
+  --breakpoint-sm: 640px; /* Source: structured-spec */
+  --breakpoint-md: 768px; /* Source: structured-spec */
+  --breakpoint-lg: 1024px; /* Source: structured-spec */
+  --breakpoint-xl: 1280px; /* Source: structured-spec */
+  --breakpoint-2xl: 1536px; /* Source: structured-spec */
+  --container-max: 1280px; /* Source: structured-spec */
+}
+
+.dark {
+  /* primary */
+  --primary-50: #0f1f4d; /* Source: structured-spec */
+  --primary-100: #162b66; /* Source: structured-spec */
+  --primary-200: #1e3d8f; /* Source: structured-spec */
+  --primary-300: #2754b8; /* Source: structured-spec */
+  --primary-400: #356de3; /* Source: structured-spec */
+  --primary-500: #4b85f6; /* Source: structured-spec */
+  --primary-600: #6394fa; /* Source: structured-spec */
+  --primary-700: #85adff; /* Source: structured-spec */
+  --primary-800: #b3cdff; /* Source: structured-spec */
+  --primary-900: #dbe6ff; /* Source: structured-spec */
+  --primary-950: #eef4ff; /* Source: structured-spec */
+
+  /* gray */
+  --gray-0: #0a0a0a; /* Source: structured-spec */
+  --gray-50: #111111; /* Source: structured-spec */
+  --gray-100: #1a1a1a; /* Source: structured-spec */
+  --gray-200: #262626; /* Source: structured-spec */
+  --gray-300: #404040; /* Source: structured-spec */
+  --gray-400: #525252; /* Source: structured-spec */
+  --gray-500: #737373; /* Source: structured-spec */
+  --gray-600: #a3a3a3; /* Source: structured-spec */
+  --gray-700: #d4d4d4; /* Source: structured-spec */
+  --gray-800: #e5e5e5; /* Source: structured-spec */
+  --gray-900: #f5f5f5; /* Source: structured-spec */
+  --gray-950: #ffffff; /* Source: structured-spec */
+
+  /* semantic */
+  --success: #4ade80; /* Source: structured-spec */
+  --success-bg: #052e16; /* Source: structured-spec */
+  --warning: #fbbf24; /* Source: structured-spec */
+  --warning-bg: #451a03; /* Source: structured-spec */
+  --error: #f87171; /* Source: structured-spec */
+  --error-bg: #450a0a; /* Source: structured-spec */
+  --info: var(--primary-500); /* Source: structured-spec */
+  --info-bg: #0f1f4d; /* Source: structured-spec */
+
+  /* semantic-aliases */
+  --color-background: var(--gray-0); /* Source: structured-spec */
+  --color-surface: var(--gray-50); /* Source: structured-spec */
+  --color-surface-elevated: var(--gray-100); /* Source: structured-spec */
+  --color-surface-muted: var(--gray-100); /* Source: structured-spec */
+  --color-border: var(--gray-200); /* Source: structured-spec */
+  --color-border-subtle: var(--gray-100); /* Source: structured-spec */
+  --color-text: var(--gray-900); /* Source: structured-spec */
+  --color-text-secondary: var(--gray-600); /* Source: structured-spec */
+  --color-text-muted: var(--gray-400); /* Source: structured-spec */
+  --color-primary: var(--primary-500); /* Source: structured-spec */
+  --color-primary-hover: var(--primary-600); /* Source: structured-spec */
+  --color-primary-subtle: var(--primary-950); /* Source: structured-spec */
+  --color-on-primary: #0a0a0a; /* Source: structured-spec */
+}
+
+/* Typography utilities */
+.xl-display,
+.xl-h1,
+.xl-h2,
+.xl-h3,
+.xl-h4,
+.xl-body,
+.xl-lead,
+.xl-caption,
+.xl-eyebrow {
+  font-family: var(--font-sans);
+}
+
+.xl-display {
+  font-size: var(--text-5xl);
+  line-height: 60px;
+  font-weight: var(--font-bold);
+}
+
+.xl-h1 {
+  font-size: var(--text-4xl);
+  line-height: 48px;
+  font-weight: var(--font-semibold);
+}
+
+.xl-h2 {
+  font-size: var(--text-3xl);
+  line-height: 42px;
+  font-weight: var(--font-semibold);
+}
+
+.xl-h3 {
+  font-size: var(--text-2xl);
+  line-height: 36px;
+  font-weight: var(--font-medium);
+}
+
+.xl-h4 {
+  font-size: var(--text-xl);
+  line-height: 32px;
+  font-weight: var(--font-medium);
+}
+
+.xl-body {
+  font-size: var(--text-base);
+  line-height: 26px;
+  font-weight: var(--font-normal);
+}
+
+.xl-lead {
+  font-size: var(--text-lg);
+  line-height: 30px;
+  font-weight: var(--font-normal);
+}
+
+.xl-caption {
+  font-size: var(--text-xs);
+  line-height: 18px;
+  font-weight: var(--font-normal);
+}
+
+.xl-eyebrow {
+  font-size: var(--text-xs);
+  line-height: 18px;
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.xl-mono {
+  font-family: var(--font-mono);
+}

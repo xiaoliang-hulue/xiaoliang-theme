@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Tooltip",
+  "slug": "tooltip",
+  "confidence": "high",
+  "semanticTypeCandidates": ["feedback", "hint"],
+  "variantDimensions": ["placement"],
+  "representativeVariants": [
+    { "placement": "top" }
+  ],
+  "anatomy": ["trigger", "bubble", "arrow"],
+  "structurePatterns": ["hover-trigger", "absolute-bubble"],
+  "usageHints": ["图标说明", "缩写展开", "操作提示"],
+  "doNotInvent": ["rich tooltips", "interactive tooltips"],
+  "unknowns": []
+}

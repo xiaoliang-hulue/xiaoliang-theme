@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Form",
+  "slug": "form",
+  "confidence": "high",
+  "semanticTypeCandidates": ["container", "input-group"],
+  "variantDimensions": ["layout", "state"],
+  "representativeVariants": [
+    { "layout": "vertical", "state": "default" },
+    { "layout": "horizontal", "state": "default" },
+    { "layout": "inline", "state": "default" },
+    { "layout": "vertical", "state": "error" },
+    { "layout": "vertical", "state": "success" }
+  ],
+  "anatomy": ["root", "field", "label", "input", "hint", "error-message"],
+  "structurePatterns": ["grouped-fields", "labeled-inputs", "validation-messages"],
+  "usageHints": ["表单布局", "字段分组", "校验反馈"],
+  "doNotInvent": ["complex multi-step wizard", "file upload", "rich editor"],
+  "unknowns": []
+}

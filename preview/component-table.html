@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Table · 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  /* Page scaffold — NOT extracted */
+  body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+  .row { display: flex; gap: var(--space-2); align-items: center; margin-bottom: var(--space-2); flex-wrap: wrap; }
+  .row.label-only { min-height: 20px; }
+  .label { font-size: var(--text-xs); line-height: 18px; color: var(--color-text-secondary); white-space: nowrap; }
+  .divider { width: 100%; height: 1px; margin: var(--space-2) 0; border: none; background: var(--color-border-subtle); }
+  /* @component-css-start */
+  /* Component definitions — extracted to components.css by deterministic script */
+  .table { width: 100%; border-collapse: collapse; table-layout: fixed; background: var(--color-surface); }
+  .table th, .table td { height: 48px; padding: 0 var(--space-4); text-align: left; font-size: var(--text-sm); line-height: 22px; border-bottom: 1px solid var(--color-border-subtle); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .table th { font-weight: var(--font-medium); color: var(--color-text-secondary); background: var(--color-surface-muted); }
+  .table td { color: var(--color-text); }
+  .table.stripe tbody tr:nth-child(even) { background: var(--color-surface-muted); }
+  .table.hover tbody tr:hover { filter: brightness(0.97); }
+  .table-empty { text-align: center; padding: var(--space-10) var(--space-4); color: var(--color-text-muted); }
+  .table-empty-icon { width: 48px; height: 48px; margin: 0 auto var(--space-3); color: var(--color-text-muted); opacity: .6; }
+  /* @component-css-end */
+</style>
+</head>
+<body>
+  <div class="row label-only"><span class="label">默认</span></div>
+  <div class="row">
+    <table class="table">
+      <thead><tr><th>项目名称</th><th>类型</th><th>状态</th><th>数量</th></tr></thead>
+      <tbody>
+        <tr><td>项目 Alpha</td><td>基础数据</td><td>生效中</td><td>12,480</td></tr>
+        <tr><td>项目 Beta</td><td>运营数据</td><td>待处理</td><td>8,320</td></tr>
+        <tr><td>项目 Gamma</td><td>财务数据</td><td>已归档</td><td>24,150</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row label-only"><span class="label">悬停行</span></div>
+  <div class="row">
+    <table class="table hover">
+      <thead><tr><th>项目名称</th><th>类型</th><th>状态</th><th>数量</th></tr></thead>
+      <tbody>
+        <tr><td>项目 Alpha</td><td>基础数据</td><td>生效中</td><td>12,480</td></tr>
+        <tr><td>项目 Beta</td><td>运营数据</td><td>待处理</td><td>8,320</td></tr>
+        <tr><td>项目 Gamma</td><td>财务数据</td><td>已归档</td><td>24,150</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <hr class="divider">
+  <div class="row label-only"><span class="label">斑马纹</span></div>
+  <div class="row">
+    <table class="table stripe">
+      <thead><tr><th>项目名称</th><th>类型</th><th>状态</th><th>数量</th></tr></thead>
+      <tbody>
+        <tr><td>项目 Alpha</td><td>基础数据</td><td>生效中</td><td>12,480</td></tr>
+        <tr><td>项目 Beta</td><td>运营数据</td><td>待处理</td><td>8,320</td></tr>
+        <tr><td>项目 Gamma</td><td>财务数据</td><td>已归档</td><td>24,150</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row label-only"><span class="label">斑马纹 + 悬停行</span></div>
+  <div class="row">
+    <table class="table stripe hover">
+      <thead><tr><th>项目名称</th><th>类型</th><th>状态</th><th>数量</th></tr></thead>
+      <tbody>
+        <tr><td>项目 Alpha</td><td>基础数据</td><td>生效中</td><td>12,480</td></tr>
+        <tr><td>项目 Beta</td><td>运营数据</td><td>待处理</td><td>8,320</td></tr>
+        <tr><td>项目 Gamma</td><td>财务数据</td><td>已归档</td><td>24,150</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <hr class="divider">
+  <div class="row label-only"><span class="label">空态</span></div>
+  <div class="row">
+    <table class="table">
+      <thead><tr><th>项目名称</th><th>类型</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td colspan="3">
+          <div class="table-empty">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="table-empty-icon"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+            <div style="font-size: var(--text-sm); color: var(--color-text-secondary);">暂无数据</div>
+            <div style="font-size: var(--text-xs); margin-top: var(--space-1);">点击右上角按钮创建记录。</div>
+          </div>
+        </td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

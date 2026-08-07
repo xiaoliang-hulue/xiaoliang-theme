@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Pagination",
+  "slug": "pagination",
+  "confidence": "high",
+  "semanticTypeCandidates": ["navigation", "data-control"],
+  "variantDimensions": ["size", "state"],
+  "representativeVariants": [
+    { "size": "default", "state": "default" },
+    { "size": "small", "state": "default" },
+    { "size": "default", "state": "active" },
+    { "size": "default", "state": "disabled" }
+  ],
+  "anatomy": ["root", "prev-button", "next-button", "page-item", "ellipsis"],
+  "structurePatterns": ["button-group", "page-numbers", "boundary-controls"],
+  "usageHints": ["表格分页", "列表分页", "数据导航"],
+  "doNotInvent": ["infinite scroll", "page size selector", "jump to page input"],
+  "unknowns": []
+}

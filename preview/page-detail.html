@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>详情页 - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* @component-css-start */
+body { margin: 0; background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.navbar { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 var(--space-4); background: var(--color-surface-elevated); border-bottom: 1px solid var(--color-border); }
+.navbar-brand { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-lg); font-weight: var(--font-medium); }
+.navbar-actions { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--color-text-secondary); }
+.page { max-width: var(--container-max); margin: 0 auto; padding: var(--space-6) var(--space-4); }
+.page-header { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+.back-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-elevated); color: var(--color-text-secondary); cursor: pointer; transition: background .15s; }
+.back-btn:hover { background: var(--color-surface-muted); }
+.page-title { font-size: var(--text-2xl); font-weight: var(--font-semibold); line-height: 36px; margin: 0; }
+.page-subtitle { font-size: var(--text-sm); color: var(--color-text-secondary); margin: var(--space-1) 0 0; }
+.detail-grid { display: grid; gap: var(--space-4); }
+.detail-row { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.detail-field { flex: 1; min-width: 200px; }
+.field-label { font-size: var(--text-xs); color: var(--color-text-secondary); margin-bottom: var(--space-1); }
+.field-value { font-size: var(--text-base); color: var(--color-text); }
+.field-value-mono { font-family: var(--font-mono); }
+.status-row { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); }
+.page-actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-brand"><i data-lucide="box"></i>小亮设计系统</div>
+  <div class="navbar-actions"><i data-lucide="bell"></i><i data-lucide="user"></i></div>
+</nav>
+<main class="page">
+  <div class="page-header">
+    <button class="back-btn" type="button" aria-label="返回"><i data-lucide="arrow-left"></i></button>
+    <div>
+      <h1 class="page-title">订单详情</h1>
+      <p class="page-subtitle">查看并管理该订单的全部信息</p>
+    </div>
+  </div>
+  <div class="detail-grid">
+    <div class="card card-default">
+      <div class="card-header">基础信息</div>
+      <div class="detail-row">
+        <div class="detail-field">
+          <div class="field-label">订单编号</div>
+          <div class="field-value field-value-mono">ORD-2024-0815-001</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">下单时间</div>
+          <div class="field-value">2024 年 8 月 15 日 14:32</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">订单来源</div>
+          <div class="field-value">微信小程序商城</div>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="field-label">当前状态</span>
+        <span class="tag tag-rounded tag-success">已支付</span>
+        <span class="tag tag-rounded tag-default">待发货</span>
+      </div>
+    </div>
+    <div class="card card-default">
+      <div class="card-header">收货信息</div>
+      <div class="detail-row">
+        <div class="detail-field">
+          <div class="field-label">收货人</div>
+          <div class="field-value">张小明</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">联系电话</div>
+          <div class="field-value">138 **** 5678</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">收货地址</div>
+          <div class="field-value">北京市朝阳区建国路 88 号 SOHO 现代城 3 号楼 1202 室</div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-default">
+      <div class="card-header">商品明细</div>
+      <div class="detail-row">
+        <div class="detail-field">
+          <div class="field-label">商品名称</div>
+          <div class="field-value">小亮智能台灯 Pro</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">规格</div>
+          <div class="field-value">白色 / 国 AA 级 / 无线充电底座</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">数量</div>
+          <div class="field-value">2 件</div>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="field-label">商品状态</span>
+        <span class="tag tag-rounded tag-primary">库存充足</span>
+      </div>
+    </div>
+    <div class="card card-default">
+      <div class="card-header">金额汇总</div>
+      <div class="detail-row">
+        <div class="detail-field">
+          <div class="field-label">商品金额</div>
+          <div class="field-value">¥598.00</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">运费</div>
+          <div class="field-value">¥0.00</div>
+        </div>
+        <div class="detail-field">
+          <div class="field-label">实付金额</div>
+          <div class="field-value">¥598.00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-actions">
+    <button class="btn btn-secondary btn-md" type="button">返回列表</button>
+    <button class="btn btn-ghost btn-md" type="button">打印订单</button>
+    <button class="btn btn-primary btn-md" type="button">确认发货</button>
+  </div>
+</main>
+<script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

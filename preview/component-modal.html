@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modal - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+
+/* @component-css-start */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; padding: var(--space-6); z-index: 100; }
+.modal { width: 100%; max-width: 480px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); }
+.modal-header { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
+.modal-title { font-size: var(--text-lg); font-weight: var(--font-medium); color: var(--color-text); }
+.modal-close { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--radius-md); border: none; background: transparent; color: var(--color-text-muted); cursor: pointer; }
+.modal-close:hover { background: var(--color-surface-muted); color: var(--color-text); }
+.modal-body { padding: var(--space-6); font-size: var(--text-base); line-height: 26px; color: var(--color-text-secondary); }
+.modal-footer { display: flex; justify-content: flex-end; gap: var(--space-3); padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-border-subtle); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-sans); font-weight: var(--font-medium); white-space: nowrap; }
+.btn-md { min-height: 36px; padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
+.btn-primary { background: var(--color-primary); color: var(--color-on-primary); }
+.btn-secondary { background: var(--color-surface-muted); color: var(--color-text); border-color: var(--color-border); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="modal-overlay" style="position: relative; padding: 0; background: transparent;">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">对话框标题</div>
+      <button class="modal-close" type="button" aria-label="关闭"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <div class="modal-body">这是一个标准对话框，用于确认操作或展示重要信息。</div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary btn-md" type="button">取消</button>
+      <button class="btn btn-primary btn-md" type="button">确认</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

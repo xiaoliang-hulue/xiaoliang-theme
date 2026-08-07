@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小亮主题 · UI Kit</title>
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <link rel="stylesheet" href="../../components.css">
+  <style>
+    :root { --uikit-sidebar-w: 220px; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background: var(--color-background);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .uikit-shell {
+      width: 100%;
+      max-width: 1184px;
+      margin: 0 auto;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: var(--uikit-sidebar-w) minmax(0, 1fr);
+      gap: var(--space-4);
+      min-height: 100vh;
+      padding: var(--space-4);
+    }
+    .uikit-sidebar,
+    .uikit-main,
+    .uikit-toolbar { min-width: 0; }
+    .uikit-sidebar {
+      overflow: hidden;
+      max-width: 100%;
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      height: fit-content;
+    }
+    .uikit-main {
+      background: var(--color-surface-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      min-height: 720px;
+    }
+    [data-component] {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .uikit-toolbar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+    .uikit-responsive-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+      min-width: 0;
+    }
+    .uikit-responsive-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .uikit-table-wrap {
+      max-width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+    }
+    .uikit-truncate {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .uikit-nowrap { white-space: nowrap; flex-shrink: 0; }
+    .uikit-action-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      max-width: 160px;
+      overflow: hidden;
+    }
+    .uikit-action {
+      min-width: 0;
+      max-width: 120px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .brand { display: flex; align-items: center; gap: var(--space-3); }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--font-bold);
+      font-size: var(--text-lg);
+    }
+    .brand-title { font-size: var(--text-lg); font-weight: var(--font-semibold); line-height: 28px; }
+    .brand-sub { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 18px; }
+
+    .sidebar-menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      text-align: left;
+    }
+    .sidebar-link:hover { background: var(--color-surface-muted); color: var(--color-text); }
+    .sidebar-link.active { background: var(--color-primary-subtle); color: var(--color-primary); }
+    .sidebar-icon { flex-shrink: 0; width: 18px; height: 18px; }
+
+    .screen { animation: fadeIn .25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .screen-title { font-size: var(--text-3xl); font-weight: var(--font-semibold); line-height: 42px; margin: 0 0 var(--space-2); }
+    .screen-desc { font-size: var(--text-base); color: var(--color-text-secondary); line-height: 26px; margin: 0 0 var(--space-6); }
+
+    .section-title { font-size: var(--text-xl); font-weight: var(--font-medium); line-height: 32px; margin: var(--space-8) 0 var(--space-4); }
+    .section-title:first-of-type { margin-top: 0; }
+    .demo-label { font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-2); line-height: 18px; }
+
+    .hero-card {
+      background: linear-gradient(135deg, var(--color-primary-subtle) 0%, var(--color-surface-elevated) 100%);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      margin-bottom: var(--space-6);
+    }
+    .hero-card h2 { font-size: var(--text-4xl); font-weight: var(--font-bold); line-height: 48px; margin: 0 0 var(--space-3); }
+    .hero-card p { font-size: var(--text-lg); color: var(--color-text-secondary); line-height: 30px; margin: 0 0 var(--space-6); max-width: 640px; }
+
+    .flex-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+    .flex-row-sm { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+
+    .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin-bottom: var(--space-4); }
+    .form-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+    .form-field label { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-text); }
+    .form-field .hint { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 18px; }
+    .form-field .error-text { font-size: var(--text-xs); color: var(--error); line-height: 18px; }
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .metric-value { font-size: var(--text-3xl); font-weight: var(--font-bold); line-height: 42px; margin: 0 0 var(--space-1); }
+    .metric-label { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 22px; }
+    .metric-delta { font-size: var(--text-xs); font-weight: var(--font-medium); margin-top: var(--space-3); display: inline-flex; align-items: center; gap: var(--space-1); }
+    .metric-delta.up { color: var(--success); }
+    .metric-delta.down { color: var(--error); }
+
+    .chart { display: flex; align-items: flex-end; gap: var(--space-2); height: 140px; padding: var(--space-4); background: var(--color-surface-muted); border-radius: var(--radius-lg); }
+    .chart-bar { flex: 1; min-width: 8px; background: var(--color-primary); border-radius: var(--radius-sm); opacity: .85; transition: opacity .15s; }
+    .chart-bar:hover { opacity: 1; }
+
+    .footer-note {
+      margin-top: var(--space-8);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-border-subtle);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      line-height: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .uikit-shell { grid-template-columns: minmax(0, 1fr); }
+      .uikit-sidebar { display: none; }
+      .uikit-responsive-grid,
+      .uikit-responsive-grid.three { grid-template-columns: minmax(0, 1fr); }
+      .form-row { grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .uikit-toolbar { flex-direction: column; align-items: stretch; }
+      .uikit-responsive-grid,
+      .uikit-responsive-grid.three { grid-template-columns: minmax(0, 1fr); }
+      .form-actions { flex-direction: column; align-items: stretch; }
+      .hero-card h2 { font-size: var(--text-3xl); line-height: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const { useState } = React;
+
+    const Icon = ({ name }) => {
+      const path = {
+        grid: <><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></>,
+        form: <><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></>,
+        dashboard: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></>,
+        search: <><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></>,
+        bell: <><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></>,
+        user: <><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></>,
+        check: <><path d="M20 6L9 17l-5-5"/></>,
+        info: <><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></>,
+        warning: <><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></>,
+        arrowUp: <><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></>,
+        arrowDown: <><path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/></>,
+        plus: <><path d="M12 5v14"/><path d="M5 12h14"/></>,
+      }[name];
+      return <svg className="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{path}</svg>;
+    };
+
+    const SidebarLink = ({ icon, label, active, onClick }) => (
+      <button className={`sidebar-link ${active ? 'active' : ''}`} onClick={onClick}>
+        <Icon name={icon} />
+        <span className="uikit-truncate">{label}</span>
+      </button>
+    );
+
+    const Sidebar = ({ current, setScreen }) => (
+      <aside className="uikit-sidebar sidebar">
+        <div className="brand">
+          <span className="brand-mark">亮</span>
+          <div>
+            <div className="brand-title uikit-truncate">小亮主题</div>
+            <div className="brand-sub">SaaS 设计系统</div>
+          </div>
+        </div>
+        <nav>
+          <ul className="sidebar-menu">
+            <li><SidebarLink icon="grid" label="组件总览" active={current === 'overview'} onClick={() => setScreen('overview')} /></li>
+            <li><SidebarLink icon="form" label="表单示例" active={current === 'form'} onClick={() => setScreen('form')} /></li>
+            <li><SidebarLink icon="dashboard" label="数据看板" active={current === 'dashboard'} onClick={() => setScreen('dashboard')} /></li>
+          </ul>
+        </nav>
+        <div className="card card-compact" data-component="card">
+          <div className="card-header" style={{ fontSize: 'var(--text-sm)' }}>当前版本</div>
+          <div className="card-body" style={{ fontSize: 'var(--text-xs)', marginBottom: 0 }}>
+            v1.2 · 14 个组件 · 深浅双模式
+          </div>
+        </div>
+      </aside>
+    );
+
+    const OverviewScreen = () => {
+      const [pressed, setPressed] = useState(false);
+      const [modalOpen, setModalOpen] = useState(false);
+      return (
+        <div className="screen">
+          <h1 className="screen-title">组件总览</h1>
+          <p className="screen-desc">小亮主题在真实 SaaS 场景中的组件组合与状态展示。</p>
+
+          <div className="hero-card" data-component="card">
+            <h2>极简、干净、可扩展</h2>
+            <p>以 4px 栅格与语义化 Token 为基础，为个人项目与轻量 SaaS 产品提供一致的视觉语言。</p>
+            <div className="flex-row">
+              <button className="btn btn-primary btn-md" data-component="button">开始使用</button>
+              <button className="btn btn-secondary btn-md" data-component="button">查看文档</button>
+              <button className="btn btn-ghost btn-md" data-component="button">了解更多</button>
+            </div>
+          </div>
+
+          <div className="section-title">按钮状态</div>
+          <div className="card card-default" data-component="card">
+            <div className="demo-label">变体与尺寸</div>
+            <div className="flex-row">
+              <button className="btn btn-primary btn-sm" data-component="button">小型</button>
+              <button className="btn btn-primary btn-md" data-component="button">主要</button>
+              <button className="btn btn-primary btn-lg" data-component="button">大型</button>
+              <button className="btn btn-secondary btn-md" data-component="button">次要</button>
+              <button className="btn btn-ghost btn-md" data-component="button">幽灵</button>
+              <button className="btn btn-danger btn-md" data-component="button">危险</button>
+            </div>
+            <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>状态</div>
+            <div className="flex-row">
+              <button className="btn btn-primary btn-md" disabled data-component="button">禁用</button>
+              <button className="btn btn-primary btn-md btn-loading" data-component="button">加载中</button>
+              <button className="btn btn-secondary btn-md btn-loading" data-component="button">加载中</button>
+            </div>
+            <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>点击反馈</div>
+            <button
+              className="btn btn-primary btn-md"
+              data-component="button"
+              onMouseDown={() => setPressed(true)}
+              onMouseUp={() => setPressed(false)}
+              onMouseLeave={() => setPressed(false)}
+              style={{ transform: pressed ? 'scale(0.97)' : 'scale(1)', transition: 'transform .1s' }}
+            >
+              点我看看
+            </button>
+          </div>
+
+          <div className="section-title">表单输入</div>
+          <div className="uikit-responsive-grid">
+            <div className="card card-default" data-component="card">
+              <div className="demo-label">默认与焦点</div>
+              <input className="input" type="text" placeholder="请输入项目名称" data-component="input" />
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>禁用状态</div>
+              <input className="input" type="text" defaultValue="只读内容" disabled data-component="input" />
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>校验状态</div>
+              <input className="input error" type="text" defaultValue="xiaoliang@" data-component="input" style={{ marginBottom: 'var(--space-2)' }} />
+              <input className="input success" type="text" defaultValue="xiaoliang@example.com" data-component="input" />
+            </div>
+            <div className="card card-default" data-component="card">
+              <div className="demo-label">标签与状态</div>
+              <div className="flex-row-sm">
+                <span className="tag tag-rounded tag-default" data-component="tag">默认</span>
+                <span className="tag tag-rounded tag-primary" data-component="tag">主要</span>
+                <span className="tag tag-rounded tag-success" data-component="tag">成功</span>
+                <span className="tag tag-rounded tag-warning" data-component="tag">警告</span>
+                <span className="tag tag-rounded tag-error" data-component="tag">错误</span>
+                <span className="tag tag-pill tag-primary" data-component="tag">胶囊</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="section-title">Alert 提示</div>
+          <div className="uikit-responsive-grid">
+            <div className="alert info" role="alert" data-component="alert">
+              <span className="icon"><Icon name="info" /></span>
+              <span className="message">系统将于今晚 02:00 进行例行维护。</span>
+            </div>
+            <div className="alert success" role="alert" data-component="alert">
+              <span className="icon"><Icon name="check" /></span>
+              <span className="message">项目配置已保存成功。</span>
+            </div>
+            <div className="alert warning" role="alert" data-component="alert">
+              <span className="icon"><Icon name="warning" /></span>
+              <span className="message">存储空间即将达到上限，请及时清理。</span>
+            </div>
+            <div className="alert error" role="alert" data-component="alert">
+              <span className="icon"><Icon name="warning" /></span>
+              <span className="message">网络连接失败，请稍后重试。</span>
+            </div>
+          </div>
+
+          <div className="section-title">数据表格</div>
+          <div className="card card-default" data-component="card">
+            <div className="uikit-table-wrap">
+              <table className="table stripe hover" data-component="table">
+                <thead>
+                  <tr><th>项目名称</th><th>负责人</th><th>状态</th><th>更新日期</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>官网改版</td><td>李小亮</td><td><span className="tag tag-rounded tag-primary" data-component="tag">进行中</span></td><td>2026-08-07</td></tr>
+                  <tr><td>数据迁移</td><td>王小明</td><td><span className="tag tag-rounded tag-success" data-component="tag">已完成</span></td><td>2026-08-05</td></tr>
+                  <tr><td>权限系统</td><td>张晓云</td><td><span className="tag tag-rounded tag-warning" data-component="tag">待评审</span></td><td>2026-08-03</td></tr>
+                  <tr><td>接口重构</td><td>刘小刚</td><td><span className="tag tag-rounded tag-default" data-component="tag">已归档</span></td><td>2026-07-28</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="section-title">导航与浮层</div>
+          <div className="uikit-responsive-grid">
+            <div className="card card-default" data-component="card">
+              <div className="demo-label">顶部导航</div>
+              <nav className="topnav" style={{ borderRadius: 'var(--radius-md)' }} data-component="topnav">
+                <span className="topnav-brand">小亮应用</span>
+                <div className="topnav-links">
+                  <a href="#" className="topnav-link active">概览</a>
+                  <a href="#" className="topnav-link">项目</a>
+                  <a href="#" className="topnav-link">设置</a>
+                </div>
+              </nav>
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>侧边导航</div>
+              <nav className="sidenav" style={{ borderRadius: 'var(--radius-md)', minHeight: 160 }} data-component="sidenav">
+                <div className="sidenav-section">
+                  <div className="sidenav-section-title">工作台</div>
+                  <a href="#" className="sidenav-link active">概览</a>
+                  <a href="#" className="sidenav-link">项目</a>
+                </div>
+              </nav>
+            </div>
+            <div className="card card-default" data-component="card">
+              <div className="demo-label">下拉菜单</div>
+              <div className="dropdown" data-component="dropdown">
+                <button className="btn btn-secondary btn-md" type="button">操作菜单</button>
+                <div className="dropdown-menu">
+                  <button className="dropdown-item" type="button">编辑</button>
+                  <button className="dropdown-item" type="button">复制</button>
+                  <div className="dropdown-divider"></div>
+                  <button className="dropdown-item" type="button" style={{ color: 'var(--error)' }}>删除</button>
+                </div>
+              </div>
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>提示气泡</div>
+              <div className="flex-row">
+                <span className="tooltip" tabIndex="0" data-component="tooltip">
+                  <button className="btn btn-secondary btn-sm" type="button">悬停提示</button>
+                  <span className="tooltip-bubble">这是一个提示气泡</span>
+                </span>
+              </div>
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>Toast 通知</div>
+              <div className="toast success" role="status" data-component="toast" style={{ position: 'static', transform: 'none' }}>
+                <span className="toast-icon"><Icon name="check" /></span>
+                <div className="toast-content">
+                  <div className="toast-title">保存成功</div>
+                  <div className="toast-message">您的配置已更新。</div>
+                </div>
+              </div>
+            </div>
+            <div className="card card-default" data-component="card">
+              <div className="demo-label">Modal 对话框</div>
+              <button className="btn btn-primary btn-md" type="button" onClick={() => setModalOpen(true)} data-component="button">打开对话框</button>
+            </div>
+          </div>
+
+          <div className="section-title">表单布局</div>
+          <div className="card card-default" data-component="card">
+            <form data-component="form">
+              <div className="demo-label">垂直字段</div>
+              <div className="form-field">
+                <label className="form-field-label" htmlFor="overview-email">邮箱</label>
+                <div className="input-wrap">
+                  <input id="overview-email" className="input" type="email" defaultValue="xiaoliang@example.com" data-component="input" />
+                  <span className="input-hint">用于接收系统通知</span>
+                </div>
+              </div>
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>水平字段</div>
+              <div className="form-field form-field-row">
+                <label className="form-field-label" htmlFor="overview-nickname">昵称</label>
+                <input id="overview-nickname" className="input" type="text" defaultValue="小亮" data-component="input" />
+              </div>
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>行内字段</div>
+              <div className="form-inline">
+                <div className="form-field">
+                  <label className="form-field-label" htmlFor="overview-city">城市</label>
+                  <input id="overview-city" className="input" type="text" defaultValue="上海" data-component="input" />
+                </div>
+                <button className="btn btn-primary btn-md" type="button" data-component="button">查询</button>
+              </div>
+              <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>校验状态</div>
+              <div className="form-field error" style={{ marginBottom: 'var(--space-3)' }}>
+                <label className="form-field-label" htmlFor="overview-error">邮箱格式</label>
+                <div className="input-wrap">
+                  <input id="overview-error" className="input error" type="text" defaultValue="xiaoliang@" data-component="input" />
+                  <span className="input-hint error">请输入有效的邮箱地址</span>
+                </div>
+              </div>
+              <div className="form-field success">
+                <label className="form-field-label" htmlFor="overview-success">用户名</label>
+                <div className="input-wrap">
+                  <input id="overview-success" className="input success" type="text" defaultValue="xiaoliang" data-component="input" />
+                  <span className="input-hint success">用户名可用</span>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div className="section-title">分页</div>
+          <div className="card card-default" data-component="card">
+            <div className="demo-label">默认尺寸</div>
+            <ul className="pagination" data-component="pagination">
+              <li className="page-item"><button className="page-link" type="button" disabled>&lt;</button></li>
+              <li className="page-item"><button className="page-link active" type="button">1</button></li>
+              <li className="page-item"><button className="page-link" type="button">2</button></li>
+              <li className="page-item"><button className="page-link" type="button">3</button></li>
+              <li className="page-item"><span className="page-ellipsis">…</span></li>
+              <li className="page-item"><button className="page-link" type="button">10</button></li>
+              <li className="page-item"><button className="page-link" type="button">&gt;</button></li>
+            </ul>
+            <div className="demo-label" style={{ marginTop: 'var(--space-4)' }}>小尺寸</div>
+            <ul className="pagination pagination-sm" data-component="pagination">
+              <li className="page-item"><button className="page-link" type="button" disabled>&lt;</button></li>
+              <li className="page-item"><button className="page-link active" type="button">1</button></li>
+              <li className="page-item"><button className="page-link" type="button">2</button></li>
+              <li className="page-item"><button className="page-link" type="button">3</button></li>
+              <li className="page-item"><span className="page-ellipsis">…</span></li>
+              <li className="page-item"><button className="page-link" type="button">8</button></li>
+              <li className="page-item"><button className="page-link" type="button">&gt;</button></li>
+            </ul>
+          </div>
+
+          {modalOpen && (
+            <div className="modal-overlay" data-component="modal" onClick={() => setModalOpen(false)}>
+              <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" onClick={(e) => e.stopPropagation()}>
+                <div className="modal-header">
+                  <div className="modal-title" id="modal-title">确认删除</div>
+                  <button className="modal-close" type="button" aria-label="关闭" onClick={() => setModalOpen(false)}>×</button>
+                </div>
+                <div className="modal-body">删除后数据将无法恢复，是否继续？</div>
+                <div className="modal-footer">
+                  <button className="btn btn-secondary btn-md" type="button" onClick={() => setModalOpen(false)} data-component="button">取消</button>
+                  <button className="btn btn-danger btn-md" type="button" onClick={() => setModalOpen(false)} data-component="button">确认删除</button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const FormScreen = () => {
+      const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
+      const [submitted, setSubmitted] = useState(false);
+      const [showSuccess, setShowSuccess] = useState(false);
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+        if (email && password) {
+          setShowSuccess(true);
+          setTimeout(() => setShowSuccess(false), 3000);
+        }
+      };
+
+      return (
+        <div className="screen">
+          <h1 className="screen-title">表单示例</h1>
+          <p className="screen-desc">登录与设置表单的组件组合、验证反馈与提交状态。</p>
+
+          <div className="card card-default" data-component="card" style={{ maxWidth: 560 }}>
+            <div className="card-header">欢迎回来</div>
+            <div className="card-body">请输入你的邮箱和密码以继续。</div>
+            <form onSubmit={handleSubmit}>
+              <div className="form-field">
+                <label>邮箱</label>
+                <input
+                  className={`input ${submitted && !email ? 'error' : ''}`}
+                  type="email"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  data-component="input"
+                />
+                {submitted && !email && <span className="error-text">请输入邮箱地址</span>}
+              </div>
+              <div className="form-field" style={{ marginTop: 'var(--space-4)' }}>
+                <label>密码</label>
+                <input
+                  className={`input ${submitted && !password ? 'error' : ''}`}
+                  type="password"
+                  placeholder="请输入密码"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  data-component="input"
+                />
+                {submitted && !password && <span className="error-text">请输入密码</span>}
+              </div>
+              {showSuccess && (
+                <div className="alert success" role="alert" data-component="alert" style={{ marginTop: 'var(--space-4)' }}>
+                  <span className="icon"><Icon name="check" /></span>
+                  <span className="message">登录成功，正在跳转控制台…</span>
+                </div>
+              )}
+              <div className="form-actions">
+                <button className="btn btn-primary btn-md" type="submit" data-component="button">登录</button>
+                <button className="btn btn-secondary btn-md" type="button" data-component="button">注册账号</button>
+              </div>
+            </form>
+          </div>
+
+          <div className="section-title">账户设置</div>
+          <div className="card card-default" data-component="card">
+            <div className="card-header">个人资料</div>
+            <div className="card-body">更新你的个人信息与通知偏好。</div>
+            <div className="form-row">
+              <div className="form-field">
+                <label>昵称</label>
+                <input className="input" type="text" defaultValue="李小亮" data-component="input" />
+                <span className="hint">2-20 个字符，支持中英文。</span>
+              </div>
+              <div className="form-field">
+                <label>职位</label>
+                <input className="input" type="text" placeholder="例如：前端工程师" data-component="input" />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-field">
+                <label>手机号</label>
+                <input className="input" type="tel" defaultValue="13800138000" disabled data-component="input" />
+                <span className="hint">如需修改请联系管理员。</span>
+              </div>
+              <div className="form-field">
+                <label>时区</label>
+                <input className="input" type="text" defaultValue="Asia/Shanghai" data-component="input" />
+              </div>
+            </div>
+            <div className="form-field" style={{ marginTop: 'var(--space-2)' }}>
+              <label>通知偏好</label>
+              <div className="flex-row-sm">
+                <span className="tag tag-rounded tag-primary" data-component="tag">邮件</span>
+                <span className="tag tag-rounded tag-default" data-component="tag">短信</span>
+                <span className="tag tag-rounded tag-default" data-component="tag">浏览器</span>
+              </div>
+            </div>
+            <div className="form-actions">
+              <button className="btn btn-primary btn-md" data-component="button">保存更改</button>
+              <button className="btn btn-ghost btn-md" data-component="button">取消</button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const DashboardScreen = () => {
+      const [filter, setFilter] = useState('all');
+      const rows = [
+        { name: '月度活跃用户', owner: '产品组', status: 'success', date: '2026-08-07', value: '12,480' },
+        { name: '新注册转化', owner: '增长组', status: 'warning', date: '2026-08-06', value: '8,320' },
+        { name: '平均响应时长', owner: '技术组', status: 'error', date: '2026-08-05', value: '240ms' },
+        { name: '工单处理量', owner: '客服组', status: 'primary', date: '2026-08-04', value: '1,256' },
+        { name: '接口成功率', owner: '技术组', status: 'success', date: '2026-08-03', value: '99.97%' },
+        { name: '存储使用量', owner: '运维组', status: 'warning', date: '2026-08-02', value: '78%' },
+        { name: '错误日志数', owner: '技术组', status: 'error', date: '2026-08-01', value: '23' },
+        { name: '内容发布量', owner: '运营组', status: 'primary', date: '2026-07-31', value: '892' },
+      ];
+      const filtered = filter === 'all' ? rows : rows.filter(r => r.status === filter);
+      const chartPoints = [34, 52, 46, 70, 58, 82, 66, 90, 74, 62, 88, 76];
+      const tagMap = {
+        success: <span className="tag tag-rounded tag-success" data-component="tag">正常</span>,
+        warning: <span className="tag tag-rounded tag-warning" data-component="tag">关注</span>,
+        error: <span className="tag tag-rounded tag-error" data-component="tag">异常</span>,
+        primary: <span className="tag tag-rounded tag-primary" data-component="tag">优化中</span>,
+      };
+
+      return (
+        <div className="screen">
+          <h1 className="screen-title">数据看板</h1>
+          <p className="screen-desc">SaaS 仪表盘中的指标卡片、表格筛选与全局提示。</p>
+
+          <div className="uikit-toolbar">
+            <span className="uikit-nowrap" style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--font-medium)' }}>筛选：</span>
+            <button className={`btn ${filter === 'all' ? 'btn-primary' : 'btn-secondary'} btn-sm`} onClick={() => setFilter('all')} data-component="button">全部</button>
+            <button className={`btn ${filter === 'success' ? 'btn-primary' : 'btn-secondary'} btn-sm`} onClick={() => setFilter('success')} data-component="button">正常</button>
+            <button className={`btn ${filter === 'warning' ? 'btn-primary' : 'btn-secondary'} btn-sm`} onClick={() => setFilter('warning')} data-component="button">关注</button>
+            <button className={`btn ${filter === 'error' ? 'btn-primary' : 'btn-secondary'} btn-sm`} onClick={() => setFilter('error')} data-component="button">异常</button>
+          </div>
+
+          <div className="uikit-responsive-grid three">
+            <div className="card card-default" data-component="card">
+              <div className="metric-value">12,480</div>
+              <div className="metric-label">月度活跃用户</div>
+              <div className="metric-delta up"><Icon name="arrowUp" /> +12.5%</div>
+            </div>
+            <div className="card card-default" data-component="card">
+              <div className="metric-value">8,320</div>
+              <div className="metric-label">本周新增注册</div>
+              <div className="metric-delta up"><Icon name="arrowUp" /> +5.3%</div>
+            </div>
+            <div className="card card-default" data-component="card">
+              <div className="metric-value">240ms</div>
+              <div className="metric-label">平均响应时长</div>
+              <div className="metric-delta down"><Icon name="arrowDown" /> +18ms</div>
+            </div>
+          </div>
+
+          <div className="uikit-responsive-grid" style={{ marginTop: 'var(--space-6)' }}>
+            <div className="card card-default" data-component="card">
+              <div className="section-title" style={{ marginTop: 0 }}>趋势概览</div>
+              <div className="chart">
+                {chartPoints.map((h, i) => (
+                  <div key={i} className="chart-bar" style={{ height: `${h}%` }} title={`第 ${i + 1} 期`} />
+                ))}
+              </div>
+            </div>
+            <div className="card card-default" data-component="card">
+              <div className="section-title" style={{ marginTop: 0 }}>告警提示</div>
+              <div className="alert warning" role="alert" data-component="alert">
+                <span className="icon"><Icon name="warning" /></span>
+                <span className="message">平均响应时长超过 200ms 阈值，建议排查近期接口性能。</span>
+              </div>
+              <div className="alert info" role="alert" data-component="alert" style={{ marginTop: 'var(--space-3)' }}>
+                <span className="icon"><Icon name="info" /></span>
+                <span className="message">本周系统可用性 99.97%，无计划外停机。</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="section-title">指标明细</div>
+          <div className="card card-default" data-component="card">
+            <div className="uikit-table-wrap">
+              <table className="table hover" data-component="table">
+                <thead>
+                  <tr><th>指标名称</th><th>负责团队</th><th>当前值</th><th>状态</th><th>更新时间</th></tr>
+                </thead>
+                <tbody>
+                  {filtered.map((row, i) => (
+                    <tr key={i}>
+                      <td>{row.name}</td>
+                      <td>{row.owner}</td>
+                      <td>{row.value}</td>
+                      <td>{tagMap[row.status]}</td>
+                      <td>{row.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="section-title">快速操作</div>
+          <div className="uikit-responsive-grid">
+            <div className="card card-interactive" data-component="card">
+              <div className="card-header">导出报表</div>
+              <div className="card-body">下载当前筛选条件下的完整数据报表。</div>
+              <button className="btn btn-primary btn-sm" data-component="button">导出 CSV</button>
+            </div>
+            <div className="card card-interactive" data-component="card">
+              <div className="card-header">配置告警</div>
+              <div className="card-body">为关键指标设置阈值告警与通知渠道。</div>
+              <button className="btn btn-secondary btn-sm" data-component="button">前往配置</button>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const App = () => {
+      const [screen, setScreen] = useState('overview');
+      const screens = {
+        overview: <OverviewScreen />,
+        form: <FormScreen />,
+        dashboard: <DashboardScreen />,
+      };
+
+      return (
+        <div className="uikit-shell page" data-layout-guard="uikit-v1">
+          <Sidebar current={screen} setScreen={setScreen} />
+          <main className="uikit-main main">
+            {screens[screen]}
+            <div className="footer-note">小亮主题 UI Kit · React 18 独立页面 · 所有样式来自 colors_and_type.css 与 components.css</div>
+          </main>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

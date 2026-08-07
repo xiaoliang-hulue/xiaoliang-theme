@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Alert",
+  "slug": "alert",
+  "confidence": "high",
+  "semanticTypeCandidates": ["feedback", "banner"],
+  "variantDimensions": ["type"],
+  "representativeVariants": [
+    { "type": "info" },
+    { "type": "success" },
+    { "type": "warning" },
+    { "type": "error" }
+  ],
+  "anatomy": ["root", "icon", "message"],
+  "structurePatterns": ["single-root", "horizontal-stack"],
+  "usageHints": ["全局提示", "操作反馈", "状态通知"],
+  "doNotInvent": ["toast", "snackbar", "dismissible alert"],
+  "unknowns": []
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Input",
+  "slug": "input",
+  "confidence": "high",
+  "semanticTypeCandidates": ["form", "text-field"],
+  "variantDimensions": ["state", "size"],
+  "representativeVariants": [
+    { "state": "default", "size": "default" },
+    { "state": "focus", "size": "default" },
+    { "state": "disabled", "size": "default" },
+    { "state": "error", "size": "default" },
+    { "state": "success", "size": "default" }
+  ],
+  "anatomy": ["root", "input", "placeholder", "hint", "prefix", "suffix"],
+  "structurePatterns": ["single-root", "native-input", "optional-hint"],
+  "usageHints": ["单行文本输入", "搜索框", "表单字段", "校验反馈"],
+  "doNotInvent": ["multi-line textarea", "rich text editor", "autocomplete"],
+  "unknowns": []
+}

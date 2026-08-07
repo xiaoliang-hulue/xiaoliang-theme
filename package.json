@@ -1,0 +1,51 @@
+{
+  "name": "xiaoliang-theme",
+  "version": "1.2.0",
+  "description": "小亮主题 — 个人极简干净设计系统，含浅色/深色双模式、纯 CSS 变量 Token 与 14 个基础组件",
+  "main": "colors_and_type.css",
+  "style": "colors_and_type.css",
+  "files": [
+    "colors_and_type.css",
+    "components.css",
+    "tailwind.config.js",
+    "css.json",
+    "README.md",
+    "SKILL.md",
+    "accessibility-report.json",
+    "assets/",
+    "preview/",
+    "ui_kits/",
+    "components/",
+    "specs/"
+  ],
+  "exports": {
+    ".": "./colors_and_type.css",
+    "./css": "./colors_and_type.css",
+    "./components": "./components.css",
+    "./tailwind": "./tailwind.config.js",
+    "./tokens": "./css.json"
+  },
+  "keywords": [
+    "design-system",
+    "css-variables",
+    "theme",
+    "ui-kit",
+    "tailwindcss",
+    "xiaoliang",
+    "小亮主题"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "tailwindcss": {
+      "optional": true
+    }
+  }
+}

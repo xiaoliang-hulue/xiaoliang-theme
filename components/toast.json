@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Toast",
+  "slug": "toast",
+  "confidence": "high",
+  "semanticTypeCandidates": ["feedback", "notification"],
+  "variantDimensions": ["type"],
+  "representativeVariants": [
+    { "type": "success" },
+    { "type": "info" },
+    { "type": "error" }
+  ],
+  "anatomy": ["container", "icon", "title", "message"],
+  "structurePatterns": ["fixed-position", "auto-dismiss"],
+  "usageHints": ["操作结果反馈", "系统通知", "轻量提示"],
+  "doNotInvent": ["action buttons inside toast", "persistent banners"],
+  "unknowns": []
+}

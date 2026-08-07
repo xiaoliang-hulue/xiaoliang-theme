@@ -1,0 +1,299 @@
+{
+  "generatedAt": "2026-08-07T05:31:03.178Z",
+  "standard": "WCAG 2.1 AA",
+  "thresholdNormal": 4.5,
+  "thresholdLarge": 3,
+  "summary": {
+    "total": 24,
+    "pass": 22,
+    "fail": 0,
+    "exempt": 2,
+    "missing": 0,
+    "allPass": true
+  },
+  "lightMode": {
+    "total": 12,
+    "pass": 11,
+    "fail": 0
+  },
+  "darkMode": {
+    "total": 12,
+    "pass": 11,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "正文文字 / 页面背景",
+      "fg": "--color-text",
+      "bg": "--color-background",
+      "mode": "light",
+      "ratio": 17.93,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "次要文字 / 页面背景",
+      "fg": "--color-text-secondary",
+      "bg": "--color-background",
+      "mode": "light",
+      "ratio": 7.81,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "禁用文字 / 页面背景",
+      "fg": "--color-text-muted",
+      "bg": "--color-background",
+      "exempt": true,
+      "reason": "禁用元素按 WCAG 规范不强制要求对比度",
+      "mode": "light",
+      "ratio": 2.52,
+      "aaNormal": false,
+      "aaLarge": false,
+      "aaaNormal": false,
+      "status": "exempt"
+    },
+    {
+      "name": "主按钮文字 / 主按钮背景",
+      "fg": "--color-on-primary",
+      "bg": "--color-primary",
+      "mode": "light",
+      "ratio": 5.17,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "主按钮悬停文字 / 悬停背景",
+      "fg": "--color-on-primary",
+      "bg": "--color-primary-hover",
+      "mode": "light",
+      "ratio": 6.7,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "链接文字 / 页面背景",
+      "fg": "--color-primary",
+      "bg": "--color-background",
+      "mode": "light",
+      "ratio": 5.17,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "错误文字 / 错误背景",
+      "fg": "--error",
+      "bg": "--error-bg",
+      "mode": "light",
+      "ratio": 5.91,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "成功文字 / 成功背景",
+      "fg": "--success",
+      "bg": "--success-bg",
+      "mode": "light",
+      "ratio": 4.79,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "警告文字 / 警告背景",
+      "fg": "--warning",
+      "bg": "--warning-bg",
+      "mode": "light",
+      "ratio": 4.84,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "信息文字 / 信息背景",
+      "fg": "--info",
+      "bg": "--info-bg",
+      "mode": "light",
+      "ratio": 4.73,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "表格文字 / 表格背景",
+      "fg": "--color-text",
+      "bg": "--color-surface",
+      "mode": "light",
+      "ratio": 17.93,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "表头文字 / 表头背景",
+      "fg": "--color-text-secondary",
+      "bg": "--color-surface-muted",
+      "mode": "light",
+      "ratio": 7.49,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "正文文字 / 页面背景",
+      "fg": "--color-text",
+      "bg": "--color-background",
+      "mode": "dark",
+      "ratio": 18.16,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "次要文字 / 页面背景",
+      "fg": "--color-text-secondary",
+      "bg": "--color-background",
+      "mode": "dark",
+      "ratio": 7.85,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "禁用文字 / 页面背景",
+      "fg": "--color-text-muted",
+      "bg": "--color-background",
+      "exempt": true,
+      "reason": "禁用元素按 WCAG 规范不强制要求对比度",
+      "mode": "dark",
+      "ratio": 2.53,
+      "aaNormal": false,
+      "aaLarge": false,
+      "aaaNormal": false,
+      "status": "exempt"
+    },
+    {
+      "name": "主按钮文字 / 主按钮背景",
+      "fg": "--color-on-primary",
+      "bg": "--color-primary",
+      "mode": "dark",
+      "ratio": 5.64,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "主按钮悬停文字 / 悬停背景",
+      "fg": "--color-on-primary",
+      "bg": "--color-primary-hover",
+      "mode": "dark",
+      "ratio": 6.74,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "链接文字 / 页面背景",
+      "fg": "--color-primary",
+      "bg": "--color-background",
+      "mode": "dark",
+      "ratio": 5.64,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "错误文字 / 错误背景",
+      "fg": "--error",
+      "bg": "--error-bg",
+      "mode": "dark",
+      "ratio": 5.84,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "成功文字 / 成功背景",
+      "fg": "--success",
+      "bg": "--success-bg",
+      "mode": "dark",
+      "ratio": 8.55,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "警告文字 / 警告背景",
+      "fg": "--warning",
+      "bg": "--warning-bg",
+      "mode": "dark",
+      "ratio": 8.97,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "信息文字 / 信息背景",
+      "fg": "--info",
+      "bg": "--info-bg",
+      "mode": "dark",
+      "ratio": 4.52,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "表格文字 / 表格背景",
+      "fg": "--color-text",
+      "bg": "--color-surface",
+      "mode": "dark",
+      "ratio": 17.32,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
+    },
+    {
+      "name": "表头文字 / 表头背景",
+      "fg": "--color-text-secondary",
+      "bg": "--color-surface-muted",
+      "mode": "dark",
+      "ratio": 6.9,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    }
+  ],
+  "exemptions": [
+    "[light] 禁用文字 / 页面背景: 2.52:1 (禁用元素按 WCAG 规范不强制要求对比度)",
+    "[dark] 禁用文字 / 页面背景: 2.53:1 (禁用元素按 WCAG 规范不强制要求对比度)"
+  ],
+  "failures": []
+}

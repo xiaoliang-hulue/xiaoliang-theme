@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "TopNav",
+  "slug": "topnav",
+  "confidence": "high",
+  "semanticTypeCandidates": ["navigation", "header"],
+  "variantDimensions": ["density"],
+  "representativeVariants": [
+    { "density": "default" }
+  ],
+  "anatomy": ["brand", "links", "link", "active-indicator"],
+  "structurePatterns": ["horizontal-bar", "brand-left", "links-right"],
+  "usageHints": ["顶部全局导航", "页面切换", "品牌展示"],
+  "doNotInvent": ["search input", "user dropdown"],
+  "unknowns": []
+}

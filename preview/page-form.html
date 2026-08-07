@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>表单页 - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+<style>
+/* @component-css-start */
+body { margin: 0; background: var(--color-surface-muted); font-family: var(--font-sans); color: var(--color-text); line-height: 1.5; }
+.page-header { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4) var(--space-6); background: var(--color-surface); border-bottom: 1px solid var(--color-border); box-shadow: var(--shadow-sm); }
+.page-header h1 { margin: 0; font-size: var(--text-xl); font-weight: var(--font-semibold); }
+.back-link { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--color-text-secondary); text-decoration: none; font-size: var(--text-sm); transition: color .15s; }
+.back-link:hover { color: var(--color-primary); }
+.page-main { max-width: var(--container-max); margin: 0 auto; padding: var(--space-6); }
+.form-stack { display: flex; flex-direction: column; gap: var(--space-5); max-width: 640px; margin: 0 auto; }
+.form-alert { margin-bottom: var(--space-4); }
+.form-item { display: flex; flex-direction: column; gap: var(--space-1); }
+.form-item label { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-text); }
+.form-item .hint { font-size: var(--text-xs); color: var(--color-text-muted); }
+.form-item.required label::after { content: "*"; color: var(--error); margin-left: var(--space-1); }
+.select-wrap { position: relative; }
+.select-wrap .input { width: 100%; appearance: none; -webkit-appearance: none; padding-right: var(--space-8); }
+.select-wrap .chevron { position: absolute; right: var(--space-3); top: 50%; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; }
+.form-actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
+</style>
+</head>
+<body>
+<header class="page-header">
+  <a href="#" class="back-link"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i>返回</a>
+  <h1>表单页</h1>
+</header>
+<main class="page-main">
+  <div class="form-stack">
+    <div class="alert info form-alert" role="alert"><i data-lucide="info" class="icon"></i><span class="message">请填写完整信息，带 * 的项目为必填项。</span></div>
+    <section class="card card-default">
+      <h2 class="card-header">创建新项目</h2>
+      <p class="card-body">填写下方信息以创建新的项目档案，提交后将进入审核流程。</p>
+      <form>
+        <div class="form-stack">
+          <div class="form-item required">
+            <label for="project-name">项目名称</label>
+            <input class="input" id="project-name" type="text" placeholder="请输入项目名称">
+          </div>
+          <div class="form-item">
+            <label for="project-desc">项目描述</label>
+            <input class="input" id="project-desc" type="text" placeholder="请输入项目描述，不超过 100 字">
+            <span class="hint">简要描述项目目标和范围。</span>
+          </div>
+          <div class="form-item required">
+            <label for="project-type">项目类型</label>
+            <div class="select-wrap">
+              <select class="input" id="project-type">
+                <option value="" disabled selected>请选择项目类型</option>
+                <option value="product">产品研发</option>
+                <option value="operation">运营管理</option>
+                <option value="marketing">市场营销</option>
+                <option value="finance">财务合规</option>
+              </select>
+              <i data-lucide="chevron-down" class="chevron" style="width:18px;height:18px;"></i>
+            </div>
+          </div>
+          <div class="form-item required">
+            <label for="contact-email">联系邮箱</label>
+            <input class="input" id="contact-email" type="email" placeholder="example@company.com">
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary btn-md" type="submit">提交</button>
+            <button class="btn btn-secondary btn-md" type="button">取消</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+</main>
+<script>lucide.createIcons();</script>
+</body>
+</html>

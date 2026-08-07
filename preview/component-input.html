@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; min-width: 0; gap: var(--space-2); flex-wrap: wrap; align-items: center; padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.input { width: 240px; max-width: 100%; height: 40px; flex-shrink: 0; padding: 0 var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); outline: none; transition: border-color .15s; }
+.input::placeholder { color: var(--color-text-muted); }
+.input:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; }
+.input:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
+.input.error { border-color: var(--error); background: var(--error-bg); }
+.input.success { border-color: var(--success); background: var(--success-bg); }
+.input-wrap { display: flex; flex-direction: column; gap: var(--space-1); }
+.input-hint { font-size: var(--text-xs); line-height: 18px; color: var(--color-text-muted); }
+.input-hint.success { color: var(--success); }
+.input-hint.error { color: var(--error); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail"><input class="input" type="text" placeholder="请输入内容"></div></section>
+<section class="story" data-evidence-sample="focus"><span class="story-label">聚焦</span><div class="rail"><input class="input" type="text" placeholder="请输入内容" autofocus></div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="disabled"><span class="story-label">禁用</span><div class="rail"><input class="input" type="text" value="不可编辑内容" disabled></div></section>
+<section class="story" data-evidence-sample="error"><span class="story-label">错误</span><div class="rail"><div class="input-wrap"><input class="input error" type="text" value="错误输入"><span class="input-hint error">格式不正确</span></div></div></section>
+<section class="story" data-evidence-sample="success"><span class="story-label">成功</span><div class="rail"><div class="input-wrap"><input class="input success" type="text" value="正确输入"><span class="input-hint success">校验通过</span></div></div></section>
+</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "libraryName": "小亮主题",
+  "sourceKind": "structured-spec",
+  "components": [
+    { "slug": "button", "name": "Button", "semanticType": "action" },
+    { "slug": "input", "name": "Input", "semanticType": "form" },
+    { "slug": "card", "name": "Card", "semanticType": "container" },
+    { "slug": "tag", "name": "Tag", "semanticType": "status" },
+    { "slug": "alert", "name": "Alert", "semanticType": "feedback" },
+    { "slug": "table", "name": "Table", "semanticType": "data" },
+    { "slug": "modal", "name": "Modal", "semanticType": "overlay" },
+    { "slug": "tooltip", "name": "Tooltip", "semanticType": "feedback" },
+    { "slug": "toast", "name": "Toast", "semanticType": "feedback" },
+    { "slug": "dropdown", "name": "Dropdown", "semanticType": "navigation" },
+    { "slug": "topnav", "name": "TopNav", "semanticType": "navigation" },
+    { "slug": "sidenav", "name": "SideNav", "semanticType": "navigation" },
+    { "slug": "form", "name": "Form", "semanticType": "container" },
+    { "slug": "pagination", "name": "Pagination", "semanticType": "navigation" }
+  ]
+}

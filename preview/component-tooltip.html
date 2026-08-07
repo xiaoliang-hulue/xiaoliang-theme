@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tooltip - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-10) var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; gap: var(--space-4); align-items: center; justify-content: center; margin-bottom: var(--space-4); }
+
+/* @component-css-start */
+.tooltip { position: relative; display: inline-flex; }
+.tooltip-bubble { position: absolute; bottom: calc(100% + var(--space-2)); left: 50%; transform: translateX(-50%); padding: var(--space-1) var(--space-2); background: var(--gray-900); color: var(--gray-0); font-size: var(--text-xs); line-height: 18px; border-radius: var(--radius-md); white-space: nowrap; z-index: 40; }
+.tooltip-bubble::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--gray-900); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-sans); font-weight: var(--font-medium); white-space: nowrap; }
+.btn-sm { min-height: 28px; padding: var(--space-1) var(--space-3); font-size: var(--text-xs); }
+.btn-secondary { background: var(--color-surface-muted); color: var(--color-text); border-color: var(--color-border); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="row">
+  <span class="tooltip">
+    <button class="btn btn-secondary btn-sm" type="button">悬停提示</button>
+    <span class="tooltip-bubble">这是一个提示气泡</span>
+  </span>
+  <span class="tooltip">
+    <button class="btn btn-secondary btn-sm" type="button">上方显示</button>
+    <span class="tooltip-bubble">信息将显示在上方</span>
+  </span>
+</div>
+</body>
+</html>

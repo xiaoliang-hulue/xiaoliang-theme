@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toast - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-end; }
+
+/* @component-css-start */
+.toast { display: flex; align-items: flex-start; gap: var(--space-3); min-width: 280px; max-width: 420px; padding: var(--space-4); background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.toast-icon { flex-shrink: 0; width: 20px; height: 20px; }
+.toast-content { flex: 1; min-width: 0; }
+.toast-title { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-text); margin-bottom: var(--space-1); }
+.toast-message { font-size: var(--text-sm); line-height: 22px; color: var(--color-text-secondary); }
+.toast.success .toast-icon { color: var(--success); }
+.toast.error .toast-icon { color: var(--error); }
+.toast.info .toast-icon { color: var(--info); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="toast success" role="status">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <div class="toast-content">
+      <div class="toast-title">保存成功</div>
+      <div class="toast-message">您的配置已更新。</div>
+    </div>
+  </div>
+  <div class="toast info" role="status">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <div class="toast-content">
+      <div class="toast-title">新消息</div>
+      <div class="toast-message">您收到一条系统通知。</div>
+    </div>
+  </div>
+  <div class="toast error" role="status">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    <div class="toast-content">
+      <div class="toast-title">操作失败</div>
+      <div class="toast-message">请检查网络连接后重试。</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

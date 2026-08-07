@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Tag",
+  "slug": "tag",
+  "confidence": "high",
+  "semanticTypeCandidates": ["status", "badge", "label"],
+  "variantDimensions": ["variant", "shape"],
+  "representativeVariants": [
+    { "variant": "default", "shape": "rounded" },
+    { "variant": "primary", "shape": "rounded" },
+    { "variant": "success", "shape": "rounded" },
+    { "variant": "warning", "shape": "rounded" },
+    { "variant": "error", "shape": "rounded" },
+    { "variant": "primary", "shape": "pill" }
+  ],
+  "anatomy": ["root", "label"],
+  "structurePatterns": ["single-root", "text-label"],
+  "usageHints": ["状态标识", "分类标签", "徽标"],
+  "doNotInvent": ["removable tags", "tag input", "tag groups"],
+  "unknowns": []
+}

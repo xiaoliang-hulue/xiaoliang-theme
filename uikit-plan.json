@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "headBoilerplate": "<link rel=\"stylesheet\" href=\"../../colors_and_type.css\">",
+  "corePreviewComponents": [
+    {
+      "slug": "button",
+      "reason": "fixed slot \"button\"; semantic=button:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/button.json",
+      "priority": 1,
+      "slot": "button"
+    },
+    {
+      "slug": "card",
+      "reason": "fixed slot \"card\"; semantic=card:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/card.json",
+      "priority": 2,
+      "slot": "card"
+    },
+    {
+      "slug": "tag",
+      "reason": "fixed slot \"tag\"; semantic=tag:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/tag.json",
+      "priority": 3,
+      "slot": "tag"
+    },
+    {
+      "slug": "table",
+      "reason": "fixed slot \"table\"; semantic=table:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/table.json",
+      "priority": 4,
+      "slot": "table"
+    },
+    {
+      "slug": "topnav",
+      "reason": "fixed slot \"navigation\"; semantic=navigation:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/topnav.json",
+      "priority": 5,
+      "slot": "navigation"
+    },
+    {
+      "slug": "sidenav",
+      "reason": "fixed slot \"navigation\"; semantic=navigation:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/sidenav.json",
+      "priority": 6,
+      "slot": "navigation"
+    },
+    {
+      "slug": "dropdown",
+      "reason": "fixed slot \"menu\"; semantic=menu:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/dropdown.json",
+      "priority": 7,
+      "slot": "menu"
+    },
+    {
+      "slug": "alert",
+      "reason": "fallback after fixed slots; semantic=alert:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/alert.json",
+      "priority": 8
+    },
+    {
+      "slug": "input",
+      "reason": "fallback after fixed slots; semantic=input:0.75; policy=fixed-slots-first",
+      "evidenceFile": "components/input.json",
+      "priority": 9
+    },
+    {
+      "slug": "modal",
+      "reason": "expanded overlay component; semantic=overlay:0.75",
+      "evidenceFile": "components/modal.json",
+      "priority": 10
+    },
+    {
+      "slug": "tooltip",
+      "reason": "expanded feedback component; semantic=feedback:0.75",
+      "evidenceFile": "components/tooltip.json",
+      "priority": 11
+    },
+    {
+      "slug": "toast",
+      "reason": "expanded feedback component; semantic=feedback:0.75",
+      "evidenceFile": "components/toast.json",
+      "priority": 12
+    },
+    {
+      "slug": "form",
+      "reason": "expanded container component; semantic=container:0.75",
+      "evidenceFile": "components/form.json",
+      "priority": 13
+    },
+    {
+      "slug": "pagination",
+      "reason": "expanded navigation component; semantic=navigation:0.75",
+      "evidenceFile": "components/pagination.json",
+      "priority": 14
+    }
+  ],
+  "supportEvidenceComponents": [],
+  "allowedComponents": [
+    "button",
+    "card",
+    "tag",
+    "table",
+    "alert",
+    "input",
+    "modal",
+    "tooltip",
+    "toast",
+    "dropdown",
+    "topnav",
+    "sidenav",
+    "form",
+    "pagination"
+  ],
+  "screenBlueprints": [
+    {
+      "name": null,
+      "componentSlugs": [],
+      "role": "primary"
+    },
+    {
+      "name": null,
+      "componentSlugs": [],
+      "role": "secondary"
+    },
+    {
+      "name": null,
+      "componentSlugs": [],
+      "role": "secondary"
+    }
+  ],
+  "productContext": {
+    "kitType": "website",
+    "productType": "SaaS",
+    "dominantCopy": [],
+    "pageNames": [],
+    "selectedFrameNames": []
+  },
+  "selectionPolicy": "fixed-slots-first",
+  "slotAssignments": [
+    {
+      "slot": "button",
+      "slug": "button",
+      "reason": "semantic"
+    },
+    {
+      "slot": "card",
+      "slug": "card",
+      "reason": "semantic"
+    },
+    {
+      "slot": "tag",
+      "slug": "tag",
+      "reason": "semantic"
+    },
+    {
+      "slot": "table",
+      "slug": "table",
+      "reason": "semantic"
+    },
+    {
+      "slot": "navigation",
+      "slug": "topnav",
+      "reason": "semantic"
+    },
+    {
+      "slot": "navigation",
+      "slug": "sidenav",
+      "reason": "semantic"
+    },
+    {
+      "slot": "menu",
+      "slug": "dropdown",
+      "reason": "semantic"
+    }
+  ],
+  "missingFixedSlots": [],
+  "fallbackComponents": [
+    "alert",
+    "input",
+    "modal",
+    "tooltip",
+    "toast"
+  ],
+  "needsNarrative": false,
+  "forbiddenInventedComponents": [],
+  "lowConfidence": false,
+  "warnings": []
+}

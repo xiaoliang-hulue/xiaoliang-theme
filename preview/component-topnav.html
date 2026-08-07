@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TopNav - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+
+/* @component-css-start */
+.topnav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); width: 100%; height: 64px; padding: 0 var(--space-6); background: var(--color-surface-elevated); border-bottom: 1px solid var(--color-border); box-sizing: border-box; }
+.topnav-brand { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--color-text); text-decoration: none; }
+.topnav-links { display: flex; align-items: center; gap: var(--space-1); }
+.topnav-link { padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: var(--color-text-secondary); border-radius: var(--radius-md); text-decoration: none; }
+.topnav-link:hover { color: var(--color-text); background: var(--color-surface-muted); }
+.topnav-link.active { color: var(--color-primary); background: var(--color-primary-subtle); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="#" class="topnav-brand">小亮应用</a>
+  <div class="topnav-links">
+    <a href="#" class="topnav-link active">概览</a>
+    <a href="#" class="topnav-link">项目</a>
+    <a href="#" class="topnav-link">团队</a>
+    <a href="#" class="topnav-link">设置</a>
+  </div>
+</nav>
+</body>
+</html>

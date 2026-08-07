@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>列表页 - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* @component-css-start */
+body { margin: 0; padding: var(--space-6); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); line-height: 1.5; }
+.page { max-width: var(--container-max); margin: 0 auto; }
+.navbar { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 var(--space-6); background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); margin-bottom: var(--space-6); }
+.nav-brand { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-lg); font-weight: var(--font-semibold); color: var(--color-text); }
+.nav-brand .icon { width: 24px; height: 24px; color: var(--color-primary); }
+.nav-actions { display: flex; align-items: center; gap: var(--space-4); }
+.nav-link { display: inline-flex; align-items: center; gap: var(--space-1); font-size: var(--text-sm); color: var(--color-text-secondary); text-decoration: none; transition: color .15s; }
+.nav-link:hover { color: var(--color-primary); }
+.page-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-5); }
+.page-title { margin: 0; font-size: var(--text-2xl); font-weight: var(--font-semibold); color: var(--color-text); }
+.toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-5); }
+.search-box { position: relative; display: inline-flex; align-items: center; }
+.search-box .input { width: 280px; padding-left: var(--space-8); }
+.search-box .icon { position: absolute; left: var(--space-3); width: 18px; height: 18px; color: var(--color-text-muted); }
+.filter-group { display: inline-flex; align-items: center; gap: var(--space-2); }
+.table-wrap { background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; margin-bottom: var(--space-5); }
+.table-actions { display: flex; align-items: center; gap: var(--space-2); }
+.pagination-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.pagination { display: inline-flex; align-items: center; gap: var(--space-1); }
+.page-info { font-size: var(--text-sm); color: var(--color-text-secondary); }
+.table .col-actions { width: 140px; }
+.table .col-status { width: 96px; }
+.table .col-date { width: 120px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="navbar" aria-label="顶部导航">
+    <a href="#" class="nav-brand">
+      <i data-lucide="zap" class="icon"></i>
+      <span>小亮工作台</span>
+    </a>
+    <div class="nav-actions">
+      <a href="#" class="nav-link"><i data-lucide="home" width="18" height="18"></i>首页</a>
+      <a href="#" class="nav-link"><i data-lucide="bell" width="18" height="18"></i>通知</a>
+      <a href="#" class="nav-link"><i data-lucide="user" width="18" height="18"></i>管理员</a>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <h1 class="page-title">客户列表</h1>
+    <div class="page-actions">
+      <button class="btn btn-secondary btn-md" type="button"><i data-lucide="download" width="16" height="16"></i>导出</button>
+      <button class="btn btn-primary btn-md" type="button"><i data-lucide="plus" width="16" height="16"></i>新建客户</button>
+    </div>
+  </header>
+
+  <section class="toolbar" aria-label="搜索与筛选">
+    <div class="search-box">
+      <i data-lucide="search" class="icon"></i>
+      <input class="input" type="text" placeholder="搜索客户名称、联系人或编号">
+    </div>
+    <select class="input" aria-label="客户类型" style="width:160px">
+      <option>全部类型</option>
+      <option>企业客户</option>
+      <option>个人客户</option>
+      <option>渠道客户</option>
+    </select>
+    <div class="filter-group">
+      <button class="btn btn-primary btn-sm" type="button">全部</button>
+      <button class="btn btn-secondary btn-sm" type="button">生效中</button>
+      <button class="btn btn-secondary btn-sm" type="button">待处理</button>
+      <button class="btn btn-secondary btn-sm" type="button">已归档</button>
+    </div>
+  </section>
+
+  <div class="table-wrap">
+    <table class="table hover">
+      <thead>
+        <tr>
+          <th>客户名称</th>
+          <th>类型</th>
+          <th class="col-status">状态</th>
+          <th>负责人</th>
+          <th class="col-date">创建时间</th>
+          <th class="col-actions">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>华东科技有限公司</td>
+          <td>企业客户</td>
+          <td><span class="tag tag-rounded tag-success">生效中</span></td>
+          <td>王伟</td>
+          <td>2024-08-01</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-sm" type="button">编辑</button>
+              <button class="btn btn-danger btn-sm" type="button">删除</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>青云设计工作室</td>
+          <td>个人客户</td>
+          <td><span class="tag tag-rounded tag-warning">待处理</span></td>
+          <td>李娜</td>
+          <td>2024-08-03</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-sm" type="button">编辑</button>
+              <button class="btn btn-danger btn-sm" type="button">删除</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>星河贸易集团</td>
+          <td>渠道客户</td>
+          <td><span class="tag tag-rounded tag-success">生效中</span></td>
+          <td>张强</td>
+          <td>2024-08-05</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-sm" type="button">编辑</button>
+              <button class="btn btn-danger btn-sm" type="button">删除</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>百川物流有限公司</td>
+          <td>企业客户</td>
+          <td><span class="tag tag-rounded tag-error">已停用</span></td>
+          <td>赵敏</td>
+          <td>2024-07-28</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-sm" type="button">编辑</button>
+              <button class="btn btn-danger btn-sm" type="button">删除</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>晨光教育机构</td>
+          <td>企业客户</td>
+          <td><span class="tag tag-rounded tag-success">生效中</span></td>
+          <td>刘洋</td>
+          <td>2024-08-06</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-sm" type="button">编辑</button>
+              <button class="btn btn-danger btn-sm" type="button">删除</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>未来数字传媒</td>
+          <td>渠道客户</td>
+          <td><span class="tag tag-rounded tag-default">已归档</span></td>
+          <td>陈静</td>
+          <td>2024-07-15</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-sm" type="button">编辑</button>
+              <button class="btn btn-danger btn-sm" type="button">删除</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="pagination-bar" aria-label="分页与批量操作">
+    <span class="page-info">共 128 条记录，每页 6 条</span>
+    <div class="pagination">
+      <button class="btn btn-secondary btn-sm" type="button" disabled>上一页</button>
+      <button class="btn btn-primary btn-sm" type="button">1</button>
+      <button class="btn btn-secondary btn-sm" type="button">2</button>
+      <button class="btn btn-secondary btn-sm" type="button">3</button>
+      <span class="page-info">…</span>
+      <button class="btn btn-secondary btn-sm" type="button">22</button>
+      <button class="btn btn-secondary btn-sm" type="button">下一页</button>
+    </div>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script>
+</body>
+</html>

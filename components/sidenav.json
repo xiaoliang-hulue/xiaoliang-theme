@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "SideNav",
+  "slug": "sidenav",
+  "confidence": "high",
+  "semanticTypeCandidates": ["navigation", "sidebar"],
+  "variantDimensions": ["density"],
+  "representativeVariants": [
+    { "density": "default" }
+  ],
+  "anatomy": ["section", "section-title", "link", "icon", "active-indicator"],
+  "structurePatterns": ["vertical-list", "grouped-sections", "icon-label"],
+  "usageHints": ["侧边功能导航", "模块分组", "后台布局"],
+  "doNotInvent": ["collapsible groups", "tree menus"],
+  "unknowns": []
+}

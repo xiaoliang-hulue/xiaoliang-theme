@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Table",
+  "slug": "table",
+  "confidence": "high",
+  "semanticTypeCandidates": ["data", "grid"],
+  "variantDimensions": ["stripe", "hover", "state"],
+  "representativeVariants": [
+    { "stripe": false, "hover": false, "state": "default" },
+    { "stripe": true, "hover": false, "state": "default" },
+    { "stripe": false, "hover": true, "state": "default" },
+    { "stripe": true, "hover": true, "state": "default" },
+    { "stripe": false, "hover": false, "state": "empty" }
+  ],
+  "anatomy": ["root", "thead", "tbody", "tr", "th", "td", "empty-state"],
+  "structurePatterns": ["native-table", "header-row", "empty-placeholder"],
+  "usageHints": ["数据展示", "列表数据", "对比信息"],
+  "doNotInvent": ["sortable columns", "pagination", "expandable rows"],
+  "unknowns": []
+}

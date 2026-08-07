@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Dropdown",
+  "slug": "dropdown",
+  "confidence": "high",
+  "semanticTypeCandidates": ["navigation", "menu"],
+  "variantDimensions": ["placement", "intent"],
+  "representativeVariants": [
+    { "placement": "bottom-left", "intent": "default" }
+  ],
+  "anatomy": ["trigger", "menu", "item", "divider"],
+  "structurePatterns": ["click-trigger", "absolute-menu", "list-items"],
+  "usageHints": ["操作菜单", "筛选排序", "上下文选项"],
+  "doNotInvent": ["mega menus", "nested flyouts"],
+  "unknowns": []
+}
