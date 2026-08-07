@@ -12,11 +12,29 @@
 
 ## 安装使用
 
-### npm 安装（推荐）
+### npm 安装（推荐，需先发布到 npm）
 
 ```bash
 npm install xiaoliang-theme
 ```
+
+### 从 Gitee 安装
+
+```bash
+npm install git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git
+```
+
+或在 `package.json` 中：
+
+```json
+{
+  "dependencies": {
+    "xiaoliang-theme": "git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git#main"
+  }
+}
+```
+
+### 引入样式
 
 在 HTML 中引入：
 

@@ -17,14 +17,14 @@
 
 ### 2. 提供仓库地址
 
-把 Gitee 仓库 HTTPS 或 SSH 地址发给我，例如：
+你的 Gitee 仓库地址：
 
 ```
-https://gitee.com/你的用户名/xiaoliang-theme.git
-git@gitee.com:你的用户名/xiaoliang-theme.git
+https://gitee.com/huluexiaoliang/xiaoliang-theme.git
+git@gitee.com:huluexiaoliang/xiaoliang-theme.git
 ```
 
-我会帮你更新 `package.json` 的 `repository` 字段。
+`package.json` 的 `repository` 字段已更新。
 
 ### 3. 配置 Git 作者信息（重要）
 
@@ -57,7 +57,7 @@ cat ~/.ssh/id_ed25519.pub
 3. 推送：
 
 ```bash
-git remote add origin git@gitee.com:你的用户名/xiaoliang-theme.git
+git remote add origin git@gitee.com:huluexiaoliang/xiaoliang-theme.git
 git branch -M main
 git push -u origin main
 ```
@@ -65,7 +65,7 @@ git push -u origin main
 #### 方式 B：HTTPS
 
 ```bash
-git remote add origin https://gitee.com/你的用户名/xiaoliang-theme.git
+git remote add origin https://gitee.com/huluexiaoliang/xiaoliang-theme.git
 git branch -M main
 git push -u origin main
 ```
@@ -83,7 +83,7 @@ Gitee 是代码托管平台，不能替代 npm registry。如果希望别人通�
 如果只是通过 Gitee 安装，可以使用：
 
 ```bash
-npm install https://gitee.com/你的用户名/xiaoliang-theme.git
+npm install git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git
 ```
 
 或在 `package.json` 中：
@@ -91,7 +91,7 @@ npm install https://gitee.com/你的用户名/xiaoliang-theme.git
 ```json
 {
   "dependencies": {
-    "xiaoliang-theme": "git+https://gitee.com/你的用户名/xiaoliang-theme.git#main"
+    "xiaoliang-theme": "git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git#main"
   }
 }
 ```

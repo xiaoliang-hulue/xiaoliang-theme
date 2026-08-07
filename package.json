@@ -38,7 +38,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://gitee.com/huluexiaoliang/xiaoliang-theme.git"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.0.0"
