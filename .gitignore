@@ -32,3 +32,6 @@ temp/
 # Environment
 .env
 .env.local
+
+# System-managed design library metadata
+metadata.json
