@@ -77,61 +77,67 @@ import 'xiaoliang-theme/components.css';
 
 ### 按钮
 
+组件类名为 `btn` / `btn-primary` / `btn-secondary` / `btn-ghost` / `btn-danger`，尺寸用 `btn-sm` / `btn-md` / `btn-lg`，禁用加 `disabled` 属性，加载态加 `btn-loading`。
+
 ```html
-<button class="xl-button xl-button--primary">主要按钮</button>
-<button class="xl-button xl-button--secondary">次要按钮</button>
+<button class="btn btn-primary">主要按钮</button>
+<button class="btn btn-secondary">次要按钮</button>
 ```
 
 ```css
-.xl-button {
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  padding: 0 16px;
+  min-height: 36px;
+  padding: 0 var(--space-4);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   font-family: var(--font-sans);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-.xl-button--primary {
+.btn-primary {
   background: var(--color-primary);
   color: var(--color-on-primary);
 }
 
-.xl-button--primary:hover {
+.btn-primary:hover {
   background: var(--color-primary-hover);
 }
 
-.xl-button--secondary {
-  background: var(--color-surface);
+.btn-secondary {
+  background: var(--color-surface-muted);
   color: var(--color-text);
   border-color: var(--color-border);
 }
 
-.xl-button--secondary:hover {
-  background: var(--color-surface-muted);
+.btn-secondary:hover {
+  background: var(--color-border-subtle);
 }
 ```
 
 ### 卡片
 
 ```html
-<div class="xl-card">
+<div class="card card-default">
   <h3 class="xl-h4">卡片标题</h3>
   <p class="xl-body">卡片内容描述文字。</p>
 </div>
 ```
 
 ```css
-.xl-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-subtle);
+.card {
+  width: 100%;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+}
+
+.card-default {
   padding: var(--space-6);
 }
 ```
@@ -139,11 +145,11 @@ import 'xiaoliang-theme/components.css';
 ### 输入框
 
 ```html
-<input class="xl-input" type="text" placeholder="请输入内容">
+<input class="input" type="text" placeholder="请输入内容">
 ```
 
 ```css
-.xl-input {
+.input {
   width: 100%;
   height: 40px;
   padding: 0 var(--space-3);
@@ -151,32 +157,35 @@ import 'xiaoliang-theme/components.css';
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text);
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   font-family: var(--font-sans);
 }
 
-.xl-input::placeholder {
+.input::placeholder {
   color: var(--color-text-muted);
 }
 
-.xl-input:focus {
-  outline: none;
+.input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-primary-subtle);
+  outline: 2px solid var(--color-primary-subtle);
+  outline-offset: 2px;
 }
 ```
 
 ## 切换深色模式
+
+主题默认**跟随系统偏好**（`prefers-color-scheme: dark`）。如需手动控制，给 `<html>` 设置 `data-theme` 属性即可（也兼容 `.dark` 类）：
 
 ```js
 const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 ```
 
-或强制指定：
+强制指定（手动覆盖系统偏好）：
 
 ```html
 <html data-theme="dark">
+<!-- 或显式浅色：<html data-theme="light"> -->
 ```
 
 ## Token 速查
@@ -264,39 +273,49 @@ module.exports = {
 
 | 文件 | 说明 |
 |------|------|
-| `colors_and_type.css` | Token 定义与排版工具类 |
-| `css.json` | Token 的 JSON 投影 |
-| `components.css` | 聚合后的组件样式 |
+| `colors_and_type.css` | Token 定义与排版工具类（浅色/深色双模式） |
+| `css.json` | Token 的 JSON 投影（含 light / dark） |
+| `components.css` | 聚合后的组件样式（14 个组件，类名 `.btn` / `.alert` 等） |
+| `components/` | 各组件的结构化定义（`index.json` + 14 个 `*.json`） |
 | `tailwind.config.js` | Tailwind CSS 主题配置 |
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `preview/index.html` | 主题总览预览页 |
+| `preview/component-*.html` | 14 个组件预览页 |
 | `preview/page-list.html` | 列表页模板 |
 | `preview/page-detail.html` | 详情页模板 |
 | `preview/page-form.html` | 表单页模板 |
 | `preview/page-dashboard.html` | 仪表盘模板 |
 | `ui_kits/website/index.html` | UI Kit 展示页（3 屏：组件总览、表单示例、数据看板） |
+| `ui_kits/website/quality-report.json` | UI Kit 质量报告 |
+| `uikit-plan.json` | UI Kit 生成计划 |
 | `SKILL.md` | 设计系统规范 |
 | `accessibility-report.json` | 可访问性检查报告（WCAG 2.1 AA） |
 | `specs/小亮主题-PRD.md` | 原始 PRD |
 
 ## 组件清单
 
-已提供预览页的组件：
+已提供预览页的组件（共 14 个）：
 
 | 组件 | 预览文件 | 说明 |
 |------|----------|------|
-| Button | `preview/component-button.html` | Primary / Secondary / Ghost / Danger / 尺寸 / 禁用 |
-| Input | `preview/component-input.html` | 默认 / Focus / 禁用 / 错误 |
+| Button | `preview/component-button.html` | Primary / Secondary / Ghost / Danger / 尺寸 / 禁用 / 加载 |
+| Input | `preview/component-input.html` | 默认 / Focus / 禁用 / 错误 / 成功 |
 | Card | `preview/component-card.html` | 默认 / 紧凑 / 可交互 |
-| Tag | `preview/component-tag.html` | Default / Primary / Success / Warning / Error / Pill |
+| Tag | `preview/component-tag.html` | Default / Primary / Success / Warning / Error / Rounded / Pill |
 | Alert | `preview/component-alert.html` | Info / Success / Warning / Error |
 | Table | `preview/component-table.html` | 默认 / 斑马纹 / Hover |
 | Form | `preview/component-form.html` | 垂直 / 水平 / 行内布局 / 错误 / 成功 / 禁用 |
 | Pagination | `preview/component-pagination.html` | 默认 / 小尺寸 / 激活 / 禁用 / 省略号 |
+| Dropdown | `preview/component-dropdown.html` | 菜单 / 分隔线 / 项 |
+| Modal | `preview/component-modal.html` | 标题 / 内容 / 底部操作 |
+| Tooltip | `preview/component-tooltip.html` | 悬停气泡（下 / 上） |
+| Toast | `preview/component-toast.html` | Success / Error / Info |
+| TopNav | `preview/component-topnav.html` | 品牌 / 导航链接 / 激活态 |
+| SideNav | `preview/component-sidenav.html` | 分区 / 链接 / 激活态 |
 
-组件样式已聚合到 `components.css`，可直接引入或按需复制。
+组件样式已聚合到 `components.css`（类名规范：`.btn` / `.alert` / `.input` / `.card` / `.tag` 等），可直接引入或按需复制。各组件的结构化定义见 `components/*.json`。
 
-UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述 6 个组件，覆盖组件总览、表单示例、数据看板 3 个屏幕，可作为真实页面布局参考。
+UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件，覆盖组件总览、表单示例、数据看板 3 个屏幕，可作为真实页面布局参考。
 
 ## 可访问性
 
@@ -306,8 +325,8 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述 6 个组件�
 
 - 页面模板（列表页、详情页、表单页、仪表盘）—— 已完成
 - UI Kit 展示页 —— 已完成
-- 组件覆盖：Button、Input、Card、Tag、Alert、Table、Form、Pagination —— 已完成
+- 组件覆盖：Button、Input、Card、Tag、Alert、Table、Form、Pagination、Dropdown、Modal、Tooltip、Toast、TopNav、SideNav（共 14 个）—— 已完成
 
 ## 许可
 
-个人项目自由使用。
+基于 [MIT 许可证](./LICENSE) 开源，可自由用于个人与商业项目。

@@ -123,6 +123,7 @@
   --container-max: 1280px; /* Source: structured-spec */
 }
 
+:root[data-theme="dark"],
 .dark {
   /* primary */
   --primary-50: #0f1f4d; /* Source: structured-spec */
@@ -175,6 +176,63 @@
   --color-primary-hover: var(--primary-600); /* Source: structured-spec */
   --color-primary-subtle: var(--primary-950); /* Source: structured-spec */
   --color-on-primary: #0a0a0a; /* Source: structured-spec */
+}
+
+/* 自动跟随系统偏好：用户未显式指定浅色时，系统深色即应用深色 Token */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* primary */
+    --primary-50: #0f1f4d; /* Source: structured-spec */
+    --primary-100: #162b66; /* Source: structured-spec */
+    --primary-200: #1e3d8f; /* Source: structured-spec */
+    --primary-300: #2754b8; /* Source: structured-spec */
+    --primary-400: #356de3; /* Source: structured-spec */
+    --primary-500: #4b85f6; /* Source: structured-spec */
+    --primary-600: #6394fa; /* Source: structured-spec */
+    --primary-700: #85adff; /* Source: structured-spec */
+    --primary-800: #b3cdff; /* Source: structured-spec */
+    --primary-900: #dbe6ff; /* Source: structured-spec */
+    --primary-950: #eef4ff; /* Source: structured-spec */
+
+    /* gray */
+    --gray-0: #0a0a0a; /* Source: structured-spec */
+    --gray-50: #111111; /* Source: structured-spec */
+    --gray-100: #1a1a1a; /* Source: structured-spec */
+    --gray-200: #262626; /* Source: structured-spec */
+    --gray-300: #404040; /* Source: structured-spec */
+    --gray-400: #525252; /* Source: structured-spec */
+    --gray-500: #737373; /* Source: structured-spec */
+    --gray-600: #a3a3a3; /* Source: structured-spec */
+    --gray-700: #d4d4d4; /* Source: structured-spec */
+    --gray-800: #e5e5e5; /* Source: structured-spec */
+    --gray-900: #f5f5f5; /* Source: structured-spec */
+    --gray-950: #ffffff; /* Source: structured-spec */
+
+    /* semantic */
+    --success: #4ade80; /* Source: structured-spec */
+    --success-bg: #052e16; /* Source: structured-spec */
+    --warning: #fbbf24; /* Source: structured-spec */
+    --warning-bg: #451a03; /* Source: structured-spec */
+    --error: #f87171; /* Source: structured-spec */
+    --error-bg: #450a0a; /* Source: structured-spec */
+    --info: var(--primary-500); /* Source: structured-spec */
+    --info-bg: #0f1f4d; /* Source: structured-spec */
+
+    /* semantic-aliases */
+    --color-background: var(--gray-0); /* Source: structured-spec */
+    --color-surface: var(--gray-50); /* Source: structured-spec */
+    --color-surface-elevated: var(--gray-100); /* Source: structured-spec */
+    --color-surface-muted: var(--gray-100); /* Source: structured-spec */
+    --color-border: var(--gray-200); /* Source: structured-spec */
+    --color-border-subtle: var(--gray-100); /* Source: structured-spec */
+    --color-text: var(--gray-900); /* Source: structured-spec */
+    --color-text-secondary: var(--gray-600); /* Source: structured-spec */
+    --color-text-muted: var(--gray-400); /* Source: structured-spec */
+    --color-primary: var(--primary-500); /* Source: structured-spec */
+    --color-primary-hover: var(--primary-600); /* Source: structured-spec */
+    --color-primary-subtle: var(--primary-950); /* Source: structured-spec */
+    --color-on-primary: #0a0a0a; /* Source: structured-spec */
+  }
 }
 
 /* Typography utilities */

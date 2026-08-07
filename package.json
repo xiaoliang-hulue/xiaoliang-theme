@@ -34,11 +34,15 @@
     "xiaoliang",
     "小亮主题"
   ],
-  "author": "",
+  "author": "小亮 (huluexiaoliang)",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://gitee.com/huluexiaoliang/xiaoliang-theme.git"
+  },
+  "scripts": {
+    "build": "node extract-components-css.mjs",
+    "build:components": "node extract-components-css.mjs"
   },
   "peerDependencies": {
     "tailwindcss": ">=3.0.0"

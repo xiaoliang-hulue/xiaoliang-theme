@@ -80,10 +80,15 @@ user-invocable: true
 | Token | 浅色值 | 深色值 |
 |-------|--------|--------|
 | `--gray-0` | `#ffffff` | `#0a0a0a` |
+| `--gray-50` | `#fafafa` | `#111111` |
 | `--gray-100` | `#f5f5f5` | `#1a1a1a` |
 | `--gray-200` | `#e5e5e5` | `#262626` |
+| `--gray-300` | `#d4d4d4` | `#404040` |
 | `--gray-400` | `#a3a3a3` | `#525252` |
+| `--gray-500` | `#737373` | `#737373` |
 | `--gray-600` | `#525252` | `#a3a3a3` |
+| `--gray-700` | `#404040` | `#d4d4d4` |
+| `--gray-800` | `#262626` | `#e5e5e5` |
 | `--gray-900` | `#171717` | `#f5f5f5` |
 | `--gray-950` | `#0a0a0a` | `#ffffff` |
 
@@ -93,11 +98,16 @@ user-invocable: true
 |-------|----------|----------|------|
 | `--color-background` | `--gray-0` | `--gray-0` | 页面背景 |
 | `--color-surface` | `--gray-0` | `--gray-50` | 卡片表面 |
+| `--color-surface-elevated` | `--gray-0` | `--gray-100` | 浮起表面（弹窗/导航） |
+| `--color-surface-muted` | `--gray-50` | `--gray-100` | 次级表面 |
+| `--color-border` | `--gray-200` | `--gray-200` | 默认边框 |
+| `--color-border-subtle` | `--gray-100` | `--gray-100` | 弱边框 |
 | `--color-text` | `--gray-900` | `--gray-100` | 主要文字 |
 | `--color-text-secondary` | `--gray-600` | `--gray-500` | 次要文字 |
-| `--color-border` | `--gray-200` | `--gray-200` | 默认边框 |
+| `--color-text-muted` | `--gray-400` | `--gray-400` | 禁用/占位符 |
 | `--color-primary` | `--primary-600` | `--primary-500` | 主色 |
 | `--color-primary-hover` | `--primary-700` | `--primary-400` | 主色悬停 |
+| `--color-primary-subtle` | `--primary-50` | `--primary-950` | 主色弱背景 |
 | `--color-on-primary` | `#ffffff` | `#0a0a0a` | 主色上的文字 |
 
 ### 字体 Token
@@ -188,14 +198,19 @@ user-invocable: true
 
 ```
 小亮主题/
-├── colors_and_type.css    # Token 与排版工具类
-├── css.json               # Token JSON 投影
-├── README.md              # 使用说明
-├── SKILL.md               # 设计规范
-├── specs/                 # 原始 PRD
-│   └── 小亮主题-PRD.md
-└── preview/               # 预览页
-    └── index.html
+├── colors_and_type.css      # Token 与排版工具类（浅色/深色双模式）
+├── components.css           # 14 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
+├── css.json                 # Token 的 JSON 投影（light / dark）
+├── tailwind.config.js      # Tailwind CSS 主题配置
+├── extract-components-css.mjs  # 由 preview/component-*.html 重新生成 components.css
+├── components/              # 各组件结构化定义（index.json + 14 个 *.json）
+├── preview/                 # 预览页（index.html + 14 个组件页 + 4 个页面模板）
+├── ui_kits/website/         # UI Kit 展示页与质量报告
+├── assets/icons/            # 图标说明（Lucide）
+├── specs/小亮主题-PRD.md     # 原始 PRD
+├── README.md                # 使用说明
+├── SKILL.md                 # 设计规范
+└── accessibility-report.json # 可访问性检查（WCAG 2.1 AA）
 ```
 
 ---
