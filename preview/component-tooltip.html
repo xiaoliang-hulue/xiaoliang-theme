@@ -12,8 +12,10 @@ body { margin: 0; padding: var(--space-10) var(--space-3); background: var(--col
 
 /* @component-css-start */
 .tooltip { position: relative; display: inline-flex; }
-.tooltip-bubble { position: absolute; bottom: calc(100% + var(--space-2)); left: 50%; transform: translateX(-50%); padding: var(--space-1) var(--space-2); background: var(--gray-900); color: var(--gray-0); font-size: var(--text-xs); line-height: 18px; border-radius: var(--radius-md); white-space: nowrap; z-index: 40; }
+.tooltip-bubble { position: absolute; bottom: calc(100% + var(--space-2)); left: 50%; transform: translateX(-50%); padding: var(--space-1) var(--space-2); background: var(--gray-900); color: var(--gray-0); font-size: var(--text-xs); line-height: 18px; border-radius: var(--radius-md); white-space: nowrap; z-index: 40; opacity: 0; visibility: hidden; transition: opacity .15s ease, visibility .15s ease; pointer-events: none; }
 .tooltip-bubble::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--gray-900); }
+.tooltip:hover .tooltip-bubble,
+.tooltip:focus-within .tooltip-bubble { opacity: 1; visibility: visible; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-sans); font-weight: var(--font-medium); white-space: nowrap; }
 .btn-sm { min-height: 28px; padding: var(--space-1) var(--space-3); font-size: var(--text-xs); }
 .btn-secondary { background: var(--color-surface-muted); color: var(--color-text); border-color: var(--color-border); }

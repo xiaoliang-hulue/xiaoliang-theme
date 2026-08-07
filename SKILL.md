@@ -1,6 +1,6 @@
 ---
 name: "小亮主题 (Xiao Liang Theme)"
-description: 个人极简干净设计系统，提供浅色/深色双模式、纯 CSS 变量 Token 与 14 个基础组件规范。激活此 Skill 后，可直接使用小亮主题生成页面、组件或视觉方案。
+description: 个人极简干净设计系统，提供浅色/深色双模式、纯 CSS 变量 Token 与 18 个基础组件规范。激活此 Skill 后，可直接使用小亮主题生成页面、组件或视觉方案。
 user-invocable: true
 ---
 
@@ -185,11 +185,16 @@ user-invocable: true
 
 - Button（Primary / Secondary / Ghost / Danger / Disabled）
 - Input / Textarea
+- Select
+- Checkbox / Radio / Switch
 - Card
 - Tag / Badge
 - Alert（Info / Success / Warning / Error）
 - Modal / Dialog
 - Table
+- Form（垂直 / 水平 / 行内）
+- Pagination
+- Dropdown / Tooltip / Toast
 - Navigation（TopNav / SideNav）
 
 ---
@@ -199,12 +204,12 @@ user-invocable: true
 ```
 小亮主题/
 ├── colors_and_type.css      # Token 与排版工具类（浅色/深色双模式）
-├── components.css           # 14 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
+├── components.css           # 18 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
 ├── css.json                 # Token 的 JSON 投影（light / dark）
-├── tailwind.config.js      # Tailwind CSS 主题配置
+├── theme.js                # 零依赖交互脚本（Modal / Toast，暴露 window.XL）
 ├── extract-components-css.mjs  # 由 preview/component-*.html 重新生成 components.css
-├── components/              # 各组件结构化定义（index.json + 14 个 *.json）
-├── preview/                 # 预览页（index.html + 14 个组件页 + 4 个页面模板）
+├── components/              # 各组件结构化定义（index.json + *.json）
+├── preview/                 # 预览页（index.html + 18 个组件页 + 4 个页面模板）
 ├── ui_kits/website/         # UI Kit 展示页与质量报告
 ├── assets/icons/            # 图标说明（Lucide）
 ├── specs/小亮主题-PRD.md     # 原始 PRD

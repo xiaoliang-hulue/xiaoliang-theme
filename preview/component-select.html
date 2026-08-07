@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Select - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-3); flex-wrap: wrap; }
+.label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* @component-css-start */
+.select { height: 40px; min-width: 200px; padding: 0 var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); outline: none; transition: border-color .15s; cursor: pointer; box-sizing: border-box; }
+.select:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; }
+.select:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
+.select.error { border-color: var(--error); background: var(--error-bg); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="row"><span class="label">默认</span>
+  <select class="select" aria-label="选择城市">
+    <option>佛山</option><option>广州</option><option>深圳</option><option>东莞</option>
+  </select>
+</div>
+<div class="row"><span class="label">错误</span>
+  <select class="select error" aria-label="选择城市" aria-invalid="true">
+    <option>请选择</option><option>佛山</option>
+  </select>
+</div>
+<div class="row"><span class="label">禁用</span>
+  <select class="select" disabled aria-label="选择城市"><option>佛山</option></select>
+</div>
+</body>
+</html>

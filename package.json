@@ -1,13 +1,13 @@
 {
   "name": "xiaoliang-theme",
   "version": "1.2.0",
-  "description": "小亮主题 — 个人极简干净设计系统，含浅色/深色双模式、纯 CSS 变量 Token 与 14 个基础组件",
+  "description": "小亮主题 — 个人极简干净设计系统，含浅色/深色双模式、纯 CSS 变量 Token 与 18 个基础组件",
   "main": "colors_and_type.css",
   "style": "colors_and_type.css",
   "files": [
     "colors_and_type.css",
     "components.css",
-    "tailwind.config.js",
+    "theme.js",
     "css.json",
     "README.md",
     "SKILL.md",
@@ -22,15 +22,14 @@
     ".": "./colors_and_type.css",
     "./css": "./colors_and_type.css",
     "./components": "./components.css",
-    "./tailwind": "./tailwind.config.js",
-    "./tokens": "./css.json"
+    "./tokens": "./css.json",
+    "./js": "./theme.js"
   },
   "keywords": [
     "design-system",
     "css-variables",
     "theme",
     "ui-kit",
-    "tailwindcss",
     "xiaoliang",
     "小亮主题"
   ],
@@ -41,15 +40,8 @@
     "url": "https://gitee.com/huluexiaoliang/xiaoliang-theme.git"
   },
   "scripts": {
-    "build": "node extract-components-css.mjs",
+    "build": "node build-tokens.mjs && node extract-components-css.mjs",
+    "build:tokens": "node build-tokens.mjs",
     "build:components": "node extract-components-css.mjs"
-  },
-  "peerDependencies": {
-    "tailwindcss": ">=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "tailwindcss": {
-      "optional": true
-    }
   }
 }

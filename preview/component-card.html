@@ -16,12 +16,13 @@
     .card { width: 100%; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
     .card-default { padding: var(--space-6); }
     .card-compact { padding: var(--space-4); }
-    .card-interactive { padding: var(--space-6); cursor: pointer; transition: filter .15s; }
-    .card-interactive:hover { filter: brightness(0.97); }
+.card-interactive { padding: var(--space-6); cursor: pointer; transition: filter .15s; }
+.card-interactive:hover { filter: brightness(0.97); }
+.card-interactive:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
     .card-header { font-size: var(--text-lg); line-height: 30px; font-weight: var(--font-medium); margin-bottom: var(--space-2); }
     .card-body { font-size: var(--text-base); line-height: 26px; color: var(--color-text-secondary); margin-bottom: var(--space-4); }
     .card-compact .card-body { margin-bottom: var(--space-3); }
-    .card-footer { font-size: var(--text-sm); line-height: 22px; color: var(--color-text-muted); }
+    .card-footer { font-size: var(--text-sm); line-height: 22px; color: var(--color-text-subtle); }
     .card-disabled { opacity: .55; pointer-events: none; filter: grayscale(.25); }
     /* @component-css-end */
   </style>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Textarea - 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; gap: var(--space-3); align-items: flex-start; margin-bottom: var(--space-3); flex-wrap: wrap; }
+.label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* @component-css-start */
+.textarea { width: 100%; max-width: 420px; min-height: 96px; padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); line-height: 22px; outline: none; transition: border-color .15s; resize: vertical; box-sizing: border-box; }
+.textarea::placeholder { color: var(--color-text-muted); }
+.textarea:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; }
+.textarea:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
+.textarea.error { border-color: var(--error); background: var(--error-bg); }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="row"><span class="label">默认</span><textarea class="textarea" placeholder="请输入详细描述"></textarea></div>
+<div class="row"><span class="label">错误</span><textarea class="textarea error" aria-invalid="true">内容包含非法字符，请修改后重试。</textarea></div>
+<div class="row"><span class="label">禁用</span><textarea class="textarea" disabled>当前不可编辑</textarea></div>
+</body>
+</html>

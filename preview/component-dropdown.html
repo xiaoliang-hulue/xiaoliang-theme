@@ -11,11 +11,14 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 
 /* @component-css-start */
 .dropdown { position: relative; display: inline-flex; }
-.dropdown-menu { position: absolute; top: calc(100% + var(--space-1)); left: 0; min-width: 180px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); z-index: 50; }
+.dropdown-menu { position: absolute; top: calc(100% + var(--space-1)); left: 0; min-width: 180px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); z-index: 50; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .15s ease, visibility .15s ease, transform .15s ease; }
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
 .dropdown-item { display: flex; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-2) var(--space-3); font-size: var(--text-sm); line-height: 22px; color: var(--color-text); background: transparent; border: none; text-align: left; cursor: pointer; }
 .dropdown-item:hover { background: var(--color-surface-muted); }
 .dropdown-item:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
 .dropdown-item:last-child { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+.dropdown-item:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
 .dropdown-divider { height: 1px; margin: var(--space-1) 0; background: var(--color-border-subtle); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-sans); font-weight: var(--font-medium); white-space: nowrap; }
 .btn-md { min-height: 36px; padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
@@ -25,12 +28,12 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 </head>
 <body>
 <div class="dropdown">
-  <button class="btn btn-secondary btn-md" type="button">操作菜单</button>
-  <div class="dropdown-menu">
-    <button class="dropdown-item" type="button">编辑</button>
-    <button class="dropdown-item" type="button">复制</button>
+  <button class="btn btn-secondary btn-md" type="button" aria-haspopup="menu" aria-expanded="false">操作菜单</button>
+  <div class="dropdown-menu" role="menu">
+    <button class="dropdown-item" type="button" role="menuitem">编辑</button>
+    <button class="dropdown-item" type="button" role="menuitem">复制</button>
     <div class="dropdown-divider"></div>
-    <button class="dropdown-item" type="button" style="color: var(--error);">删除</button>
+    <button class="dropdown-item" type="button" role="menuitem" style="color: var(--error);">删除</button>
   </div>
 </div>
 </body>

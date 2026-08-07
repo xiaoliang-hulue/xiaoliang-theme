@@ -8,7 +8,7 @@
 <style>
 /* Page scaffold — NOT extracted */
 body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
-.row { display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-end; }
+.row { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-6); flex-wrap: wrap; }
 
 /* @component-css-start */
 .toast { display: flex; align-items: flex-start; gap: var(--space-3); min-width: 280px; max-width: 420px; padding: var(--space-4); background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
@@ -19,17 +19,30 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .toast.success .toast-icon { color: var(--success); }
 .toast.error .toast-icon { color: var(--error); }
 .toast.info .toast-icon { color: var(--info); }
+.toast-close { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin: calc(var(--space-1) * -1); border-radius: var(--radius-md); border: none; background: transparent; color: var(--color-text-muted); cursor: pointer; flex-shrink: 0; align-self: flex-start; }
+.toast-close:hover { background: var(--color-surface-muted); color: var(--color-text); }
+/* 固定定位容器：由 theme.js 动态创建，也可在页面中静态放置 */
+.toast-container { position: fixed; right: var(--space-6); bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); z-index: 200; pointer-events: none; max-width: calc(100vw - var(--space-12)); }
+.toast-container .toast { pointer-events: auto; }
 /* @component-css-end */
 </style>
 </head>
 <body>
 <div class="row">
+  <button class="btn btn-primary btn-md" type="button" onclick="XL.showToast({type:'success', title:'保存成功', message:'您的配置已更新。'})">成功通知</button>
+  <button class="btn btn-secondary btn-md" type="button" onclick="XL.showToast({type:'info', title:'新消息', message:'您收到一条系统通知。'})">信息通知</button>
+  <button class="btn btn-danger btn-md" type="button" onclick="XL.showToast({type:'error', title:'操作失败', message:'请检查网络连接后重试。'})">错误通知</button>
+</div>
+
+<!-- 静态示例（位于固定容器，模拟运行时的真实位置） -->
+<div class="toast-container" role="region" aria-live="polite" aria-label="通知">
   <div class="toast success" role="status">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <div class="toast-content">
       <div class="toast-title">保存成功</div>
       <div class="toast-message">您的配置已更新。</div>
     </div>
+    <button class="toast-close" type="button" aria-label="关闭"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
   </div>
   <div class="toast info" role="status">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -37,6 +50,7 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
       <div class="toast-title">新消息</div>
       <div class="toast-message">您收到一条系统通知。</div>
     </div>
+    <button class="toast-close" type="button" aria-label="关闭"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
   </div>
   <div class="toast error" role="status">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
@@ -44,7 +58,9 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
       <div class="toast-title">操作失败</div>
       <div class="toast-message">请检查网络连接后重试。</div>
     </div>
+    <button class="toast-close" type="button" aria-label="关闭"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
   </div>
 </div>
+<script src="../theme.js"></script>
 </body>
 </html>

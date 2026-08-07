@@ -64,14 +64,32 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
     .card { width: 100%; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
     .card-default { padding: var(--space-6); }
     .card-compact { padding: var(--space-4); }
-    .card-interactive { padding: var(--space-6); cursor: pointer; transition: filter .15s; }
-    .card-interactive:hover { filter: brightness(0.97); }
+.card-interactive { padding: var(--space-6); cursor: pointer; transition: filter .15s; }
+.card-interactive:hover { filter: brightness(0.97); }
+.card-interactive:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
     .card-header { font-size: var(--text-lg); line-height: 30px; font-weight: var(--font-medium); margin-bottom: var(--space-2); }
     .card-body { font-size: var(--text-base); line-height: 26px; color: var(--color-text-secondary); margin-bottom: var(--space-4); }
     .card-compact .card-body { margin-bottom: var(--space-3); }
-    .card-footer { font-size: var(--text-sm); line-height: 22px; color: var(--color-text-muted); }
+    .card-footer { font-size: var(--text-sm); line-height: 22px; color: var(--color-text-subtle); }
     .card-disabled { opacity: .55; pointer-events: none; filter: grayscale(.25); }
     /* @component-css-end */
+
+/* ── 来源: component-checkbox.html ─────────────────────────────────────────────────── */
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; gap: var(--space-6); align-items: flex-start; margin-bottom: var(--space-3); flex-wrap: wrap; }
+.label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+fieldset { border: none; margin: 0; padding: 0; }
+legend { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-text); margin-bottom: var(--space-2); padding: 0; }
+
+/* @component-css-start */
+.check { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text); cursor: pointer; }
+.check + .check { margin-top: var(--space-2); }
+.check input { width: 16px; height: 16px; margin: 0; accent-color: var(--color-primary); cursor: pointer; flex-shrink: 0; }
+.check input:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.check input:disabled { cursor: not-allowed; }
+.check:has(input:disabled) { color: var(--color-text-muted); cursor: not-allowed; }
+/* @component-css-end */
 
 /* ── 来源: component-dropdown.html ─────────────────────────────────────────────────── */
 /* Page scaffold — NOT extracted */
@@ -79,11 +97,14 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 
 /* @component-css-start */
 .dropdown { position: relative; display: inline-flex; }
-.dropdown-menu { position: absolute; top: calc(100% + var(--space-1)); left: 0; min-width: 180px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); z-index: 50; }
+.dropdown-menu { position: absolute; top: calc(100% + var(--space-1)); left: 0; min-width: 180px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); z-index: 50; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .15s ease, visibility .15s ease, transform .15s ease; }
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
 .dropdown-item { display: flex; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-2) var(--space-3); font-size: var(--text-sm); line-height: 22px; color: var(--color-text); background: transparent; border: none; text-align: left; cursor: pointer; }
 .dropdown-item:hover { background: var(--color-surface-muted); }
 .dropdown-item:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
 .dropdown-item:last-child { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+.dropdown-item:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
 .dropdown-divider { height: 1px; margin: var(--space-1) 0; background: var(--color-border-subtle); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-sans); font-weight: var(--font-medium); white-space: nowrap; }
 .btn-md { min-height: 36px; padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
@@ -131,7 +152,7 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .input.error { border-color: var(--error); background: var(--error-bg); }
 .input.success { border-color: var(--success); background: var(--success-bg); }
 .input-wrap { display: flex; flex-direction: column; gap: var(--space-1); }
-.input-hint { font-size: var(--text-xs); line-height: 18px; color: var(--color-text-muted); }
+.input-hint { font-size: var(--text-xs); line-height: 18px; color: var(--color-text-subtle); }
 .input-hint.success { color: var(--success); }
 .input-hint.error { color: var(--error); }
 /* @component-css-end */
@@ -142,6 +163,7 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 
 /* @component-css-start */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; padding: var(--space-6); z-index: 100; }
+.modal-overlay[hidden] { display: none; }
 .modal { width: 100%; max-width: 480px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); }
 .modal-header { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4) var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
 .modal-title { font-size: var(--text-lg); font-weight: var(--font-medium); color: var(--color-text); }
@@ -218,6 +240,19 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 }
 /* @component-css-end */
 
+/* ── 来源: component-select.html ─────────────────────────────────────────────────── */
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-3); flex-wrap: wrap; }
+.label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* @component-css-start */
+.select { height: 40px; min-width: 200px; padding: 0 var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); outline: none; transition: border-color .15s; cursor: pointer; box-sizing: border-box; }
+.select:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; }
+.select:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
+.select.error { border-color: var(--error); background: var(--error-bg); }
+/* @component-css-end */
+
 /* ── 来源: component-sidenav.html ─────────────────────────────────────────────────── */
 /* Page scaffold — NOT extracted */
 body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
@@ -229,6 +264,24 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .sidenav-link { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: var(--color-text-secondary); border-radius: var(--radius-md); text-decoration: none; }
 .sidenav-link:hover { color: var(--color-text); background: var(--color-surface-muted); }
 .sidenav-link.active { color: var(--color-primary); background: var(--color-primary-subtle); }
+.sidenav-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+/* @component-css-end */
+
+/* ── 来源: component-switch.html ─────────────────────────────────────────────────── */
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; gap: var(--space-6); align-items: center; margin-bottom: var(--space-3); flex-wrap: wrap; }
+.label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* @component-css-start */
+.switch { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
+.switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+.switch-track { width: 40px; height: 24px; border-radius: var(--radius-full); background: var(--color-border); transition: background .15s; position: relative; flex-shrink: 0; }
+.switch-track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--color-surface); box-shadow: var(--shadow-sm); transition: transform .15s; }
+.switch input:checked + .switch-track { background: var(--color-primary); }
+.switch input:checked + .switch-track::after { transform: translateX(16px); }
+.switch input:focus-visible + .switch-track { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.switch input:disabled + .switch-track { opacity: .5; cursor: not-allowed; }
 /* @component-css-end */
 
 /* ── 来源: component-table.html ─────────────────────────────────────────────────── */
@@ -246,8 +299,8 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
   .table td { color: var(--color-text); }
   .table.stripe tbody tr:nth-child(even) { background: var(--color-surface-muted); }
   .table.hover tbody tr:hover { filter: brightness(0.97); }
-  .table-empty { text-align: center; padding: var(--space-10) var(--space-4); color: var(--color-text-muted); }
-  .table-empty-icon { width: 48px; height: 48px; margin: 0 auto var(--space-3); color: var(--color-text-muted); opacity: .6; }
+  .table-empty { text-align: center; padding: var(--space-10) var(--space-4); color: var(--color-text-subtle); }
+  .table-empty-icon { width: 48px; height: 48px; margin: 0 auto var(--space-3); color: var(--color-text-subtle); opacity: .6; }
   /* @component-css-end */
 
 /* ── 来源: component-tag.html ─────────────────────────────────────────────────── */
@@ -270,10 +323,24 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
     .tag:hover { filter: brightness(1.08); }
     /* @component-css-end */
 
+/* ── 来源: component-textarea.html ─────────────────────────────────────────────────── */
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.row { display: flex; gap: var(--space-3); align-items: flex-start; margin-bottom: var(--space-3); flex-wrap: wrap; }
+.label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* @component-css-start */
+.textarea { width: 100%; max-width: 420px; min-height: 96px; padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); line-height: 22px; outline: none; transition: border-color .15s; resize: vertical; box-sizing: border-box; }
+.textarea::placeholder { color: var(--color-text-muted); }
+.textarea:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; }
+.textarea:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
+.textarea.error { border-color: var(--error); background: var(--error-bg); }
+/* @component-css-end */
+
 /* ── 来源: component-toast.html ─────────────────────────────────────────────────── */
 /* Page scaffold — NOT extracted */
 body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
-.row { display: flex; flex-direction: column; gap: var(--space-3); align-items: flex-end; }
+.row { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-6); flex-wrap: wrap; }
 
 /* @component-css-start */
 .toast { display: flex; align-items: flex-start; gap: var(--space-3); min-width: 280px; max-width: 420px; padding: var(--space-4); background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
@@ -284,6 +351,11 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .toast.success .toast-icon { color: var(--success); }
 .toast.error .toast-icon { color: var(--error); }
 .toast.info .toast-icon { color: var(--info); }
+.toast-close { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin: calc(var(--space-1) * -1); border-radius: var(--radius-md); border: none; background: transparent; color: var(--color-text-muted); cursor: pointer; flex-shrink: 0; align-self: flex-start; }
+.toast-close:hover { background: var(--color-surface-muted); color: var(--color-text); }
+/* 固定定位容器：由 theme.js 动态创建，也可在页面中静态放置 */
+.toast-container { position: fixed; right: var(--space-6); bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); z-index: 200; pointer-events: none; max-width: calc(100vw - var(--space-12)); }
+.toast-container .toast { pointer-events: auto; }
 /* @component-css-end */
 
 /* ── 来源: component-tooltip.html ─────────────────────────────────────────────────── */
@@ -293,8 +365,10 @@ body { margin: 0; padding: var(--space-10) var(--space-3); background: var(--col
 
 /* @component-css-start */
 .tooltip { position: relative; display: inline-flex; }
-.tooltip-bubble { position: absolute; bottom: calc(100% + var(--space-2)); left: 50%; transform: translateX(-50%); padding: var(--space-1) var(--space-2); background: var(--gray-900); color: var(--gray-0); font-size: var(--text-xs); line-height: 18px; border-radius: var(--radius-md); white-space: nowrap; z-index: 40; }
+.tooltip-bubble { position: absolute; bottom: calc(100% + var(--space-2)); left: 50%; transform: translateX(-50%); padding: var(--space-1) var(--space-2); background: var(--gray-900); color: var(--gray-0); font-size: var(--text-xs); line-height: 18px; border-radius: var(--radius-md); white-space: nowrap; z-index: 40; opacity: 0; visibility: hidden; transition: opacity .15s ease, visibility .15s ease; pointer-events: none; }
 .tooltip-bubble::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--gray-900); }
+.tooltip:hover .tooltip-bubble,
+.tooltip:focus-within .tooltip-bubble { opacity: 1; visibility: visible; }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-sans); font-weight: var(--font-medium); white-space: nowrap; }
 .btn-sm { min-height: 28px; padding: var(--space-1) var(--space-3); font-size: var(--text-xs); }
 .btn-secondary { background: var(--color-surface-muted); color: var(--color-text); border-color: var(--color-border); }
@@ -311,4 +385,5 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .topnav-link { padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: var(--color-text-secondary); border-radius: var(--radius-md); text-decoration: none; }
 .topnav-link:hover { color: var(--color-text); background: var(--color-surface-muted); }
 .topnav-link.active { color: var(--color-primary); background: var(--color-primary-subtle); }
+.topnav-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
 /* @component-css-end */

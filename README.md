@@ -221,51 +221,34 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 - `.xl-display` / `.xl-h1` / `.xl-h2` / `.xl-h3` / `.xl-h4`
 - `.xl-body` / `.xl-lead` / `.xl-caption` / `.xl-eyebrow` / `.xl-mono`
 
-## Tailwind CSS 配置
+## 引入方式
 
-本主题提供 `tailwind.config.js`，已将 Token 映射为 Tailwind 的 `colors`、`spacing`、`borderRadius`、`boxShadow`、`fontFamily` 等主题键：
-
-```js
-// tailwind.config.js
-module.exports = {
-  content: ['./src/**/*.{html,js,jsx,ts,tsx,vue}'],
-  theme: {
-    colors: {
-      primary: {
-        DEFAULT: 'var(--color-primary)',
-        hover: 'var(--color-primary-hover)',
-        subtle: 'var(--color-primary-subtle)',
-      },
-      surface: {
-        DEFAULT: 'var(--color-surface)',
-        elevated: 'var(--color-surface-elevated)',
-        muted: 'var(--color-surface-muted)',
-      },
-      text: {
-        DEFAULT: 'var(--color-text)',
-        secondary: 'var(--color-text-secondary)',
-        muted: 'var(--color-text-muted)',
-      },
-      // ...
-    },
-  },
-};
-```
-
-在项目中同时引入 Token 文件与 Tailwind 编译后的 CSS 即可：
+小亮主题是 **纯 CSS** 设计系统，无需任何构建工具。在页面中引入 Token 文件与组件样式即可：
 
 ```html
 <link rel="stylesheet" href="小亮主题/colors_and_type.css">
-<link rel="stylesheet" href="/dist/output.css">
+<link rel="stylesheet" href="小亮主题/components.css">
 ```
+
+如需使用 Modal / Toast 等交互组件，再引入零依赖的 `theme.js`（暴露全局 `window.XL`）：
+
+```html
+<script src="小亮主题/theme.js"></script>
+<script>
+  XL.openModal('#demo-modal');
+  XL.showToast({ type: 'success', title: '已保存', message: '配置已更新' });
+</script>
+```
+
+> 本主题不依赖 Tailwind 或其它 CSS 框架；若你的项目使用 Tailwind，可基于 `css.json` 的 Token 自行生成 `tailwind.config.js`。
 
 ## 图标
 
-本主题默认使用 **Lucide** 图标库，不内置 SVG 图标文件。详见 `assets/icons/README.md`。
+本主题默认使用 **Lucide** 图标库，运行时已本地内置（`assets/icons/lucide.min.js`，无外部 CDN 依赖）。详见 `assets/icons/README.md`。
 
 ```html
 <i data-lucide="search"></i>
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="assets/icons/lucide.min.js"></script>
 <script>lucide.createIcons();</script>
 ```
 
@@ -275,12 +258,12 @@ module.exports = {
 |------|------|
 | `colors_and_type.css` | Token 定义与排版工具类（浅色/深色双模式） |
 | `css.json` | Token 的 JSON 投影（含 light / dark） |
-| `components.css` | 聚合后的组件样式（14 个组件，类名 `.btn` / `.alert` 等） |
-| `components/` | 各组件的结构化定义（`index.json` + 14 个 `*.json`） |
-| `tailwind.config.js` | Tailwind CSS 主题配置 |
+| `components.css` | 聚合后的组件样式（18 个组件，类名 `.btn` / `.alert` 等） |
+| `components/` | 各组件的结构化定义（`index.json` + `*.json`） |
+| `theme.js` | 零依赖交互脚本（Modal / Toast，暴露 `window.XL`） |
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `preview/index.html` | 主题总览预览页 |
-| `preview/component-*.html` | 14 个组件预览页 |
+| `preview/component-*.html` | 18 个组件预览页 |
 | `preview/page-list.html` | 列表页模板 |
 | `preview/page-detail.html` | 详情页模板 |
 | `preview/page-form.html` | 表单页模板 |
@@ -294,17 +277,21 @@ module.exports = {
 
 ## 组件清单
 
-已提供预览页的组件（共 14 个）：
+已提供预览页的组件（共 18 个）：
 
 | 组件 | 预览文件 | 说明 |
 |------|----------|------|
 | Button | `preview/component-button.html` | Primary / Secondary / Ghost / Danger / 尺寸 / 禁用 / 加载 |
 | Input | `preview/component-input.html` | 默认 / Focus / 禁用 / 错误 / 成功 |
+| Textarea | `preview/component-textarea.html` | 默认 / 错误 / 禁用 |
+| Select | `preview/component-select.html` | 默认 / 错误 / 禁用 |
 | Card | `preview/component-card.html` | 默认 / 紧凑 / 可交互 |
 | Tag | `preview/component-tag.html` | Default / Primary / Success / Warning / Error / Rounded / Pill |
 | Alert | `preview/component-alert.html` | Info / Success / Warning / Error |
 | Table | `preview/component-table.html` | 默认 / 斑马纹 / Hover |
 | Form | `preview/component-form.html` | 垂直 / 水平 / 行内布局 / 错误 / 成功 / 禁用 |
+| Checkbox / Radio | `preview/component-checkbox.html` | 复选 / 单选 / 禁用 |
+| Switch | `preview/component-switch.html` | 开 / 关 / 禁用 |
 | Pagination | `preview/component-pagination.html` | 默认 / 小尺寸 / 激活 / 禁用 / 省略号 |
 | Dropdown | `preview/component-dropdown.html` | 菜单 / 分隔线 / 项 |
 | Modal | `preview/component-modal.html` | 标题 / 内容 / 底部操作 |
@@ -325,7 +312,7 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 
 - 页面模板（列表页、详情页、表单页、仪表盘）—— 已完成
 - UI Kit 展示页 —— 已完成
-- 组件覆盖：Button、Input、Card、Tag、Alert、Table、Form、Pagination、Dropdown、Modal、Tooltip、Toast、TopNav、SideNav（共 14 个）—— 已完成
+- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Tooltip、Toast、TopNav、SideNav（共 18 个）—— 已完成
 
 ## 许可
 

@@ -1,29 +1,45 @@
 # 图标说明
 
-本主题默认使用 **Lucide** 图标库，不内置任何 SVG 图标文件。
+本主题默认使用 **Lucide** 图标库。为避免运行时依赖外部 CDN、并便于在受限网络 / 严格 CSP 环境下使用，已将 Lucide UMD 运行时 **本地内置** 于 `assets/icons/lucide.min.js`（版本 1.8.0）。
 
 ## 使用方式
 
-可通过 CDN 直接引入，在 HTML 中使用 `data-lucide` 属性声明图标名称：
+在 HTML 中通过 `data-lucide` 属性声明图标名称，并引入本地运行时：
 
 ```html
 <i data-lucide="search"></i>
 <i data-lucide="bell"></i>
 <i data-lucide="user"></i>
 
-<script src="https://unpkg.com/lucide@latest"></script>
+<script src="assets/icons/lucide.min.js"></script>
 <script>
   lucide.createIcons();
 </script>
 ```
 
-也可通过 npm 安装：
+> 路径说明：预览页位于 `preview/`，引用路径为 `../assets/icons/lucide.min.js`；项目根目录引用则为 `assets/icons/lucide.min.js`。
 
-```bash
-npm install lucide
+## 内容安全策略（CSP）
+
+由于图标运行时已本地化，可将 CSP 收紧为仅信任同源脚本：
+
+```
+Content-Security-Policy: script-src 'self';
 ```
 
-然后在项目中按需引入并使用。
+如仍需通过 CDN 引入 Lucide，可放宽为：
+
+```
+Content-Security-Policy: script-src 'self' https://unpkg.com;
+```
+
+## 通过 npm 使用
+
+```bash
+npm install lucide@1.8.0
+```
+
+在构建流程中按需引入 Lucide 的 ESM / CommonJS 模块。
 
 ## 自定义图标
 
