@@ -41,6 +41,7 @@ npm install git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git
 ```html
 <link rel="stylesheet" href="node_modules/xiaoliang-theme/colors_and_type.css">
 <link rel="stylesheet" href="node_modules/xiaoliang-theme/components.css">
+<link rel="stylesheet" href="node_modules/xiaoliang-theme/utilities.css">
 ```
 
 或在 CSS/JS 中按需引入：
@@ -48,11 +49,13 @@ npm install git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git
 ```css
 @import "xiaoliang-theme/colors_and_type.css";
 @import "xiaoliang-theme/components.css";
+@import "xiaoliang-theme/utilities.css";
 ```
 
 ```js
 import 'xiaoliang-theme/colors_and_type.css';
 import 'xiaoliang-theme/components.css';
+import 'xiaoliang-theme/utilities.css';
 ```
 
 ### 手动复制
@@ -223,11 +226,12 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
 ## 引入方式
 
-小亮主题是 **纯 CSS** 设计系统，无需任何构建工具。在页面中引入 Token 文件与组件样式即可：
+小亮主题是 **纯 CSS** 设计系统，无需任何构建工具。在页面中引入 Token 文件、组件样式与工具类即可：
 
 ```html
 <link rel="stylesheet" href="小亮主题/colors_and_type.css">
 <link rel="stylesheet" href="小亮主题/components.css">
+<link rel="stylesheet" href="小亮主题/utilities.css">
 ```
 
 如需使用 Modal / Toast 等交互组件，再引入零依赖的 `theme.js`（暴露全局 `window.XL`）：
@@ -241,6 +245,27 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 ```
 
 > 本主题不依赖 Tailwind 或其它 CSS 框架；若你的项目使用 Tailwind，可基于 `css.json` 的 Token 自行生成 `tailwind.config.js`。
+
+## 工具类（Utilities）
+
+`utilities.css` 由 `build-utilities.mjs` 从 `css.json` 的 Token 变量自动生成，提供脱离组件即可使用的布局/间距/圆角/阴影工具类：
+
+- **间距**：`p-*` / `px-*` / `py-*` / `pt-*` / `pr-*` / `pb-*` / `pl-*`、`m-*` / `mx-*` / `my-*` / `mt-*` / `mr-*` / `mb-*` / `ml-*`、`gap-*` / `gap-x-*` / `gap-y-*`（基于 `--space-*` 刻度：0/1/2/3/4/5/6/8/10/12/16/20/24）
+- **圆角**：`rounded-none` / `rounded-sm` / `rounded-md` / `rounded-lg` / `rounded-xl` / `rounded-full`（基于 `--radius-*`）
+- **阴影**：`shadow-xs` / `shadow-sm` / `shadow-md` / `shadow-lg` / `shadow-xl`（基于 `--shadow-*`）
+- **容器**：`container`（随断点 `sm/md/lg/xl/2xl` 增长最大宽度）、`container-fluid`
+- **弹性布局**：`flex` / `flex-col` / `flex-wrap` / `items-center` / `justify-between` / `flex-1` 等
+- **栅格**：`grid` / `grid-cols-1/2/3/4/5/6/12`，以及响应式变体 `sm:grid-cols-*` / `md:grid-cols-*` / `lg:grid-cols-*` / `xl:grid-cols-*`（基于 `--breakpoint-*`）
+- **显隐**：`block` / `inline-block` / `hidden` 及响应式变体 `sm:block` / `md:hidden` / `lg:flex` 等
+
+```html
+<div class="container flex items-center justify-between p-4 gap-3">
+  <h1 class="xl-h3">标题</h1>
+  <button class="btn btn-primary rounded-md shadow-sm">操作</button>
+</div>
+```
+
+> 工具类直接消费 `colors_and_type.css` 中的 Token 变量，因此浅色/深色双模式与主题定制自动生效。改 Token 后运行 `npm run build` 即可同步重新生成。
 
 ## 图标
 
@@ -259,6 +284,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `colors_and_type.css` | Token 定义与排版工具类（浅色/深色双模式） |
 | `css.json` | Token 的 JSON 投影（含 light / dark） |
 | `components.css` | 聚合后的组件样式（18 个组件，类名 `.btn` / `.alert` 等） |
+| `utilities.css` | 工具类（间距/圆角/阴影/容器/弹性/栅格，由 `build-utilities.mjs` 生成） |
 | `components/` | 各组件的结构化定义（`index.json` + `*.json`） |
 | `theme.js` | 零依赖交互脚本（Modal / Toast，暴露 `window.XL`） |
 | `assets/icons/README.md` | Lucide 图标使用说明 |

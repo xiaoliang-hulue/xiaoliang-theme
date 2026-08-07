@@ -23,6 +23,7 @@ user-invocable: true
 ```html
 <link rel="stylesheet" href="colors_and_type.css">
 <link rel="stylesheet" href="components.css">
+<link rel="stylesheet" href="utilities.css">
 ```
 
 ---
@@ -39,10 +40,12 @@ user-invocable: true
 
 ## 快速上手
 
-在 HTML 文件中引入 Token 样式表：
+在 HTML 文件中引入 Token 样式表与工具类：
 
 ```html
 <link rel="stylesheet" href="小亮主题/colors_and_type.css">
+<link rel="stylesheet" href="小亮主题/components.css">
+<link rel="stylesheet" href="小亮主题/utilities.css">
 ```
 
 引入后即可使用 CSS 变量：
@@ -205,9 +208,13 @@ user-invocable: true
 小亮主题/
 ├── colors_and_type.css      # Token 与排版工具类（浅色/深色双模式）
 ├── components.css           # 18 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
+├── utilities.css           # 工具类（间距/圆角/阴影/容器/弹性/栅格，由 build-utilities.mjs 生成）
 ├── css.json                 # Token 的 JSON 投影（light / dark）
 ├── theme.js                # 零依赖交互脚本（Modal / Toast，暴露 window.XL）
+├── build-tokens.mjs         # 由 css.json 单一来源重新生成深色 Token
 ├── extract-components-css.mjs  # 由 preview/component-*.html 重新生成 components.css
+├── build-utilities.mjs      # 由 css.json 的 Token 变量生成 utilities.css
+├── build-a11y-report.mjs    # 重新生成 accessibility-report.json（WCAG 2.1 AA 对比度校验）
 ├── components/              # 各组件结构化定义（index.json + *.json）
 ├── preview/                 # 预览页（index.html + 18 个组件页 + 4 个页面模板）
 ├── ui_kits/website/         # UI Kit 展示页与质量报告

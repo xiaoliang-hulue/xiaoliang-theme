@@ -7,6 +7,7 @@
   "files": [
     "colors_and_type.css",
     "components.css",
+    "utilities.css",
     "theme.js",
     "css.json",
     "README.md",
@@ -22,6 +23,7 @@
     ".": "./colors_and_type.css",
     "./css": "./colors_and_type.css",
     "./components": "./components.css",
+    "./utilities": "./utilities.css",
     "./tokens": "./css.json",
     "./js": "./theme.js"
   },
@@ -40,8 +42,10 @@
     "url": "https://gitee.com/huluexiaoliang/xiaoliang-theme.git"
   },
   "scripts": {
-    "build": "node build-tokens.mjs && node extract-components-css.mjs",
+    "build": "node build-tokens.mjs && node extract-components-css.mjs && node build-utilities.mjs",
     "build:tokens": "node build-tokens.mjs",
-    "build:components": "node extract-components-css.mjs"
+    "build:components": "node extract-components-css.mjs",
+    "build:utilities": "node build-utilities.mjs",
+    "build:a11y": "node build-a11y-report.mjs"
   }
 }

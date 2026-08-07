@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-08-07T05:31:03.178Z",
+  "generatedAt": "2026-08-07T15:18:43.992Z",
   "standard": "WCAG 2.1 AA",
   "thresholdNormal": 4.5,
   "thresholdLarge": 3,
   "summary": {
-    "total": 24,
-    "pass": 22,
+    "total": 26,
+    "pass": 24,
     "fail": 0,
     "exempt": 2,
     "missing": 0,
     "allPass": true
   },
   "lightMode": {
-    "total": 12,
-    "pass": 11,
+    "total": 13,
+    "pass": 12,
     "fail": 0
   },
   "darkMode": {
-    "total": 12,
-    "pass": 11,
+    "total": 13,
+    "pass": 12,
     "fail": 0
   },
   "checks": [
@@ -56,6 +56,17 @@
       "aaLarge": false,
       "aaaNormal": false,
       "status": "exempt"
+    },
+    {
+      "name": "次级正文(可读) / 页面背景",
+      "fg": "--color-text-subtle",
+      "bg": "--color-background",
+      "mode": "light",
+      "ratio": 4.83,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
     },
     {
       "name": "主按钮文字 / 主按钮背景",
@@ -190,6 +201,17 @@
       "aaLarge": false,
       "aaaNormal": false,
       "status": "exempt"
+    },
+    {
+      "name": "次级正文(可读) / 页面背景",
+      "fg": "--color-text-subtle",
+      "bg": "--color-background",
+      "mode": "dark",
+      "ratio": 7.85,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
+      "status": "pass"
     },
     {
       "name": "主按钮文字 / 主按钮背景",
