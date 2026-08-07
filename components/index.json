@@ -16,6 +16,10 @@
     { "slug": "topnav", "name": "TopNav", "semanticType": "navigation" },
     { "slug": "sidenav", "name": "SideNav", "semanticType": "navigation" },
     { "slug": "form", "name": "Form", "semanticType": "container" },
-    { "slug": "pagination", "name": "Pagination", "semanticType": "navigation" }
+    { "slug": "pagination", "name": "Pagination", "semanticType": "navigation" },
+    { "slug": "textarea", "name": "Textarea", "semanticType": "form" },
+    { "slug": "select", "name": "Select", "semanticType": "form" },
+    { "slug": "checkbox", "name": "Checkbox / Radio", "semanticType": "form" },
+    { "slug": "switch", "name": "Switch", "semanticType": "form" }
   ]
 }

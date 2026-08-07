@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Textarea",
+  "slug": "textarea",
+  "confidence": "high",
+  "semanticTypeCandidates": ["form", "text-field"],
+  "variantDimensions": ["state", "size"],
+  "representativeVariants": [
+    { "state": "default", "size": "default" },
+    { "state": "focus", "size": "default" },
+    { "state": "disabled", "size": "default" },
+    { "state": "error", "size": "default" }
+  ],
+  "anatomy": ["root", "textarea", "placeholder", "hint", "label"],
+  "structurePatterns": ["single-root", "native-textarea", "optional-hint", "optional-label"],
+  "usageHints": ["多行文本输入", "评论框", "长表单字段", "校验反馈"],
+  "doNotInvent": ["rich text editor", "autocomplete", "mention"],
+  "unknowns": []
+}

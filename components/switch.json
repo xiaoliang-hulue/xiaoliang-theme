@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Switch",
+  "slug": "switch",
+  "confidence": "high",
+  "semanticTypeCandidates": ["form", "toggle", "boolean"],
+  "variantDimensions": ["state", "size"],
+  "representativeVariants": [
+    { "state": "off", "size": "default" },
+    { "state": "on", "size": "default" },
+    { "state": "disabled", "size": "default" }
+  ],
+  "anatomy": ["root", "input", "track", "thumb", "label"],
+  "structurePatterns": ["single-root", "checkbox-hack", "track-thumb", "optional-label"],
+  "usageHints": ["即时开关", "设置项切换", "明暗模式切换", "布尔偏好"],
+  "doNotInvent": ["checkbox (use Checkbox)", "slider", "segmented control"],
+  "unknowns": []
+}

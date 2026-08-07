@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Select",
+  "slug": "select",
+  "confidence": "high",
+  "semanticTypeCandidates": ["form", "choice"],
+  "variantDimensions": ["state", "size"],
+  "representativeVariants": [
+    { "state": "default", "size": "default" },
+    { "state": "focus", "size": "default" },
+    { "state": "disabled", "size": "default" },
+    { "state": "error", "size": "default" }
+  ],
+  "anatomy": ["root", "select", "option", "hint", "label"],
+  "structurePatterns": ["single-root", "native-select", "optional-hint", "optional-label"],
+  "usageHints": ["单选下拉", "枚举值选择", "表单选择字段", "校验反馈"],
+  "doNotInvent": ["multi-select", "combobox with search", "autocomplete"],
+  "unknowns": []
+}

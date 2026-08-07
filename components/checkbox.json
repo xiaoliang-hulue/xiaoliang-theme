@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Checkbox / Radio",
+  "slug": "checkbox",
+  "confidence": "high",
+  "semanticTypeCandidates": ["form", "choice", "boolean"],
+  "variantDimensions": ["type", "state"],
+  "representativeVariants": [
+    { "type": "checkbox", "state": "default" },
+    { "type": "checkbox", "state": "checked" },
+    { "type": "checkbox", "state": "disabled" },
+    { "type": "radio", "state": "default" },
+    { "type": "radio", "state": "checked" },
+    { "type": "radio", "state": "disabled" }
+  ],
+  "anatomy": ["root", "input", "label", "indicator"],
+  "structurePatterns": ["single-root", "native-input", "label-wrapped", "accent-color"],
+  "usageHints": ["多选勾选", "单选 radio 组", "同意条款", "表单布尔字段"],
+  "doNotInvent": ["toggle switch (use Switch)", "indeterminate-only control"],
+  "unknowns": []
+}
