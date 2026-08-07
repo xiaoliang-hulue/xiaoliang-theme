@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Avatar",
+  "slug": "avatar",
+  "confidence": "high",
+  "semanticTypeCandidates": ["media", "identity"],
+  "variantDimensions": ["size", "shape", "tone", "content", "status"],
+  "representativeVariants": [
+    { "size": "xs" },
+    { "size": "sm" },
+    { "size": "md" },
+    { "size": "lg" },
+    { "size": "xl" },
+    { "shape": "circle" },
+    { "shape": "square" },
+    { "tone": "default" },
+    { "tone": "primary" },
+    { "tone": "outline" },
+    { "content": "initials" },
+    { "content": "image" },
+    { "status": "online" },
+    { "status": "busy" },
+    { "status": "away" },
+    { "status": "offline" }
+  ],
+  "anatomy": ["root", "image", "initials", "status-dot", "group"],
+  "structurePatterns": [
+    "role-img-with-aria-label",
+    "overflow-hidden-clips-image",
+    "negative-margin-stacking-in-group",
+    "status-dot-absolute-bottom-right"
+  ],
+  "usageHints": ["用户身份标识", "评论列表", "成员协作列表", "在线状态展示"],
+  "doNotInvent": ["avatar upload interaction", "hover card popover", "presence auto-refresh"],
+  "unknowns": []
+}

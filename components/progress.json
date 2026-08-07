@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Progress",
+  "slug": "progress",
+  "confidence": "high",
+  "semanticTypeCandidates": ["feedback", "status"],
+  "variantDimensions": ["size", "tone", "determinacy"],
+  "representativeVariants": [
+    { "size": "sm" },
+    { "size": "md" },
+    { "size": "lg" },
+    { "tone": "primary" },
+    { "tone": "success" },
+    { "tone": "warning" },
+    { "tone": "error" },
+    { "determinacy": "determinate" },
+    { "determinacy": "indeterminate" }
+  ],
+  "anatomy": ["root", "bar", "label", "value"],
+  "structurePatterns": [
+    "role-progressbar-with-aria-valuenow",
+    "inline-width-percentage-on-bar",
+    "indeterminate-omits-valuenow"
+  ],
+  "usageHints": ["文件上传进度", "任务完成度", "配额占用", "不确定时长的加载"],
+  "doNotInvent": ["circular progress ring", "segmented step progress", "buffered dual-track progress"],
+  "unknowns": []
+}

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; min-width: 0; gap: var(--space-4); flex-wrap: wrap; align-items: center; padding: var(--space-3) var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+.demo-box { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text-secondary); }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  background: var(--error);
+  color: var(--color-background);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: var(--font-medium);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 语义色 */
+.badge.primary { background: var(--color-primary); color: var(--color-on-primary); }
+.badge.success { background: var(--success); color: var(--color-background); }
+.badge.warning { background: var(--warning); color: var(--color-background); }
+.badge.neutral {
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+/* 圆点（无数字） */
+.badge.dot { min-width: 8px; width: 8px; height: 8px; padding: 0; }
+
+/* 附着容器：把徽标定位到宿主右上角 */
+.badge-wrap { position: relative; display: inline-flex; }
+.badge-wrap > .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  border: 2px solid var(--color-surface);
+}
+.badge-wrap > .badge.dot { transform: translate(25%, -25%); }
+
+@media (forced-colors: active) {
+  .badge { border: 1px solid CanvasText; forced-color-adjust: none; background: Highlight; color: HighlightText; }
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail">
+<span class="badge">3</span>
+<span class="badge">12</span>
+<span class="badge">99+</span>
+<span class="badge dot" role="img" aria-label="有新消息"></span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="semantic"><span class="story-label">语义色</span><div class="rail">
+<span class="badge primary">5</span>
+<span class="badge success">已完成</span>
+<span class="badge warning">待处理</span>
+<span class="badge neutral">草稿</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="attached"><span class="story-label">附着角标</span><div class="rail">
+<span class="badge-wrap" role="img" aria-label="通知，8 条未读">
+  <span class="demo-box" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+  </span>
+  <span class="badge">8</span>
+</span>
+<span class="badge-wrap" role="img" aria-label="消息，有新内容">
+  <span class="demo-box" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H5.17L4 17.17z"/></svg>
+  </span>
+  <span class="badge dot"></span>
+</span>
+<span class="badge-wrap" role="img" aria-label="小亮，2 条待办">
+  <span class="avatar sm" aria-hidden="true">XL</span>
+  <span class="badge primary">2</span>
+</span>
+</div></section>
+</div>
+</main>
+</body>
+</html>

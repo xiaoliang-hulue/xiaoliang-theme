@@ -237,11 +237,11 @@
 .shadow-xl{box-shadow:var(--shadow-xl)}
 .container{width:100%;max-width:var(--container-max);margin-inline:auto;padding-inline:var(--space-4)}
 .container-fluid{width:100%;padding-inline:var(--space-4)}
-@media (min-width:var(--breakpoint-sm)){.container{max-width:var(--breakpoint-sm)}}
-@media (min-width:var(--breakpoint-md)){.container{max-width:var(--breakpoint-md)}}
-@media (min-width:var(--breakpoint-lg)){.container{max-width:var(--breakpoint-lg)}}
-@media (min-width:var(--breakpoint-xl)){.container{max-width:var(--breakpoint-xl)}}
-@media (min-width:var(--breakpoint-2xl)){.container{max-width:var(--breakpoint-2xl)}}
+@media (min-width:640px){.container{max-width:var(--breakpoint-sm)}}
+@media (min-width:768px){.container{max-width:var(--breakpoint-md)}}
+@media (min-width:1024px){.container{max-width:var(--breakpoint-lg)}}
+@media (min-width:1280px){.container{max-width:var(--breakpoint-xl)}}
+@media (min-width:1536px){.container{max-width:var(--breakpoint-2xl)}}
 .flex{display:flex}
 .inline-flex{display:inline-flex}
 .flex-col{flex-direction:column}
@@ -271,46 +271,49 @@
 .grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}
 .grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}
 .grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}
-@media (min-width:var(--breakpoint-sm)){.sm\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-sm)){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-sm)){.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-sm)){.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-sm)){.sm\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-sm)){.sm\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-sm)){.sm\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-md)){.md\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-md)){.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-md)){.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-md)){.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-md)){.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-md)){.md\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-md)){.md\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-lg)){.lg\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-lg)){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-lg)){.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-lg)){.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-lg)){.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-lg)){.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-lg)){.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-xl)){.xl\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-xl)){.xl\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-xl)){.xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-xl)){.xl\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-xl)){.xl\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-xl)){.xl\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
-@media (min-width:var(--breakpoint-xl)){.xl\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
+@media (min-width:640px){.sm\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
+@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:640px){.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:640px){.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:640px){.sm\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (min-width:640px){.sm\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (min-width:640px){.sm\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
+@media (min-width:768px){.md\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
+@media (min-width:768px){.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:768px){.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:768px){.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:768px){.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (min-width:768px){.md\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (min-width:768px){.md\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (min-width:1024px){.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
+@media (min-width:1280px){.xl\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}}
+@media (min-width:1280px){.xl\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1280px){.xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1280px){.xl\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:1280px){.xl\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media (min-width:1280px){.xl\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media (min-width:1280px){.xl\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}}
 .block{display:block}
 .inline-block{display:inline-block}
 .hidden{display:none}
-@media (min-width:var(--breakpoint-sm)){.sm\:block{display:block}}
-@media (min-width:var(--breakpoint-sm)){.sm\:hidden{display:none}}
-@media (min-width:var(--breakpoint-sm)){.sm\:flex{display:flex}}
-@media (min-width:var(--breakpoint-md)){.md\:block{display:block}}
-@media (min-width:var(--breakpoint-md)){.md\:hidden{display:none}}
-@media (min-width:var(--breakpoint-md)){.md\:flex{display:flex}}
-@media (min-width:var(--breakpoint-lg)){.lg\:block{display:block}}
-@media (min-width:var(--breakpoint-lg)){.lg\:hidden{display:none}}
-@media (min-width:var(--breakpoint-lg)){.lg\:flex{display:flex}}
-@media (min-width:var(--breakpoint-xl)){.xl\:block{display:block}}
-@media (min-width:var(--breakpoint-xl)){.xl\:hidden{display:none}}
-@media (min-width:var(--breakpoint-xl)){.xl\:flex{display:flex}}
+@media (min-width:640px){.sm\:block{display:block}}
+@media (min-width:640px){.sm\:hidden{display:none}}
+@media (min-width:640px){.sm\:flex{display:flex}}
+@media (min-width:768px){.md\:block{display:block}}
+@media (min-width:768px){.md\:hidden{display:none}}
+@media (min-width:768px){.md\:flex{display:flex}}
+@media (min-width:1024px){.lg\:block{display:block}}
+@media (min-width:1024px){.lg\:hidden{display:none}}
+@media (min-width:1024px){.lg\:flex{display:flex}}
+@media (min-width:1280px){.xl\:block{display:block}}
+@media (min-width:1280px){.xl\:hidden{display:none}}
+@media (min-width:1280px){.xl\:flex{display:flex}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}
+.not-sr-only{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;clip-path:none;white-space:normal}
+.focus\:not-sr-only:focus{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;clip-path:none;white-space:normal}

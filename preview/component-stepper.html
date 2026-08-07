@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; min-width: 0; gap: var(--space-2); align-items: stretch; padding: var(--space-4) var(--space-3); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-sans);
+}
+.step {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  text-align: center;
+}
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: calc(50% + 22px);
+  right: calc(-50% + 22px);
+  height: 2px;
+  background: var(--color-border);
+}
+.step-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  line-height: 1;
+}
+.step-index svg { width: 14px; height: 14px; }
+.step-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.step-title { font-size: var(--text-sm); color: var(--color-text-secondary); }
+.step-desc { font-size: var(--text-xs); color: var(--color-text-subtle); }
+
+/* 已完成 */
+.step.done .step-index {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.step.done .step-title { color: var(--color-text-secondary); }
+.step.done:not(:last-child)::after { background: var(--color-primary); }
+
+/* 进行中 */
+.step.active .step-index {
+  border-color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+.step.active .step-title { color: var(--color-text); font-weight: var(--font-medium); }
+
+/* 垂直方向 */
+.stepper.vertical { flex-direction: column; align-items: stretch; }
+.stepper.vertical .step {
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-3);
+  text-align: left;
+  padding-bottom: var(--space-5);
+}
+.stepper.vertical .step:last-child { padding-bottom: 0; }
+.stepper.vertical .step:not(:last-child)::after {
+  top: 32px;
+  bottom: 4px;
+  left: 13px;
+  right: auto;
+  width: 2px;
+  height: auto;
+}
+
+@media (forced-colors: active) {
+  .step-index { border: 1px solid CanvasText; }
+  .step:not(:last-child)::after { background: CanvasText; }
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="horizontal"><span class="story-label">水平</span><div class="rail">
+<ol class="stepper" aria-label="下单流程">
+  <li class="step done" aria-label="步骤 1：填写信息，已完成">
+    <span class="step-index" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+    <span class="step-body"><span class="step-title">填写信息</span></span>
+  </li>
+  <li class="step active" aria-current="step" aria-label="步骤 2：确认订单，进行中">
+    <span class="step-index" aria-hidden="true">2</span>
+    <span class="step-body"><span class="step-title">确认订单</span></span>
+  </li>
+  <li class="step" aria-label="步骤 3：支付完成，未开始">
+    <span class="step-index" aria-hidden="true">3</span>
+    <span class="step-body"><span class="step-title">支付完成</span></span>
+  </li>
+</ol>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="with-desc"><span class="story-label">带描述</span><div class="rail">
+<ol class="stepper" aria-label="项目进度">
+  <li class="step done" aria-label="步骤 1：创建项目，已完成，已于 08-01 完成">
+    <span class="step-index" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+    <span class="step-body"><span class="step-title">创建项目</span><span class="step-desc">已于 08-01 完成</span></span>
+  </li>
+  <li class="step done" aria-label="步骤 2：配置环境，已完成，已于 08-04 完成">
+    <span class="step-index" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+    <span class="step-body"><span class="step-title">配置环境</span><span class="step-desc">已于 08-04 完成</span></span>
+  </li>
+  <li class="step active" aria-current="step" aria-label="步骤 3：部署上线，进行中，预计 08-10">
+    <span class="step-index" aria-hidden="true">3</span>
+    <span class="step-body"><span class="step-title">部署上线</span><span class="step-desc">预计 08-10</span></span>
+  </li>
+</ol>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="vertical"><span class="story-label">垂直</span><div class="rail">
+<ol class="stepper vertical" aria-label="审核进度">
+  <li class="step done" aria-label="步骤 1：提交申请，已完成，材料已通过初审">
+    <span class="step-index" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+    <span class="step-body"><span class="step-title">提交申请</span><span class="step-desc">材料已通过初审</span></span>
+  </li>
+  <li class="step active" aria-current="step" aria-label="步骤 2：资质审核，进行中，预计 1 至 3 个工作日">
+    <span class="step-index" aria-hidden="true">2</span>
+    <span class="step-body"><span class="step-title">资质审核</span><span class="step-desc">预计 1-3 个工作日</span></span>
+  </li>
+  <li class="step" aria-label="步骤 3：审核结果，未开始，结果将以站内信通知">
+    <span class="step-index" aria-hidden="true">3</span>
+    <span class="step-body"><span class="step-title">审核结果</span><span class="step-desc">结果将以站内信通知</span></span>
+  </li>
+</ol>
+</div></section>
+</div>
+</main>
+</body>
+</html>

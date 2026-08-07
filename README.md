@@ -234,15 +234,18 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 <link rel="stylesheet" href="小亮主题/utilities.css">
 ```
 
-如需使用 Modal / Toast 等交互组件，再引入零依赖的 `theme.js`（暴露全局 `window.XL`）：
+如需使用 Modal / Drawer / Toast / Tabs 等交互组件，再引入零依赖的 `theme.js`（暴露全局 `window.XL`）：
 
 ```html
 <script src="小亮主题/theme.js"></script>
 <script>
-  XL.openModal('#demo-modal');
+  XL.openModal('#demo-modal');            // 参数可为选择器字符串或元素
+  XL.openDrawer('#filter-drawer');        // Drawer 与 Modal 共用浮层基座
   XL.showToast({ type: 'success', title: '已保存', message: '配置已更新' });
 </script>
 ```
+
+也可完全不写 JS，用属性触发：`data-modal-open="#id"` / `data-modal-close`、`data-drawer-open="#id"` / `data-drawer-close`；Tabs 容器加 `data-tabs` 即自动初始化。浮层支持 ESC 关闭、点击遮罩关闭、焦点陷阱与多层叠加。
 
 > 本主题不依赖 Tailwind 或其它 CSS 框架；若你的项目使用 Tailwind，可基于 `css.json` 的 Token 自行生成 `tailwind.config.js`。
 
@@ -257,6 +260,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 - **弹性布局**：`flex` / `flex-col` / `flex-wrap` / `items-center` / `justify-between` / `flex-1` 等
 - **栅格**：`grid` / `grid-cols-1/2/3/4/5/6/12`，以及响应式变体 `sm:grid-cols-*` / `md:grid-cols-*` / `lg:grid-cols-*` / `xl:grid-cols-*`（基于 `--breakpoint-*`）
 - **显隐**：`block` / `inline-block` / `hidden` 及响应式变体 `sm:block` / `md:hidden` / `lg:flex` 等
+- **可访问性**：`sr-only`（视觉隐藏、保留给屏幕阅读器）、`not-sr-only`、`focus:not-sr-only`（聚焦时还原，用于"跳转到主内容"链接）
 
 ```html
 <div class="container flex items-center justify-between p-4 gap-3">
@@ -283,13 +287,13 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 |------|------|
 | `colors_and_type.css` | Token 定义与排版工具类（浅色/深色双模式） |
 | `css.json` | Token 的 JSON 投影（含 light / dark） |
-| `components.css` | 聚合后的组件样式（21 个组件，类名 `.btn` / `.alert` 等） |
+| `components.css` | 聚合后的组件样式（26 个组件，类名 `.btn` / `.alert` 等） |
 | `utilities.css` | 工具类（间距/圆角/阴影/容器/弹性/栅格，由 `build-utilities.mjs` 生成） |
 | `components/` | 各组件的结构化定义（`index.json` + `*.json`） |
 | `theme.js` | 零依赖交互脚本（Modal / Toast，暴露 `window.XL`） |
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `preview/index.html` | 主题总览预览页 |
-| `preview/component-*.html` | 21 个组件预览页 |
+| `preview/component-*.html` | 26 个组件预览页 |
 | `preview/page-list.html` | 列表页模板 |
 | `preview/page-detail.html` | 详情页模板 |
 | `preview/page-form.html` | 表单页模板 |
@@ -303,7 +307,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
 ## 组件清单
 
-已提供预览页的组件（共 21 个）：
+已提供预览页的组件（共 26 个）：
 
 | 组件 | 预览文件 | 说明 |
 |------|----------|------|
@@ -328,6 +332,11 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Tabs | `preview/component-tabs.html` | 概览 / 详情 / 设置（ARIA + 方向键，依赖 theme.js） |
 | Accordion | `preview/component-accordion.html` | 折叠 / 默认展开（原生 details，零 JS） |
 | Breadcrumb | `preview/component-breadcrumb.html` | 默认 / Chevron 分隔符 |
+| Progress | `preview/component-progress.html` | 尺寸 / 语义色 / 带标签 / 不确定进度 |
+| Avatar | `preview/component-avatar.html` | 5 档尺寸 / 圆形方形 / 图片文字 / 状态点 / 头像组 |
+| Badge | `preview/component-badge.html` | 计数 / 圆点 / 语义色 / 附着角标 |
+| Stepper | `preview/component-stepper.html` | 水平 / 垂直 / 已完成·进行中·未开始 |
+| Drawer | `preview/component-drawer.html` | 右 / 左 / 底部三向抽屉（依赖 theme.js） |
 
 组件样式已聚合到 `components.css`（类名规范：`.btn` / `.alert` / `.input` / `.card` / `.tag` 等），可直接引入或按需复制。各组件的结构化定义见 `components/*.json`。
 
@@ -341,7 +350,7 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 
 - 页面模板（列表页、详情页、表单页、仪表盘）—— 已完成
 - UI Kit 展示页 —— 已完成
-- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb（共 21 个）—— 已完成
+- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Drawer、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb、Progress、Avatar、Badge、Stepper（共 26 个）—— 已完成
 
 ## 许可
 

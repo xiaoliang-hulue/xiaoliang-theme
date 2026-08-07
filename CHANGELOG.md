@@ -4,6 +4,30 @@
 
 ---
 
+## [1.4.0] - 2026-08-07
+
+### 新增
+
+- **组件扩展至 26 个**，新增 5 个组件：
+  - **Progress**（进度条）：`role="progressbar"` + `aria-valuenow`，3 档尺寸、4 种语义色、带标签行与不确定进度动画（`prefers-reduced-motion` 下降级为静态）。
+  - **Avatar**（头像）：5 档尺寸、圆形 / 方形、文字缩写 / 图片、在线状态点（online / busy / away / offline）与 `.avatar-group` 负边距堆叠。
+  - **Badge**（徽标）：计数 / 圆点两种形态、5 种语义色，`.badge-wrap` 可将角标定位到任意宿主右上角；前景色用 `var(--color-background)` 实现明暗模式自动反色。
+  - **Stepper**（步骤条）：水平 / 垂直两向，已完成 / 进行中 / 未开始三态，基于 `<ol>` 语义与 `aria-current="step"`，连接线用伪元素绘制。
+  - **Drawer**（抽屉）：右 / 左 / 底部三向滑出，与 Modal 共用浮层基座，支持 ESC、点击遮罩关闭、焦点陷阱与多层叠加。
+- **`.field-group` / `.field-group-title`**：Checkbox / Radio 的 fieldset 分组样式纳入组件层，使用者复制示例不再出现浏览器默认边框。
+- **工具类新增可访问性类**：`sr-only`、`not-sr-only`、`focus:not-sr-only`。
+- `theme.js` 新增 `XL.openDrawer` / `XL.closeDrawer`，并支持传入 CSS 选择器字符串（此前仅接受元素，与 README 示例不符）。
+
+### 修复
+
+- **`components.css` 打包污染**（重要）：`extract-components-css.mjs` 此前把预览页 `<style>` 整块聚合，导致脚手架样式——包括全局 `body { margin/padding/background }` 与 `.specimen` / `.stage` / `.story` / `.rail` / `.divider` / `.row` / `.label` 等内部类——被打进发布产物，污染任何引入该文件的页面。现改为仅提取 `@component-css-start` / `@component-css-end` 标记之间的内容，缺失标记的预览页会构建失败。
+- **响应式工具类完全失效**（重要）：`build-utilities.mjs` 生成的媒体查询写作 `@media (min-width:var(--breakpoint-md))`，而 CSS 规范不允许在媒体查询条件中使用 `var()`，导致 `.container` 的断点增长、`.{sm,md,lg,xl}:grid-cols-*`、`.{sm,md,lg,xl}:{block,hidden,flex}` 全部不生效。现改为构建期从 `css.json` 展开为字面量（属性值仍保留 `var()`）。
+- **Modal 点击遮罩无法关闭**：原判断用 `overlay.contains(e.target)`，而遮罩本身即 overlay，条件恒为真。现改为判断点击是否落在 `.modal` / `.drawer` 面板之外。
+- **浮层多层叠加**：ESC 与焦点陷阱改为作用于最上层浮层，关闭时仅在无剩余浮层时才恢复 `body` 滚动。
+- **`preview/index.html` 组件索引过时**：此前只收录 12 个组件，现按表单 / 展示 / 反馈 / 导航四组补齐 26 个组件与 4 个页面模板；并移除该页误加的 `@component-css-start` 标记。
+
+---
+
 ## [1.3.0] - 2026-08-07
 
 ### 新增

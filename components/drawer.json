@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Drawer",
+  "slug": "drawer",
+  "confidence": "high",
+  "semanticTypeCandidates": ["overlay", "navigation"],
+  "variantDimensions": ["placement", "sections"],
+  "representativeVariants": [
+    { "placement": "right" },
+    { "placement": "left" },
+    { "placement": "bottom" },
+    { "sections": "header-body" },
+    { "sections": "header-body-footer" }
+  ],
+  "anatomy": ["overlay", "panel", "header", "title", "close", "body", "footer"],
+  "structurePatterns": [
+    "overlay-hidden-attribute-toggling",
+    "role-dialog-aria-modal-labelledby",
+    "focus-trap-and-escape-close",
+    "click-outside-panel-to-close",
+    "data-drawer-open-close-delegation"
+  ],
+  "usageHints": ["筛选面板", "详情侧栏", "移动端导航抽屉", "底部动作面板"],
+  "doNotInvent": ["resizable drawer", "swipe gesture dismiss", "nested drawer stacking beyond two levels"],
+  "notes": [
+    "依赖 theme.js：XL.openDrawer / XL.closeDrawer，与 Modal 共用同一浮层基座（支持叠加与栈式关闭）。"
+  ],
+  "unknowns": []
+}

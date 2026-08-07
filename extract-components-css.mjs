@@ -1,5 +1,7 @@
 // extract-components-css.mjs
-// 从 preview/component-*.html 的 <style> 块中提取组件样式，聚合为 components.css。
+// 从 preview/component-*.html 的 <style> 块中，只提取 @component-css-start / @component-css-end
+// 标记之间的组件样式，聚合为 components.css。标记之外的预览页脚手架（body / .specimen / .story
+// 等）不会被打包，避免污染使用者页面。
 // 用法：node extract-components-css.mjs
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -12,18 +14,40 @@ const files = readdirSync(previewDir)
   .filter((f) => /^component-.*\.html$/.test(f))
   .sort();
 
+const START = '/* @component-css-start */';
+const END = '/* @component-css-end */';
+
 const blocks = [];
+const unmarked = [];
+
 for (const file of files) {
   const html = readFileSync(join(previewDir, file), 'utf8');
   const styleRe = /<style[^>]*>([\s\S]*?)<\/style>/gi;
   let m;
+  let found = false;
   while ((m = styleRe.exec(html)) !== null) {
-    blocks.push({ file, css: m[1].trim() });
+    const styleCss = m[1];
+    const start = styleCss.indexOf(START);
+    const end = styleCss.indexOf(END, start + START.length);
+    if (start === -1 || end === -1) continue;
+    const css = styleCss.slice(start + START.length, end).trim();
+    if (css) {
+      blocks.push({ file, css });
+      found = true;
+    }
   }
+  if (!found) unmarked.push(file);
+}
+
+if (unmarked.length > 0) {
+  console.error(
+    `以下预览页缺少 ${START} / ${END} 标记，组件样式无法提取：\n  - ` + unmarked.join('\n  - ')
+  );
+  process.exit(1);
 }
 
 if (blocks.length === 0) {
-  console.error('未找到任何 component-*.html 中的 <style> 块。');
+  console.error('未在任何 component-*.html 中找到标记区间内的组件样式。');
   process.exit(1);
 }
 

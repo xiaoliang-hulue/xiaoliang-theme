@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; min-width: 0; gap: var(--space-3); flex-wrap: wrap; align-items: center; padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: 1;
+  overflow: hidden;
+  user-select: none;
+}
+.avatar img,
+.avatar svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* 尺寸 */
+.avatar.xs { width: 24px; height: 24px; font-size: var(--text-xs); }
+.avatar.sm { width: 32px; height: 32px; font-size: var(--text-xs); }
+.avatar.lg { width: 56px; height: 56px; font-size: var(--text-lg); }
+.avatar.xl { width: 72px; height: 72px; font-size: var(--text-xl); }
+
+/* 形状与配色 */
+.avatar.square { border-radius: var(--radius-md); }
+.avatar.primary { background: var(--color-primary-subtle); color: var(--color-primary); }
+.avatar.outline { background: var(--color-surface); border: 1px solid var(--color-border); }
+
+/* 状态点 */
+.avatar-status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30%;
+  height: 30%;
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-surface);
+  background: var(--color-text-muted);
+}
+.avatar-status.online { background: var(--success); }
+.avatar-status.busy { background: var(--error); }
+.avatar-status.away { background: var(--warning); }
+
+/* 头像组 */
+.avatar-group { display: inline-flex; align-items: center; }
+.avatar-group .avatar { border: 2px solid var(--color-surface); }
+.avatar-group .avatar + .avatar { margin-left: calc(var(--space-2) * -1); }
+.avatar-group .avatar.more { background: var(--color-surface-muted); color: var(--color-text-secondary); }
+
+@media (forced-colors: active) {
+  .avatar { border: 1px solid CanvasText; }
+  .avatar-status { border-color: Canvas; }
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="sizes"><span class="story-label">尺寸</span><div class="rail">
+<span class="avatar xs" aria-label="用户 小亮" role="img">XL</span>
+<span class="avatar sm" aria-label="用户 小亮" role="img">XL</span>
+<span class="avatar" aria-label="用户 小亮" role="img">XL</span>
+<span class="avatar lg" aria-label="用户 小亮" role="img">XL</span>
+<span class="avatar xl" aria-label="用户 小亮" role="img">XL</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="variants"><span class="story-label">变体</span><div class="rail">
+<span class="avatar" aria-label="默认头像" role="img">AB</span>
+<span class="avatar primary" aria-label="主色头像" role="img">CD</span>
+<span class="avatar outline" aria-label="描边头像" role="img">EF</span>
+<span class="avatar square" aria-label="方形头像" role="img">GH</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="image"><span class="story-label">图片</span><div class="rail">
+<span class="avatar lg" role="img" aria-label="示例用户头像">
+  <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <rect width="56" height="56" fill="#e5e5e5"/>
+    <circle cx="28" cy="21" r="10" fill="#a3a3a3"/>
+    <path d="M8 56c0-11 9-19 20-19s20 8 20 19z" fill="#a3a3a3"/>
+  </svg>
+</span>
+<span class="avatar lg square" role="img" aria-label="示例用户头像（方形）">
+  <svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <rect width="56" height="56" fill="#d4d4d4"/>
+    <circle cx="28" cy="21" r="10" fill="#737373"/>
+    <path d="M8 56c0-11 9-19 20-19s20 8 20 19z" fill="#737373"/>
+  </svg>
+</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="status"><span class="story-label">状态</span><div class="rail">
+<span class="avatar" role="img" aria-label="小亮，在线">XL<span class="avatar-status online"></span></span>
+<span class="avatar" role="img" aria-label="小亮，忙碌">XL<span class="avatar-status busy"></span></span>
+<span class="avatar" role="img" aria-label="小亮，离开">XL<span class="avatar-status away"></span></span>
+<span class="avatar" role="img" aria-label="小亮，离线">XL<span class="avatar-status"></span></span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="group"><span class="story-label">头像组</span><div class="rail">
+<span class="avatar-group" role="group" aria-label="项目成员 5 人">
+  <span class="avatar sm" role="img" aria-label="成员 A">A</span>
+  <span class="avatar sm" role="img" aria-label="成员 B">B</span>
+  <span class="avatar sm" role="img" aria-label="成员 C">C</span>
+  <span class="avatar sm more" role="img" aria-label="其余 2 人">+2</span>
+</span>
+</div></section>
+</div>
+</main>
+</body>
+</html>

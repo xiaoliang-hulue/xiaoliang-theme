@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Badge",
+  "slug": "badge",
+  "confidence": "high",
+  "semanticTypeCandidates": ["status", "indicator"],
+  "variantDimensions": ["tone", "form", "placement"],
+  "representativeVariants": [
+    { "tone": "error" },
+    { "tone": "primary" },
+    { "tone": "success" },
+    { "tone": "warning" },
+    { "tone": "neutral" },
+    { "form": "count" },
+    { "form": "dot" },
+    { "placement": "standalone" },
+    { "placement": "attached" }
+  ],
+  "anatomy": ["root", "wrap", "host"],
+  "structurePatterns": [
+    "badge-wrap-relative-positioning",
+    "absolute-corner-with-translate-offset",
+    "foreground-uses-color-background-for-auto-contrast",
+    "aria-label-on-wrap-describes-host-and-count"
+  ],
+  "usageHints": ["未读消息数", "通知角标", "状态圆点", "列表项计数"],
+  "doNotInvent": ["animated bounce on change", "badge with close button", "ribbon corner badge"],
+  "notes": [
+    "与 Tag 的区别：Tag 是独立的内容标签，Badge 是附着在宿主元素上的计数 / 状态指示器。"
+  ],
+  "unknowns": []
+}

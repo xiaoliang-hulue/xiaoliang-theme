@@ -10,8 +10,6 @@
 body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
 .row { display: flex; gap: var(--space-6); align-items: flex-start; margin-bottom: var(--space-3); flex-wrap: wrap; }
 .label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
-fieldset { border: none; margin: 0; padding: 0; }
-legend { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-text); margin-bottom: var(--space-2); padding: 0; }
 
 /* @component-css-start */
 .check { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text); cursor: pointer; }
@@ -20,14 +18,24 @@ legend { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(
 .check input:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 .check input:disabled { cursor: not-allowed; }
 .check:has(input:disabled) { color: var(--color-text-muted); cursor: not-allowed; }
+
+/* 表单分组：用 fieldset + legend 承载一组复选 / 单选的语义 */
+.field-group { border: none; margin: 0; padding: 0; min-inline-size: 0; }
+.field-group-title {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text);
+}
 /* @component-css-end */
 </style>
 </head>
 <body>
 <div class="row">
   <span class="label">复选</span>
-  <fieldset>
-    <legend>订阅通知</legend>
+  <fieldset class="field-group">
+    <legend class="field-group-title">订阅通知</legend>
     <label class="check"><input type="checkbox" checked> 邮件通知</label>
     <label class="check"><input type="checkbox"> 短信通知</label>
     <label class="check"><input type="checkbox" disabled> 电话回访（不可用）</label>
@@ -35,8 +43,8 @@ legend { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(
 </div>
 <div class="row">
   <span class="label">单选</span>
-  <fieldset>
-    <legend>主题模式</legend>
+  <fieldset class="field-group">
+    <legend class="field-group-title">主题模式</legend>
     <label class="check"><input type="radio" name="mode" checked> 浅色</label>
     <label class="check"><input type="radio" name="mode"> 深色</label>
     <label class="check"><input type="radio" name="mode"> 跟随系统</label>

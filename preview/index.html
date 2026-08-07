@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../colors_and_type.css">
   <link rel="stylesheet" href="../components.css">
   <style>
-    /* @component-css-start */
+    /* Page scaffold — 本页样式不参与 components.css 聚合 */
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -196,6 +196,31 @@
       flex-wrap: wrap;
       align-items: center;
     }
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+    .comp-link {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      font-size: var(--text-sm);
+      text-decoration: none;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .comp-link:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+    .comp-link:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
     [data-theme="dark"] {
       color-scheme: dark;
     }
@@ -291,21 +316,57 @@
 
     <section class="section">
       <h2 class="section-title">组件示例</h2>
-      <p class="section-desc">基于 Token 的基础组件样式</p>
-      <div class="row" style="margin-bottom: var(--space-6);">
-        <a href="component-button.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Button</a>
-        <a href="component-input.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Input</a>
-        <a href="component-card.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Card</a>
-        <a href="component-tag.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Tag</a>
-        <a href="component-alert.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Alert</a>
-        <a href="component-table.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Table</a>
-        <a href="component-modal.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Modal</a>
-        <a href="component-tooltip.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Tooltip</a>
-        <a href="component-toast.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Toast</a>
-        <a href="component-dropdown.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">Dropdown</a>
-        <a href="component-topnav.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">TopNav</a>
-        <a href="component-sidenav.html" style="font-size: var(--text-sm); color: var(--color-primary); text-decoration: none;">SideNav</a>
-      </div>
+      <p class="section-desc">基于 Token 的 26 个基础组件，点击查看独立预览页</p>
+
+      <h3 class="group-title">表单</h3>
+      <nav class="link-grid" aria-label="表单类组件">
+        <a class="comp-link" href="component-input.html">Input</a>
+        <a class="comp-link" href="component-textarea.html">Textarea</a>
+        <a class="comp-link" href="component-select.html">Select</a>
+        <a class="comp-link" href="component-checkbox.html">Checkbox / Radio</a>
+        <a class="comp-link" href="component-switch.html">Switch</a>
+        <a class="comp-link" href="component-form.html">Form</a>
+      </nav>
+
+      <h3 class="group-title">操作与展示</h3>
+      <nav class="link-grid" aria-label="操作与展示类组件">
+        <a class="comp-link" href="component-button.html">Button</a>
+        <a class="comp-link" href="component-card.html">Card</a>
+        <a class="comp-link" href="component-table.html">Table</a>
+        <a class="comp-link" href="component-tag.html">Tag</a>
+        <a class="comp-link" href="component-badge.html">Badge</a>
+        <a class="comp-link" href="component-avatar.html">Avatar</a>
+      </nav>
+
+      <h3 class="group-title">反馈与状态</h3>
+      <nav class="link-grid" aria-label="反馈与状态类组件">
+        <a class="comp-link" href="component-alert.html">Alert</a>
+        <a class="comp-link" href="component-toast.html">Toast</a>
+        <a class="comp-link" href="component-tooltip.html">Tooltip</a>
+        <a class="comp-link" href="component-progress.html">Progress</a>
+        <a class="comp-link" href="component-stepper.html">Stepper</a>
+      </nav>
+
+      <h3 class="group-title">导航与浮层</h3>
+      <nav class="link-grid" aria-label="导航与浮层类组件">
+        <a class="comp-link" href="component-topnav.html">TopNav</a>
+        <a class="comp-link" href="component-sidenav.html">SideNav</a>
+        <a class="comp-link" href="component-breadcrumb.html">Breadcrumb</a>
+        <a class="comp-link" href="component-tabs.html">Tabs</a>
+        <a class="comp-link" href="component-accordion.html">Accordion</a>
+        <a class="comp-link" href="component-pagination.html">Pagination</a>
+        <a class="comp-link" href="component-dropdown.html">Dropdown</a>
+        <a class="comp-link" href="component-modal.html">Modal</a>
+        <a class="comp-link" href="component-drawer.html">Drawer</a>
+      </nav>
+
+      <h3 class="group-title">页面模板</h3>
+      <nav class="link-grid" aria-label="页面模板">
+        <a class="comp-link" href="page-dashboard.html">Dashboard</a>
+        <a class="comp-link" href="page-list.html">List</a>
+        <a class="comp-link" href="page-form.html">Form Page</a>
+        <a class="comp-link" href="page-detail.html">Detail</a>
+      </nav>
       <div class="components-grid">
         <div class="component-card">
           <h3>Button</h3>

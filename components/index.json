@@ -23,6 +23,11 @@
     { "slug": "switch", "name": "Switch", "semanticType": "form" },
     { "slug": "tabs", "name": "Tabs", "semanticType": "navigation" },
     { "slug": "accordion", "name": "Accordion", "semanticType": "disclosure" },
-    { "slug": "breadcrumb", "name": "Breadcrumb", "semanticType": "navigation" }
+    { "slug": "breadcrumb", "name": "Breadcrumb", "semanticType": "navigation" },
+    { "slug": "progress", "name": "Progress", "semanticType": "feedback" },
+    { "slug": "avatar", "name": "Avatar", "semanticType": "media" },
+    { "slug": "badge", "name": "Badge", "semanticType": "status" },
+    { "slug": "stepper", "name": "Stepper", "semanticType": "navigation" },
+    { "slug": "drawer", "name": "Drawer", "semanticType": "overlay" }
   ]
 }

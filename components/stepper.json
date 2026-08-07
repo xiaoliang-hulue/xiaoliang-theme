@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Stepper",
+  "slug": "stepper",
+  "confidence": "high",
+  "semanticTypeCandidates": ["navigation", "status"],
+  "variantDimensions": ["orientation", "state", "content"],
+  "representativeVariants": [
+    { "orientation": "horizontal" },
+    { "orientation": "vertical" },
+    { "state": "done" },
+    { "state": "active" },
+    { "state": "pending" },
+    { "content": "title-only" },
+    { "content": "title-with-desc" }
+  ],
+  "anatomy": ["root", "step", "index", "body", "title", "desc", "connector"],
+  "structurePatterns": [
+    "ordered-list-semantics",
+    "aria-current-step-on-active",
+    "connector-via-pseudo-element",
+    "aria-label-on-item-carries-full-state"
+  ],
+  "usageHints": ["下单流程", "多步表单", "审核进度", "项目里程碑"],
+  "doNotInvent": ["clickable step navigation", "error state step", "collapsible step content"],
+  "unknowns": []
+}

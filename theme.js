@@ -1,6 +1,6 @@
 // theme.js — 小亮主题零依赖交互增强
-// 仅提供交互组件所需的最小 JS：Modal（ESC / 焦点陷阱 / 点击外部关闭）、Toast（固定容器 / 自动消失 / 关闭）、Tabs（ARIA 标签切换 + 键盘导航）。
-// 纯 CSS 组件（Button / Input / Card / Tag / Alert / Table / Tooltip / Dropdown / Pagination / Nav / Breadcrumb / Accordion）无需本文件。
+// 仅提供交互组件所需的最小 JS：Modal / Drawer（ESC / 焦点陷阱 / 点击遮罩关闭 / 多层栈）、Toast（固定容器 / 自动消失 / 关闭）、Tabs（ARIA 标签切换 + 键盘导航）。
+// 纯 CSS 组件（Button / Input / Card / Tag / Alert / Table / Tooltip / Dropdown / Pagination / Nav / Breadcrumb / Accordion / Progress / Avatar / Badge / Stepper）无需本文件。
 // 全局命名空间：window.XL
 (function () {
   'use strict';
@@ -28,38 +28,58 @@
       });
   }
 
-  /* ── Modal ── */
-  function openModal(modal) {
-    if (!modal) return;
-    modal.hidden = false;
-    modal.setAttribute('aria-hidden', 'false');
+  /* ── Overlay 基座（Modal / Drawer 共用） ── */
+  var OVERLAY_SELECTOR = '.modal-overlay:not([hidden]), .drawer-overlay:not([hidden])';
+  var PANEL_SELECTOR = '.modal, .drawer';
+
+  // 取最上层（DOM 顺序最后）的可见浮层，支持 Modal 与 Drawer 叠加
+  function topOverlay() {
+    var list = document.querySelectorAll(OVERLAY_SELECTOR);
+    return list.length ? list[list.length - 1] : null;
+  }
+
+  // 允许传入元素或 CSS 选择器字符串
+  function resolveOverlay(target) {
+    if (!target) return null;
+    return typeof target === 'string' ? document.querySelector(target) : target;
+  }
+
+  function openOverlay(target) {
+    var overlay = resolveOverlay(target);
+    if (!overlay) return;
+    overlay.hidden = false;
+    overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    var f = getFocusable(modal);
-    (f[0] || modal).focus();
+    var f = getFocusable(overlay);
+    if (f[0]) f[0].focus();
     document.addEventListener('keydown', onKeydown, true);
     document.addEventListener('mousedown', onOutside, true);
   }
 
-  function closeModal(modal) {
-    if (!modal) return;
-    modal.hidden = true;
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    document.removeEventListener('keydown', onKeydown, true);
-    document.removeEventListener('mousedown', onOutside, true);
-    if (modal._trigger && typeof modal._trigger.focus === 'function') modal._trigger.focus();
+  function closeOverlay(target) {
+    var overlay = resolveOverlay(target);
+    if (!overlay) return;
+    overlay.hidden = true;
+    overlay.setAttribute('aria-hidden', 'true');
+    // 仅当没有其他浮层时才恢复滚动并卸载全局监听
+    if (!topOverlay()) {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKeydown, true);
+      document.removeEventListener('mousedown', onOutside, true);
+    }
+    if (overlay._trigger && typeof overlay._trigger.focus === 'function') overlay._trigger.focus();
   }
 
   function onKeydown(e) {
+    var overlay = topOverlay();
+    if (!overlay) return;
     if (e.key === 'Escape') {
-      var m = document.querySelector('.modal-overlay:not([hidden])');
-      if (m) closeModal(m);
+      e.preventDefault();
+      closeOverlay(overlay);
       return;
     }
     if (e.key === 'Tab') {
-      var modal = document.querySelector('.modal-overlay:not([hidden])');
-      if (!modal) return;
-      var f = getFocusable(modal);
+      var f = getFocusable(overlay);
       if (f.length === 0) return;
       var first = f[0];
       var last = f[f.length - 1];
@@ -73,9 +93,12 @@
     }
   }
 
+  // 点击遮罩（面板之外）关闭
   function onOutside(e) {
-    var modal = document.querySelector('.modal-overlay:not([hidden])');
-    if (modal && !modal.contains(e.target)) closeModal(modal);
+    var overlay = topOverlay();
+    if (!overlay) return;
+    var panel = overlay.querySelector(PANEL_SELECTOR);
+    if (panel && !panel.contains(e.target)) closeOverlay(overlay);
   }
 
   /* ── Toast ── */
@@ -167,28 +190,34 @@
     initAllTabs();
   }
 
-  /* ── 事件委托：data-modal-open / data-modal-close ── */
+  /* ── 事件委托：data-modal-open|close / data-drawer-open|close ── */
   document.addEventListener('click', function (e) {
-    var opener = e.target.closest('[data-modal-open]');
+    if (!e.target || typeof e.target.closest !== 'function') return;
+
+    var opener = e.target.closest('[data-modal-open], [data-drawer-open]');
     if (opener) {
-      var sel = opener.getAttribute('data-modal-open');
-      var modal = document.querySelector(sel);
-      if (modal) {
-        modal._trigger = opener;
-        openModal(modal);
+      var sel = opener.getAttribute('data-modal-open') || opener.getAttribute('data-drawer-open');
+      var overlay = sel ? document.querySelector(sel) : null;
+      if (overlay) {
+        overlay._trigger = opener;
+        openOverlay(overlay);
       }
       return;
     }
-    var closer = e.target.closest('[data-modal-close]');
+
+    var closer = e.target.closest('[data-modal-close], [data-drawer-close]');
     if (closer) {
-      var overlay = closer.closest('.modal-overlay');
-      if (overlay) closeModal(overlay);
+      var host = closer.closest('.modal-overlay, .drawer-overlay');
+      if (host) closeOverlay(host);
     }
   });
 
   window.XL = {
-    openModal: openModal,
-    closeModal: closeModal,
+    // Modal / Drawer 共用同一套浮层实现，保留语义化别名
+    openModal: openOverlay,
+    closeModal: closeOverlay,
+    openDrawer: openOverlay,
+    closeDrawer: closeOverlay,
     showToast: showToast,
     initTabs: initTabs
   };

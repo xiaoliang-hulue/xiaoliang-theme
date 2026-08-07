@@ -5,6 +5,8 @@
 // 容器与栅格消费 --breakpoint-* / --container-max，从而把断点 Token 暴露为可用工具。
 //
 // 单一来源：变量定义在 css.json，本脚本只引用变量名，不重复写死数值。
+// 例外：@media 的条件部分（min-width）按 CSS 规范不支持 var()，因此断点值在构建期
+// 从 css.json 展开为字面量；属性值仍使用 var(--breakpoint-*)，保持可主题化。
 // 运行：`node build-utilities.mjs`（已并入 `npm run build`）。
 
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -19,6 +21,8 @@ const spaceSteps = Object.keys(spacing);
 const gridCols = [1, 2, 3, 4, 5, 6, 12];
 // 用于"类选择器的"断点（2xl 会让类名以数字开头，CSS 选择器不合法，故仅用于属性值）
 const classBp = ['sm', 'md', 'lg', 'xl'];
+// @media 条件不支持 var()，构建期展开为字面量
+const mq = (b) => `@media (min-width:${bp[b]})`;
 
 const L = [];
 L.push('/* 小亮主题 — 工具类（Utilities）');
@@ -69,7 +73,7 @@ for (const [k] of Object.entries(shadow)) {
 L.push('.container{width:100%;max-width:var(--container-max);margin-inline:auto;padding-inline:var(--space-4)}');
 L.push('.container-fluid{width:100%;padding-inline:var(--space-4)}');
 for (const b of ['sm', 'md', 'lg', 'xl', '2xl']) {
-  L.push(`@media (min-width:var(--breakpoint-${b})){.container{max-width:var(--breakpoint-${b})}}`);
+  L.push(`${mq(b)}{.container{max-width:var(--breakpoint-${b})}}`);
 }
 
 // ---------- Flex ----------
@@ -103,20 +107,26 @@ for (const n of gridCols) {
   L.push(`.grid-cols-${n}{grid-template-columns:repeat(${n},minmax(0,1fr))}`);
 }
 for (const b of classBp) {
-  const mq = `@media (min-width:var(--breakpoint-${b}))`;
   for (const n of gridCols) {
-    L.push(`${mq}{.${b}\\:grid-cols-${n}{grid-template-columns:repeat(${n},minmax(0,1fr))}}`);
+    L.push(`${mq(b)}{.${b}\\:grid-cols-${n}{grid-template-columns:repeat(${n},minmax(0,1fr))}}`);
   }
 }
 
 // ---------- 显示工具（含响应式显隐） ----------
 L.push('.block{display:block}', '.inline-block{display:inline-block}', '.hidden{display:none}');
 for (const b of classBp) {
-  const mq = `@media (min-width:var(--breakpoint-${b}))`;
-  L.push(`${mq}{.${b}\\:block{display:block}}`);
-  L.push(`${mq}{.${b}\\:hidden{display:none}}`);
-  L.push(`${mq}{.${b}\\:flex{display:flex}}`);
+  L.push(`${mq(b)}{.${b}\\:block{display:block}}`);
+  L.push(`${mq(b)}{.${b}\\:hidden{display:none}}`);
+  L.push(`${mq(b)}{.${b}\\:flex{display:flex}}`);
 }
+
+// ---------- 可访问性 ----------
+// 视觉隐藏但保留给屏幕阅读器；.focus:not-sr-only 用于聚焦时还原（如"跳转到主内容"链接）
+L.push(
+  '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}',
+  '.not-sr-only{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;clip-path:none;white-space:normal}',
+  '.focus\\:not-sr-only:focus{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;clip-path:none;white-space:normal}',
+);
 
 const out = L.join('\n') + '\n';
 writeFileSync(new URL('./utilities.css', import.meta.url), out, 'utf8');
