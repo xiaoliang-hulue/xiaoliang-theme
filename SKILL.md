@@ -16,6 +16,12 @@ user-invocable: true
 - 遵循 4px 栅格：间距、尺寸、圆角尽量使用 `--space-*` 与 `--radius-*`。
 - 保持浅色/深色双模式：生成的 HTML 需通过 `data-theme="dark"` 或系统偏好切换验证。
 - 使用 Lucide 图标库，不引入自定义 SVG。所有图标（含 CSS `::before`/`::after` 的 chevron 箭头）一律使用 Lucide 真实路径：要么用 `<i data-lucide="图标名">` + `lucide.createIcons()`，要么在 CSS mask 中内联 Lucide 的 `<path d="…"/>`（而非手绘 polyline 或 Feather 画法）。图标源真值为 `assets/icons/lucide.min.js`（lucide v1.8.0）。
+- **图标一致性硬性约束（引用本主题时必须遵守）**：
+  1. 图标库版本锁定为 `assets/icons/lucide.min.js`（lucide v1.8.0）。引用主题时须同目录放置该文件，**禁止**替换为其它版本或远程 CDN，否则出现版本漂移/画法不一致。
+  2. 组件内图标二选一、**禁止混用**：要么「全部内联 Lucide 真实路径」（推荐，自包含单文件分发），要么「统一用 `<i data-lucide>` + 页面内 `lucide.createIcons()`」（须确保已引用库并调用）。同一文件不得一部分内联、一部分 data-lucide。
+  3. **严禁** emoji（🌙 / 📊 等）、字符箭头（→ / ← 作图标用途）、手绘 polyline 或 Feather 画法充当图标；文本说明里的方向键提示（如「← / →」）不受限。
+  4. 升级图标库时，必须**全量**重新抽取所有内联路径（含 CSS mask），禁止只更新部分图标。
+  5. 提交前用 `npm run audit:icons` 校验：任何非 Lucide 路径、版本不符、emoji 引用都会报错（与 `audit:a11y` 并列，可用 `npm run audit` 一次跑全）。
 - 正文对比度需 ≥ 4.5:1，禁用文字按规范豁免。
 
 ## 快速引用

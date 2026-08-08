@@ -1,0 +1,422 @@
+{
+  "generatedAt": "2026-08-08T03:08:06.736Z",
+  "scanned": 36,
+  "dirs": [
+    "D:/workbuddy_workspace/小亮主题"
+  ],
+  "files": [
+    {
+      "file": "components.css",
+      "inline": [
+        {
+          "name": "ChevronDown",
+          "loc": 1573
+        },
+        {
+          "name": "ChevronDown",
+          "loc": 1841
+        },
+        {
+          "name": "ChevronRight",
+          "loc": 7988
+        },
+        {
+          "name": "ChevronRight",
+          "loc": 8257
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-accordion.html",
+      "inline": [
+        {
+          "name": "ChevronDown",
+          "loc": 2689
+        },
+        {
+          "name": "ChevronDown",
+          "loc": 2957
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-alert.html",
+      "inline": [],
+      "ref": [
+        {
+          "name": "info",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "check-circle",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "alert-triangle",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "x-circle",
+          "inLib": true,
+          "scriptRefsLucide": true
+        }
+      ],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-avatar.html",
+      "inline": [
+        {
+          "name": "User",
+          "loc": 4857
+        },
+        {
+          "name": "User",
+          "loc": 5224
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-badge.html",
+      "inline": [
+        {
+          "name": "Bell",
+          "loc": 4310
+        },
+        {
+          "name": "Send",
+          "loc": 4850
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-breadcrumb.html",
+      "inline": [
+        {
+          "name": "ChevronRight",
+          "loc": 2873
+        },
+        {
+          "name": "ChevronRight",
+          "loc": 3142
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-drawer.html",
+      "inline": [
+        {
+          "name": "X",
+          "loc": 4501
+        },
+        {
+          "name": "X",
+          "loc": 5404
+        },
+        {
+          "name": "X",
+          "loc": 6085
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-modal.html",
+      "inline": [
+        {
+          "name": "X",
+          "loc": 2813
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-stepper.html",
+      "inline": [
+        {
+          "name": "Check",
+          "loc": 4433
+        },
+        {
+          "name": "Check",
+          "loc": 5432
+        },
+        {
+          "name": "Check",
+          "loc": 5884
+        },
+        {
+          "name": "Check",
+          "loc": 6792
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-table.html",
+      "inline": [
+        {
+          "name": "Inbox",
+          "loc": 4253
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\component-toast.html",
+      "inline": [
+        {
+          "name": "CheckCircle2",
+          "loc": 2721
+        },
+        {
+          "name": "X",
+          "loc": 3204
+        },
+        {
+          "name": "Info",
+          "loc": 3521
+        },
+        {
+          "name": "X",
+          "loc": 4022
+        },
+        {
+          "name": "CircleX",
+          "loc": 4340
+        },
+        {
+          "name": "X",
+          "loc": 4842
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\index.html",
+      "inline": [
+        {
+          "name": "Moon",
+          "loc": 6446
+        },
+        {
+          "name": "Sun",
+          "loc": 14853
+        },
+        {
+          "name": "Moon",
+          "loc": 15313
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "preview\\page-dashboard.html",
+      "inline": [],
+      "ref": [
+        {
+          "name": "box",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "layout-dashboard",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "folder-open",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "bar-chart-2",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "users",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "settings",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "menu",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "bell",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "download",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "plus",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "trending-up",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "trending-down",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "info",
+          "inLib": true,
+          "scriptRefsLucide": true
+        }
+      ],
+      "emoji": []
+    },
+    {
+      "file": "preview\\page-detail.html",
+      "inline": [],
+      "ref": [
+        {
+          "name": "box",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "bell",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "user",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "arrow-left",
+          "inLib": true,
+          "scriptRefsLucide": true
+        }
+      ],
+      "emoji": []
+    },
+    {
+      "file": "preview\\page-form.html",
+      "inline": [],
+      "ref": [
+        {
+          "name": "arrow-left",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "info",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "chevron-down",
+          "inLib": true,
+          "scriptRefsLucide": true
+        }
+      ],
+      "emoji": []
+    },
+    {
+      "file": "preview\\page-list.html",
+      "inline": [],
+      "ref": [
+        {
+          "name": "zap",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "home",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "bell",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "user",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "download",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "plus",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "search",
+          "inLib": true,
+          "scriptRefsLucide": true
+        }
+      ],
+      "emoji": []
+    },
+    {
+      "file": "theme.js",
+      "inline": [
+        {
+          "name": "CheckCircle2",
+          "loc": 398
+        },
+        {
+          "name": "CircleX",
+          "loc": 645
+        },
+        {
+          "name": "Info",
+          "loc": 907
+        },
+        {
+          "name": "X",
+          "loc": 1171
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    }
+  ],
+  "issues": [],
+  "allClear": true,
+  "issueCount": 0
+}
