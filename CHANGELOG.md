@@ -4,6 +4,24 @@
 
 ---
 
+## [1.4.1] - 2026-08-08
+
+### 新增
+
+- **组件级 / 页面级 ARIA 审计**：新增 `audit-a11y.mjs`，静态扫描 `preview/component-*.html` 与 `preview/page-*.html`，检查可访问名、role 结构、地标、装饰性图标隐藏与标题层级，输出 `component-a11y-report.json`。当前 30 个预览页全部通过（error / warning / info 均为 0）。运行：`npm run audit:a11y`。
+- **设计 Token 参考页**：新增 `preview/tokens.html`，离线速查全部 Token（主色阶 / 中性色阶 / 语义色 / 表面文本边框 / 字号 / 间距 / 圆角 / 阴影 / 断点），并在 `preview/index.html` 索引。
+- **无障碍兜底 CSS**（写入 `colors_and_type.css`，位于 Token 区块之外、不被构建覆盖）：
+  - `@media print`：打印时隐藏浮层与装饰性图标，保证纸面可读；
+  - `[dir="rtl"]`：提供 RTL 基础镜像（方向、对齐、侧栏位置）；
+  - `@media (prefers-contrast: more)`：加强边框与文本对比；
+  - 此前已含 `prefers-reduced-motion` 与 `forced-colors` 支持。
+
+### 修复
+
+- 批量补强预览页 ARIA：装饰性 Lucide 图标与内联 `<svg>` 加 `aria-hidden="true"`；图标按钮（如通知铃铛）补 `aria-label`；`<nav>` 补 `aria-label` 区分地标；侧边栏当前项加 `aria-current="page"`；演示用 `<input>` / `<table>` 补 `aria-label`。审计脚本同步支持隐式 `<label>` 包裹关联，避免误报。
+
+---
+
 ## [1.4.0] - 2026-08-07
 
 ### 新增

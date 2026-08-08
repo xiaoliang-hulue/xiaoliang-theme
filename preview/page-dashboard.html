@@ -48,23 +48,23 @@
 <body>
   <div class="app">
     <aside class="sidebar">
-      <div class="brand"><i data-lucide="box" class="nav-icon"></i>小亮控制台</div>
-      <nav class="nav">
-        <div class="nav-item active"><i data-lucide="layout-dashboard" class="nav-icon"></i>仪表盘</div>
-        <div class="nav-item"><i data-lucide="folder-open" class="nav-icon"></i>项目</div>
-        <div class="nav-item"><i data-lucide="bar-chart-2" class="nav-icon"></i>报表</div>
-        <div class="nav-item"><i data-lucide="users" class="nav-icon"></i>客户</div>
-        <div class="nav-item"><i data-lucide="settings" class="nav-icon"></i>设置</div>
+      <div class="brand"><i data-lucide="box" class="nav-icon" aria-hidden="true"></i>小亮控制台</div>
+      <nav class="nav" aria-label="侧边导航">
+        <div class="nav-item active" aria-current="page"><i data-lucide="layout-dashboard" class="nav-icon" aria-hidden="true"></i>仪表盘</div>
+        <div class="nav-item"><i data-lucide="folder-open" class="nav-icon" aria-hidden="true"></i>项目</div>
+        <div class="nav-item"><i data-lucide="bar-chart-2" class="nav-icon" aria-hidden="true"></i>报表</div>
+        <div class="nav-item"><i data-lucide="users" class="nav-icon" aria-hidden="true"></i>客户</div>
+        <div class="nav-item"><i data-lucide="settings" class="nav-icon" aria-hidden="true"></i>设置</div>
       </nav>
     </aside>
     <main class="main">
       <header class="topbar">
         <div class="topbar-left">
-          <i data-lucide="menu" class="top-icon"></i>
+          <i data-lucide="menu" class="top-icon" aria-hidden="true"></i>
           <span class="breadcrumb">首页 / 仪表盘</span>
         </div>
         <div class="topbar-right">
-          <button class="btn btn-ghost btn-md" type="button"><i data-lucide="bell" class="btn-icon"></i></button>
+          <button class="btn btn-ghost btn-md" type="button" aria-label="通知"><i data-lucide="bell" class="btn-icon" aria-hidden="true"></i></button>
           <span class="avatar">张</span>
         </div>
       </header>
@@ -72,35 +72,35 @@
         <div class="page-header">
           <h1 class="page-title">仪表盘</h1>
           <div class="page-actions">
-            <button class="btn btn-secondary btn-md" type="button"><i data-lucide="download" class="btn-icon"></i>导出数据</button>
-            <button class="btn btn-primary btn-md" type="button"><i data-lucide="plus" class="btn-icon"></i>新建项目</button>
+            <button class="btn btn-secondary btn-md" type="button"><i data-lucide="download" class="btn-icon" aria-hidden="true"></i>导出数据</button>
+            <button class="btn btn-primary btn-md" type="button"><i data-lucide="plus" class="btn-icon" aria-hidden="true"></i>新建项目</button>
           </div>
         </div>
         <div class="kpi-grid">
           <div class="card card-default">
             <div class="kpi-label">本月总收入</div>
             <div class="kpi-value">¥ 1,248,000</div>
-            <div class="kpi-change up"><i data-lucide="trending-up" class="btn-icon"></i>+12.5% 较上月</div>
+            <div class="kpi-change up"><i data-lucide="trending-up" class="btn-icon" aria-hidden="true"></i>+12.5% 较上月</div>
           </div>
           <div class="card card-default">
             <div class="kpi-label">活跃用户</div>
             <div class="kpi-value">48,352</div>
-            <div class="kpi-change up"><i data-lucide="trending-up" class="btn-icon"></i>+8.2% 较上周</div>
+            <div class="kpi-change up"><i data-lucide="trending-up" class="btn-icon" aria-hidden="true"></i>+8.2% 较上周</div>
           </div>
           <div class="card card-default">
             <div class="kpi-label">今日订单量</div>
             <div class="kpi-value">1,426</div>
-            <div class="kpi-change down"><i data-lucide="trending-down" class="btn-icon"></i>-3.1% 较昨日</div>
+            <div class="kpi-change down"><i data-lucide="trending-down" class="btn-icon" aria-hidden="true"></i>-3.1% 较昨日</div>
           </div>
           <div class="card card-default">
             <div class="kpi-label">转化率</div>
             <div class="kpi-value">4.8%</div>
-            <div class="kpi-change up"><i data-lucide="trending-up" class="btn-icon"></i>+0.6% 较上周</div>
+            <div class="kpi-change up"><i data-lucide="trending-up" class="btn-icon" aria-hidden="true"></i>+0.6% 较上周</div>
           </div>
         </div>
         <div class="section">
           <div class="alert info" role="alert">
-            <i data-lucide="info" class="icon"></i>
+            <i data-lucide="info" class="icon" aria-hidden="true"></i>
             <span class="message">系统将于今晚 02:00 进行例行维护，预计耗时 30 分钟，期间部分服务可能短暂不可用。</span>
           </div>
         </div>
@@ -110,7 +110,7 @@
             <button class="btn btn-ghost btn-md" type="button">查看全部</button>
           </div>
           <div class="card card-default card-table">
-            <table class="table hover">
+            <table class="table hover" aria-label="数据表格示例">
               <thead>
                 <tr>
                   <th>订单编号</th>

@@ -33,12 +33,12 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 <body>
 <main class="specimen">
 <div class="stage">
-<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail"><input class="input" type="text" placeholder="请输入内容"></div></section>
-<section class="story" data-evidence-sample="focus"><span class="story-label">聚焦</span><div class="rail"><input class="input" type="text" placeholder="请输入内容" autofocus></div></section>
+<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail"><input class="input" type="text" placeholder="请输入内容" aria-label="默认输入"></div></section>
+<section class="story" data-evidence-sample="focus"><span class="story-label">聚焦</span><div class="rail"><input class="input" type="text" placeholder="请输入内容" autofocus aria-label="聚焦输入"></div></section>
 <hr class="divider">
-<section class="story" data-evidence-sample="disabled"><span class="story-label">禁用</span><div class="rail"><input class="input" type="text" value="不可编辑内容" disabled></div></section>
-<section class="story" data-evidence-sample="error"><span class="story-label">错误</span><div class="rail"><div class="input-wrap"><input class="input error" type="text" value="错误输入"><span class="input-hint error">格式不正确</span></div></div></section>
-<section class="story" data-evidence-sample="success"><span class="story-label">成功</span><div class="rail"><div class="input-wrap"><input class="input success" type="text" value="正确输入"><span class="input-hint success">校验通过</span></div></div></section>
+<section class="story" data-evidence-sample="disabled"><span class="story-label">禁用</span><div class="rail"><input class="input" type="text" value="不可编辑内容" disabled aria-label="禁用输入"></div></section>
+<section class="story" data-evidence-sample="error"><span class="story-label">错误</span><div class="rail"><div class="input-wrap"><input class="input error" type="text" value="错误输入" aria-label="错误输入"><span class="input-hint error">格式不正确</span></div></div></section>
+<section class="story" data-evidence-sample="success"><span class="story-label">成功</span><div class="rail"><div class="input-wrap"><input class="input success" type="text" value="正确输入" aria-label="正确输入"><span class="input-hint success">校验通过</span></div></div></section>
 </div>
 </main>
 </body>

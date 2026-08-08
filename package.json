@@ -1,6 +1,6 @@
 {
   "name": "xiaoliang-theme",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "小亮主题 — 个人极简干净设计系统，含浅色/深色双模式、纯 CSS 变量 Token 与 26 个基础组件",
   "main": "colors_and_type.css",
   "style": "colors_and_type.css",
@@ -47,6 +47,7 @@
     "build:tokens": "node build-tokens.mjs",
     "build:components": "node extract-components-css.mjs",
     "build:utilities": "node build-utilities.mjs",
-    "build:a11y": "node build-a11y-report.mjs"
+    "build:a11y": "node build-a11y-report.mjs",
+    "audit:a11y": "node audit-a11y.mjs"
   }
 }

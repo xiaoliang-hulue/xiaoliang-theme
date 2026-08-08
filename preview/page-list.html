@@ -37,28 +37,28 @@ body { margin: 0; padding: var(--space-6); background: var(--color-surface); fon
 <div class="page">
   <nav class="navbar" aria-label="顶部导航">
     <a href="#" class="nav-brand">
-      <i data-lucide="zap" class="icon"></i>
+      <i data-lucide="zap" class="icon" aria-hidden="true"></i>
       <span>小亮工作台</span>
     </a>
     <div class="nav-actions">
-      <a href="#" class="nav-link"><i data-lucide="home" width="18" height="18"></i>首页</a>
-      <a href="#" class="nav-link"><i data-lucide="bell" width="18" height="18"></i>通知</a>
-      <a href="#" class="nav-link"><i data-lucide="user" width="18" height="18"></i>管理员</a>
+      <a href="#" class="nav-link"><i data-lucide="home" width="18" height="18" aria-hidden="true"></i>首页</a>
+      <a href="#" class="nav-link"><i data-lucide="bell" width="18" height="18" aria-hidden="true"></i>通知</a>
+      <a href="#" class="nav-link"><i data-lucide="user" width="18" height="18" aria-hidden="true"></i>管理员</a>
     </div>
   </nav>
 
   <header class="page-header">
     <h1 class="page-title">客户列表</h1>
     <div class="page-actions">
-      <button class="btn btn-secondary btn-md" type="button"><i data-lucide="download" width="16" height="16"></i>导出</button>
-      <button class="btn btn-primary btn-md" type="button"><i data-lucide="plus" width="16" height="16"></i>新建客户</button>
+      <button class="btn btn-secondary btn-md" type="button"><i data-lucide="download" width="16" height="16" aria-hidden="true"></i>导出</button>
+      <button class="btn btn-primary btn-md" type="button"><i data-lucide="plus" width="16" height="16" aria-hidden="true"></i>新建客户</button>
     </div>
   </header>
 
   <section class="toolbar" aria-label="搜索与筛选">
     <div class="search-box">
-      <i data-lucide="search" class="icon"></i>
-      <input class="input" type="text" placeholder="搜索客户名称、联系人或编号">
+      <i data-lucide="search" class="icon" aria-hidden="true"></i>
+      <input class="input" type="text" placeholder="搜索客户名称、联系人或编号" aria-label="搜索客户">
     </div>
     <select class="input" aria-label="客户类型" style="width:160px">
       <option>全部类型</option>
@@ -75,7 +75,7 @@ body { margin: 0; padding: var(--space-6); background: var(--color-surface); fon
   </section>
 
   <div class="table-wrap">
-    <table class="table hover">
+    <table class="table hover" aria-label="数据表格示例">
       <thead>
         <tr>
           <th>客户名称</th>

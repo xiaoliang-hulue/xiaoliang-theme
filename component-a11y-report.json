@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-08-08T01:58:23.804Z",
+  "scope": "preview/component-*.html + preview/page-*.html",
+  "summary": {
+    "filesScanned": 30,
+    "findings": {
+      "error": 0,
+      "warning": 0,
+      "info": 0
+    },
+    "allPass": true,
+    "note": "warning/info 为质量提示不阻断；error 需修复。启发式静态检查，不替代屏幕阅读器实测。"
+  },
+  "files": []
+}

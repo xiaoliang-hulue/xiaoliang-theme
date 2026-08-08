@@ -297,3 +297,48 @@
     color: HighlightText;
   }
 }
+
+/* Accessibility — 打印场景：隐藏浮层与装饰性图标，保证纸面可读 */
+@media print {
+  .modal-overlay, .drawer-overlay, .toast, .tooltip, .dropdown-menu,
+  .top-icon, .btn-icon, .nav-icon, .icon {
+    display: none !important;
+  }
+  body { background: #fff !important; color: #000 !important; }
+  a { color: #000 !important; text-decoration: underline; }
+  .card, .alert, .table, .component-card { break-inside: avoid; }
+}
+
+/* Accessibility — RTL 基础镜像（组件级完整 RTL 需逐步适配） */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: start;
+}
+[dir="rtl"] .row,
+[dir="rtl"] .nav,
+[dir="rtl"] .topbar,
+[dir="rtl"] .page-header,
+[dir="rtl"] .section-header,
+[dir="rtl"] .form-actions,
+[dir="rtl"] .topbar-right {
+  flex-direction: row-reverse;
+}
+[dir="rtl"] .sidebar {
+  border-right: none;
+  border-left: 1px solid var(--color-border);
+}
+
+/* Accessibility — 高对比偏好：加强边框与文本对比 */
+@media (prefers-contrast: more) {
+  :root {
+    --color-border: #737373;
+    --color-border-subtle: #a3a3a3;
+    --color-text-muted: #525252;
+    --color-text-secondary: #404040;
+  }
+  .btn, .input, .select, .textarea, .card, .tag, .alert,
+  .table, .dropdown-menu, .modal, .drawer, .switch-track, .avatar {
+    border-width: 1px;
+    border-color: currentColor;
+  }
+}

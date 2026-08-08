@@ -294,6 +294,9 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `preview/index.html` | 主题总览预览页 |
 | `preview/component-*.html` | 26 个组件预览页 |
+| `preview/tokens.html` | 设计 Token 参考页（颜色/字号/间距/圆角/阴影/断点） |
+| `audit-a11y.mjs` | 组件级 / 页面级 ARIA 审计脚本（启发式静态检查） |
+| `component-a11y-report.json` | 组件级 ARIA 审计报告 |
 | `preview/page-list.html` | 列表页模板 |
 | `preview/page-detail.html` | 详情页模板 |
 | `preview/page-form.html` | 表单页模板 |
@@ -346,11 +349,16 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 
 已基于 WCAG 2.1 AA 执行对比度检查，完整结果见 `accessibility-report.json`。正文、按钮、链接、表格等核心文字与背景组合均达到 ≥ 4.5:1，禁用文字按规范豁免。
 
+组件级与页面级 ARIA 检查另由 `audit-a11y.mjs` 覆盖（扫描 `preview/component-*.html` 与 `preview/page-*.html`，检查可访问名、role 结构、地标、装饰性图标隐藏、标题层级等），结果见 `component-a11y-report.json`，当前 30 个预览页全部通过（error / warning / info 均为 0）。运行：`npm run audit:a11y`。
+
+`colors_and_type.css` 额外提供无障碍兜底：打印场景隐藏浮层与装饰图标；`[dir="rtl"]` 基础镜像；`@media (prefers-contrast: more)` 加强边框与文本对比；已含 `prefers-reduced-motion` 与 `forced-colors` 支持。
+
 ## 扩展状态
 
 - 页面模板（列表页、详情页、表单页、仪表盘）—— 已完成
 - UI Kit 展示页 —— 已完成
 - 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Drawer、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb、Progress、Avatar、Badge、Stepper（共 26 个）—— 已完成
+- 可访问性补强：组件级 ARIA 审计脚本与报告、设计 Token 参考页、打印 / RTL / 高对比兜底 —— 已完成
 
 ## 许可
 

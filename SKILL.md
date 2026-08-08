@@ -223,14 +223,16 @@ user-invocable: true
 ├── extract-components-css.mjs  # 由 preview/component-*.html 重新生成 components.css
 ├── build-utilities.mjs      # 由 css.json 的 Token 变量生成 utilities.css
 ├── build-a11y-report.mjs    # 重新生成 accessibility-report.json（WCAG 2.1 AA 对比度校验）
+├── audit-a11y.mjs           # 组件级/页面级 ARIA 审计（启发式静态检查）
 ├── components/              # 各组件结构化定义（index.json + *.json）
-├── preview/                 # 预览页（index.html + 26 个组件页 + 4 个页面模板）
+├── preview/                 # 预览页（index.html + 26 个组件页 + 4 个页面模板 + tokens.html）
 ├── ui_kits/website/         # UI Kit 展示页与质量报告
 ├── assets/icons/            # 图标说明（Lucide）
 ├── specs/小亮主题-PRD.md     # 原始 PRD
 ├── README.md                # 使用说明
 ├── SKILL.md                 # 设计规范
-└── accessibility-report.json # 可访问性检查（WCAG 2.1 AA）
+├── accessibility-report.json # 可访问性检查（WCAG 2.1 AA 对比度）
+└── component-a11y-report.json # 组件级 ARIA 审计报告
 ```
 
 ---
@@ -241,3 +243,5 @@ user-invocable: true
 - 间距、字号、圆角均使用 px 单位。
 - 正文与背景对比度 ≥ 4.5:1。
 - 组件样式优先使用语义别名（`--color-*`），不直接引用色阶。
+- 预览页 ARIA 由 `audit-a11y.mjs` 审计（30 个预览页全通过）；设计 Token 可速查 `preview/tokens.html`。
+- `colors_and_type.css` 内置无障碍兜底：打印隐藏浮层、`[dir="rtl"]` 基础镜像、`prefers-contrast: more` 加强对比，并支持 `prefers-reduced-motion` 与 `forced-colors`。

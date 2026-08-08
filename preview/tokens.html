@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>设计 Token · 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — 本页为 Token 参考页，不进入 components.css 聚合 */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-background); color: var(--color-text); font-family: var(--font-sans); line-height: 1.6; }
+.container { max-width: var(--container-max); margin: 0 auto; padding: var(--space-8) var(--space-6); }
+.header { margin-bottom: var(--space-10); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
+.header h1 { margin: 0; font-size: var(--text-3xl); font-weight: var(--font-semibold); }
+.header p { margin: var(--space-2) 0 0; color: var(--color-text-secondary); }
+.section { margin-bottom: var(--space-12); }
+.section h2 { margin: 0 0 var(--space-5); font-size: var(--text-2xl); font-weight: var(--font-semibold); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--space-3); }
+.swatch { border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.swatch .c { height: 64px; }
+.swatch .meta { padding: var(--space-2) var(--space-3); font-size: var(--text-xs); line-height: 18px; }
+.swatch .meta code { font-family: var(--font-mono); color: var(--color-text-secondary); }
+.row-line { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border-subtle); }
+.row-line:last-child { border-bottom: none; }
+.row-line .name { width: 150px; flex-shrink: 0; font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-secondary); }
+.radius-box { width: 96px; height: 64px; background: var(--color-surface-muted); border: 1px solid var(--color-primary); }
+.shadow-box { width: 120px; height: 64px; background: var(--color-surface); border-radius: var(--radius-md); }
+.bp-row { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border-subtle); }
+.bp-row:last-child { border-bottom: none; }
+.bp-row .name { width: 170px; font-family: var(--font-mono); font-size: var(--text-sm); color: var(--color-text-secondary); }
+.demo-box { margin-top: var(--space-4); padding: var(--space-4); border: 1px dashed var(--color-border); border-radius: var(--radius-md); }
+.note { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); }
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <h1>设计 Token</h1>
+    <p>小亮主题全部设计变量速查 · 浅色 / 深色自动跟随系统</p>
+  </header>
+
+  <section class="section"><h2>主色阶 Primary</h2><div class="grid" id="primary"></div></section>
+  <section class="section"><h2>中性色阶 Gray</h2><div class="grid" id="gray"></div></section>
+  <section class="section"><h2>语义色 Semantic</h2><div class="grid" id="semantic"></div></section>
+  <section class="section"><h2>表面 / 文本 / 边框</h2><div class="grid" id="surface"></div></section>
+  <section class="section"><h2>字号 Type Scale</h2><div id="type"></div></section>
+  <section class="section"><h2>间距 Spacing</h2><div id="space"></div></section>
+  <section class="section"><h2>圆角 Radius</h2><div class="grid" id="radius"></div></section>
+  <section class="section"><h2>阴影 Shadow</h2><div class="grid" id="shadow"></div></section>
+  <section class="section"><h2>断点 Breakpoints</h2><div id="bp"></div>
+    <div class="demo-box"><p class="note">.container 在 ≥768px 时居中限宽；栅格工具类 .grid-cols-* 随断点响应。缩放窗口即可观察响应式变化。</p></div>
+  </section>
+</div>
+<script>
+const root = document.documentElement;
+const V = n => getComputedStyle(root).getPropertyValue(n).trim();
+function swatch(id, names) {
+  const el = document.getElementById(id);
+  names.forEach(n => {
+    const d = document.createElement('div'); d.className = 'swatch';
+    d.innerHTML = `<div class="c" style="background:var(${n})"></div><div class="meta"><code>${n}</code><br>${V(n)}</div>`;
+    el.appendChild(d);
+  });
+}
+function line(id, names) {
+  const el = document.getElementById(id);
+  names.forEach(n => {
+    const d = document.createElement('div'); d.className = 'row-line';
+    d.innerHTML = `<span class="name">${n}</span><span style="font-family:var(--font-mono);font-size:var(--text-sm)">${V(n)}</span>`;
+    el.appendChild(d);
+  });
+}
+swatch('primary', ['--primary-50','--primary-100','--primary-200','--primary-300','--primary-400','--primary-500','--primary-600','--primary-700','--primary-800','--primary-900','--primary-950']);
+swatch('gray', ['--gray-0','--gray-50','--gray-100','--gray-200','--gray-300','--gray-400','--gray-500','--gray-600','--gray-700','--gray-800','--gray-900','--gray-950']);
+swatch('semantic', ['--success','--success-bg','--warning','--warning-bg','--error','--error-bg','--info','--info-bg']);
+swatch('surface', ['--color-background','--color-surface','--color-surface-elevated','--color-surface-muted','--color-border','--color-border-subtle','--color-text','--color-text-secondary','--color-text-muted','--color-text-subtle','--color-primary','--color-primary-hover','--color-primary-subtle','--color-on-primary']);
+line('type', ['--text-xs','--text-sm','--text-base','--text-lg','--text-xl','--text-2xl','--text-3xl','--text-4xl','--text-5xl']);
+line('space', ['--space-0','--space-1','--space-2','--space-3','--space-4','--space-5','--space-6','--space-8','--space-10','--space-12','--space-16','--space-20','--space-24']);
+const rel = document.getElementById('radius');
+['--radius-none','--radius-sm','--radius-md','--radius-lg','--radius-xl','--radius-full'].forEach(n => {
+  const d = document.createElement('div'); d.className = 'swatch';
+  d.innerHTML = `<div class="radius-box" style="border-radius:var(${n})"></div><div class="meta"><code>${n}</code><br>${V(n)}</div>`;
+  rel.appendChild(d);
+});
+const sel = document.getElementById('shadow');
+['--shadow-xs','--shadow-sm','--shadow-md','--shadow-lg','--shadow-xl'].forEach(n => {
+  const d = document.createElement('div'); d.className = 'swatch';
+  d.innerHTML = `<div class="shadow-box" style="box-shadow:var(${n})"></div><div class="meta"><code>${n}</code><br>${V(n)}</div>`;
+  sel.appendChild(d);
+});
+const bel = document.getElementById('bp');
+['--breakpoint-sm','--breakpoint-md','--breakpoint-lg','--breakpoint-xl','--breakpoint-2xl','--container-max'].forEach(n => {
+  const d = document.createElement('div'); d.className = 'bp-row';
+  d.innerHTML = `<span class="name">${n}</span><span style="font-family:var(--font-mono);font-size:var(--text-sm)">${V(n)}</span>`;
+  bel.appendChild(d);
+});
+</script>
+</body>
+</html>
