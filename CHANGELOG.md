@@ -4,6 +4,37 @@
 
 ---
 
+## [1.4.4] - 2026-08-08
+
+### 修复（深色 Token 严重缺陷）
+
+- **`--color-primary-subtle` 深色值取反修复**：深色主色阶为倒序（`--primary-50` 最暗 `#0f1f4d`、`--primary-950` 最亮 `#eef4ff`），但语义别名此前错误映射到 `primary-950`，导致深色下 `--color-primary-subtle` 是近白色 `#eef4ff`。受影响组件：`.btn-ghost:hover`、`.tag-primary`、`.avatar.primary`、`.sidenav-link.active`、`.topnav-link.active`、`.step.active .step-index` —— 深色模式下悬停/激活时出现刺眼白块。已改为 `#0f1f4d`（`css.json` 单一真值 → `build-tokens.mjs` 重生成 `colors_and_type.css` 两处深色作用域）。
+  - 主色文字落在该浅底上的对比度由 **3.18:1（不达 AA）** 提升至 **4.52:1（达 AA）**。
+- **澄清两项「疑似坏值」实为正确值**（外部报告曾建议改动，实测会引入新缺陷，故保持不变）：
+  - `--color-on-primary: #0a0a0a`（深色）—— 主色 `#4b85f6` 为亮蓝，白字对比度仅 **3.51:1（不达 AA）**，黑字 **5.64:1（达 AA）**。
+  - `--color-primary-hover: #6394fa`（深色）—— 悬停态需比常态更亮，符合深色交互惯例。
+
+### 新增（对比度硬门禁）
+
+- **`npm run audit:contrast`（`build-a11y-report.mjs`）升级为构建门禁**：此前脚本只生成报告、从不失败退出，导致上述色阶取反缺陷长期潜伏。现在 `fail > 0` 即 `process.exit(1)`。
+- **新增上界校验 `maxRatio`**：除常规下界（正文 ≥4.5:1、UI 非文本 ≥3:1）外，新增「对比度过高即失败」的守卫，用于捕获**同色系近邻被取反**这一类错误。首个用例：`primary-subtle` / `background` 必须 ≤2.5:1（取反时会飙到 17.93:1，直接拦截）。
+- 新增 3 项检查（共 32 项，pass=30 / exempt=2 / fail=0）：
+  - 主色文字 / 主色浅底（幽灵悬停·标签·头像·激活项）
+  - 主色浅底 / 页面背景（同色系近邻·上界守卫）
+  - 正文文字 / 悬浮表面（模态·抽屉·下拉）
+- `npm run audit` 链路扩展为 `audit:contrast && audit:a11y && audit:icons`，任一失败即中断。
+
+### 改进（`audit-icons.mjs`）
+
+- 支持**单文件**扫描目标（此前仅接受目录，传入 `.html` 会 `ENOTDIR` 崩溃），便于下游项目直接校验单个产物页。
+- 支持 `data-not-icon="说明"` 豁免属性：装饰性 / 非图标用途的内联 SVG（如水印底纹）可显式标注豁免，避免误报。
+
+### 规范（SKILL.md）
+
+新增「深色 Token 硬性约束」5 条：① 深色主色阶倒序，浅底别名须映射 50 端；② 深色 `--color-on-primary` 是黑不是白（附对比度实测值）；③ Token 真值在 `css.json`，禁手改 CSS；④ 下游快照禁止就地打补丁绕开主题坏值；⑤ 提交前必过 `npm run audit:contrast`（含上界守卫）。
+
+---
+
 ## [1.4.3] - 2026-08-08
 
 ### 新增

@@ -23,6 +23,12 @@ user-invocable: true
   4. 升级图标库时，必须**全量**重新抽取所有内联路径（含 CSS mask），禁止只更新部分图标。
   5. 提交前用 `npm run audit:icons` 校验：任何非 Lucide 路径、版本不符、emoji 引用都会报错（与 `audit:a11y` 并列，可用 `npm run audit` 一次跑全）。
 - 正文对比度需 ≥ 4.5:1，禁用文字按规范豁免。
+- **深色 Token 硬性约束（引用/派生本主题时必须遵守）**：
+  1. **深色主色阶是倒序的**：`--primary-50` 最暗（`#0f1f4d`）、`--primary-950` 最亮（`#eef4ff`）。派生浅底类语义别名（`--color-primary-subtle`）时必须映射到 **50 端**，映射到 950 端会得到近白色块（幽灵按钮悬停、`.tag-primary`、`.avatar.primary`、激活导航项都会炸）。
+  2. **`--color-on-primary` 在深色下是深色 `#0a0a0a` 而非白色**：主色 `#4b85f6` 属亮蓝，白字对比度仅 3.51:1（不达 AA），黑字为 5.64:1。不要凭直觉改成 `#ffffff`。
+  3. Token 单一真值是 `css.json`，改完必须 `npm run build:tokens` 重新生成 `colors_and_type.css`（`[data-theme="dark"]` 与 `@media (prefers-color-scheme: dark)` 两处同步），**禁止手改 CSS**。
+  4. 下游项目（如把 Token 快照进独立 HTML）**不得就地打补丁**绕开主题坏值——发现坏值请回主题修，再同步快照，否则两边永久漂移。
+  5. 提交前用 `npm run audit:contrast` 校验：既查下界（正文 ≥4.5:1、UI 元素 ≥3:1），也查**上界**（同色系近邻如 `primary-subtle`/`background` 必须 ≤2.5:1，用于捕获「色阶取反」类错误）。失败即 `exit 1`。
 
 ## 快速引用
 

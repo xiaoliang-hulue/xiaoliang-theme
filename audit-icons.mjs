@@ -75,6 +75,7 @@ function matchLucide(svgString) {
 }
 
 // ---------- 扫描目标 ----------
+// 入参可以是目录，也可以是单个文件路径（便于只校验一个生成产物）。
 const dirs = process.argv.slice(2).length ? process.argv.slice(2) : [__dirname];
 const SKIP = new Set(['.git', 'node_modules', 'ui_kits']);
 const EMOJI_RE = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/u;
@@ -90,7 +91,22 @@ function walk(dir, files) {
 }
 
 const allFiles = [];
-for (const d of dirs) walk(d, allFiles);
+for (const d of dirs) {
+  let st;
+  try {
+    st = fs.statSync(d);
+  } catch {
+    console.error(`路径不存在，已跳过: ${d}`);
+    continue;
+  }
+  if (st.isDirectory()) walk(d, allFiles);
+  else if (/\.(html|css|js)$/i.test(d)) allFiles.push(d);
+  else console.error(`非 html/css/js 文件，已跳过: ${d}`);
+}
+if (!allFiles.length) {
+  console.error('没有可扫描的文件。用法: node audit-icons.mjs [目录或文件 ...]');
+  process.exit(1);
+}
 
 const report = { generatedAt: new Date().toISOString(), scanned: allFiles.length, dirs, files: [], issues: [] };
 let issueCount = 0;
@@ -106,6 +122,13 @@ for (const f of allFiles) {
   let m;
   while ((m = svgRe.exec(txt))) {
     const svg = m[0];
+    // 显式豁免：data-not-icon="原因" 声明这是插画/水印/图表等业务图形，不是 UI 图标。
+    // 用属性而非白名单，豁免理由就写在代码现场，不会随文件移动而失效。
+    const exemptMatch = svg.match(/data-not-icon=["']([^"']*)["']/i);
+    if (exemptMatch) {
+      entry.inline.push({ name: 'EXEMPT', reason: exemptMatch[1] || 'unspecified', loc: m.index });
+      continue;
+    }
     const name = matchLucide(svg);
     entry.inline.push({ name: name || 'UNKNOWN', loc: m.index });
     if (!name) { report.issues.push({ file: rel, type: 'non-lucide-svg', loc: m.index, detail: svg.slice(0, 120) }); issueCount++; }

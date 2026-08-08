@@ -1,24 +1,24 @@
 {
-  "generatedAt": "2026-08-08T01:40:59.220Z",
+  "generatedAt": "2026-08-08T03:58:32.764Z",
   "standard": "WCAG 2.1 AA",
   "thresholdNormal": 4.5,
   "thresholdLarge": 3,
   "summary": {
-    "total": 26,
-    "pass": 24,
+    "total": 32,
+    "pass": 30,
     "fail": 0,
     "exempt": 2,
     "missing": 0,
     "allPass": true
   },
   "lightMode": {
-    "total": 13,
-    "pass": 12,
+    "total": 16,
+    "pass": 15,
     "fail": 0
   },
   "darkMode": {
-    "total": 13,
-    "pass": 12,
+    "total": 16,
+    "pass": 15,
     "fail": 0
   },
   "checks": [
@@ -99,6 +99,41 @@
       "aaNormal": true,
       "aaLarge": true,
       "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "主色文字 / 主色浅底(幽灵悬停·标签·头像·激活项)",
+      "fg": "--color-primary",
+      "bg": "--color-primary-subtle",
+      "mode": "light",
+      "ratio": 4.73,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "主色浅底 / 页面背景（同色系近邻·上界守卫）",
+      "fg": "--color-primary-subtle",
+      "bg": "--color-background",
+      "guard": "max",
+      "maxRatio": 2.5,
+      "mode": "light",
+      "ratio": 1.09,
+      "aaNormal": false,
+      "aaLarge": false,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "正文文字 / 悬浮表面（模态·抽屉·下拉）",
+      "fg": "--color-text",
+      "bg": "--color-surface-elevated",
+      "mode": "light",
+      "ratio": 17.93,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
       "status": "pass"
     },
     {
@@ -244,6 +279,41 @@
       "aaNormal": true,
       "aaLarge": true,
       "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "主色文字 / 主色浅底(幽灵悬停·标签·头像·激活项)",
+      "fg": "--color-primary",
+      "bg": "--color-primary-subtle",
+      "mode": "dark",
+      "ratio": 4.52,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "主色浅底 / 页面背景（同色系近邻·上界守卫）",
+      "fg": "--color-primary-subtle",
+      "bg": "--color-background",
+      "guard": "max",
+      "maxRatio": 2.5,
+      "mode": "dark",
+      "ratio": 1.25,
+      "aaNormal": false,
+      "aaLarge": false,
+      "aaaNormal": false,
+      "status": "pass"
+    },
+    {
+      "name": "正文文字 / 悬浮表面（模态·抽屉·下拉）",
+      "fg": "--color-text",
+      "bg": "--color-surface-elevated",
+      "mode": "dark",
+      "ratio": 15.96,
+      "aaNormal": true,
+      "aaLarge": true,
+      "aaaNormal": true,
       "status": "pass"
     },
     {
