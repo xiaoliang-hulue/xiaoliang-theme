@@ -4,6 +4,30 @@
 
 ---
 
+## [1.4.3] - 2026-08-08
+
+### 新增
+
+- **图标一致性审计脚本 `audit-icons.mjs`**：静态扫描目标目录下所有 `.html/.css/.js`（排除 `lucide.min.js`、`ui_kits`、`.git`、`node_modules`），逐图标做三类检查：
+  1. **几何签名比对** —— 提取每个 `<svg>` 块（含 CSS `mask` data-uri）的 `path/circle/line/polyline/rect` 几何属性，排序拼接为签名，与内置 Lucide v1.8.0 全量 1940 个图标比对，识别「非 Lucide 自定义 SVG」与「旧版本路径漂移」；
+  2. **`data-lucide` 引用校验** —— 检查图标名在库中存在，且页面确实引入了 `lucide.min.js` 并调用 `createIcons()`（防孤儿引用）；
+  3. **Emoji 扫描** —— 剥离 svg 后扫描文本节点，禁止 emoji / 字符图标充当 UI 图标。
+  输出 `audit-icons-report.json`。运行：`npm run audit:icons`；`npm run audit` 一次跑完 a11y + icons。
+
+### 修复（版本漂移与残留清理）
+
+- `preview/component-badge.html`：`bell`、`send` 内联路径为旧版 Lucide 画法，已更新为 v1.8.0 真实路径。
+- `preview/component-table.html`：`inbox` 内联路径为旧版画法，已更新为 v1.8.0 真实路径。
+- `preview/component-avatar.html`：两处灰色人像占位为自定义填充 SVG（`rect`+`circle`+`path`），已改为 Lucide `user`。
+- `preview/index.html`：主题切换按钮使用 emoji `🌙` / `☀️`，已改为内联 Lucide `moon` / `sun`；切换逻辑由 `textContent` 改为 `innerHTML`。
+- 审计结果：主题源与用户级副本 **0 问题**，全部图标命中 Lucide v1.8.0，无 emoji、无自定义 SVG、无孤儿 `data-lucide` 引用。
+
+### 规范（SKILL.md 硬性约束）
+
+新增「图标一致性硬性约束」5 条：① 图标源锁定内置 Lucide v1.8.0，禁止切换版本或引 CDN；② 单页内要么全内联真实路径、要么全用 `data-lucide`，禁止两种用法混用；③ 禁止 emoji、字符箭头（`☰`/`▶`）、手绘 `polyline`、Feather 旧路径充当图标；④ 升级图标库须全量重抽所有内联路径；⑤ 提交前必须通过 `npm run audit:icons`。
+
+---
+
 ## [1.4.2] - 2026-08-08
 
 ### 修复（规范一致性）
