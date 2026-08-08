@@ -8,7 +8,23 @@ import { createRequire } from 'module';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
-const LUCIDE = path.join(__dirname, 'assets/icons/lucide.min.js');
+
+// 图标库定位：兼容两种目录布局
+//   ① 主题仓库根：<repo>/audit-icons.mjs      -> assets/icons/lucide.min.js
+//   ② 用户级 Skill：<skill>/assets/audit-icons.mjs -> icons/lucide.min.js
+// 也允许用环境变量 LUCIDE_LIB 显式指定。
+const LUCIDE_CANDIDATES = [
+  process.env.LUCIDE_LIB,
+  path.join(__dirname, 'assets/icons/lucide.min.js'),
+  path.join(__dirname, 'icons/lucide.min.js'),
+  path.join(__dirname, '../assets/icons/lucide.min.js'),
+].filter(Boolean);
+const LUCIDE = LUCIDE_CANDIDATES.find((p) => fs.existsSync(p));
+if (!LUCIDE) {
+  console.error('✗ 未找到 lucide.min.js，已尝试：\n  ' + LUCIDE_CANDIDATES.join('\n  '));
+  console.error('  可设置环境变量 LUCIDE_LIB=<lucide.min.js 绝对路径> 后重试。');
+  process.exit(1);
+}
 
 // ---------- 建立 Lucide 库索引：标准化几何签名 -> 图标名 ----------
 function geomOfChildren(children) {
