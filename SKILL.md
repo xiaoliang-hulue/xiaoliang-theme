@@ -15,7 +15,7 @@ user-invocable: true
 - 优先使用语义别名：`--color-primary`、`--color-text`、`--color-surface`、`--color-border` 等。
 - 遵循 4px 栅格：间距、尺寸、圆角尽量使用 `--space-*` 与 `--radius-*`。
 - 保持浅色/深色双模式：生成的 HTML 需通过 `data-theme="dark"` 或系统偏好切换验证。
-- 使用 Lucide 图标库，不引入自定义 SVG。
+- 使用 Lucide 图标库，不引入自定义 SVG。所有图标（含 CSS `::before`/`::after` 的 chevron 箭头）一律使用 Lucide 真实路径：要么用 `<i data-lucide="图标名">` + `lucide.createIcons()`，要么在 CSS mask 中内联 Lucide 的 `<path d="…"/>`（而非手绘 polyline 或 Feather 画法）。图标源真值为 `assets/icons/lucide.min.js`（lucide v1.8.0）。
 - 正文对比度需 ≥ 4.5:1，禁用文字按规范豁免。
 
 ## 快速引用

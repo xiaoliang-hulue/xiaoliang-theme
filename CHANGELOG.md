@@ -4,6 +4,28 @@
 
 ---
 
+## [1.4.2] - 2026-08-08
+
+### 修复（规范一致性）
+
+- **图标全面 Lucide 化**：此前主题自身存在与「不引入自定义 SVG」规则冲突的内联 SVG，已全部改为 Lucide 真实路径：
+  - `components.css`（源：`preview/component-accordion.html`、`preview/component-breadcrumb.html`）的折叠/分隔 chevron 由手绘 `polyline` 改为 Lucide `chevron-down` / `chevron-right` 路径（mask 内联）；
+  - `theme.js` 与 `preview/component-toast.html` 的 Toast 图标（success/error/info）由 Feather `check-circle`/`x-circle`/`info` 改为 Lucide `circle-check`/`circle-x`/`info`；
+  - `preview/component-stepper.html` 已完成步骤对勾由 Feather `polyline` 改为 Lucide `check` 路径。
+  - 关闭 `x` 图标经核对待为 Lucide `x`，无需改动。
+- 重建 `components.css`（26 样式块）已含上述 Lucide 路径；全仓（除 `lucide.min.js` 与 `ui_kits` 示例代码）已无 Feather / 自定义 `polyline` 残留。
+- `SKILL.md` 图标规范补充：CSS 伪元素箭头同样须用 Lucide 真实路径（mask 内联）。
+
+### 题库平台（外部项目 `题库制作/`）
+
+- 耐久修复 `quiz-platform-generator/assets/platform-template.html` 与 `build_db_xl.py` 的图标层，使其符合小亮主题 Lucide 规范，并重生成 `数据库设计基础.html`：
+  - 顶栏 `book-open` / `moon`（夜间切换）由 Feather 画法改为 Lucide 真实路径；
+  - 反馈区 `ok` / `no` / `info` 由 Feather `check-circle`/`x-circle`/`info` 改为 Lucide `circle-check`/`circle-x`/`info`；
+  - 折叠箭头 CSS mask 由手绘 `polyline` 改为 Lucide `chevron-right` 路径（展开旋转 90°）。
+  - 校验：生成页 6 处 Lucide 路径全部命中，Feather / 自定义 SVG 残留为 0。
+
+---
+
 ## [1.4.1] - 2026-08-08
 
 ### 新增
