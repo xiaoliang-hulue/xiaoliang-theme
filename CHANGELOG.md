@@ -4,6 +4,18 @@
 
 ---
 
+## [1.4.7] - 2026-08-12
+
+### 改进（预览页统一明暗切换 · 产物去重瘦身）
+
+- **预览页统一明暗切换入口**：新增 `preview/_theme.js` 公共片段（自动注入右上角切换按钮，尊重页面已有 `data-theme`、跟随系统偏好、点击手动切换），31 个此前无切换入口的预览页（26 个组件页 + page-dashboard/detail/form/list + tokens）统一引入；`index.html` 保留原有更完整的切换脚本。现在所有 32 个预览页均可手动切换明暗模式。
+- **components.css 聚合去重**：`extract-components-css.mjs` 新增按「选择器 + 规范化声明块」去重逻辑（同一选择器完全相同的声明只保留首次出现；不同版本保留声明条数最多的完整版，如 `.btn` 保留含 `flex-shrink:0` 的完整定义）。`components.css` 从 42677B 减至 32284B（**-24.4%**），275 条规则，合并完全重复 19 条；`.page-ellipsis`/`.badge`/`.avatar` 等合法覆盖不受影响。
+- **渲染等价验证**：新旧 components.css 对 5 个代表性预览页（button/card/table/dashboard/form）无头 Edge 截图像素对比，4 页 0 差异、1 页仅 0.0069% 抗锯齿微差；语义等价确认（0 声明不匹配，多行选择器完整保留）。
+- 审计全绿：`npm run audit` → 对比度 32 项 pass=30/exempt=2/fail=0、a11y allPass、图标 0 问题。
+- 同步：用户级 Skill 副本 `assets/components.css` / `assets/preview/*` 已同步。
+
+---
+
 ## [1.4.6] - 2026-08-12
 
 ### 修复（夜间模式配色 · 统一柔和护眼）
