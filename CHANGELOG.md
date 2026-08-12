@@ -4,6 +4,23 @@
 
 ---
 
+## [1.4.6] - 2026-08-12
+
+### 修复（夜间模式配色 · 统一柔和护眼）
+
+- **深色 Token 全面调优**（`css.json` dark/aliases → `build-tokens.mjs` 重建 `colors_and_type.css` 两处深色作用域同步产出）：深色底由纯黑改为柔和蓝黑，文字层级分明、主色提亮、边框提亮，解决 6 个预览页夜间观感不一致、发闷、层级不清的问题。
+- 具体变更：
+  - 背景：`--color-background` `#0a0a0a`→`#0d1117`（柔和蓝黑）、`--color-surface` `#111111`→`#151a21`、`--color-surface-elevated/muted` `#1a1a1a`→`#1b2230`。
+  - 文字：`--color-text` `#f5f5f5`→`#e6edf3`（柔和亮白）、`--color-text-secondary` `#a3a3a3`→`#aeb9c7`、`--color-text-subtle` `#a3a3a3`→`#8b98a9`。
+  - 主色：`--color-primary` `#4b85f6`→`#6ea8ff`（提亮，深底对比明显）、`--color-primary-hover` `#6394fa`→`#8ab8ff`、`--color-on-primary` `#0a0a0a`→`#0d1117`。
+  - 边框：`--color-border` `#262626`→`#303d4d`、`--color-border-subtle` `#1a1a1a`→`#262f3d`（卡片/分隔线夜间可见）。
+- **对比度（实测，全部达标）**：正文/背景 16.02:1、次要/背景 9.52:1、subtle/背景 6.45:1、主色/背景 7.85:1、on-primary/主色 7.85:1、success/warning/error 落深底 10.86/11.34/6.84:1。均为「明显对比 + 柔和护眼」取向（避免纯白刺眼、避免高饱和荧光）。
+- 语义色（success/warning/error）深色值保持不变（本就达标）。
+- 审计全绿：`npm run audit` → 对比度 32 项 pass=30/exempt=2/fail=0、a11y allPass、图标 0 问题。
+- 同步：用户级 Skill 副本 `assets/css.json` / `assets/colors_and_type.css` / `assets/preview/*`（32 个预览页）已同步；副本 preview 图标引用按副本目录结构改写为 `../icons/lucide.min.js`。
+
+---
+
 ## [1.4.5] - 2026-08-08
 
 ### 新增（语义令牌 · 收藏星）

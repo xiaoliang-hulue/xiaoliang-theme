@@ -135,20 +135,20 @@
   --error-bg: #450a0a;
   --info: var(--primary-500);
   --info-bg: var(--primary-50);
-  --color-background: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-elevated: #1a1a1a;
-  --color-surface-muted: #1a1a1a;
-  --color-border: #262626;
-  --color-border-subtle: #1a1a1a;
-  --color-text: #f5f5f5;
-  --color-text-secondary: #a3a3a3;
+  --color-background: #0d1117;
+  --color-surface: #151a21;
+  --color-surface-elevated: #1b2230;
+  --color-surface-muted: #1b2230;
+  --color-border: #303d4d;
+  --color-border-subtle: #262f3d;
+  --color-text: #e6edf3;
+  --color-text-secondary: #aeb9c7;
   --color-text-muted: #525252;
-  --color-text-subtle: #a3a3a3;
-  --color-primary: #4b85f6;
-  --color-primary-hover: #6394fa;
+  --color-text-subtle: #8b98a9;
+  --color-primary: #6ea8ff;
+  --color-primary-hover: #8ab8ff;
   --color-primary-subtle: #0f1f4d;
-  --color-on-primary: #0a0a0a;
+  --color-on-primary: #0d1117;
 }
 
 /* 自动跟随系统偏好：用户未显式指定浅色时，系统深色即应用深色 Token */
@@ -186,20 +186,20 @@
   --error-bg: #450a0a;
   --info: var(--primary-500);
   --info-bg: var(--primary-50);
-  --color-background: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-elevated: #1a1a1a;
-  --color-surface-muted: #1a1a1a;
-  --color-border: #262626;
-  --color-border-subtle: #1a1a1a;
-  --color-text: #f5f5f5;
-  --color-text-secondary: #a3a3a3;
+  --color-background: #0d1117;
+  --color-surface: #151a21;
+  --color-surface-elevated: #1b2230;
+  --color-surface-muted: #1b2230;
+  --color-border: #303d4d;
+  --color-border-subtle: #262f3d;
+  --color-text: #e6edf3;
+  --color-text-secondary: #aeb9c7;
   --color-text-muted: #525252;
-  --color-text-subtle: #a3a3a3;
-  --color-primary: #4b85f6;
-  --color-primary-hover: #6394fa;
+  --color-text-subtle: #8b98a9;
+  --color-primary: #6ea8ff;
+  --color-primary-hover: #8ab8ff;
   --color-primary-subtle: #0f1f4d;
-  --color-on-primary: #0a0a0a;
+  --color-on-primary: #0d1117;
   }
 }
 /* @@TOKENS-END@@ */

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T03:58:32.764Z",
+  "generatedAt": "2026-08-12T12:28:12.316Z",
   "standard": "WCAG 2.1 AA",
   "thresholdNormal": 4.5,
   "thresholdLarge": 3,
@@ -207,7 +207,7 @@
       "fg": "--color-text",
       "bg": "--color-background",
       "mode": "dark",
-      "ratio": 18.16,
+      "ratio": 16.02,
       "aaNormal": true,
       "aaLarge": true,
       "aaaNormal": true,
@@ -218,7 +218,7 @@
       "fg": "--color-text-secondary",
       "bg": "--color-background",
       "mode": "dark",
-      "ratio": 7.85,
+      "ratio": 9.52,
       "aaNormal": true,
       "aaLarge": true,
       "aaaNormal": true,
@@ -231,7 +231,7 @@
       "exempt": true,
       "reason": "禁用元素按 WCAG 规范不强制要求对比度",
       "mode": "dark",
-      "ratio": 2.53,
+      "ratio": 2.42,
       "aaNormal": false,
       "aaLarge": false,
       "aaaNormal": false,
@@ -242,10 +242,10 @@
       "fg": "--color-text-subtle",
       "bg": "--color-background",
       "mode": "dark",
-      "ratio": 7.85,
+      "ratio": 6.45,
       "aaNormal": true,
       "aaLarge": true,
-      "aaaNormal": true,
+      "aaaNormal": false,
       "status": "pass"
     },
     {
@@ -253,10 +253,10 @@
       "fg": "--color-on-primary",
       "bg": "--color-primary",
       "mode": "dark",
-      "ratio": 5.64,
+      "ratio": 7.85,
       "aaNormal": true,
       "aaLarge": true,
-      "aaaNormal": false,
+      "aaaNormal": true,
       "status": "pass"
     },
     {
@@ -264,10 +264,10 @@
       "fg": "--color-on-primary",
       "bg": "--color-primary-hover",
       "mode": "dark",
-      "ratio": 6.74,
+      "ratio": 9.35,
       "aaNormal": true,
       "aaLarge": true,
-      "aaaNormal": false,
+      "aaaNormal": true,
       "status": "pass"
     },
     {
@@ -275,10 +275,10 @@
       "fg": "--color-primary",
       "bg": "--color-background",
       "mode": "dark",
-      "ratio": 5.64,
+      "ratio": 7.85,
       "aaNormal": true,
       "aaLarge": true,
-      "aaaNormal": false,
+      "aaaNormal": true,
       "status": "pass"
     },
     {
@@ -286,7 +286,7 @@
       "fg": "--color-primary",
       "bg": "--color-primary-subtle",
       "mode": "dark",
-      "ratio": 4.52,
+      "ratio": 6.58,
       "aaNormal": true,
       "aaLarge": true,
       "aaaNormal": false,
@@ -299,7 +299,7 @@
       "guard": "max",
       "maxRatio": 2.5,
       "mode": "dark",
-      "ratio": 1.25,
+      "ratio": 1.19,
       "aaNormal": false,
       "aaLarge": false,
       "aaaNormal": false,
@@ -310,7 +310,7 @@
       "fg": "--color-text",
       "bg": "--color-surface-elevated",
       "mode": "dark",
-      "ratio": 15.96,
+      "ratio": 13.48,
       "aaNormal": true,
       "aaLarge": true,
       "aaaNormal": true,
@@ -365,7 +365,7 @@
       "fg": "--color-text",
       "bg": "--color-surface",
       "mode": "dark",
-      "ratio": 17.32,
+      "ratio": 14.79,
       "aaNormal": true,
       "aaLarge": true,
       "aaaNormal": true,
@@ -376,16 +376,16 @@
       "fg": "--color-text-secondary",
       "bg": "--color-surface-muted",
       "mode": "dark",
-      "ratio": 6.9,
+      "ratio": 8.01,
       "aaNormal": true,
       "aaLarge": true,
-      "aaaNormal": false,
+      "aaaNormal": true,
       "status": "pass"
     }
   ],
   "exemptions": [
     "[light] 禁用文字 / 页面背景: 2.52:1 (禁用元素按 WCAG 规范不强制要求对比度)",
-    "[dark] 禁用文字 / 页面背景: 2.53:1 (禁用元素按 WCAG 规范不强制要求对比度)"
+    "[dark] 禁用文字 / 页面背景: 2.42:1 (禁用元素按 WCAG 规范不强制要求对比度)"
   ],
   "failures": []
 }
