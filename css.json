@@ -48,7 +48,7 @@
       "color-text": "#171717",
       "color-text-secondary": "#525252",
       "color-text-muted": "#a3a3a3",
-      "color-text-subtle": "#6b7280",
+      "color-text-subtle": "#677183",
       "color-primary": "#2563eb",
       "color-primary-hover": "#1d4ed8",
       "color-primary-subtle": "#f0f5ff",
@@ -65,9 +65,9 @@
       "500": "#4b85f6",
       "600": "#6394fa",
       "700": "#85adff",
-      "800": "#b3cdff",
-      "900": "#dbe6ff",
-      "950": "#eef4ff"
+      "800": "#bacff7",
+      "900": "#dfe9fb",
+      "950": "#f2f5fd"
     },
     "gray": {
       "0": "#0a0a0a",
@@ -84,31 +84,31 @@
       "950": "#ffffff"
     },
     "semantic": {
-      "success": "#4ade80",
-      "success-bg": "#052e16",
-      "warning": "#fbbf24",
-      "warning-bg": "#451a03",
-      "fav-on": "#fbbf24",
-      "error": "#f87171",
-      "error-bg": "#450a0a",
+      "success": "#51d682",
+      "success-bg": "#0b2816",
+      "warning": "#eeb52f",
+      "warning-bg": "#372410",
+      "fav-on": "#f2a92c",
+      "error": "#ed7e7e",
+      "error-bg": "#3b1111",
     "info": "var(--primary-500)",
     "info-bg": "var(--primary-50)"
     },
     "aliases": {
-      "color-background": "#0d1117",
-      "color-surface": "#151a21",
-      "color-surface-elevated": "#1b2230",
-      "color-surface-muted": "#1b2230",
-      "color-border": "#303d4d",
-      "color-border-subtle": "#262f3d",
-      "color-text": "#e6edf3",
-      "color-text-secondary": "#aeb9c7",
+      "color-background": "#0f1115",
+      "color-surface": "#181b21",
+      "color-surface-elevated": "#1f242e",
+      "color-surface-muted": "#1f242e",
+      "color-border": "#373d49",
+      "color-border-subtle": "#2b2f36",
+      "color-text": "#ebecef",
+      "color-text-secondary": "#b3b8c1",
       "color-text-muted": "#525252",
-      "color-text-subtle": "#8b98a9",
-      "color-primary": "#6ea8ff",
-      "color-primary-hover": "#8ab8ff",
+      "color-text-subtle": "#8f96a3",
+      "color-primary": "#7eb0f1",
+      "color-primary-hover": "#9bc1f3",
       "color-primary-subtle": "#0f1f4d",
-      "color-on-primary": "#0d1117"
+      "color-on-primary": "#0f1115"
     }
   },
   "breakpoints": {

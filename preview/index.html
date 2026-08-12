@@ -438,7 +438,11 @@
       label.textContent = isDark ? '切换浅色' : '切换深色';
     }
 
-    let currentDark = mq.matches;
+    let currentDark =
+      root.getAttribute('data-theme') === 'dark' ||
+      root.getAttribute('data-theme') === 'light'
+        ? root.getAttribute('data-theme') === 'dark'
+        : mq.matches;
     applyTheme(currentDark);
 
     toggle.addEventListener('click', () => {
