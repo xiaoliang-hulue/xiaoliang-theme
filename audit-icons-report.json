@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-08T04:00:08.416Z",
-  "scanned": 36,
+  "generatedAt": "2026-08-13T02:39:24.519Z",
+  "scanned": 38,
   "dirs": [
     "D:\\workbuddy_workspace\\小亮主题"
   ],
@@ -10,19 +10,19 @@
       "inline": [
         {
           "name": "ChevronDown",
-          "loc": 1573
+          "loc": 1495
         },
         {
           "name": "ChevronDown",
-          "loc": 1841
+          "loc": 1731
         },
         {
           "name": "ChevronRight",
-          "loc": 7988
+          "loc": 6610
         },
         {
           "name": "ChevronRight",
-          "loc": 8257
+          "loc": 6847
         }
       ],
       "ref": [],
@@ -390,6 +390,21 @@
           "scriptRefsLucide": true
         }
       ],
+      "emoji": []
+    },
+    {
+      "file": "preview\\_theme.js",
+      "inline": [
+        {
+          "name": "Sun",
+          "loc": 385
+        },
+        {
+          "name": "Moon",
+          "loc": 853
+        }
+      ],
+      "ref": [],
       "emoji": []
     },
     {

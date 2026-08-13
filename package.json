@@ -1,6 +1,6 @@
 {
   "name": "xiaoliang-theme",
-  "version": "1.4.8",
+  "version": "1.4.10",
   "description": "小亮主题 — 个人极简干净设计系统，含浅色/深色双模式、纯 CSS 变量 Token 与 26 个基础组件",
   "main": "colors_and_type.css",
   "style": "colors_and_type.css",

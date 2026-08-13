@@ -37,6 +37,10 @@
     root.setAttribute('data-theme', isDark ? 'dark' : 'light');
     iconEl.innerHTML = isDark ? SUN : MOON;
     labelEl.textContent = isDark ? '切换浅色' : '切换深色';
+    // 通知 preview 页面刷新依赖 getComputedStyle 的静态文本
+    root.dispatchEvent(new CustomEvent('xl-theme-changed', {
+      detail: { isDark: isDark, mode: isDark ? 'dark' : 'light' }
+    }));
   }
 
   // 初始化：尊重页面已有的显式 data-theme（如手动写过 light/dark），
