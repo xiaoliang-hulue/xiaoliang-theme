@@ -93,7 +93,7 @@ function matchLucide(svgString) {
 // ---------- 扫描目标 ----------
 // 入参可以是目录，也可以是单个文件路径（便于只校验一个生成产物）。
 const dirs = process.argv.slice(2).length ? process.argv.slice(2) : [__dirname];
-const SKIP = new Set(['.git', 'node_modules', 'ui_kits']);
+const SKIP = new Set(['.git', '.worktrees', '.superpowers', 'node_modules', 'test-results', 'playwright-report', 'ui_kits']);
 const EMOJI_RE = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/u;
 
 function walk(dir, files) {
