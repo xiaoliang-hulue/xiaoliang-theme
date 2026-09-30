@@ -19,6 +19,8 @@ body { margin: 0; padding: var(--space-10) var(--space-3); background: var(--col
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); border: 1px solid transparent; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-sans); font-weight: var(--font-medium); white-space: nowrap; }
 .btn-sm { min-height: 28px; padding: var(--space-1) var(--space-3); font-size: var(--text-xs); }
 .btn-secondary { background: var(--color-surface-muted); color: var(--color-text); border-color: var(--color-border); }
+.tooltip-bubble { transform: translateX(-50%) translateY(4px); transition: opacity var(--motion-duration-base) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-emphasized), visibility 0s linear var(--motion-duration-base); }
+.tooltip:hover .tooltip-bubble, .tooltip:focus-within .tooltip-bubble { transform: translateX(-50%) translateY(0); transition-delay: 0s; }
 /* @component-css-end */
 </style>
 </head>

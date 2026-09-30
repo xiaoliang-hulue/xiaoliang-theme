@@ -4,7 +4,7 @@
    如需修改，请编辑对应的 preview/component-*.html 后重新运行本脚本。
    ═══════════════════════════════════════════════════════════════ */
 
-/* 由 extract-components-css.mjs 聚合去重生成：共 283 条规则，合并完全重复 41 条。 */
+/* 由 extract-components-css.mjs 聚合去重生成：共 296 条规则，合并完全重复 47 条。 */
 
 .accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden }
 .accordion-item { border-bottom: 1px solid var(--color-border-subtle) }
@@ -127,6 +127,14 @@
 @keyframes drawer-in-bottom {from { transform: translateY(100%); } to { transform: translateY(0); }}
 @media (prefers-reduced-motion: reduce) {.drawer { animation: none; }}
 @media (max-width: 480px) {.drawer { max-width: 100%; }}
+.drawer-overlay:not([hidden]) { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) both }
+.drawer-overlay.is-closing { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) reverse both }
+.drawer-overlay.is-closing .drawer { animation-name: drawer-out-right }
+.drawer-overlay.is-closing.left .drawer { animation-name: drawer-out-left }
+.drawer-overlay.is-closing.bottom .drawer { animation-name: drawer-out-bottom }
+@keyframes drawer-out-right {from { transform: translateX(0); } to { transform: translateX(100%); }}
+@keyframes drawer-out-left {from { transform: translateX(0); } to { transform: translateX(-100%); }}
+@keyframes drawer-out-bottom {from { transform: translateY(0); } to { transform: translateY(100%); }}
 .dropdown { position: relative; display: inline-flex }
 .dropdown-menu { position: absolute; top: calc(100% + var(--space-1)); left: 0; min-width: 180px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-md); z-index: 50; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .15s ease, visibility .15s ease, transform .15s ease }
 .dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0) }
@@ -168,6 +176,10 @@
 .modal-close:hover { background: var(--color-surface-muted); color: var(--color-text) }
 .modal-body { padding: var(--space-6); font-size: var(--text-base); line-height: 26px; color: var(--color-text-secondary) }
 .modal-footer { display: flex; justify-content: flex-end; gap: var(--space-3); padding: var(--space-4) var(--space-6); border-top: 1px solid var(--color-border-subtle) }
+.modal-overlay:not([hidden]) { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) both }
+.modal-overlay:not([hidden]) .modal { animation: xl-pop-in var(--motion-duration-slow) var(--motion-ease-emphasized) both }
+.modal-overlay.is-closing { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) reverse both }
+.modal-overlay.is-closing .modal { animation: xl-pop-in var(--motion-duration-base) var(--motion-ease-standard) reverse both }
 .pagination { display: inline-flex; align-items: center; gap: var(--space-1); list-style: none; margin: 0; padding: 0 }
 .page-item { display: inline-flex }
 .page-link, .page-ellipsis { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 var(--space-2); font-size: var(--text-sm); font-weight: var(--font-medium); line-height: 1; color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: background .15s, border-color .15s, color .15s; text-decoration: none; user-select: none }
@@ -283,6 +295,7 @@
 .toast-close:hover { background: var(--color-surface-muted); color: var(--color-text) }
 .toast-container { position: fixed; right: var(--space-6); bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); z-index: 200; pointer-events: none; max-width: calc(100vw - var(--space-12)) }
 .toast-container .toast { pointer-events: auto }
+.toast.is-toast-closing { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-standard) reverse both }
 .tooltip { position: relative; display: inline-flex }
 .tooltip-bubble { position: absolute; bottom: calc(100% + var(--space-2)); left: 50%; transform: translateX(-50%); padding: var(--space-1) var(--space-2); background: var(--gray-900); color: var(--gray-0); font-size: var(--text-xs); line-height: 18px; border-radius: var(--radius-md); white-space: nowrap; z-index: 40; opacity: 0; visibility: hidden; transition: opacity .15s ease, visibility .15s ease; pointer-events: none }
 .tooltip-bubble::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: var(--gray-900) }

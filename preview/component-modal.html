@@ -23,6 +23,10 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .btn-md { min-height: 36px; padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
 .btn-primary { background: var(--color-primary); color: var(--color-on-primary); }
 .btn-secondary { background: var(--color-surface-muted); color: var(--color-text); border-color: var(--color-border); }
+.modal-overlay:not([hidden]) { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) both; }
+.modal-overlay:not([hidden]) .modal { animation: xl-pop-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; }
+.modal-overlay.is-closing { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) reverse both; }
+.modal-overlay.is-closing .modal { animation: xl-pop-in var(--motion-duration-base) var(--motion-ease-standard) reverse both; }
 /* @component-css-end */
 </style>
 </head>

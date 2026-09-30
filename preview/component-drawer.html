@@ -113,6 +113,14 @@ body { margin: 0; padding: var(--space-6); background: var(--color-surface); fon
 @media (max-width: 480px) {
   .drawer { max-width: 100%; }
 }
+.drawer-overlay:not([hidden]) { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) both; }
+.drawer-overlay.is-closing { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) reverse both; }
+.drawer-overlay.is-closing .drawer { animation-name: drawer-out-right; }
+.drawer-overlay.is-closing.left .drawer { animation-name: drawer-out-left; }
+.drawer-overlay.is-closing.bottom .drawer { animation-name: drawer-out-bottom; }
+@keyframes drawer-out-right { from { transform: translateX(0); } to { transform: translateX(100%); } }
+@keyframes drawer-out-left { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+@keyframes drawer-out-bottom { from { transform: translateY(0); } to { transform: translateY(100%); } }
 /* @component-css-end */
 </style>
 </head>
