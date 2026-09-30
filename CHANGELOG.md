@@ -4,6 +4,24 @@
 
 ---
 
+## [1.5.0] - 2026-09-30
+
+### 新增
+
+- 海蓝主色、青绿辅助色与暖金强调色，浅色加入轻微暖中性表面。
+- 统一动效 Token、完整动效与轻柔动效控制。
+- Button、表单、Card、Table、导航、Tabs、Accordion、Progress 与浮层动效。
+- Modal、Drawer、Toast 进入和退出动画。
+- 动效契约审计与 Playwright 浏览器回归。
+- GitHub Actions 自动构建、无障碍、图标和动效检查。
+- GitHub Pages 在线预览入口与首次 GitHub 发布指南。
+
+### 兼容
+
+- 不删除、不重命名现有 Token 与组件 class。
+- `window.XL` 与所有数据属性交互 API 保持兼容。
+- 系统 `prefers-reduced-motion: reduce` 继续强制降级。
+
 ## [1.4.10] - 2026-08-13
 
 ### 改进（夜间模式柔和化 · 压低前景刺眼感）
