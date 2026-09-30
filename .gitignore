@@ -45,6 +45,9 @@ agent-reports/
 # Superpowers visual brainstorming sessions
 .superpowers/
 
+# Isolated git worktrees
+.worktrees/
+
 # Local reports / temporary demos (not part of the published theme)
 outputs/
 _saturation_change_log.md
