@@ -4,6 +4,12 @@
 
 ---
 
+## [1.5.5] - 2026-09-30
+
+- **全局基础排版主题化**：`colors_and_type.css` 末尾（token 区外，build 不覆盖）新增 `::selection`（主色底 + on-primary 文字，跟随主题）与基础 `code`（等宽字体 + 主题文字色），消除选中文字系统色高亮与裸行内代码系统色问题。
+- **checkbox / radio 完全自定义**：`component-checkbox.html` 的 `.check input` 由 `accent-color` 着色升级为 `appearance: none` + 伪元素重绘——checkbox 方形对勾、radio 圆形实心点，选中态用 `--color-primary` 填充 + `--color-on-primary` 标记，边框/背景/缩放过渡全部主题化；保留 `:focus-visible` 焦点环、`:disabled` 与 `:has(input:disabled)` 禁用态。去除原生控件形状，与自定义 select 视觉统一。
+- 组件 CSS 重新聚合（309 条规则，旧 `accent-color` 残留清零）；对比度审计 44 项 fail=0、图标审计 0 问题。
+
 ## [1.5.4] - 2026-09-30
 
 ### 新增（自定义下拉组件，彻底替代原生 `<select>` 弹层）

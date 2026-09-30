@@ -511,3 +511,7 @@
     border-color: currentColor;
   }
 }
+
+/* Base typography elements — 选区高亮与行内代码跟随主题（手写区，build:tokens 仅重写 token 区，此处安全保留） */
+::selection { background: var(--color-primary); color: var(--color-on-primary); }
+code { font-family: var(--font-mono); color: var(--color-text); }

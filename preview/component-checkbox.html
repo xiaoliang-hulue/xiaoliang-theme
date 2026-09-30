@@ -14,9 +14,36 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 /* @component-css-start */
 .check { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text); cursor: pointer; }
 .check + .check { margin-top: var(--space-2); }
-.check input { width: 16px; height: 16px; margin: 0; accent-color: var(--color-primary); cursor: pointer; flex-shrink: 0; }
+.check input {
+  appearance: none; -webkit-appearance: none;
+  width: 18px; height: 18px; margin: 0; flex-shrink: 0;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  position: relative; cursor: pointer;
+  transition: background var(--motion-duration-base) var(--motion-ease-standard),
+              border-color var(--motion-duration-base) var(--motion-ease-standard),
+              transform var(--motion-duration-base) var(--motion-ease-spring);
+}
+.check input[type="radio"] { border-radius: 50%; }
+.check input:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.04);
+}
+.check input:checked::after {
+  content: ""; position: absolute; left: 5px; top: 1px;
+  width: 5px; height: 10px;
+  border: solid var(--color-on-primary); border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.check input[type="radio"]:checked::after {
+  left: 4px; top: 4px; width: 6px; height: 6px;
+  border: none; border-radius: 50%;
+  background: var(--color-on-primary); transform: none;
+}
 .check input:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
-.check input:disabled { cursor: not-allowed; }
+.check input:disabled { opacity: .45; cursor: not-allowed; }
 .check:has(input:disabled) { color: var(--color-text-muted); cursor: not-allowed; }
 
 /* 表单分组：用 fieldset + legend 承载一组复选 / 单选的语义 */
@@ -28,8 +55,6 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
   font-weight: var(--font-medium);
   color: var(--color-text);
 }
-.check input { accent-color: var(--color-primary); transition: transform var(--motion-duration-base) var(--motion-ease-spring); }
-.check input:checked { transform: scale(1.08); }
 /* @component-css-end */
 </style>
 </head>
