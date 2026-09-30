@@ -41,7 +41,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/huluexiaoliang/xiaoliang-theme.git"
+    "url": "git+https://github.com/xiaoliang-hulue/xiaoliang-theme.git"
+  },
+  "homepage": "https://xiaoliang-hulue.github.io/xiaoliang-theme/",
+  "bugs": {
+    "url": "https://github.com/xiaoliang-hulue/xiaoliang-theme/issues"
   },
   "scripts": {
     "build": "node build-tokens.mjs && node extract-components-css.mjs && node build-utilities.mjs",
