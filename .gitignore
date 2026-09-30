@@ -42,6 +42,9 @@ agent-reports/
 # Agent workspace memory (not part of the theme)
 .workbuddy/
 
+# Superpowers visual brainstorming sessions
+.superpowers/
+
 # Local reports / temporary demos (not part of the published theme)
 outputs/
 _saturation_change_log.md
