@@ -307,6 +307,65 @@
 }
 /* @@TOKENS-END@@ */
 
+/* Motion system */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-fade {
+    animation: xl-fade-in var(--motion-duration-slow) var(--motion-ease-emphasized) both;
+  }
+  .motion-rise {
+    animation: xl-rise-in var(--motion-duration-emphasis) var(--motion-ease-emphasized) both;
+  }
+  .motion-pop {
+    animation: xl-pop-in var(--motion-duration-slow) var(--motion-ease-spring) both;
+  }
+  [data-reveal] {
+    animation: xl-rise-in var(--motion-duration-emphasis) var(--motion-ease-emphasized) both;
+    animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step));
+  }
+}
+
+[data-motion="subtle"] {
+  --motion-duration-fast: 90ms;
+  --motion-duration-base: 130ms;
+  --motion-duration-slow: 180ms;
+  --motion-duration-emphasis: 240ms;
+  --motion-distance-sm: 2px;
+  --motion-distance-md: 4px;
+  --motion-distance-lg: 8px;
+  --motion-scale-hover: 1.006;
+}
+
+[data-motion="off"] *,
+[data-motion="off"] *::before,
+[data-motion="off"] *::after {
+  animation-delay: 0ms !important;
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-delay: 0ms !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+@keyframes xl-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes xl-rise-in {
+  from { opacity: 0; transform: translateY(var(--motion-distance-lg)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes xl-pop-in {
+  from { opacity: 0; transform: scale(var(--motion-scale-press)); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes xl-shimmer {
+  from { transform: translateX(-140%); }
+  to { transform: translateX(140%); }
+}
+
 /* Typography utilities */
 .xl-display,
 .xl-h1,
@@ -383,8 +442,10 @@
 /* Accessibility — 尊重用户「减少动效」偏好 */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
+    animation-delay: 0ms !important;
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    transition-delay: 0ms !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }

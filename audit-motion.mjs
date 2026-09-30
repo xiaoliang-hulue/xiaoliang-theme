@@ -7,7 +7,7 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const read = (name) => fs.readFileSync(path.join(root, name), 'utf8');
 const json = JSON.parse(read('css.json'));
 const css = read('colors_and_type.css');
-const themeJs = read('theme.js');
+const components = read('components.css');
 
 const errors = [];
 const requireText = (text, expected, label) => {
@@ -41,6 +41,12 @@ if (!json.motion || typeof json.motion !== 'object') {
 for (const key of requiredMotionKeys) {
   requireText(css, `--motion-${key}:`, 'colors_and_type.css');
 }
+requireText(css, '[data-motion="off"]', 'colors_and_type.css');
+requireText(css, '[data-motion="subtle"]', 'colors_and_type.css');
+requireText(css, '@media (prefers-reduced-motion: reduce)', 'colors_and_type.css');
+requireText(components, '@keyframes btn-spin', 'components.css');
+requireText(components, '@keyframes drawer-in-right', 'components.css');
+requireText(components, '@media (prefers-reduced-motion: reduce)', 'components.css');
 
 if (errors.length) {
   console.error(`动效契约未通过，共 ${errors.length} 项：`);
@@ -48,4 +54,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log('动效契约通过：Token 已接入。');
+console.log('动效契约通过：Token、控制入口、关键帧与减少动效均已接入。');
