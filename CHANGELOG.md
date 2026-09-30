@@ -4,6 +4,19 @@
 
 ---
 
+## [1.5.4] - 2026-09-30
+
+### 新增（自定义下拉组件，彻底替代原生 `<select>` 弹层）
+
+- **动机**：原生 `<select>` 展开后的弹层由操作系统渲染，CSS 仅能影响配色、无法控制圆角/阴影/暗色观感，是此前“select 不符合主题”的真正根因。本版本提供完全主题化的自定义下拉组件。
+- **组件实现**（`preview/select.js` + 组件 CSS，已聚合进 `components.css`）：
+  - 结构：`.select-wrap` 容器 + `.select-trigger` 触发按钮（内联 Lucide chevron-down 箭头，展开时旋转）+ `.select-list`/`role=listbox` 弹层 + `.select-option`/`role=option` 选项。
+  - 无障碍：WAI-ARIA combobox/listbox 模式——`aria-haspopup`/`aria-expanded`/`aria-controls`/`aria-activedescendant`/`aria-selected` 全齐；键盘支持 ↑/↓ 移动、Enter/Space 选择、Esc 关闭、Home/End 跳首尾、首字母快速定位；点击外部关闭；选中派发 `select:change` 事件并同步隐藏 input 值。
+  - 暗色同步：弹层用 `--color-surface-elevated`/`--shadow-lg` 等 Token 绘制，随主题天然变暗；选中/悬停态 `--color-primary-subtle`。
+- **替换范围（仓库 preview 内全部 3 处 `<select>`）**：`component-select.html`（默认/错误/禁用三态演示）、`page-form.html`（项目类型）、`page-list.html`（客户类型筛选）。下游项目（quiz-platform 等）在各自仓库，不受影响，可复用 `assets/select.js` + 组件 CSS。
+- **图标审计**：caret 改用 Lucide 标准 `chevron-down` 路径写法（`<path d="m6 9 6 6 6-6"/>`），消除此前 `<polyline>` 几何签名不被识别的误报；`audit:icons` 全清（issueCount=0）。
+- **验证**：`node --check` 语法通过；无头 Edge `--dump-dom` 确认点击后 `aria-expanded=true`、弹层可见、首选项 `is-active` 高亮、`aria-activedescendant` 正确；对比度审计 44 项 fail=0。
+
 ## [1.5.3] - 2026-09-30
 
 ### 修复（Form 页与 Select 下拉主题脱轨）

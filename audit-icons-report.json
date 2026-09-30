@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T08:35:41.231Z",
+  "generatedAt": "2026-09-30T09:10:37.185Z",
   "scanned": 42,
   "dirs": [
     "D:\\workbuddy_workspace\\小亮主题"
@@ -146,6 +146,25 @@
       "emoji": []
     },
     {
+      "file": "preview\\component-select.html",
+      "inline": [
+        {
+          "name": "ChevronDown",
+          "loc": 3961
+        },
+        {
+          "name": "ChevronDown",
+          "loc": 4815
+        },
+        {
+          "name": "ChevronDown",
+          "loc": 5591
+        }
+      ],
+      "ref": [],
+      "emoji": []
+    },
+    {
       "file": "preview\\component-stepper.html",
       "inline": [
         {
@@ -184,27 +203,27 @@
       "inline": [
         {
           "name": "CheckCircle2",
-          "loc": 2940
+          "loc": 2990
         },
         {
           "name": "X",
-          "loc": 3423
+          "loc": 3473
         },
         {
           "name": "Info",
-          "loc": 3740
+          "loc": 3790
         },
         {
           "name": "X",
-          "loc": 4241
+          "loc": 4291
         },
         {
           "name": "CircleX",
-          "loc": 4559
+          "loc": 4609
         },
         {
           "name": "X",
-          "loc": 5061
+          "loc": 5111
         }
       ],
       "ref": [],
@@ -330,7 +349,12 @@
     },
     {
       "file": "preview\\page-form.html",
-      "inline": [],
+      "inline": [
+        {
+          "name": "ChevronDown",
+          "loc": 3599
+        }
+      ],
       "ref": [
         {
           "name": "arrow-left",
@@ -341,18 +365,18 @@
           "name": "info",
           "inLib": true,
           "scriptRefsLucide": true
-        },
-        {
-          "name": "chevron-down",
-          "inLib": true,
-          "scriptRefsLucide": true
         }
       ],
       "emoji": []
     },
     {
       "file": "preview\\page-list.html",
-      "inline": [],
+      "inline": [
+        {
+          "name": "ChevronDown",
+          "loc": 5107
+        }
+      ],
       "ref": [
         {
           "name": "zap",
@@ -386,11 +410,6 @@
         },
         {
           "name": "search",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "chevron-down",
           "inLib": true,
           "scriptRefsLucide": true
         }

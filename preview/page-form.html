@@ -21,9 +21,7 @@ body { margin: 0; background: var(--color-surface-muted); font-family: var(--fon
 .form-item label { font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-text); }
 .form-item .hint { font-size: var(--text-xs); color: var(--color-text-muted); }
 .form-item.required label::after { content: "*"; color: var(--error); margin-left: var(--space-1); }
-.select-wrap { position: relative; }
-.select-wrap .select { width: 100%; appearance: none; -webkit-appearance: none; padding-right: var(--space-8); }
-.select-wrap .chevron { position: absolute; right: var(--space-3); top: 50%; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; }
+.select-wrap { position: relative; width: 100%; }
 .form-actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
 .form-stack > * { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
 .form-stack > *:nth-child(1) { --reveal-index: 0; }
@@ -56,14 +54,17 @@ body { margin: 0; background: var(--color-surface-muted); font-family: var(--fon
           <div class="form-item required">
             <label for="project-type">项目类型</label>
             <div class="select-wrap">
-              <select class="select" id="project-type">
-                <option value="" disabled selected>请选择项目类型</option>
-                <option value="product">产品研发</option>
-                <option value="operation">运营管理</option>
-                <option value="marketing">市场营销</option>
-                <option value="finance">财务合规</option>
-              </select>
-              <i data-lucide="chevron-down" class="chevron" style="width:18px;height:18px;" aria-hidden="true"></i>
+              <button type="button" id="project-type" class="select select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="project-type">
+                <span class="select-value">请选择项目类型</span>
+                <svg class="select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <ul class="select-list" role="listbox" hidden>
+                <li class="select-option is-disabled" role="option" aria-disabled="true" data-value="">请选择项目类型</li>
+                <li class="select-option" role="option" data-value="product">产品研发</li>
+                <li class="select-option" role="option" data-value="operation">运营管理</li>
+                <li class="select-option" role="option" data-value="marketing">市场营销</li>
+                <li class="select-option" role="option" data-value="finance">财务合规</li>
+              </ul>
             </div>
           </div>
           <div class="form-item required">
@@ -80,6 +81,7 @@ body { margin: 0; background: var(--color-surface-muted); font-family: var(--fon
   </div>
 </main>
 <script>lucide.createIcons();</script>
+  <script src="select.js"></script>
   <script src="_theme.js"></script>
 </body>
 </html>

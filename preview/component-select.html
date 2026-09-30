@@ -5,39 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Select - 小亮主题</title>
 <link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
 <style>
 /* Page scaffold — NOT extracted */
 body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
 .row { display: flex; gap: var(--space-3); align-items: center; margin-bottom: var(--space-3); flex-wrap: wrap; }
 .label { width: 92px; flex-shrink: 0; font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+.note { font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-2) 0 0; }
 
 /* @component-css-start */
-.select { height: 40px; min-width: 200px; padding: 0 var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); outline: none; transition: border-color .15s; cursor: pointer; box-sizing: border-box; }
-.select:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; }
-.select:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
-.select.error { border-color: var(--error); background: var(--error-bg); }
-.select { transition: border-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized), background-color var(--motion-duration-fast) var(--motion-ease-standard); }
-.select:focus { box-shadow: 0 0 0 3px var(--color-primary-subtle); }
-.select.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
-.select option { background-color: var(--color-surface); color: var(--color-text); }
-.select option:checked, .select option:hover { background-color: var(--color-primary-subtle); color: var(--color-text); }
+/* 自定义下拉组件 —— 弹层完全主题化（圆角/阴影/配色/暗色同步可控） */
+.select-wrap { position: relative; display: inline-block; vertical-align: middle; }
+.select-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-2); width: 100%; height: 40px; min-width: 200px; padding: 0 var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); outline: none; cursor: pointer; box-sizing: border-box; text-align: left; transition: border-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized), background-color var(--motion-duration-fast) var(--motion-ease-standard); }
+.select-trigger:hover { border-color: var(--color-border-strong); }
+.select-trigger:focus-visible, .select-wrap.is-open .select-trigger { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; box-shadow: 0 0 0 3px var(--color-primary-subtle); }
+.select-trigger:disabled, .select-trigger.is-disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
+.select-trigger .select-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.select-caret { flex-shrink: 0; width: 16px; height: 16px; color: var(--color-text-muted); transition: transform var(--motion-duration-fast) var(--motion-ease-standard); }
+.select-wrap.is-open .select-caret { transform: rotate(180deg); }
+.select-list { position: absolute; top: calc(100% + var(--space-1)); left: 0; z-index: 50; min-width: 100%; max-height: 240px; overflow-y: auto; margin: 0; padding: var(--space-1); list-style: none; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); }
+.select-option { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: var(--radius-sm); font-size: var(--text-sm); color: var(--color-text); cursor: pointer; }
+.select-option.is-active { background: var(--color-primary-subtle); color: var(--color-text); }
+.select-option[aria-selected='true'] { color: var(--color-primary); font-weight: var(--font-medium); }
+.select-option[aria-disabled='true'], .select-option.is-disabled { color: var(--color-text-muted); cursor: not-allowed; }
+/* 错误态：沿用主题 .error 语义色 */
+.select.error, .select-trigger.error { border-color: var(--error); background: var(--error-bg); }
+.select.error:focus-visible, .select-trigger.error:focus-visible, .select-wrap.is-open .select-trigger.error { box-shadow: 0 0 0 3px var(--error-bg); }
 /* @component-css-end */
 </style>
 </head>
 <body>
 <div class="row"><span class="label">默认</span>
-  <select class="select" aria-label="选择城市">
-    <option>佛山</option><option>广州</option><option>深圳</option><option>东莞</option>
-  </select>
+  <div class="select-wrap">
+    <button type="button" class="select select-trigger" aria-haspopup="listbox" aria-expanded="false">
+      <span class="select-value">佛山</span>
+      <svg class="select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <ul class="select-list" role="listbox" hidden>
+      <li class="select-option" role="option" data-value="fs" aria-selected="true">佛山</li>
+      <li class="select-option" role="option" data-value="gz">广州</li>
+      <li class="select-option" role="option" data-value="sz">深圳</li>
+      <li class="select-option" role="option" data-value="dg">东莞</li>
+    </ul>
+  </div>
 </div>
 <div class="row"><span class="label">错误</span>
-  <select class="select error" aria-label="选择城市" aria-invalid="true">
-    <option>请选择</option><option>佛山</option>
-  </select>
+  <div class="select-wrap">
+    <button type="button" class="select select-trigger error" aria-haspopup="listbox" aria-expanded="false" aria-invalid="true">
+      <span class="select-value">请选择</span>
+      <svg class="select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <ul class="select-list" role="listbox" hidden>
+      <li class="select-option is-disabled" role="option" aria-disabled="true" data-value="">请选择</li>
+      <li class="select-option" role="option" data-value="fs">佛山</li>
+      <li class="select-option" role="option" data-value="gz">广州</li>
+    </ul>
+  </div>
 </div>
 <div class="row"><span class="label">禁用</span>
-  <select class="select" disabled aria-label="选择城市"><option>佛山</option></select>
+  <div class="select-wrap">
+    <button type="button" class="select select-trigger" aria-haspopup="listbox" aria-expanded="false" disabled>
+      <span class="select-value">佛山</span>
+      <svg class="select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <ul class="select-list" role="listbox" hidden>
+      <li class="select-option" role="option" data-value="fs" aria-selected="true">佛山</li>
+    </ul>
+  </div>
 </div>
+<p class="note">完全自定义弹层：圆角、阴影、选中/悬停配色与暗色同步可控；支持上下键导航、Enter 选择、Esc 关闭、首字母快速定位，符合 WAI-ARIA combobox/listbox 规范。</p>
+  <script src="select.js"></script>
   <script src="_theme.js"></script>
 </body>
 </html>
