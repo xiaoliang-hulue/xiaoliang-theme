@@ -47,6 +47,8 @@ user-invocable: true
 - **细线分隔**：使用 1px 低对比度边框进行区域划分。
 - **4px 栅格**：所有间距、尺寸、圆角均基于 4px 倍数。
 - **深浅自然切换**：深色模式对浅色 Token 进行语义化映射，保持层级关系。
+- **清晰有节奏**：动效服务于反馈与层级，统一使用 `--motion-*` Token，并尊重系统减少动效设置。
+- **有限强调**：青绿用于成功与数据增长，暖金用于收藏与提醒，不把强调色铺满页面。
 
 ---
 
@@ -89,6 +91,15 @@ user-invocable: true
 | `--primary-600` | `#2563eb` | `#6394fa` |
 | `--primary-700` | `#1d4ed8` | `#85adff` |
 | `--primary-950` | `#172554` | `#eef4ff` |
+
+### 辅助与强调色
+
+| Token | 浅色值 | 深色值 | 用途 |
+|-------|--------|--------|------|
+| `--color-accent` | `#0f766e` | `#5eead4` | 成功、数据增长、辅助操作 |
+| `--color-accent-subtle` | `#ecfdf8` | `#123b35` | 青绿弱背景 |
+| `--color-gold` | `#a16207` | `#f0c86b` | 收藏、提醒、有限强调 |
+| `--color-gold-subtle` | `#fffbeb` | `#3d3115` | 暖金弱背景 |
 
 ### 中性色阶
 
@@ -192,6 +203,13 @@ user-invocable: true
 <html data-theme="dark">
 ```
 
+## 动效系统
+
+- 组件动效统一消费 `--motion-duration-*`、`--motion-ease-*`、`--motion-distance-*` 与 `--motion-stagger-step`。
+- 默认启用完整动效；`data-motion="subtle"` 降低幅度，`data-motion="off"` 关闭非必要动效。
+- 系统 `prefers-reduced-motion: reduce` 优先级最高，必须将动画延迟和时长同时归零。
+- 浮层关闭必须等待退出动画后再设置 `hidden`，并保留 ESC、焦点陷阱和滚动锁行为。
+
 ---
 
 ## 组件规范
@@ -217,7 +235,7 @@ user-invocable: true
 - Dropdown / Tooltip / Toast
 - Navigation（TopNav / SideNav）
 - Tabs（ARIA 标签切换，依赖 theme.js 的 XL.initTabs）
-- Accordion（原生 details/summary，零 JS）
+- Accordion（原生 details/summary；引入 theme.js 后增加高度过渡）
 - Breadcrumb（面包屑导航，纯 CSS）
 
 ---
