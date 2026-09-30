@@ -14,8 +14,9 @@ const css = JSON.parse(readFileSync(new URL('./css.json', import.meta.url), 'utf
 function buildResolved(mode) {
   const m = css[mode];
   const map = {};
-  for (const [k, v] of Object.entries(m.primary)) map[`primary-${k}`] = v;
-  for (const [k, v] of Object.entries(m.gray)) map[`gray-${k}`] = v;
+  for (const group of ['primary', 'gray', 'accent', 'gold']) {
+    for (const [k, v] of Object.entries(m[group])) map[`${group}-${k}`] = v;
+  }
   for (const [k, v] of Object.entries(m.semantic)) map[k] = v;
   for (const [k, v] of Object.entries(m.aliases)) map[k] = v;
   const resolved = {};
@@ -70,6 +71,12 @@ const SPECS = [
   { name: '信息文字 / 信息背景', fg: 'info', bg: 'info-bg' },
   { name: '表格文字 / 表格背景', fg: 'color-text', bg: 'color-surface' },
   { name: '表头文字 / 表头背景', fg: 'color-text-secondary', bg: 'color-surface-muted' },
+  { name: '辅助色文字 / 辅助色浅底', fg: 'color-accent', bg: 'color-accent-subtle' },
+  { name: '暖金文字 / 暖金浅底', fg: 'color-gold', bg: 'color-gold-subtle' },
+  { name: '辅助色按钮文字 / 辅助色按钮背景', fg: 'color-on-accent', bg: 'color-accent' },
+  { name: '暖金按钮文字 / 暖金按钮背景', fg: 'color-on-gold', bg: 'color-gold' },
+  { name: '辅助色浅底 / 页面背景（同色系近邻·上界守卫）', fg: 'color-accent-subtle', bg: 'color-background', maxRatio: 2.5 },
+  { name: '暖金浅底 / 页面背景（同色系近邻·上界守卫）', fg: 'color-gold-subtle', bg: 'color-background', maxRatio: 2.5 },
 ];
 
 function buildMode(mode) {

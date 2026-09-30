@@ -19,8 +19,9 @@ const decl = (name, val) => `  --${name}: ${val};`;
 // ── 浅色 / 主题无关 Token（:root）──
 const light = [];
 light.push('  color-scheme: light dark;');
-for (const [k, v] of Object.entries(json.light.primary)) light.push(decl(`primary-${k}`, v));
-for (const [k, v] of Object.entries(json.light.gray)) light.push(decl(`gray-${k}`, v));
+for (const group of ['primary', 'gray', 'accent', 'gold']) {
+  for (const [k, v] of Object.entries(json.light[group])) light.push(decl(`${group}-${k}`, v));
+}
 for (const [k, v] of Object.entries(json.light.semantic)) light.push(decl(k, v));
 for (const [k, v] of Object.entries(json.light.aliases)) light.push(decl(k, v));
 for (const [k, v] of Object.entries(json.font.family)) light.push(decl(`font-${k}`, v));
@@ -40,8 +41,9 @@ const lightBlock = `:root {\n${light.join('\n')}\n}`;
 
 // ── 深色 Token（仅与浅色不同的部分）──
 const dark = [];
-for (const [k, v] of Object.entries(json.dark.primary)) dark.push(decl(`primary-${k}`, v));
-for (const [k, v] of Object.entries(json.dark.gray)) dark.push(decl(`gray-${k}`, v));
+for (const group of ['primary', 'gray', 'accent', 'gold']) {
+  for (const [k, v] of Object.entries(json.dark[group])) dark.push(decl(`${group}-${k}`, v));
+}
 for (const [k, v] of Object.entries(json.dark.semantic)) dark.push(decl(k, v));
 for (const [k, v] of Object.entries(json.dark.aliases)) dark.push(decl(k, v));
 const darkDecls = dark.join('\n');
