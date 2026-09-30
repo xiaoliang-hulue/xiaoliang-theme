@@ -51,6 +51,7 @@
     "audit:contrast": "node build-a11y-report.mjs",
     "audit:a11y": "node audit-a11y.mjs",
     "audit:icons": "node audit-icons.mjs",
-    "audit": "npm run audit:contrast && npm run audit:a11y && npm run audit:icons"
+    "audit:motion": "node audit-motion.mjs",
+    "audit": "npm run audit:contrast && npm run audit:a11y && npm run audit:icons && npm run audit:motion"
   }
 }

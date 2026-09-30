@@ -28,6 +28,7 @@ for (const [k, v] of Object.entries(json.font.size)) light.push(decl(`text-${k}`
 for (const [k, v] of Object.entries(json.font.weight)) light.push(decl(`font-${k}`, v));
 for (const [k, v] of Object.entries(json.radius)) light.push(decl(`radius-${k}`, v));
 for (const [k, v] of Object.entries(json.spacing)) light.push(decl(`space-${k}`, v));
+for (const [k, v] of Object.entries(json.motion)) light.push(decl(`motion-${k}`, v));
 for (const [k, v] of Object.entries(json.shadow)) light.push(decl(`shadow-${k}`, v));
 if (json.breakpoints) {
   for (const [k, v] of Object.entries(json.breakpoints)) {
