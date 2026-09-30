@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
@@ -24,6 +23,9 @@ npm-debug.log*
 *.tgz
 dist/
 build/
+test-results/
+playwright-report/
+.playwright/
 
 # Temporary files
 tmp/

@@ -26,6 +26,7 @@
     .card-disabled { opacity: .55; pointer-events: none; filter: grayscale(.25); }
 .card-interactive { transition: transform var(--motion-duration-slow) var(--motion-ease-emphasized), border-color var(--motion-duration-base) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized); }
 .card-interactive:hover, .card-interactive:focus-visible { transform: translateY(calc(-1 * var(--motion-distance-md))); border-color: var(--color-primary); box-shadow: var(--shadow-md); }
+.card { box-sizing: border-box; }
     /* @component-css-end */
   </style>
 </head>

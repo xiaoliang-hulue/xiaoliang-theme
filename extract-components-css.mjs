@@ -125,15 +125,18 @@ function dedupe(blocks) {
         continue;
       }
 
-      const existing = normalBySelector.get(rule.sel);
+      let existing = normalBySelector.get(rule.sel);
       if (!existing) {
-        normalBySelector.set(rule.sel, rule);
+        existing = { sel: rule.sel, declarations: new Map() };
+        normalBySelector.set(rule.sel, existing);
         order.push(`rule|${rule.sel}`);
       } else {
         removed++;
-        if (rule.declarations.length > existing.declarations.length) {
-          normalBySelector.set(rule.sel, rule);
-        }
+      }
+      for (const declaration of rule.declarations) {
+        const colon = declaration.indexOf(':');
+        const property = colon === -1 ? declaration : declaration.slice(0, colon).trim();
+        existing.declarations.set(property, declaration);
       }
     }
   }
@@ -142,7 +145,7 @@ function dedupe(blocks) {
     if (key.startsWith('at|')) return `${exactAtRules.get(key).text}\n`;
     const selector = key.slice('rule|'.length);
     const rule = normalBySelector.get(selector);
-    return `${rule.sel} { ${rule.declarations.join('; ')} }\n`;
+    return `${rule.sel} { ${Array.from(rule.declarations.values()).join('; ')} }\n`;
   }).join('');
 
   return { out, removed, total: order.length };
