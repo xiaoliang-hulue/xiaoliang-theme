@@ -14,8 +14,8 @@
     .sidebar { width: 240px; flex-shrink: 0; background: var(--color-surface-elevated); border-right: 1px solid var(--color-border); display: flex; flex-direction: column; padding: var(--space-4) 0; }
     .brand { display: flex; align-items: center; gap: var(--space-2); padding: 0 var(--space-5); margin-bottom: var(--space-6); font-size: var(--text-xl); font-weight: var(--font-semibold); color: var(--color-primary); }
     .nav { display: flex; flex-direction: column; gap: var(--space-1); }
-    .nav-item { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-5); color: var(--color-text-secondary); font-size: var(--text-sm); cursor: pointer; transition: background .15s, color .15s; }
-    .nav-item:hover { background: var(--color-surface-muted); color: var(--color-text); }
+    .nav-item { display: flex; align-items: center; gap: var(--space-3); margin-inline: var(--space-3); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); color: var(--color-text-secondary); font-size: var(--text-sm); cursor: pointer; transition: background var(--motion-duration-base) var(--motion-ease-standard), color var(--motion-duration-base) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-standard); }
+    .nav-item:hover { transform: translateX(var(--motion-distance-sm)); background: var(--color-surface-muted); color: var(--color-text); }
     .nav-item.active { background: var(--color-primary-subtle); color: var(--color-primary); }
     .nav-icon { width: 20px; height: 20px; flex-shrink: 0; }
     .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }

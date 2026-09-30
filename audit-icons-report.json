@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T07:37:41.888Z",
+  "generatedAt": "2026-09-30T08:11:43.523Z",
   "scanned": 39,
   "dirs": [
     "D:\\workbuddy_workspace\\小亮主题"
@@ -378,6 +378,11 @@
         },
         {
           "name": "search",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "chevron-down",
           "inLib": true,
           "scriptRefsLucide": true
         }

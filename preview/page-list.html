@@ -22,7 +22,14 @@ body { margin: 0; padding: var(--space-6); background: var(--color-surface); fon
 .search-box { position: relative; display: inline-flex; align-items: center; }
 .search-box .input { width: 280px; padding-left: var(--space-8); }
 .search-box .icon { position: absolute; left: var(--space-3); width: 18px; height: 18px; color: var(--color-text-muted); }
-.filter-group { display: inline-flex; align-items: center; gap: var(--space-2); }
+.filter-group { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border: 1px solid var(--color-border); border-radius: var(--radius-full); background: var(--color-surface-muted); }
+.filter-group .btn { border-radius: var(--radius-full); box-shadow: none; }
+.filter-group .btn-secondary { border-color: transparent; background: transparent; }
+.filter-group .btn-secondary:hover { border-color: var(--color-border-subtle); background: var(--color-surface); }
+.filter-group .btn-primary { padding-inline: var(--space-4); }
+.toolbar .select-wrap { position: relative; display: inline-flex; }
+.toolbar .select { appearance: none; -webkit-appearance: none; min-width: 160px; padding-right: var(--space-8); }
+.toolbar .select-chevron { position: absolute; right: var(--space-3); top: 50%; width: 16px; height: 16px; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; }
 .table-wrap { background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; margin-bottom: var(--space-5); }
 .table-actions { display: flex; align-items: center; gap: var(--space-2); }
 .pagination-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
@@ -62,12 +69,15 @@ body { margin: 0; padding: var(--space-6); background: var(--color-surface); fon
       <i data-lucide="search" class="icon" aria-hidden="true"></i>
       <input class="input" type="text" placeholder="搜索客户名称、联系人或编号" aria-label="搜索客户">
     </div>
-    <select class="input" aria-label="客户类型" style="width:160px">
+    <span class="select-wrap">
+      <select class="select" aria-label="客户类型">
       <option>全部类型</option>
       <option>企业客户</option>
       <option>个人客户</option>
       <option>渠道客户</option>
-    </select>
+      </select>
+      <i data-lucide="chevron-down" class="select-chevron" aria-hidden="true"></i>
+    </span>
     <div class="filter-group">
       <button class="btn btn-primary btn-sm" type="button">全部</button>
       <button class="btn btn-secondary btn-sm" type="button">生效中</button>

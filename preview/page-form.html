@@ -22,7 +22,7 @@ body { margin: 0; background: var(--color-surface-muted); font-family: var(--fon
 .form-item .hint { font-size: var(--text-xs); color: var(--color-text-muted); }
 .form-item.required label::after { content: "*"; color: var(--error); margin-left: var(--space-1); }
 .select-wrap { position: relative; }
-.select-wrap .input { width: 100%; appearance: none; -webkit-appearance: none; padding-right: var(--space-8); }
+.select-wrap .select { width: 100%; appearance: none; -webkit-appearance: none; padding-right: var(--space-8); }
 .select-wrap .chevron { position: absolute; right: var(--space-3); top: 50%; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; }
 .form-actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
 .form-stack > * { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
@@ -56,7 +56,7 @@ body { margin: 0; background: var(--color-surface-muted); font-family: var(--fon
           <div class="form-item required">
             <label for="project-type">项目类型</label>
             <div class="select-wrap">
-              <select class="input" id="project-type">
+              <select class="select" id="project-type">
                 <option value="" disabled selected>请选择项目类型</option>
                 <option value="product">产品研发</option>
                 <option value="operation">运营管理</option>
