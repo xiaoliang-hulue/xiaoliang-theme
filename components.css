@@ -4,7 +4,7 @@
    如需修改，请编辑对应的 preview/component-*.html 后重新运行本脚本。
    ═══════════════════════════════════════════════════════════════ */
 
-/* 由 extract-components-css.mjs 聚合去重生成：共 264 条规则，合并完全重复 10 条。 */
+/* 由 extract-components-css.mjs 聚合去重生成：共 272 条规则，合并完全重复 22 条。 */
 
 .accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden }
 .accordion-item { border-bottom: 1px solid var(--color-border-subtle) }
@@ -83,6 +83,9 @@
 .btn-primary.btn-loading::after { border-color: var(--color-on-primary); border-right-color: transparent }
 .btn-secondary.btn-loading::after, .btn-ghost.btn-loading::after, .btn-danger.btn-loading::after { border-color: currentColor; border-right-color: transparent }
 @keyframes btn-spin {to { transform: rotate(360deg); }}
+.btn:hover:not(:disabled) { transform: translateY(calc(-1 * var(--motion-distance-sm))); box-shadow: var(--shadow-sm) }
+.btn:active:not(:disabled) { transform: translateY(0) scale(var(--motion-scale-press)); box-shadow: none }
+.btn-loading::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, .2) 50%, transparent 75%); animation: xl-shimmer 1.2s linear infinite; pointer-events: none }
 .card { width: 100%; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg) }
 .card-default { padding: var(--space-6) }
 .card-compact { padding: var(--space-4) }
@@ -102,6 +105,7 @@
 .check:has(input:disabled) { color: var(--color-text-muted); cursor: not-allowed }
 .field-group { border: none; margin: 0; padding: 0; min-inline-size: 0 }
 .field-group-title { padding: 0; margin-bottom: var(--space-2); font-size: var(--text-sm); font-weight: var(--font-medium); color: var(--color-text) }
+.check input:checked { transform: scale(1.08) }
 .drawer-overlay { position: fixed; inset: 0; display: flex; background: rgba(0, 0, 0, .45); z-index: 100 }
 .drawer-overlay[hidden] { display: none }
 .drawer { display: flex; flex-direction: column; width: 100%; max-width: 360px; height: 100%; margin-left: auto; background: var(--color-surface-elevated); border-left: 1px solid var(--color-border); box-shadow: var(--shadow-xl); animation: drawer-in-right .22s ease }
@@ -149,6 +153,8 @@
 .input-hint { font-size: var(--text-xs); line-height: 18px; color: var(--color-text-subtle) }
 .input-hint.success { color: var(--success) }
 .input-hint.error { color: var(--error) }
+.input.error:focus { box-shadow: 0 0 0 3px var(--error-bg) }
+.input.success:focus { box-shadow: 0 0 0 3px var(--success-bg) }
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; padding: var(--space-6); z-index: 100 }
 .modal-overlay[hidden] { display: none }
 .modal { width: 100%; max-width: 480px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-xl) }
@@ -188,6 +194,7 @@
 .select:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px }
 .select:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6 }
 .select.error { border-color: var(--error); background: var(--error-bg) }
+.select.error:focus { box-shadow: 0 0 0 3px var(--error-bg) }
 .sidenav { width: 240px; min-height: 320px; padding: var(--space-4); background: var(--color-surface-elevated); border-right: 1px solid var(--color-border); box-sizing: border-box }
 .sidenav-section { margin-bottom: var(--space-4) }
 .sidenav-section-title { padding: var(--space-2) var(--space-3); font-size: var(--text-xs); font-weight: var(--font-medium); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted) }
@@ -252,6 +259,7 @@
 .textarea:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px }
 .textarea:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6 }
 .textarea.error { border-color: var(--error); background: var(--error-bg) }
+.textarea.error:focus { box-shadow: 0 0 0 3px var(--error-bg) }
 .toast { display: flex; align-items: flex-start; gap: var(--space-3); min-width: 280px; max-width: 420px; padding: var(--space-4); background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg) }
 .toast-icon { flex-shrink: 0; width: 20px; height: 20px }
 .toast-content { flex: 1; min-width: 0 }
