@@ -69,8 +69,28 @@ function findClosingBrace(text, openIndex) {
 }
 
 function parseDeclarations(block) {
-  return block
-    .split(';')
+  // 引号感知拆分：url("data:...;utf8,...") 里的分号属于字符串内容，
+  // 不能当作声明分隔符（否则会拦腰截断 data URI，产生未闭合字符串，
+  // 进而在浏览器里吞掉后续所有规则 —— 2026-09-30 .btn 全军覆没的根因）。
+  const parts = [];
+  let current = '';
+  let quote = null;
+  for (const ch of block) {
+    if (quote) {
+      current += ch;
+      if (ch === quote && current[current.length - 2] !== '\\') quote = null;
+    } else if (ch === '"' || ch === "'") {
+      quote = ch;
+      current += ch;
+    } else if (ch === ';') {
+      parts.push(current);
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  if (current.trim()) parts.push(current);
+  return parts
     .map((declaration) => declaration.trim().replace(/\s+/g, ' '))
     .filter(Boolean);
 }

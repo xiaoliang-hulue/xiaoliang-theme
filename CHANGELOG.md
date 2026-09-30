@@ -4,6 +4,17 @@
 
 ---
 
+## [1.5.2] - 2026-09-30
+
+### 修复（重大：components.css 解析崩坏导致按钮全部退化为浏览器默认样式）
+
+- **根因**：`extract-components-css.mjs` 的 `parseDeclarations` 按裸 `;` 拆分声明，未感知引号——Accordion / Breadcrumb 图标 data URI 中的 `;utf8,` 被误当声明分隔符，data URI 被拦腰截断产生未闭合字符串，在浏览器中吞掉后续约 2.4KB 规则（恰好是整个 `.btn` 规则块）。表现为深浅两种模式下所有按钮退回 UA 默认白底黑字样式，夜间模式下白框尤其突兀、破坏沉浸感。
+- **修复**：
+  1. `parseDeclarations` 改为引号感知拆分（`"`/`'` 字符串内的 `;` 不再分割）；
+  2. `preview/component-breadcrumb.html`、`preview/component-accordion.html` 的 mask data URI 内部 `aria-hidden="true"` 双引号改为单引号（消除 CSS 字符串嵌套隐患）；
+  3. 重新聚合 `components.css`，全文件双引号配平校验通过。
+- **验证**：headless Edge 深色模式实测——`.btn-secondary` 背景 `#1d252a`/文字 `#d3d8df`/边框 `#57636d`、`.btn-primary` 背景 `#6ea8ff`、`.btn-ghost` 透明+主色文字、`.btn-danger` 背景 `#ff8a8a`，全部回归主题 Token；对比度审计 44 项 fail=0、ARIA 审计 error=0、图标审计 0 问题。
+
 ## [1.5.1] - 2026-09-30
 
 ### 修复
