@@ -18,7 +18,7 @@ const decl = (name, val) => `  --${name}: ${val};`;
 
 // ── 浅色 / 主题无关 Token（:root）──
 const light = [];
-light.push('  color-scheme: light dark;');
+light.push('  color-scheme: light;');
 for (const group of ['primary', 'gray', 'accent', 'gold']) {
   for (const [k, v] of Object.entries(json.light[group])) light.push(decl(`${group}-${k}`, v));
 }
@@ -46,7 +46,8 @@ for (const group of ['primary', 'gray', 'accent', 'gold']) {
 }
 for (const [k, v] of Object.entries(json.dark.semantic)) dark.push(decl(k, v));
 for (const [k, v] of Object.entries(json.dark.aliases)) dark.push(decl(k, v));
-const darkDecls = dark.join('\n');
+// color-scheme 随主题联动：深色块内原生控件（select 弹层/滚动条/日期选择器）一并变暗
+const darkDecls = '  color-scheme: dark;\n' + dark.join('\n');
 const darkBlock =
   `:root[data-theme="dark"],\n.dark {\n${darkDecls}\n}\n\n` +
   `/* 自动跟随系统偏好：用户未显式指定浅色时，系统深色即应用深色 Token */\n` +

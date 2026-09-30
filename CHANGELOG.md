@@ -4,6 +4,15 @@
 
 ---
 
+## [1.5.3] - 2026-09-30
+
+### 修复（Form 页与 Select 下拉主题脱轨）
+
+- **Form 页样式丢失**：`preview/component-form.html` 使用了 `.input` / `.input-hint` / `.input-wrap` / `.btn` 系列类，但页面既未内联定义、也未引入聚合的 `components.css`，导致输入框与提交/重置按钮全部退回浏览器默认样式（白底黑字、直角边框）。同病相连的 `component-toast.html`（用 `.btn` 触发通知）一并补引 `components.css`。
+- **`color-scheme` 随主题联动**：原 `:root` 写死 `color-scheme: light dark`，原生控件渲染跟随操作系统而非页面主题——夜间模式下 select 下拉弹层、滚动条、日期选择器等系统渲染部件仍是白色。改为 `build-tokens.mjs` 生成：浅色块 `color-scheme: light`，两个深色块（`[data-theme="dark"]`/`.dark` 与 `prefers-color-scheme` 媒体查询）注入 `color-scheme: dark`，原生弹出层随页面主题一致变暗。
+- **Select 弹层选项配色**：`.select` 补充 `option` 规则——选项背景 `--color-surface`、文字 `--color-text`、选中/悬停态 `--color-primary-subtle`，下拉列表不再是系统灰高亮。
+- **验证**：headless Edge 日/夜双模式实测 form 页（输入框圆角边框、primary 提交钮、error/success/disabled 状态全部主题化）与 select 页（默认/错误/禁用三态正常）；重新聚合 components.css（298 条规则，`.btn` 规则块完整）；对比度审计 44 项 fail=0。
+
 ## [1.5.2] - 2026-09-30
 
 ### 修复（重大：components.css 解析崩坏导致按钮全部退化为浏览器默认样式）

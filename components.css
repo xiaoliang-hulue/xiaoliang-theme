@@ -4,7 +4,7 @@
    如需修改，请编辑对应的 preview/component-*.html 后重新运行本脚本。
    ═══════════════════════════════════════════════════════════════ */
 
-/* 由 extract-components-css.mjs 聚合去重生成：共 296 条规则，合并完全重复 49 条。 */
+/* 由 extract-components-css.mjs 聚合去重生成：共 298 条规则，合并完全重复 49 条。 */
 
 .accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden }
 .accordion-item { border-bottom: 1px solid var(--color-border-subtle) }
@@ -211,6 +211,8 @@
 .select:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6 }
 .select.error { border-color: var(--error); background: var(--error-bg) }
 .select.error:focus { box-shadow: 0 0 0 3px var(--error-bg) }
+.select option { background-color: var(--color-surface); color: var(--color-text) }
+.select option:checked, .select option:hover { background-color: var(--color-primary-subtle); color: var(--color-text) }
 .sidenav { width: 240px; min-height: 320px; padding: var(--space-4); background: var(--color-surface-elevated); border-right: 1px solid var(--color-border); box-sizing: border-box }
 .sidenav-section { margin-bottom: var(--space-4) }
 .sidenav-section-title { padding: var(--space-2) var(--space-3); font-size: var(--text-xs); font-weight: var(--font-medium); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-muted) }

@@ -19,6 +19,8 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .select { transition: border-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized), background-color var(--motion-duration-fast) var(--motion-ease-standard); }
 .select:focus { box-shadow: 0 0 0 3px var(--color-primary-subtle); }
 .select.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
+.select option { background-color: var(--color-surface); color: var(--color-text); }
+.select option:checked, .select option:hover { background-color: var(--color-primary-subtle); color: var(--color-text); }
 /* @component-css-end */
 </style>
 </head>

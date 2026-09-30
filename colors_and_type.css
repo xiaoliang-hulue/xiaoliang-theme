@@ -7,7 +7,7 @@
 
 /* @@TOKENS-START@@ */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --primary-50: #f0f5ff;
   --primary-100: #dbe6ff;
   --primary-200: #b3cdff;
@@ -146,6 +146,7 @@
 
 :root[data-theme="dark"],
 .dark {
+  color-scheme: dark;
   --primary-50: #0f1f4d;
   --primary-100: #162b66;
   --primary-200: #1e3d8f;
@@ -227,6 +228,7 @@
 /* 自动跟随系统偏好：用户未显式指定浅色时，系统深色即应用深色 Token */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+  color-scheme: dark;
   --primary-50: #0f1f4d;
   --primary-100: #162b66;
   --primary-200: #1e3d8f;
