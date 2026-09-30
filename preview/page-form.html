@@ -23,7 +23,7 @@ body { margin: 0; background: var(--color-surface-muted); font-family: var(--fon
 .form-item.required label::after { content: "*"; color: var(--error); margin-left: var(--space-1); }
 .select-wrap { position: relative; width: 100%; }
 .form-actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
-.form-stack > * { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
+.form-stack > * { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) backwards; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
 .form-stack > *:nth-child(1) { --reveal-index: 0; }
 .form-stack > *:nth-child(2) { --reveal-index: 1; }
 .form-stack > *:nth-child(3) { --reveal-index: 2; }

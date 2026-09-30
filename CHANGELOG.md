@@ -4,6 +4,13 @@
 
 ---
 
+## [1.5.6] - 2026-09-30
+
+- **修复：自定义下拉弹层被后续表单行遮盖**（page-form 等页面展开下拉后，弹层穿插在邮箱行/按钮行之下）。根因是入场动画 `xl-rise-in`/`xl-pop-in` 使用 `animation-fill-mode: both`——动画结束后残留 `transform: translateY(0)`/`scale(1)`（插值终点实为恒等矩阵，非 `none`），每个带动画的元素（`.form-item`/`.card`/`.step`/`.toast`/`.alert` 等）都成为**持久堆叠上下文**，把弹层 `z-index` 困在自己层内；树序靠后的兄弟行据此整体盖住弹层。
+- **修复方式**：所有 transform 类入场动画 fill-mode 由 `both` 改为 `backwards`（延迟期仍保持起始隐藏态，错峰入场观感不变；结束后回落级联基础态，`transform` 真正归 `none`，堆叠上下文消失）。关键帧结束值同步改为 `transform: none`。关闭态动画（`reverse both`）与 opacity-only 的 `xl-fade-in` 保持不变。
+- **改动范围**：`colors_and_type.css`（`.motion-rise`/`.motion-pop`/`[data-reveal]`）+ 聚合源 `component-alert/form/stepper/toast/modal.html` + 页面本地样式 `page-form/dashboard/detail/list.html`；`components.css` 重新聚合（309 条规则）。
+- **验证**：无头 Edge `elementsFromPoint` 实测——修复前弹层区域最顶层命中是后续表单行（联系邮箱），修复后最顶层命中为弹层自身 `select-option`；对比度审计 fail=0。
+
 ## [1.5.5] - 2026-09-30
 
 - **全局基础排版主题化**：`colors_and_type.css` 末尾（token 区外，build 不覆盖）新增 `::selection`（主色底 + on-primary 文字，跟随主题）与基础 `code`（等宽字体 + 主题文字色），消除选中文字系统色高亮与裸行内代码系统色问题。
