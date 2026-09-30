@@ -17,6 +17,9 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .topnav-link:hover { color: var(--color-text); background: var(--color-surface-muted); }
 .topnav-link.active { color: var(--color-primary); background: var(--color-primary-subtle); }
 .topnav-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+.topnav-link { transition: background-color var(--motion-duration-base) var(--motion-ease-standard), color var(--motion-duration-base) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-standard); }
+.topnav-link:hover { transform: translateX(var(--motion-distance-sm)); }
+.topnav-link.active { box-shadow: inset 0 -2px 0 var(--color-primary); }
 /* @component-css-end */
 </style>
 </head>

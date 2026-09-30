@@ -26,6 +26,11 @@ body { margin: 0; background: var(--color-surface); font-family: var(--font-sans
 .field-value-mono { font-family: var(--font-mono); }
 .status-row { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); }
 .page-actions { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+.detail-grid > .card { animation: xl-rise-in var(--motion-duration-emphasis) var(--motion-ease-emphasized) both; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
+.detail-grid > .card:nth-child(1) { --reveal-index: 0; }
+.detail-grid > .card:nth-child(2) { --reveal-index: 1; }
+.detail-grid > .card:nth-child(3) { --reveal-index: 2; }
+.detail-grid > .card:nth-child(4) { --reveal-index: 3; }
 </style>
 </head>
 <body>

@@ -17,6 +17,9 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .sidenav-link:hover { color: var(--color-text); background: var(--color-surface-muted); }
 .sidenav-link.active { color: var(--color-primary); background: var(--color-primary-subtle); }
 .sidenav-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+.sidenav-link { transition: background-color var(--motion-duration-base) var(--motion-ease-standard), color var(--motion-duration-base) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-standard); }
+.sidenav-link:hover { transform: translateX(var(--motion-distance-sm)); }
+.sidenav-link.active { box-shadow: inset 3px 0 0 var(--color-primary); }
 /* @component-css-end */
 </style>
 </head>
