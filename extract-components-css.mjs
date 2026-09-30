@@ -56,75 +56,98 @@ if (blocks.length === 0) {
 // 等页重复定义），直接拼接会产生完全相同的重复规则。这里按「选择器 + 规范化声明块」
 // 去重：同一选择器的完全相同声明只保留首次出现；同一选择器出现不同声明时，
 // 保留声明条数最多的「完整版」（如 .btn 的 flex-shrink:0 版本优先于旧版）。
-function parseRules(cssText) {
-  // 去掉注释
+function findClosingBrace(text, openIndex) {
+  let depth = 0;
+  for (let i = openIndex; i < text.length; i++) {
+    if (text[i] === '{') depth++;
+    else if (text[i] === '}') {
+      depth--;
+      if (depth === 0) return i;
+    }
+  }
+  throw new Error(`未闭合的 CSS 块: ${text.slice(0, openIndex + 40)}`);
+}
+
+function parseDeclarations(block) {
+  return block
+    .split(';')
+    .map((declaration) => declaration.trim().replace(/\s+/g, ' '))
+    .filter(Boolean);
+}
+
+function normalizeText(text) {
+  return text.replace(/\s+/g, ' ').trim();
+}
+
+function extractTopLevel(cssText) {
   const cleaned = cssText.replace(/\/\*[\s\S]*?\*\//g, '');
   const rules = [];
-  const re = /([^{}]+)\{([^{}]*)\}/g;
-  let m;
-  while ((m = re.exec(cleaned)) !== null) {
-    const sel = m[1].trim();
-    if (!sel || sel.startsWith('@')) continue;
-    const decls = m[2]
-      .split(';')
-      .map((d) => d.trim())
-      .filter(Boolean)
-      .sort();
-    rules.push({ sel, decls, key: sel + '|' + decls.join(';') });
+  let cursor = 0;
+  while (cursor < cleaned.length) {
+    const open = cleaned.indexOf('{', cursor);
+    if (open === -1) break;
+    const prelude = cleaned.slice(cursor, open).trim();
+    if (!prelude) {
+      cursor = open + 1;
+      continue;
+    }
+    const close = findClosingBrace(cleaned, open);
+    const body = cleaned.slice(open + 1, close);
+    if (prelude.startsWith('@')) {
+      const text = `${normalizeText(prelude)} {${body.trim()}}`;
+      rules.push({ kind: 'at', key: `at|${text}`, text });
+    } else {
+      const sel = normalizeText(prelude);
+      const declarations = parseDeclarations(body);
+      const signature = [...declarations].sort().join(';');
+      rules.push({ kind: 'rule', sel, declarations, key: `rule|${sel}|${signature}` });
+    }
+    cursor = close + 1;
   }
   return rules;
 }
 
 function dedupe(blocks) {
-  const seen = new Map(); // key -> rule（保留完整版）
-  const source = new Map(); // key -> 来源文件
-  const order = []; // 首次出现顺序
-  const dupCount = {};
-
-  for (const { file, css } of blocks) {
-    for (const rule of parseRules(css)) {
-      if (!seen.has(rule.key)) {
-        seen.set(rule.key, rule);
-        source.set(rule.key, file);
-        order.push(rule.key);
-      } else {
-        dupCount[rule.key] = (dupCount[rule.key] || 0) + 1;
-      }
-    }
-  }
-
-  // 对同一选择器的多个不同声明版本，保留声明最多的完整版
-  const bySel = new Map();
-  for (const key of order) {
-    const r = seen.get(key);
-    if (!bySel.has(r.sel)) bySel.set(r.sel, []);
-    bySel.get(r.sel).push(key);
-  }
-  const keep = new Set();
-  for (const keys of bySel.values()) {
-    if (keys.length === 1) {
-      keep.add(keys[0]);
-    } else {
-      // 多版本：保留声明条数最多者（同条数保留先出现的）
-      let best = keys[0];
-      for (const k of keys) {
-        if (seen.get(k).decls.length > seen.get(best).decls.length) best = k;
-      }
-      keep.add(best);
-    }
-  }
-
-  // 组装去重后的 CSS，按首次出现顺序输出
-  let out = '';
+  const normalBySelector = new Map();
+  const exactAtRules = new Map();
+  const order = [];
   let removed = 0;
-  for (const key of order) {
-    if (!keep.has(key)) {
-      removed++;
-      continue;
+
+  for (const { css } of blocks) {
+    for (const rule of extractTopLevel(css)) {
+      if (rule.kind === 'at') {
+        if (exactAtRules.has(rule.key)) {
+          removed++;
+          continue;
+        }
+        exactAtRules.set(rule.key, rule);
+        order.push(rule.key);
+        continue;
+      }
+
+      let existing = normalBySelector.get(rule.sel);
+      if (!existing) {
+        existing = { sel: rule.sel, declarations: new Map() };
+        normalBySelector.set(rule.sel, existing);
+        order.push(`rule|${rule.sel}`);
+      } else {
+        removed++;
+      }
+      for (const declaration of rule.declarations) {
+        const colon = declaration.indexOf(':');
+        const property = colon === -1 ? declaration : declaration.slice(0, colon).trim();
+        existing.declarations.set(property, declaration);
+      }
     }
-    const r = seen.get(key);
-    out += `${r.sel} { ${r.decls.join('; ')} }\n`;
   }
+
+  const out = order.map((key) => {
+    if (key.startsWith('at|')) return `${exactAtRules.get(key).text}\n`;
+    const selector = key.slice('rule|'.length);
+    const rule = normalBySelector.get(selector);
+    return `${rule.sel} { ${Array.from(rule.declarations.values()).join('; ')} }\n`;
+  }).join('');
+
   return { out, removed, total: order.length };
 }
 

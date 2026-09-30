@@ -24,6 +24,7 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .form-actions { display: flex; gap: var(--space-2); align-items: center; padding-top: var(--space-1); }
 .form-field.error .form-field-label { color: var(--error); }
 .form-field.success .form-field-label { color: var(--success); }
+.form-item { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
 /* @component-css-end */
 </style>
 </head>

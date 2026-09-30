@@ -23,6 +23,8 @@
     .tag-warning { background: var(--warning-bg); color: var(--warning); }
     .tag-error { background: var(--error-bg); color: var(--error); }
     .tag:hover { filter: brightness(1.08); }
+.tag { transition: transform var(--motion-duration-base) var(--motion-ease-spring), background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), filter var(--motion-duration-fast) var(--motion-ease-standard); }
+.tag:hover { transform: translateY(calc(-1 * var(--motion-distance-sm))) scale(var(--motion-scale-hover)); }
     /* @component-css-end */
   </style>
 </head>

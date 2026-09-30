@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-30T07:33:22.058Z",
-  "scanned": 79,
+  "generatedAt": "2026-09-30T07:35:09.890Z",
+  "scanned": 38,
   "dirs": [
-    "D:\\workbuddy_workspace\\小亮主题"
+    "D:\\workbuddy_workspace\\小亮主题\\.worktrees\\xiaoliang-v1.5"
   ],
   "files": [
     {
-      "file": ".worktrees\\xiaoliang-v1.5\\components.css",
+      "file": "components.css",
       "inline": [
         {
           "name": "ChevronDown",
@@ -21,7 +21,7 @@
       "emoji": []
     },
     {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-accordion.html",
+      "file": "preview\\component-accordion.html",
       "inline": [
         {
           "name": "ChevronDown",
@@ -30,431 +30,6 @@
         {
           "name": "ChevronDown",
           "loc": 2995
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-alert.html",
-      "inline": [],
-      "ref": [
-        {
-          "name": "info",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "check-circle",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "alert-triangle",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "x-circle",
-          "inLib": true,
-          "scriptRefsLucide": true
-        }
-      ],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-avatar.html",
-      "inline": [
-        {
-          "name": "User",
-          "loc": 5227
-        },
-        {
-          "name": "User",
-          "loc": 5597
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-badge.html",
-      "inline": [
-        {
-          "name": "Bell",
-          "loc": 4655
-        },
-        {
-          "name": "Send",
-          "loc": 5201
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-breadcrumb.html",
-      "inline": [
-        {
-          "name": "ChevronRight",
-          "loc": 2912
-        },
-        {
-          "name": "ChevronRight",
-          "loc": 3182
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-drawer.html",
-      "inline": [
-        {
-          "name": "X",
-          "loc": 5420
-        },
-        {
-          "name": "X",
-          "loc": 6337
-        },
-        {
-          "name": "X",
-          "loc": 7028
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-modal.html",
-      "inline": [
-        {
-          "name": "X",
-          "loc": 3309
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-stepper.html",
-      "inline": [
-        {
-          "name": "Check",
-          "loc": 4900
-        },
-        {
-          "name": "Check",
-          "loc": 5916
-        },
-        {
-          "name": "Check",
-          "loc": 6372
-        },
-        {
-          "name": "Check",
-          "loc": 7293
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-table.html",
-      "inline": [
-        {
-          "name": "Inbox",
-          "loc": 4503
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\component-toast.html",
-      "inline": [
-        {
-          "name": "CheckCircle2",
-          "loc": 2940
-        },
-        {
-          "name": "X",
-          "loc": 3423
-        },
-        {
-          "name": "Info",
-          "loc": 3740
-        },
-        {
-          "name": "X",
-          "loc": 4241
-        },
-        {
-          "name": "CircleX",
-          "loc": 4559
-        },
-        {
-          "name": "X",
-          "loc": 5061
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\index.html",
-      "inline": [
-        {
-          "name": "Moon",
-          "loc": 8599
-        },
-        {
-          "name": "Sun",
-          "loc": 18238
-        },
-        {
-          "name": "Moon",
-          "loc": 18699
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\page-dashboard.html",
-      "inline": [],
-      "ref": [
-        {
-          "name": "box",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "layout-dashboard",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "folder-open",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "bar-chart-2",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "users",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "settings",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "menu",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "bell",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "download",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "plus",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "trending-up",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "trending-down",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "info",
-          "inLib": true,
-          "scriptRefsLucide": true
-        }
-      ],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\page-detail.html",
-      "inline": [],
-      "ref": [
-        {
-          "name": "box",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "bell",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "user",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "arrow-left",
-          "inLib": true,
-          "scriptRefsLucide": true
-        }
-      ],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\page-form.html",
-      "inline": [],
-      "ref": [
-        {
-          "name": "arrow-left",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "info",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "chevron-down",
-          "inLib": true,
-          "scriptRefsLucide": true
-        }
-      ],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\page-list.html",
-      "inline": [],
-      "ref": [
-        {
-          "name": "zap",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "home",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "bell",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "user",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "download",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "plus",
-          "inLib": true,
-          "scriptRefsLucide": true
-        },
-        {
-          "name": "search",
-          "inLib": true,
-          "scriptRefsLucide": true
-        }
-      ],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\preview\\_theme.js",
-      "inline": [
-        {
-          "name": "Sun",
-          "loc": 397
-        },
-        {
-          "name": "Moon",
-          "loc": 867
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": ".worktrees\\xiaoliang-v1.5\\theme.js",
-      "inline": [
-        {
-          "name": "CheckCircle2",
-          "loc": 622
-        },
-        {
-          "name": "CircleX",
-          "loc": 869
-        },
-        {
-          "name": "Info",
-          "loc": 1131
-        },
-        {
-          "name": "X",
-          "loc": 1395
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": "components.css",
-      "inline": [
-        {
-          "name": "ChevronDown",
-          "loc": 1495
-        },
-        {
-          "name": "ChevronDown",
-          "loc": 1731
-        },
-        {
-          "name": "ChevronRight",
-          "loc": 6610
-        },
-        {
-          "name": "ChevronRight",
-          "loc": 6847
-        }
-      ],
-      "ref": [],
-      "emoji": []
-    },
-    {
-      "file": "preview\\component-accordion.html",
-      "inline": [
-        {
-          "name": "ChevronDown",
-          "loc": 2689
-        },
-        {
-          "name": "ChevronDown",
-          "loc": 2957
         }
       ],
       "ref": [],
@@ -492,11 +67,11 @@
       "inline": [
         {
           "name": "User",
-          "loc": 4857
+          "loc": 5227
         },
         {
           "name": "User",
-          "loc": 5224
+          "loc": 5597
         }
       ],
       "ref": [],
@@ -507,11 +82,11 @@
       "inline": [
         {
           "name": "Bell",
-          "loc": 4310
+          "loc": 4655
         },
         {
           "name": "Send",
-          "loc": 4850
+          "loc": 5201
         }
       ],
       "ref": [],
@@ -522,11 +97,11 @@
       "inline": [
         {
           "name": "ChevronRight",
-          "loc": 2873
+          "loc": 2912
         },
         {
           "name": "ChevronRight",
-          "loc": 3142
+          "loc": 3182
         }
       ],
       "ref": [],
@@ -537,15 +112,15 @@
       "inline": [
         {
           "name": "X",
-          "loc": 4501
+          "loc": 5420
         },
         {
           "name": "X",
-          "loc": 5404
+          "loc": 6337
         },
         {
           "name": "X",
-          "loc": 6085
+          "loc": 7028
         }
       ],
       "ref": [],
@@ -556,7 +131,7 @@
       "inline": [
         {
           "name": "X",
-          "loc": 2813
+          "loc": 3309
         }
       ],
       "ref": [],
@@ -567,19 +142,19 @@
       "inline": [
         {
           "name": "Check",
-          "loc": 4433
+          "loc": 4900
         },
         {
           "name": "Check",
-          "loc": 5432
+          "loc": 5916
         },
         {
           "name": "Check",
-          "loc": 5884
+          "loc": 6372
         },
         {
           "name": "Check",
-          "loc": 6792
+          "loc": 7293
         }
       ],
       "ref": [],
@@ -590,7 +165,7 @@
       "inline": [
         {
           "name": "Inbox",
-          "loc": 4253
+          "loc": 4503
         }
       ],
       "ref": [],
@@ -601,27 +176,27 @@
       "inline": [
         {
           "name": "CheckCircle2",
-          "loc": 2721
+          "loc": 2940
         },
         {
           "name": "X",
-          "loc": 3204
+          "loc": 3423
         },
         {
           "name": "Info",
-          "loc": 3521
+          "loc": 3740
         },
         {
           "name": "X",
-          "loc": 4022
+          "loc": 4241
         },
         {
           "name": "CircleX",
-          "loc": 4340
+          "loc": 4559
         },
         {
           "name": "X",
-          "loc": 4842
+          "loc": 5061
         }
       ],
       "ref": [],
@@ -632,15 +207,15 @@
       "inline": [
         {
           "name": "Moon",
-          "loc": 6446
+          "loc": 8599
         },
         {
           "name": "Sun",
-          "loc": 14853
+          "loc": 18238
         },
         {
           "name": "Moon",
-          "loc": 15313
+          "loc": 18699
         }
       ],
       "ref": [],
@@ -814,11 +389,11 @@
       "inline": [
         {
           "name": "Sun",
-          "loc": 385
+          "loc": 397
         },
         {
           "name": "Moon",
-          "loc": 853
+          "loc": 867
         }
       ],
       "ref": [],
@@ -829,19 +404,19 @@
       "inline": [
         {
           "name": "CheckCircle2",
-          "loc": 398
+          "loc": 622
         },
         {
           "name": "CircleX",
-          "loc": 645
+          "loc": 869
         },
         {
           "name": "Info",
-          "loc": 907
+          "loc": 1131
         },
         {
           "name": "X",
-          "loc": 1171
+          "loc": 1395
         }
       ],
       "ref": [],

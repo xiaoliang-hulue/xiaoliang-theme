@@ -66,6 +66,9 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
   font-size: var(--text-xs);
   border-radius: var(--radius-sm);
 }
+.page-link, .page-ellipsis { transition: transform var(--motion-duration-base) var(--motion-ease-spring), background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); }
+.page-link:hover:not([disabled]):not(.active) { transform: translateY(calc(-1 * var(--motion-distance-sm))); box-shadow: var(--shadow-xs); }
+.page-link.active { box-shadow: 0 5px 12px color-mix(in srgb, var(--color-primary) 20%, transparent); }
 /* @component-css-end */
 </style>
 </head>

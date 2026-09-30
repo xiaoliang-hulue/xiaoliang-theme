@@ -59,6 +59,59 @@
     .theme-toggle:hover {
       background: var(--color-surface-muted);
     }
+    .motion-controls {
+      display: inline-flex;
+      gap: 2px;
+      padding: 2px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-muted);
+    }
+    .motion-toggle {
+      min-height: 32px;
+      padding: 0 var(--space-3);
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--color-text-secondary);
+      font: inherit;
+      font-size: var(--text-xs);
+      cursor: pointer;
+      transition: background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard);
+    }
+    .motion-toggle.is-active {
+      background: var(--color-surface-elevated);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-xs);
+    }
+    .language-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+    .language-card {
+      padding: var(--space-5);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-xs);
+    }
+    .language-swatch {
+      display: block;
+      width: 44px;
+      height: 44px;
+      margin-bottom: var(--space-4);
+      border-radius: var(--radius-md);
+    }
+    .language-swatch.primary { background: var(--color-primary); }
+    .language-swatch.accent { background: var(--color-accent); }
+    .language-swatch.gold { background: var(--color-gold); }
+    .language-card h3 { margin: 0 0 var(--space-2); font-size: var(--text-lg); }
+    .language-card p { margin: 0; color: var(--color-text-secondary); font-size: var(--text-sm); }
+    @media (max-width: 720px) {
+      .header { align-items: flex-start; flex-direction: column; }
+      .language-grid { grid-template-columns: 1fr; }
+    }
     .section {
       margin-bottom: var(--space-12);
     }
@@ -231,13 +284,28 @@
     <header class="header">
       <div class="header-left">
         <h1>小亮主题</h1>
-        <p>极简干净 · 留白充分 · 低饱和 · 浅色/深色双模式</p>
+        <p>海蓝 · 青绿 · 暖金 · 清晰有节奏的动效 · 浅色/深色双模式</p>
       </div>
       <button class="theme-toggle" id="themeToggle" type="button">
         <span id="themeIcon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
         <span id="themeLabel">切换深色</span>
       </button>
+      <div class="motion-controls" role="group" aria-label="动效模式">
+        <button class="motion-toggle is-active" type="button" data-motion-value="full">完整</button>
+        <button class="motion-toggle" type="button" data-motion-value="subtle">轻柔</button>
+        <button class="motion-toggle" type="button" data-motion-value="off">关闭</button>
+      </div>
     </header>
+
+    <section class="section">
+      <h2 class="section-title">视觉语言</h2>
+      <p class="section-desc">海蓝负责主操作，青绿承接数据与成功，暖金只用于收藏、提醒和关键强调</p>
+      <div class="language-grid">
+        <article class="language-card motion-rise"><span class="language-swatch primary"></span><h3>海蓝</h3><p>品牌与关键操作</p></article>
+        <article class="language-card motion-rise" style="animation-delay:80ms"><span class="language-swatch accent"></span><h3>青绿</h3><p>数据、成功与辅助操作</p></article>
+        <article class="language-card motion-rise" style="animation-delay:160ms"><span class="language-swatch gold"></span><h3>暖金</h3><p>收藏、提醒与有限强调</p></article>
+      </div>
+    </section>
 
     <section class="section">
       <h2 class="section-title">主色阶</h2>
@@ -450,6 +518,20 @@
       applyTheme(currentDark);
     });
 
+    const motionButtons = document.querySelectorAll('[data-motion-value]');
+    function applyMotion(value) {
+      if (value === 'full') root.removeAttribute('data-motion');
+      else root.setAttribute('data-motion', value);
+      localStorage.setItem('xl-motion', value);
+      motionButtons.forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.motionValue === value);
+      });
+    }
+    applyMotion(localStorage.getItem('xl-motion') || 'full');
+    motionButtons.forEach((button) => {
+      button.addEventListener('click', () => applyMotion(button.dataset.motionValue));
+    });
+
     mq.addEventListener('change', (e) => {
       currentDark = e.matches;
       applyTheme(currentDark);
@@ -464,7 +546,7 @@
        '--gray-500', '--gray-600', '--gray-700', '--gray-800', '--gray-900', '--gray-950']
     ];
     const semantic = [
-      ['--success', '--success-bg', '--warning', '--warning-bg', '--error', '--error-bg', '--info', '--info-bg']
+      ['--success', '--success-bg', '--warning', '--warning-bg', '--error', '--error-bg', '--info', '--info-bg', '--color-accent', '--color-accent-subtle', '--color-gold', '--color-gold-subtle']
     ];
 
     function renderGrid(containerId, tokens) {

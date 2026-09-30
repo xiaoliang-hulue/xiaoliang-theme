@@ -22,6 +22,8 @@
   .table.hover tbody tr:hover { filter: brightness(0.97); }
   .table-empty { text-align: center; padding: var(--space-10) var(--space-4); color: var(--color-text-subtle); }
   .table-empty-icon { width: 48px; height: 48px; margin: 0 auto var(--space-3); color: var(--color-text-subtle); opacity: .6; }
+.table tbody tr { transition: background-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); }
+.table tbody tr:hover { box-shadow: inset 3px 0 0 var(--color-primary); }
   /* @component-css-end */
 </style>
 </head>

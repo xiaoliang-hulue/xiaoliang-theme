@@ -6,6 +6,8 @@
 
 - **极简干净**：大量留白、低饱和、细线分隔
 - **深浅双模式**：自动跟随系统偏好，支持手动切换
+- **协调配色**：海蓝主色、青绿辅助色、暖金强调色与轻微暖中性表面
+- **清晰有节奏的动效**：统一时长、缓动、错峰与浮层退出，可全局降级或关闭
 - **框架无关**：纯 CSS Custom Properties，任意前端框架可用
 - **中英混排友好**：优先使用系统字体栈
 - **4px 栅格**：间距、尺寸、圆角统一节奏
@@ -191,6 +193,17 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 <!-- 或显式浅色：<html data-theme="light"> -->
 ```
 
+## 控制动效
+
+默认启用完整动效。需要更轻或完全关闭时：
+
+```html
+<html data-motion="subtle">
+<html data-motion="off">
+```
+
+系统开启“减少动态效果”时，主题会自动降级。详见 `docs/motion-system.md`。
+
 ## Token 速查
 
 ### 颜色
@@ -290,11 +303,11 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `components.css` | 聚合后的组件样式（26 个组件，类名 `.btn` / `.alert` 等） |
 | `utilities.css` | 工具类（间距/圆角/阴影/容器/弹性/栅格，由 `build-utilities.mjs` 生成） |
 | `components/` | 各组件的结构化定义（`index.json` + `*.json`） |
-| `theme.js` | 零依赖交互脚本（Modal / Toast，暴露 `window.XL`） |
+| `theme.js` | 零依赖交互脚本（Modal / Drawer / Toast / Tabs / Accordion，暴露 `window.XL`） |
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `preview/index.html` | 主题总览预览页 |
 | `preview/component-*.html` | 26 个组件预览页 |
-| `preview/tokens.html` | 设计 Token 参考页（颜色/字号/间距/圆角/阴影/断点） |
+| `preview/tokens.html` | 设计 Token 参考页（颜色/字号/间距/圆角/阴影/动效/断点） |
 | `audit-a11y.mjs` | 组件级 / 页面级 ARIA 审计脚本（启发式静态检查） |
 | `component-a11y-report.json` | 组件级 ARIA 审计报告 |
 | `preview/page-list.html` | 列表页模板 |
@@ -306,6 +319,11 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `uikit-plan.json` | UI Kit 生成计划 |
 | `SKILL.md` | 设计系统规范 |
 | `accessibility-report.json` | 可访问性检查报告（WCAG 2.1 AA） |
+| `audit-motion.mjs` | 动效 Token、控制入口、关键帧与浮层退出契约审计 |
+| `tests/visual.spec.mjs` | Playwright 桌面、手机、交互和减少动效回归 |
+| `docs/motion-system.md` | 动效 Token、控制方式和设计原则 |
+| `docs/migration-1.5.md` | 1.x 到 1.5 的无破坏升级说明 |
+| `.github/workflows/audit.yml` | GitHub Actions 自动构建与审计 |
 | `specs/小亮主题-PRD.md` | 原始 PRD |
 
 ## 组件清单

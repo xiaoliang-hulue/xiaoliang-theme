@@ -32,6 +32,8 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .tab[aria-selected="true"] { color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: var(--font-medium); }
 .tabpanel { padding: var(--space-4); color: var(--color-text-subtle); font-size: var(--text-sm); line-height: 1.6; }
 .tabpanel[hidden] { display: none; }
+.tab { transition: background-color var(--motion-duration-base) var(--motion-ease-standard), color var(--motion-duration-base) var(--motion-ease-standard); }
+.tabpanel:not([hidden]) { animation: xl-fade-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; }
 /* @component-css-end */
 </style>
 </head>

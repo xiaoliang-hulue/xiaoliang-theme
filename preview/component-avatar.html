@@ -77,6 +77,8 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
   .avatar { border: 1px solid CanvasText; }
   .avatar-status { border-color: Canvas; }
 }
+.avatar { transition: transform var(--motion-duration-base) var(--motion-ease-spring), box-shadow var(--motion-duration-base) var(--motion-ease-standard); }
+.avatar:hover { transform: translateY(calc(-1 * var(--motion-distance-sm))); box-shadow: var(--shadow-sm); }
 /* @component-css-end */
 </style>
 </head>

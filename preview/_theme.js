@@ -19,7 +19,7 @@
   // 注入样式（与 index.html 的 .theme-toggle 一致）
   var style = document.createElement('style');
   style.textContent =
-    '#xl-theme-toggle{position:fixed;top:12px;right:12px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-sm);cursor:pointer;transition:background .2s ease;box-shadow:0 1px 3px rgba(0,0,0,.12)}#xl-theme-toggle:hover{background:var(--color-surface-muted)}#xl-theme-toggle svg{flex-shrink:0}';
+    '#xl-theme-toggle{position:fixed;left:12px;bottom:12px;z-index:9998;display:inline-flex;align-items:center;gap:6px;padding:6px 10px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);color:var(--color-text);font-family:var(--font-sans);font-size:var(--text-sm);cursor:pointer;transition:background .2s ease;box-shadow:0 1px 3px rgba(0,0,0,.12)}#xl-theme-toggle:hover{background:var(--color-surface-muted)}#xl-theme-toggle svg{flex-shrink:0}';
   (document.head || document.documentElement).appendChild(style);
 
   var btn = document.createElement('button');

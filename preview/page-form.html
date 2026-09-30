@@ -25,6 +25,10 @@ body { margin: 0; background: var(--color-surface-muted); font-family: var(--fon
 .select-wrap .input { width: 100%; appearance: none; -webkit-appearance: none; padding-right: var(--space-8); }
 .select-wrap .chevron { position: absolute; right: var(--space-3); top: 50%; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; }
 .form-actions { display: flex; gap: var(--space-3); margin-top: var(--space-2); }
+.form-stack > * { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
+.form-stack > *:nth-child(1) { --reveal-index: 0; }
+.form-stack > *:nth-child(2) { --reveal-index: 1; }
+.form-stack > *:nth-child(3) { --reveal-index: 2; }
 </style>
 </head>
 <body>

@@ -17,6 +17,9 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .textarea:focus { border-color: var(--color-primary); outline: 2px solid var(--color-primary-subtle); outline-offset: 2px; }
 .textarea:disabled { background: var(--color-surface-muted); color: var(--color-text-muted); border-color: var(--color-border-subtle); cursor: not-allowed; opacity: .6; }
 .textarea.error { border-color: var(--error); background: var(--error-bg); }
+.textarea { transition: border-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized), background-color var(--motion-duration-fast) var(--motion-ease-standard); }
+.textarea:focus { box-shadow: 0 0 0 3px var(--color-primary-subtle); }
+.textarea.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
 /* @component-css-end */
 </style>
 </head>

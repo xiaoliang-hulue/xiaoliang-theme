@@ -20,6 +20,8 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .switch input:checked + .switch-track::after { transform: translateX(16px); }
 .switch input:focus-visible + .switch-track { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 .switch input:disabled + .switch-track { opacity: .5; cursor: not-allowed; }
+.switch-track { transition: background-color var(--motion-duration-base) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); }
+.switch-track::after { transition: transform var(--motion-duration-slow) var(--motion-ease-spring); }
 /* @component-css-end */
 </style>
 </head>

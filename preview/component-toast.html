@@ -24,6 +24,8 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 /* 固定定位容器：由 theme.js 动态创建，也可在页面中静态放置 */
 .toast-container { position: fixed; right: var(--space-6); bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); z-index: 200; pointer-events: none; max-width: calc(100vw - var(--space-12)); }
 .toast-container .toast { pointer-events: auto; }
+.toast { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) both; }
+.toast.is-toast-closing { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-standard) reverse both; }
 /* @component-css-end */
 </style>
 </head>

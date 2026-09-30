@@ -27,6 +27,11 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .input-hint { font-size: var(--text-xs); line-height: 18px; color: var(--color-text-subtle); }
 .input-hint.success { color: var(--success); }
 .input-hint.error { color: var(--error); }
+.input { transition: border-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized), background-color var(--motion-duration-fast) var(--motion-ease-standard); }
+.input:focus { box-shadow: 0 0 0 3px var(--color-primary-subtle); }
+.input.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
+.input.success:focus { box-shadow: 0 0 0 3px var(--success-bg); }
+.input { box-sizing: border-box; }
 /* @component-css-end */
 </style>
 </head>

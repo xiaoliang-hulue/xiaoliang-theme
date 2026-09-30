@@ -40,6 +40,8 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
   -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden="true"><path d='m9 18 6-6-6-6'/></svg>") center / contain no-repeat;
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden="true"><path d='m9 18 6-6-6-6'/></svg>") center / contain no-repeat;
 }
+.breadcrumb-link { display: inline-block; transition: color var(--motion-duration-fast) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-standard); }
+.breadcrumb-link:hover { transform: translateX(calc(-1 * var(--motion-distance-sm))); }
 /* @component-css-end */
 </style>
 </head>

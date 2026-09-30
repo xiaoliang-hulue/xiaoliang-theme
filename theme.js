@@ -5,6 +5,13 @@
 (function () {
   'use strict';
 
+  var OVERLAY_EXIT_MS = 280;
+
+  function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      document.documentElement.getAttribute('data-motion') === 'off';
+  }
+
   var ICONS = {
     success:
       '<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>',
@@ -58,16 +65,32 @@
 
   function closeOverlay(target) {
     var overlay = resolveOverlay(target);
-    if (!overlay) return;
-    overlay.hidden = true;
-    overlay.setAttribute('aria-hidden', 'true');
-    // 仅当没有其他浮层时才恢复滚动并卸载全局监听
-    if (!topOverlay()) {
-      document.body.style.overflow = '';
-      document.removeEventListener('keydown', onKeydown, true);
-      document.removeEventListener('mousedown', onOutside, true);
+    if (!overlay || overlay.classList.contains('is-closing')) return;
+    var finished = false;
+
+    function finishClose() {
+      if (finished) return;
+      finished = true;
+      overlay.classList.remove('is-closing');
+      overlay.hidden = true;
+      overlay.setAttribute('aria-hidden', 'true');
+      if (!topOverlay()) {
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', onKeydown, true);
+        document.removeEventListener('mousedown', onOutside, true);
+      }
+      if (overlay._trigger && typeof overlay._trigger.focus === 'function') overlay._trigger.focus();
     }
-    if (overlay._trigger && typeof overlay._trigger.focus === 'function') overlay._trigger.focus();
+
+    if (prefersReducedMotion()) {
+      finishClose();
+      return;
+    }
+
+    overlay.classList.add('is-closing');
+    var panel = overlay.querySelector(PANEL_SELECTOR);
+    if (panel) panel.addEventListener('animationend', finishClose, { once: true });
+    setTimeout(finishClose, OVERLAY_EXIT_MS + 80);
   }
 
   function onKeydown(e) {
@@ -115,6 +138,20 @@
     }
     return c;
   }
+  function removeToast(el) {
+    if (!el.parentNode || el.classList.contains('is-toast-closing')) return;
+    if (prefersReducedMotion()) {
+      el.parentNode.removeChild(el);
+      return;
+    }
+    el.classList.add('is-toast-closing');
+    el.addEventListener('animationend', function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, { once: true });
+    setTimeout(function () {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, OVERLAY_EXIT_MS + 80);
+  }
 
   function showToast(opts) {
     opts = opts || {};
@@ -129,13 +166,13 @@
     el.querySelector('.toast-title').textContent = opts.title || '';
     el.querySelector('.toast-message').textContent = opts.message || '';
     el.querySelector('.toast-close').addEventListener('click', function () {
-      if (el.parentNode) el.parentNode.removeChild(el);
+      removeToast(el);
     });
     toastContainer().appendChild(el);
     var duration = opts.duration == null ? 4000 : opts.duration;
     if (duration > 0) {
       setTimeout(function () {
-        if (el.parentNode) el.parentNode.removeChild(el);
+        removeToast(el);
       }, duration);
     }
     return el;
@@ -184,10 +221,50 @@
     Array.prototype.forEach.call(roots, initTabs);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAllTabs);
-  } else {
+  function initAccordions(root) {
+    var scopes = root ? [root] : Array.prototype.slice.call(document.querySelectorAll('body'));
+    scopes.forEach(function (scope) {
+      Array.prototype.forEach.call(scope.querySelectorAll('details.accordion-item'), function (details) {
+        if (details.dataset.xlAccordion === 'ready') return;
+        var summary = details.querySelector('.accordion-trigger');
+        var content = details.querySelector('.accordion-content');
+        if (!summary || !content) return;
+        details.dataset.xlAccordion = 'ready';
+        summary.addEventListener('click', function (event) {
+          if (prefersReducedMotion()) return;
+          event.preventDefault();
+          var opening = !details.open;
+          content.style.overflow = 'hidden';
+          if (opening) {
+            details.open = true;
+            content.style.height = '0px';
+            requestAnimationFrame(function () {
+              content.style.height = content.scrollHeight + 'px';
+            });
+          } else {
+            content.style.height = content.scrollHeight + 'px';
+            requestAnimationFrame(function () {
+              content.style.height = '0px';
+            });
+          }
+          content.addEventListener('transitionend', function () {
+            if (!opening) details.open = false;
+            content.style.height = '';
+          }, { once: true });
+        });
+      });
+    });
+  }
+
+  function initAllInteractive() {
     initAllTabs();
+    initAccordions();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllInteractive);
+  } else {
+    initAllInteractive();
   }
 
   /* ── 事件委托：data-modal-open|close / data-drawer-open|close ── */
@@ -219,6 +296,8 @@
     openDrawer: openOverlay,
     closeDrawer: closeOverlay,
     showToast: showToast,
-    initTabs: initTabs
+    initTabs: initTabs,
+    initAccordions: initAccordions,
+    prefersReducedMotion: prefersReducedMotion
   };
 })();

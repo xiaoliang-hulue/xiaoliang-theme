@@ -35,6 +35,10 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .btn-primary.btn-loading::after { border-color: var(--color-on-primary); border-right-color: transparent; }
 .btn-secondary.btn-loading::after, .btn-ghost.btn-loading::after, .btn-danger.btn-loading::after { border-color: currentColor; border-right-color: transparent; }
 @keyframes btn-spin { to { transform: rotate(360deg); } }
+.btn { position: relative; overflow: hidden; transition: transform var(--motion-duration-base) var(--motion-ease-standard), background-color var(--motion-duration-fast) var(--motion-ease-standard), border-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); }
+.btn:hover:not(:disabled) { transform: translateY(calc(-1 * var(--motion-distance-sm))); box-shadow: var(--shadow-sm); }
+.btn:active:not(:disabled) { transform: translateY(0) scale(var(--motion-scale-press)); box-shadow: none; }
+.btn-loading::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, .2) 50%, transparent 75%); animation: xl-shimmer 1.2s linear infinite; pointer-events: none; }
 /* @component-css-end */
 </style>
 </head>

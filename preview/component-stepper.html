@@ -107,6 +107,11 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
   .step-index { border: 1px solid CanvasText; }
   .step:not(:last-child)::after { background: CanvasText; }
 }
+.step { animation: xl-rise-in var(--motion-duration-emphasis) var(--motion-ease-emphasized) both; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)); }
+.step:nth-child(1) { --reveal-index: 0; }
+.step:nth-child(2) { --reveal-index: 1; }
+.step:nth-child(3) { --reveal-index: 2; }
+.step:nth-child(4) { --reveal-index: 3; }
 /* @component-css-end */
 </style>
 </head>
