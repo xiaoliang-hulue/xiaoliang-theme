@@ -1,6 +1,6 @@
 {
   "name": "xiaoliang-theme",
-  "version": "1.5.7",
+  "version": "1.5.8",
   "description": "小亮主题 — 兼容旧项目的高级设计系统，含海蓝青绿暖金配色、完整动效、浅色/深色双模式与 26 个基础组件",
   "main": "colors_and_type.css",
   "style": "colors_and_type.css",

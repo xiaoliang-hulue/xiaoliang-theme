@@ -4,6 +4,19 @@
 
 ---
 
+## [1.5.8] - 2026-10-03
+
+- **新增：深色模式「无边框」外观**。用户提出「不要边框岂不美哉」——与其把描边一路调暗，不如深色模式下彻底去掉容器描边，改由**底色层级（background / surface-elevated）+ 阴影**表达结构。
+- **去边框范围（容器类）**：`.card`、`.accordion`、`.tabs`、`.modal`、`.drawer`、`.dropdown-menu`、`.toast`、`.topnav`、`.progress`、`.badge.neutral`、`.tag-default`，以及容器内部分隔线 `.accordion-item`、`.tablist`、`.modal-header/-footer`、`.drawer-header/-footer`、`.table th/td`。
+- **保留边框（有意为之）**：表单控件 `.input` / `.textarea` / `.check` / `.select-trigger` 与交互控件 `.btn` / `.page-link`。依据 WCAG 2.1 SC 1.4.11——控件边界需达 3:1；无描边时它们与相邻底色同色等于消失，用户无法识别可点击区域。
+- **实现细节**：
+  - 用 `border-color: transparent` 而非 `border: none`，**保留 1px 盒宽**，明暗切换零布局抖动（已实测 `card.width=1px`）。
+  - 置于 `colors_and_type.css` **手写区**（`@@TOKENS-END@@` 之后），`build:tokens` 重建不覆盖。
+  - 整体包在 `@media (prefers-contrast: no-preference)` 内：用户主动要求更高对比度时本块不生效，交回既有高对比块的 `border-color: currentColor`，不夺走强边界。
+  - 显式恢复 `.card-interactive:hover/:focus-visible` 的主色描边——否则其悬停/键盘焦点反馈会被一并透明化。
+- **实测验证**（无头 Edge 读计算样式，非目测）：`data-theme="dark"` 与 `.dark` 类两种触发下 `.card`/`.topnav`/`.table td` 均为 `rgba(0,0,0,0)`，`.input` 保持 `rgb(51,51,51)`；`data-theme="light"` 下全部还原为 `#e5dfd9`/`#f0ebe6`，**日间模式零影响**。对比度审计 44 项 fail=0。
+- 顺带记录：无头 Edge 默认 `prefers-color-scheme: dark`，做明暗对比截图/探针时须显式写 `data-theme`，否则会把浅色页面误判为深色。
+
 ## [1.5.7] - 2026-10-03
 
 - **修复：深色模式整体泛蓝**。根因是深色中性面（背景/表面/抬升面/静音面/边框/文本系列）全部呈 B>R 的冷蓝偏色（偏色幅度 5~24 不等，越亮的面偏蓝越明显），全站同向偏蓝累积成"整体泛蓝"；而主题自带 `--gray-*` 深色调色板本就是中性灰，说明表面本该用中性灰却填了带蓝的值。

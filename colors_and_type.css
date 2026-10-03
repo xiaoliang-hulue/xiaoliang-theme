@@ -515,3 +515,33 @@
 /* Base typography elements — 选区高亮与行内代码跟随主题（手写区，build:tokens 仅重写 token 区，此处安全保留） */
 ::selection { background: var(--color-primary); color: var(--color-on-primary); }
 code { font-family: var(--font-mono); color: var(--color-text); }
+
+/* ===== 深色模式「无边框」外观 ===========================================
+   容器类去掉 1px 描边，改由底色层级（background / surface-elevated）+ 阴影表达结构。
+   · 保留边框：表单控件（.input / .textarea / .check / .select-trigger）与交互控件
+     （.btn / .page-link）—— WCAG 2.1 SC 1.4.11 要求控件边界达 3:1，无描边时它们
+     与相邻底色同色即等于消失。
+   · 实现细节：用 border-color: transparent 而非 border:none，保留 1px 盒宽，
+     明暗切换零布局抖动；容器内部分隔线同样只透明化描边色。
+   · 高对比豁免：prefers-contrast: more 时本块整体不生效，交回上方高对比块的
+     border-color: currentColor，不夺走用户主动请求的强边界。
+   · 交互补偿：.card-interactive 的悬停/聚焦描边会被一并透明化，故在此显式恢复
+     主色描边，保证悬停反馈与键盘焦点始终可见。 */
+@media (prefers-contrast: no-preference) {
+  :is(:root[data-theme="dark"], .dark) :is(.card, .accordion, .tabs, .modal, .drawer, .dropdown-menu, .toast, .topnav, .progress, .badge.neutral, .tag-default),
+  :is(:root[data-theme="dark"], .dark) :is(.accordion-item, .tablist, .modal-header, .modal-footer, .drawer-header, .drawer-footer, .table th, .table td) {
+    border-color: transparent;
+  }
+  :is(:root[data-theme="dark"], .dark) :is(.card-interactive:hover, .card-interactive:focus-visible) {
+    border-color: var(--color-primary);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) :is(.card, .accordion, .tabs, .modal, .drawer, .dropdown-menu, .toast, .topnav, .progress, .badge.neutral, .tag-default),
+    :root:not([data-theme="light"]) :is(.accordion-item, .tablist, .modal-header, .modal-footer, .drawer-header, .drawer-footer, .table th, .table td) {
+      border-color: transparent;
+    }
+    :root:not([data-theme="light"]) :is(.card-interactive:hover, .card-interactive:focus-visible) {
+      border-color: var(--color-primary);
+    }
+  }
+}
