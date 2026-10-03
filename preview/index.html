@@ -59,31 +59,6 @@
     .theme-toggle:hover {
       background: var(--color-surface-muted);
     }
-    .motion-controls {
-      display: inline-flex;
-      gap: 2px;
-      padding: 2px;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-md);
-      background: var(--color-surface-muted);
-    }
-    .motion-toggle {
-      min-height: 32px;
-      padding: 0 var(--space-3);
-      border: 0;
-      border-radius: 6px;
-      background: transparent;
-      color: var(--color-text-secondary);
-      font: inherit;
-      font-size: var(--text-xs);
-      cursor: pointer;
-      transition: background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard);
-    }
-    .motion-toggle.is-active {
-      background: var(--color-surface-elevated);
-      color: var(--color-primary);
-      box-shadow: var(--shadow-xs);
-    }
     .language-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -290,11 +265,6 @@
         <span id="themeIcon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span>
         <span id="themeLabel">切换深色</span>
       </button>
-      <div class="motion-controls" role="group" aria-label="动效模式">
-        <button class="motion-toggle is-active" type="button" data-motion-value="full">完整</button>
-        <button class="motion-toggle" type="button" data-motion-value="subtle">轻柔</button>
-        <button class="motion-toggle" type="button" data-motion-value="off">关闭</button>
-      </div>
     </header>
 
     <section class="section">
@@ -516,20 +486,6 @@
     toggle.addEventListener('click', () => {
       currentDark = !currentDark;
       applyTheme(currentDark);
-    });
-
-    const motionButtons = document.querySelectorAll('[data-motion-value]');
-    function applyMotion(value) {
-      if (value === 'full') root.removeAttribute('data-motion');
-      else root.setAttribute('data-motion', value);
-      localStorage.setItem('xl-motion', value);
-      motionButtons.forEach((button) => {
-        button.classList.toggle('is-active', button.dataset.motionValue === value);
-      });
-    }
-    applyMotion(localStorage.getItem('xl-motion') || 'full');
-    motionButtons.forEach((button) => {
-      button.addEventListener('click', () => applyMotion(button.dataset.motionValue));
     });
 
     mq.addEventListener('change', (e) => {
