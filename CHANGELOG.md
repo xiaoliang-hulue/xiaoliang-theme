@@ -4,6 +4,18 @@
 
 ---
 
+## [1.5.10] - 2026-10-03
+
+- **导航 active 态去掉高亮指示条，改用「填充底色 + 主色文字」**。用户以截图对比指出：SideNav（`component-sidenav`）与 TopNav（`component-topnav`）的选中项左侧/底部各有一条高亮亮蓝指示条，而 dashboard 侧栏（`page-dashboard`）没有——要求前两者与 dashboard 保持一致。
+- **改动**：删除两条 inset 阴影指示条，active 态只保留 `color: var(--color-primary)` + `background: var(--color-primary-subtle)`：
+  - `.sidenav-link.active` 去掉 `box-shadow: inset 3px 0 0 var(--color-primary)`
+  - `.topnav-link.active` 去掉 `box-shadow: inset 0 -2px 0 var(--color-primary)`
+  - 同步从 `.sidenav-link` 的 `transition` 移除已无意义的 `box-shadow` 项
+- **效果连贯性**：这与 v1.5.8「深色无边框」方向一致——去掉附着在容器边缘的装饰性高亮块，选中态完全由底色与文字色承担。dashboard 侧栏本来就是这个写法，现在三处统一。
+- **注意**：`.table tbody tr:hover` 的 `inset 3px 0 0` 行悬停指示条**未改动**（属于表格组件，不在本次范围）；若也要去掉请另行确认。
+- **对比度提示（不阻断，仅记录）**：active 填充 `--color-primary-subtle #162b66` 与侧栏底色 `--color-surface-elevated #1f1f1f` 的相对亮度比约 **1.23:1**，选中态主要靠文字色由 `#adadad` 变为 `#6ea8ff` 来凸显。dashboard 现状即如此，本次仅统一观感未改数值。
+- 验证：重建后 `components.css` 中两条 `.active` 规则确认无 `box-shadow`；深色实拍截图确认指示条消失、active 态与 dashboard 一致；四审计全绿。
+
 ## [1.5.9] - 2026-10-03
 
 - **SideNav 焦点环与入场动效对齐 `page-dashboard`**。用户要求 `component-sidenav.html` 的 focus 与动效跟 `page-dashboard.html` 一致。
