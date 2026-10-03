@@ -8,7 +8,7 @@
 
 - **修复：深色模式整体泛蓝**。根因是深色中性面（背景/表面/抬升面/静音面/边框/文本系列）全部呈 B>R 的冷蓝偏色（偏色幅度 5~24 不等，越亮的面偏蓝越明显），全站同向偏蓝累积成"整体泛蓝"；而主题自带 `--gray-*` 深色调色板本就是中性灰，说明表面本该用中性灰却填了带蓝的值。
 - **修复方式**：将深色 11 个中性令牌改为中性灰（R=G=B），采用**亮度守恒**策略——每个新值与其旧蓝值的相对亮度完全一致，故 WCAG 对比度比率零变化，对比度门禁仍 fail=0。主色蓝 `--color-primary:#6ea8ff` 与语义色（accent/gold/error/warning/success）保持不变。新值：background `#101315→#131313`、surface `#1a2024→#1f1f1f`、surface-elevated `#232b30→#2a2a2a`、surface-muted `#1d252a→#242424`、text `#d3d8df→#d8d8d8`、text-secondary `#a7aeb8→#adadad`、text-muted `#828c9a→#8b8b8b`、text-subtle `#8b93a1→#929292`、on-primary `#101315→#131313`。
-- **修复：深色控件边框泛白刺眼**。用户反馈中性化后的边框 `#626262`（L≈0.122）在暗底上比原蓝灰更显"白/刺眼"。经核查对比度审计 SPECS 不含边框检查（仅查文字/背景、主色浅底、语义色），边框不受门禁约束，故将深色边框调暗到柔和的中暗灰：border `#626262→#4a4a4a`、border-subtle `#3d3d3d→#333333`——卡片/输入框边缘仍清晰可辨但不再刺眼。
+- **修复：深色控件边框泛白刺眼（二次调暗）**。用户反馈中性化后的边框在暗底上仍偏亮"刺眼"。经核查对比度审计 SPECS 不含边框检查（仅查文字/背景、主色浅底、语义色），边框不受门禁约束，可自由调暗。两次迭代落地为：border `#626262→#4a4a4a→#333333`、border-subtle `#3d3d3d→#333333→#262626`。**取值受可见性下限约束**：卡片背景为 `surface-elevated #2a2a2a`，边框若再暗（如 `#2e2e2e`）与卡片底色的相对亮度比仅约 1.2:1，边框近乎消失，故 `#333333` 是"不刺眼"与"卡片边缘仍可辨"的平衡点。
 - **约束：禁止向用户展示动效调节入口**。移除 `preview/index.html` 中的动效模式按钮组（完整/轻柔/关闭）及其 `.motion-controls`/`.motion-toggle` 样式与 `applyMotion`+`localStorage` 接线，用户无法再访问、修改或持久化任何动效强度参数。保留"后台统一控制"机制：`[data-motion="subtle"/"off"]` CSS 钩子、`theme.js` 读取该属性、`prefers-reduced-motion` 无障碍降级（WCAG 强制）均保留。下游平台 skill 仅含 `prefers-reduced-motion`，本就合规。
 - **验证**：`npm run build` 全量重建；`npm run audit` 四审计全绿（对比度 44 项 fail=0、动效契约通过、图标 0 问题、ARIA error=0）。下游 quiz-platform-generator 令牌快照与 selfcheck 守卫同步至新中性值，selfcheck 225 项全过。
 
