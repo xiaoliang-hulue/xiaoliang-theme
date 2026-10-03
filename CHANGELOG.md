@@ -4,6 +4,15 @@
 
 ---
 
+## [1.5.9] - 2026-10-03
+
+- **SideNav 焦点环与入场动效对齐 `page-dashboard`**。用户要求 `component-sidenav.html` 的 focus 与动效跟 `page-dashboard.html` 一致。
+- **焦点环改为外扩**：`.sidenav-link:focus-visible` 的 `outline-offset` 由 `-2px` 改为 `2px`，与 dashboard 的 `.btn` / `.card-interactive` 一致。注意这改的是 `components.css` **组件规范**（原内嵌写法是主题对「容器内元素」的旧规定，`.topnav-link` / `.tab` / `.accordion-trigger` / `.dropdown-item` 仍是 `-2px`），所有使用 `.sidenav-link` 的地方随之变化。
+- **补齐错峰入场动效**（此前 sidenav 完全没有入场动画）：分区标题 `xl-fade-in`，链接 `xl-rise-in`，按 `--motion-stagger-step`(45ms) 递增 delay；第二分区续接序号（标题 180ms、链接 225/270ms），与 dashboard 的 `.kpi-grid > .card:nth-child()` 写法同构。`animation-fill-mode: backwards` 保证延迟期保持起始隐藏态。
+- **active 指示条改为可过渡**：`.sidenav-link` 的 `transition` 补入 `box-shadow`，原先 `inset 3px 0 0` 指示条是瞬间跳变，现随状态平滑推出。
+- 无障碍：`prefers-reduced-motion: reduce` 的全局兜底用 `!important` 压掉 `animation-duration/delay`，新增错峰动画随之强制降级，无需额外处理。
+- **实测**（无头 Edge 读计算样式）：L1/L2/L3 延迟 45/90/135ms、L4/L5 225/270ms，标题 `xl-fade-in@0s`，focus `offset=2px`，`transition-property` 含 `box-shadow`；`components.css` 309 → 315 条规则。四审计全绿。
+
 ## [1.5.8] - 2026-10-03
 
 - **新增：深色模式「无边框」外观**。用户提出「不要边框岂不美哉」——与其把描边一路调暗，不如深色模式下彻底去掉容器描边，改由**底色层级（background / surface-elevated）+ 阴影**表达结构。

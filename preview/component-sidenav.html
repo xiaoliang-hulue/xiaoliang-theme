@@ -16,10 +16,19 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .sidenav-link { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); font-size: var(--text-sm); color: var(--color-text-secondary); border-radius: var(--radius-md); text-decoration: none; }
 .sidenav-link:hover { color: var(--color-text); background: var(--color-surface-muted); }
 .sidenav-link.active { color: var(--color-primary); background: var(--color-primary-subtle); }
-.sidenav-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; }
-.sidenav-link { transition: background-color var(--motion-duration-base) var(--motion-ease-standard), color var(--motion-duration-base) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-standard); }
+.sidenav-link:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.sidenav-link { transition: background-color var(--motion-duration-base) var(--motion-ease-standard), color var(--motion-duration-base) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); }
 .sidenav-link:hover { transform: translateX(var(--motion-distance-sm)); }
 .sidenav-link.active { box-shadow: inset 3px 0 0 var(--color-primary); }
+/* 入场动效：对齐 page-dashboard 的错峰上浮 + 淡入（reduced-motion 由全局兜底强制降级） */
+.sidenav-section-title { animation: xl-fade-in var(--motion-duration-emphasis) var(--motion-ease-standard) backwards; }
+.sidenav-link { animation: xl-rise-in var(--motion-duration-emphasis) var(--motion-ease-emphasized) backwards; }
+.sidenav-link:nth-of-type(1) { animation-delay: calc(1 * var(--motion-stagger-step)); }
+.sidenav-link:nth-of-type(2) { animation-delay: calc(2 * var(--motion-stagger-step)); }
+.sidenav-link:nth-of-type(3) { animation-delay: calc(3 * var(--motion-stagger-step)); }
+.sidenav-section:nth-of-type(2) .sidenav-section-title { animation-delay: calc(4 * var(--motion-stagger-step)); }
+.sidenav-section:nth-of-type(2) .sidenav-link:nth-of-type(1) { animation-delay: calc(5 * var(--motion-stagger-step)); }
+.sidenav-section:nth-of-type(2) .sidenav-link:nth-of-type(2) { animation-delay: calc(6 * var(--motion-stagger-step)); }
 /* @component-css-end */
 </style>
 </head>
