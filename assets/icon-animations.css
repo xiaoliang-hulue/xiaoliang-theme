@@ -25,13 +25,15 @@
 .anim-icon:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 
 @keyframes la-loader-circle {
-  0% { transform: rotate(360deg) }
-  100% { transform: none }
+  0% { transform: none }
+  100% { transform: rotate(360deg) }
 }
 [data-anim="LoaderCircle"]:hover svg > *,
 [data-anim="LoaderCircle"][aria-pressed="true"] svg > *,
 [data-anim="LoaderCircle"].is-playing svg > * {
   animation: la-loader-circle 800ms linear 0ms infinite both;
+  transform-box: view-box;
+  transform-origin: center;
 }
 
 @keyframes la-circle-check {
@@ -65,34 +67,40 @@
 }
 
 @keyframes la-download {
-  0% { transform: translateY(2px) }
-  100% { transform: none }
+  0% { transform: none }
+  100% { transform: translateY(2px) }
 }
 [data-anim="Download"]:hover svg > *,
 [data-anim="Download"][aria-pressed="true"] svg > *,
 [data-anim="Download"].is-playing svg > * {
   animation: la-download 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+  transform-box: view-box;
+  transform-origin: center;
 }
 
 @keyframes la-upload {
-  0% { transform: translateY(-2px) }
-  100% { transform: none }
+  0% { transform: none }
+  100% { transform: translateY(-2px) }
 }
 [data-anim="Upload"]:hover svg > *,
 [data-anim="Upload"][aria-pressed="true"] svg > *,
 [data-anim="Upload"].is-playing svg > * {
   animation: la-upload 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+  transform-box: view-box;
+  transform-origin: center;
 }
 
 @keyframes la-copy {
   0% { transform: scale(1) }
   50% { transform: scale(1.08) }
-  100% { transform: none }
+  100% { transform: scale(1) }
 }
 [data-anim="Copy"]:hover svg > *,
 [data-anim="Copy"][aria-pressed="true"] svg > *,
 [data-anim="Copy"].is-playing svg > * {
   animation: la-copy 950ms cubic-bezier(0.42, 0, 0.58, 1) 0ms both;
+  transform-box: view-box;
+  transform-origin: center;
 }
 
 @keyframes la-plus {
@@ -112,12 +120,14 @@
   40% { transform: rotate(5deg) }
   60% { transform: rotate(-5deg) }
   80% { transform: rotate(5deg) }
-  100% { transform: none }
+  100% { transform: rotate(0deg) }
 }
 [data-anim="Sparkles"]:hover svg > *,
 [data-anim="Sparkles"][aria-pressed="true"] svg > *,
 [data-anim="Sparkles"].is-playing svg > * {
   animation: la-sparkles 400ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+  transform-box: view-box;
+  transform-origin: center;
 }
 
 @keyframes la-zap {
@@ -131,13 +141,15 @@
 }
 
 @keyframes la-heart {
-  0% { transform: translateY(-1px) }
-  100% { transform: none }
+  0% { transform: none }
+  100% { transform: translateY(-1px) }
 }
 [data-anim="Heart"]:hover svg > *,
 [data-anim="Heart"][aria-pressed="true"] svg > *,
 [data-anim="Heart"].is-playing svg > * {
   animation: la-heart 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+  transform-box: view-box;
+  transform-origin: center;
 }
 
 @keyframes la-flame {
@@ -151,13 +163,15 @@
 }
 
 @keyframes la-trending-up {
-  0% { transform: translateX(0px) translateY(0px) }
-  100% { transform: none }
+  0% { transform: none }
+  100% { transform: translateX(0px) translateY(0px) }
 }
 [data-anim="TrendingUp"]:hover svg > *,
 [data-anim="TrendingUp"][aria-pressed="true"] svg > *,
 [data-anim="TrendingUp"].is-playing svg > * {
   animation: la-trending-up 500ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+  transform-box: view-box;
+  transform-origin: center;
 }
 
 @keyframes la-activity {
@@ -175,10 +189,12 @@
   25% { transform: rotate(-10deg) }
   50% { transform: rotate(10deg) }
   75% { transform: rotate(-10deg) }
-  100% { transform: none }
+  100% { transform: rotate(0deg) }
 }
 [data-anim="Bell"]:hover svg > *,
 [data-anim="Bell"][aria-pressed="true"] svg > *,
 [data-anim="Bell"].is-playing svg > * {
   animation: la-bell 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+  transform-box: view-box;
+  transform-origin: center;
 }

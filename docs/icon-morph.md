@@ -167,6 +167,17 @@ npm run test:visual
 
 ---
 
+### transform 原点：必须钉到 view-box 中心
+
+**SVG 元素的 CSS `transform-origin` 初始值是 `0 0`（视口左上角），不是普通盒模型的 `50% 50%`。** 所以凡是带 `rotate` / `scale` 的动画，生成器都会在触发规则里显式写：
+
+```css
+transform-box: view-box;   /* 按 view-box 解析，而不是元素自身包围盒 */
+transform-origin: center;  /* → 24×24 view-box 的 12px 12px */
+```
+
+用 `view-box` 而非 `fill-box`：后者按元素**自身包围盒**算中心，对偏心图形（如某些圆弧）中心仍是偏的。
+
 ## 重新生成引擎
 
 `assets/icons/morph.min.js` 是**预打包产物，按原样提交**，运行时不经任何构建步骤。只有升级 morphicons 版本时才需要：

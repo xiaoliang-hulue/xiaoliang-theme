@@ -116,20 +116,23 @@ const EASE = {
 };
 const easeOf = (n) => EASE[n] || 'cubic-bezier(0.2, 0, 0, 1)';
 
-/* 把 scale/rotate/x/y 合成一条 transform */
-function transformOf(p, key) {
+/* 把 scale/rotate/x/y 合成一条 transform。返回 '' 表示本帧无变换。
+ * 两种语义要分清：
+ *   数组值（如 `rotate: [0, -60, 0]`）= 显式关键帧，逐帧取用；
+ *   单值  （如 `rotate: 360`）        = 从 normal 态（恒等）动到该值，故只有末帧带它。 */
+function transformOf(p, key, isLast) {
   const t = [];
-  if (p.x !== undefined) t.push('translateX(' + (typeof p.x === 'number' ? p.x + 'px' : p.x) + ')');
-  if (p.y !== undefined) t.push('translateY(' + (typeof p.y === 'number' ? p.y + 'px' : p.y) + ')');
-  if (p.scale !== undefined) {
-    const s = Array.isArray(p.scale) ? p.scale : [p.scale];
-    t.push('scale(' + s[Math.min(key, s.length - 1)] + ')');
-  }
-  if (p.rotate !== undefined) {
-    const r = Array.isArray(p.rotate) ? p.rotate : [p.rotate];
-    t.push('rotate(' + r[Math.min(key, r.length - 1)] + 'deg)');
-  }
-  return t.length ? t.join(' ') : null;
+  const pick = (k, unit) => {
+    const v = p[k];
+    if (v === undefined) return null;
+    if (Array.isArray(v)) return v[Math.min(key, v.length - 1)] + unit;
+    return isLast ? v + unit : null;
+  };
+  const x = pick('x', 'px'); if (x !== null) t.push('translateX(' + x + ')');
+  const y = pick('y', 'px'); if (y !== null) t.push('translateY(' + y + ')');
+  const sc = pick('scale', ''); if (sc !== null) t.push('scale(' + sc + ')');
+  const ro = pick('rotate', 'deg'); if (ro !== null) t.push('rotate(' + ro + ')');
+  return t.join(' ');
 }
 
 /* ---------- 3. 逐图标生成关键帧 ---------- */
@@ -159,6 +162,9 @@ for (const name of CURATED) {
     2
   );
   const frames = [];
+  let hasTransform = false;
+  /* 该图标是否含 transform 类属性（决定要不要写 transform-origin 中心修正） */
+  const wantsTransform = ['x', 'y', 'scale', 'rotate'].some((k) => p[k] !== undefined);
   for (let i = 0; i < len; i++) {
     const decl = [];
     if (p.opacity !== undefined) {
@@ -182,8 +188,12 @@ for (const name of CURATED) {
         decl.push('stroke-dashoffset: ' + off);
       }
     }
-    const tf = transformOf(p, i);
-    if (tf) decl.push('transform: ' + (i === len - 1 ? 'none' : tf));
+    const tf = transformOf(p, i, i === len - 1);
+    if (tf) { hasTransform = true; decl.push('transform: ' + tf); }
+    else if (wantsTransform && i < len - 1) {
+      /* 单值 transform 的首帧是「恒等」，显式写出来比留空帧更可读 */
+      decl.push('transform: none');
+    }
     frames.push('  ' + Math.round((i / (len - 1)) * 100) + '% { ' + decl.join('; ') + ' }');
   }
 
@@ -198,6 +208,11 @@ for (const name of CURATED) {
     '[data-anim="' + name + '"][aria-pressed="true"] svg > *,\n' +
     '[data-anim="' + name + '"].is-playing svg > * {\n' +
     '  animation: ' + keyName + ' ' + Math.round(dur) + 'ms ' + timing + ' ' + Math.round(delay) + 'ms' + iter + ' both;\n' +
+    /* SVG 元素的 CSS transform-origin 初始值是 0 0（左上角），不是 50% 50%。
+     * 不显式指定的话 rotate/scale 会绕左上角打转——必须钉到 view-box 中心。 */
+    (hasTransform
+      ? '  transform-box: view-box;\n  transform-origin: center;\n'
+      : '') +
     '}\n'
   );
   used.push({ name, key: keyName, props: Object.keys(p), durationMs: Math.round(dur), delayMs: Math.round(delay), ease: a.ease || 'default', repeat: a.repeat === Infinity ? 'infinite' : a.repeat, frames: len });

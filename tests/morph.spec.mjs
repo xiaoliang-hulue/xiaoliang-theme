@@ -411,3 +411,35 @@ test('anim: 图标名非法时拒绝挂载并告警', async ({ page }) => {
   expect(warns.some((w) => w.includes('data-anim'))).toBe(true);
   expect(errors).toEqual([]);
 });
+
+test('anim: 旋转以图标中心为圆心，不绕左上角（回归：曾因 SVG transform-origin 默认 0 0 而绕角旋转）', async ({ page }) => {
+  const errors = await open(page);
+  const el = page.locator('[data-anim="LoaderCircle"]').first();
+  await el.hover();
+
+  const style = await el.evaluate((n) => {
+    const c = getComputedStyle(n.querySelector('svg > *'));
+    return { box: c.transformBox, origin: c.transformOrigin, name: c.animationName };
+  });
+  expect(style.name).toBe('la-loader-circle');
+  // SVG 元素的 CSS transform-origin 初始值是 0 0（视口左上角），必须显式钉到中心
+  expect(style.box).toBe('view-box');
+  expect(style.origin).toMatch(/12px\s+12px/);
+
+  // 判据：绕中心旋转时，图形包围盒的中心应保持不动；
+  // 若绕左上角旋转，这个中心会沿圆周移动。
+  const centers = [];
+  for (let i = 0; i < 6; i++) {
+    centers.push(await el.evaluate((n) => {
+      const r = n.querySelector('svg > *').getBoundingClientRect();
+      return [r.left + r.width / 2, r.top + r.height / 2];
+    }));
+    await page.waitForTimeout(90);
+  }
+  const xs = centers.map((c) => c[0]);
+  const ys = centers.map((c) => c[1]);
+  const spread = (a) => Math.max(...a) - Math.min(...a);
+  expect(spread(xs)).toBeLessThan(1.5);
+  expect(spread(ys)).toBeLessThan(1.5);
+  expect(errors).toEqual([]);
+});

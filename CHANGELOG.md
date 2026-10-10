@@ -4,6 +4,15 @@
 
 ---
 
+## [1.8.1] - 2026-10-10
+
+- **修复：动画图标的旋转/缩放绕左上角而非图标中心**。用户指出「持续旋转（`repeat: Infinity`）」的旋转圆心不对。
+- **根因**：**SVG 元素的 CSS `transform-origin` 初始值是 `0 0`（视口左上角），不是普通盒模型的 `50% 50%`**。生成的 keyframes 只写了 `transform: rotate(...)` 没指定原点，于是所有 `rotate`/`scale` 类动画（15 个收录图标里的 8 个）全部绕角旋转/缩放。
+- **修复**：`build-icon-animations.mjs` 对**含 transform 的动画**在触发规则里补 `transform-box: view-box; transform-origin: center;`，把原点钉到 view-box 中心（Lucide 统一 `0 0 24 24`，即 12px 12px）。用 `view-box` 而非 `fill-box`——后者按元素自身包围盒算中心，对偏心的图形（如部分圆弧）仍会偏。
+- **顺带修正单值 transform 的方向语义**：lucide-animated 里 `rotate: 360` 这类**单值**表示「从 normal 态（恒等）动到该值」，而数组（如 `rotate: [0, -60, 0]`）才是显式关键帧。初版对两者一视同仁地首尾都写值，导致 `LoaderCircle` 是「从 360° 转回 0°」（方向反了）。现按两套语义分别处理：`0% { transform: none } → 100% { transform: rotate(360deg) }`。
+- **回归测试**（`anim: 旋转以图标中心为圆心`）不只断言 `transform-origin` 计算值，还用**包围盒中心轨迹**做判据：绕中心旋转时该中心保持不动（6 次采样跨度 < 1.5px），绕左上角则会沿圆周移动。
+- 影响范围仅限 `assets/icon-animations.css`（生成物）与生成器；形变、换图标两路不受影响。`npm run audit` 四门全绿，`npx playwright test` **26/26**。
+
 ## [1.8.0] - 2026-10-10
 
 ### 新增：动画图标（Icon Animation）——第三路图标动效
