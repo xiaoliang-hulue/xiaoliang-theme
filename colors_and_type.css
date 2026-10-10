@@ -368,6 +368,34 @@
   to { transform: translateX(140%); }
 }
 
+/* 换图标过渡（Icon Swap）——配合 assets/morph-icons.js 的 .icon-swap。
+   刻意只用 opacity / transform：图标是 24×24 的小元素，位移与缩放要克制，
+   否则过渡比图标本身还抢眼。时长由 JS 依 motion token 写入 --swap-dur。 */
+@keyframes xl-swap-out {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: none; }
+}
+@keyframes xl-swap-in {
+  from { opacity: 0; transform: none; }
+  to { opacity: 1; transform: none; }
+}
+@keyframes xl-swap-out-scale {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: scale(var(--motion-scale-press)); }
+}
+@keyframes xl-swap-in-scale {
+  from { opacity: 0; transform: scale(var(--motion-scale-press)); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes xl-swap-scale-out {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: none; }
+}
+@keyframes xl-swap-scale-in {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: none; }
+}
+
 /* Typography utilities */
 .xl-display,
 .xl-h1,

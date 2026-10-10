@@ -96,7 +96,7 @@ XLMorph.refresh();
 
 ## 可用配对（白名单）
 
-只有下表 22 组可以开放。**路径形变不保证观感**——子路径数量差异过大时中间态会塌成实心块或细碎斑点，所以必须策展，不能让使用者任意配对。
+只有下表 23 组可以开放。**路径形变不保证观感**——子路径数量差异过大时中间态会塌成实心块或细碎斑点，所以必须策展，不能让使用者任意配对。
 
 | 配对键 | 图标 | 语义 |
 |---|---|---|
@@ -117,6 +117,7 @@ XLMorph.refresh();
 | `panel-left-right` | `PanelLeft ↔ PanelRight` | 左栏 / 右栏 |
 | `toggle-left-right` | `ToggleLeft ↔ ToggleRight` | 开关 左 / 右 |
 | `check-alert` | `CircleCheck ↔ AlertCircle` | 通过 / 警示 |
+| `copy-check` | `Copy ↔ Check` | 复制 / 已复制 |
 | `trending-up-down` | `TrendingUp ↔ TrendingDown` | 上升 / 下降 |
 | `mic-mic-off` | `Mic ↔ MicOff` | 开麦 / 闭麦 |
 | `wifi-wifi-off` | `Wifi ↔ WifiOff` | 联网 / 断网 |
@@ -189,3 +190,58 @@ XLMorph.to(el, 'X', { spring: { stiffness: 300, damping: 30 } })  // 编程式�
 ```
 
 `XLMorph.to` 的图标名必须是 Lucide 中真实存在的图标，且**建议只使用白名单涉及的图标**——任意配对观感不可控。
+
+---
+
+# 换图标过渡（Icon Swap）
+
+与形变互补的一路：**形变是「同一轮廓改变形状」，换图标是「两个不同图标之间淡入淡出」**。同一个运行时（`assets/morph-icons.js`）实现，共用 Lucide 取用、触发器、无障碍与 `data-motion` 接线。
+
+## 为什么不需要白名单
+
+形变必须策展，是因为路径插值在子路径数量差异过大时会**塌陷成实心块**。换图标只是「换掉整个 SVG 再淡入淡出」，不存在插值，因此**任意 Lucide 图标名都可以配对**，不需要审批流程。
+
+## 快速开始
+
+```html
+<!-- 必需：两个 Lucide 图标名，用 | 分隔 -->
+<span class="icon-swap is-xl" data-icon-swap="Bell|BellOff" aria-label="通知开关"></span>
+
+<!-- 触发器：click（默认）/ hover / state -->
+<span class="icon-swap" data-icon-swap="Wifi|WifiOff" data-swap-trigger="hover"></span>
+
+<!-- 过渡风格：fade（默认）/ fade-scale / scale -->
+<button class="icon-swap" data-icon-swap="Search|X" data-swap-style="fade-scale"></button>
+
+<!-- 速度：读 --motion-duration-* token -->
+<button class="icon-swap" data-icon-swap="ArrowRight|ArrowLeft" data-swap-speed="slow"></button>
+```
+
+## 属性
+
+| 属性 | 必填 | 取值 | 说明 |
+|---|---|---|---|
+| `data-icon-swap` | ✅ | `图标A\|图标B` | 两个真实存在的 Lucide 图标名；非法则**拒绝挂载并告警** |
+| `data-swap-trigger` | | `click`（默认）/ `hover` / `state` | 与形变触发器语义一致 |
+| `data-swap-style` | | `fade`（默认）/ `fade-scale` / `scale` | 是否附带缩放 |
+| `data-swap-speed` | | `fast` / `base`（默认）/ `slow` | 读 `--motion-duration-fast/base/slow` |
+| `aria-label` | | 文本 | 交互式用法**应当**提供；纯装饰可省略，适配器会自动 `aria-hidden` |
+
+尺寸档位用 `.is-xs / .is-sm / .is-lg / .is-xl`，与 `.morph-icon` 同规格（`--swap-icon-size`），便于同处摆放。
+
+## 无障碍与动效
+
+- 与形变共用 `makeInteractive` / `applyA11y`：`role="button"`、`tabindex`、`Enter`/`Space`、以及缺可访问名时的告警或 `aria-hidden` 兜底，行为一致。
+- `prefers-reduced-motion: reduce` 或 `<html data-motion="off">` 时**立即换图标、不播过渡**（判定实现在 `show()` 内部，点击/悬停/状态/编程式四条路径一次覆盖）。
+- 时长由 JS 读 motion token 后写入 `--swap-dur`，**Token 仍是唯一真值**，CSS 只消费变量。
+
+## JS API
+
+```js
+XLMorph.swapTo(el, 'BellOff')      // 编程式换图标（图标名须在该元素的配对内）
+XLMorph.counts                     // { morph, swap } 最近一次 init 的挂载数
+```
+
+## 关键帧
+
+`xl-swap-out` / `xl-swap-in` 及其 `-scale` 变体共 6 个，定义在 `colors_and_type.css` 的动效区（token 区之外，`build:tokens` 不覆盖）。只用 `opacity` 与 `transform`——图标只有 24×24，位移与缩放必须克制，否则过渡比图标本身还抢眼。

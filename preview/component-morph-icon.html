@@ -43,6 +43,28 @@ body { margin: 0; background: var(--color-background); color: var(--color-text);
 .morph-icon[aria-pressed="true"], .morph-icon.is-accent { color: var(--color-primary); }
 .morph-icon:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
 .btn .morph-icon, .alert .morph-icon { --morph-icon-size: 18px; }
+
+/* —— 换图标过渡（Icon Swap）：与 .morph-icon 同规格，便于同一处摆放 —— */
+.icon-swap { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: var(--swap-icon-size, 24px); height: var(--swap-icon-size, 24px); padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: 0; cursor: default; border-radius: var(--radius-sm); }
+.icon-swap svg { display: block; width: 100%; height: 100%; }
+.icon-swap svg path, .icon-swap svg line, .icon-swap svg circle, .icon-swap svg rect, .icon-swap svg polyline, .icon-swap svg polygon { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icon-swap.is-xs { --swap-icon-size: 16px; }
+.icon-swap.is-sm { --swap-icon-size: 18px; }
+.icon-swap.is-lg { --swap-icon-size: 28px; }
+.icon-swap.is-xl { --swap-icon-size: 40px; }
+.icon-swap[role="button"], button.icon-swap { cursor: pointer; }
+.icon-swap[aria-pressed="true"], .icon-swap.is-accent { color: var(--color-primary); }
+.icon-swap:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.btn .icon-swap, .alert .icon-swap { --swap-icon-size: 18px; }
+/* 过渡：淡出与淡入各自独立成段，时长由 JS 按 motion token 写入 --swap-dur */
+.icon-swap.is-out, .icon-swap.is-in { animation-duration: var(--swap-dur, 180ms); animation-timing-function: var(--motion-ease-standard); animation-fill-mode: backwards; }
+.icon-swap.is-out { animation-name: xl-swap-out; }
+.icon-swap.is-in { animation-name: xl-swap-in; }
+/* 两种可选风格：默认纯淡入淡出；fade-scale 附带轻微缩放，scale 只做缩放 */
+.icon-swap.is-fade-scale.is-out { animation-name: xl-swap-out-scale; }
+.icon-swap.is-fade-scale.is-in { animation-name: xl-swap-in-scale; }
+.icon-swap.is-scale.is-out { animation-name: xl-swap-scale-out; }
+.icon-swap.is-scale.is-in { animation-name: xl-swap-scale-in; }
 /* @component-css-end */
 </style>
 </head>
@@ -99,7 +121,7 @@ body { margin: 0; background: var(--color-background); color: var(--color-text);
 
   <section class="section">
     <h2>可用配对（白名单）</h2>
-    <p>只有下面 22 组经过策展。子路径数量差异过大时路径形变会塌陷成实心块或细碎斑点，因此<strong>不要在表外随意配对</strong>，判定流程见 <a href="../docs/icon-morph.md">docs/icon-morph.md</a>。</p>
+    <p>只有下面 23 组经过策展。子路径数量差异过大时路径形变会塌陷成实心块或细碎斑点，因此<strong>不要在表外随意配对</strong>，判定流程见 <a href="../docs/icon-morph.md">docs/icon-morph.md</a>。</p>
     <div class="grid">
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="menu-x" aria-label="菜单与关闭图标形变演示"></button><span class="key">menu-x</span><span class="desc">菜单 / 关闭</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="plus-minus" aria-label="加号与减号图标形变演示"></button><span class="key">plus-minus</span><span class="desc">展开 / 折叠</span></div>
@@ -118,11 +140,55 @@ body { margin: 0; background: var(--color-background); color: var(--color-text);
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="panel-left-right" aria-label="左右面板图标形变演示"></button><span class="key">panel-left-right</span><span class="desc">左栏 / 右栏</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="toggle-left-right" aria-label="开关左右图标形变演示"></button><span class="key">toggle-left-right</span><span class="desc">开关 左 / 右</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="check-alert" aria-label="通过与警示图标形变演示"></button><span class="key">check-alert</span><span class="desc">通过 / 警示</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="copy-check" aria-label="复制与已复制图标形变演示"></button><span class="key">copy-check</span><span class="desc">复制 / 已复制</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="trending-up-down" aria-label="上升与下降图标形变演示"></button><span class="key">trending-up-down</span><span class="desc">上升 / 下降</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="mic-mic-off" aria-label="麦克风开启与静音图标形变演示"></button><span class="key">mic-mic-off</span><span class="desc">开麦 / 闭麦</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="wifi-wifi-off" aria-label="联网与断网图标形变演示"></button><span class="key">wifi-wifi-off</span><span class="desc">联网 / 断网</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="user-users" aria-label="单人与多人图标形变演示"></button><span class="key">user-users</span><span class="desc">单人 / 多人</span></div>
       <div class="cell"><button class="morph-icon is-lg" data-morph-icon="arrow-right-left" aria-label="前进与后退图标形变演示"></button><span class="key">arrow-right-left</span><span class="desc">前进 / 后退</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>换图标过渡（Icon Swap）</h2>
+    <p>形变是「同一轮廓改变形状」；换图标过渡是「两个<strong>不同</strong>图标之间淡入淡出」。因为不做子路径插值，所以<strong>不需要白名单</strong>——任意 Lucide 图标名都能配对。时长取自 <code>--motion-duration-*</code>，系统开启「减少动效」或 <code>data-motion="off"</code> 时立即跳变。</p>
+    <div class="stack">
+      <div class="rowline">
+        <span class="name">尺寸档位</span>
+        <span class="icon-swap is-xs" data-icon-swap="Heart|Circle" data-swap-trigger="hover"></span>
+        <span class="icon-swap is-sm" data-icon-swap="Heart|Circle" data-swap-trigger="hover"></span>
+        <span class="icon-swap" data-icon-swap="Heart|Circle" data-swap-trigger="hover"></span>
+        <span class="icon-swap is-lg" data-icon-swap="Heart|Circle" data-swap-trigger="hover"></span>
+        <span class="icon-swap is-xl" data-icon-swap="Heart|Circle" data-swap-trigger="hover"></span>
+        <span class="note">悬停即在 <code>Heart ↔ Circle</code> 间过渡，尺寸档位与形变图标一致。</span>
+      </div>
+      <div class="rowline">
+        <span class="name">过渡风格</span>
+        <button class="icon-swap is-xl" data-icon-swap="Bell|BellOff" aria-label="淡入淡出风格的通知图标"></button>
+        <span class="note"><code>fade</code>（默认，纯淡入淡出）</span>
+        <button class="icon-swap is-xl" data-icon-swap="Search|X" data-swap-style="fade-scale" aria-label="淡入淡出加缩放风格的搜索图标"></button>
+        <span class="note"><code>fade-scale</code>（附轻微缩放）</span>
+        <button class="icon-swap is-xl" data-icon-swap="Plus|Minus" data-swap-style="scale" aria-label="纯缩放风格的加减图标"></button>
+        <span class="note"><code>scale</code>（只缩放）</span>
+      </div>
+      <div class="rowline">
+        <span class="name">触发器</span>
+        <button class="icon-swap is-xl" data-icon-swap="Volume2|VolumeX" aria-label="点击切换静音图标"></button>
+        <span class="note"><code>click</code>（默认）</span>
+        <span class="icon-swap is-xl" data-icon-swap="Wifi|WifiOff" data-swap-trigger="hover"></span>
+        <span class="note"><code>hover</code>（移出回到起始图标）</span>
+        <button class="icon-swap is-xl" data-icon-swap="Star|Heart" data-swap-trigger="state" aria-label="收藏状态切换图标"></button>
+        <span class="note"><code>state</code>：与 <code>aria-pressed</code> 双向同步</span>
+      </div>
+      <div class="rowline">
+        <span class="name">速度</span>
+        <button class="icon-swap is-lg" data-icon-swap="ArrowRight|ArrowLeft" data-swap-speed="fast" aria-label="快速过渡"></button>
+        <span class="note"><code>fast</code></span>
+        <button class="icon-swap is-lg" data-icon-swap="ArrowRight|ArrowLeft" data-swap-speed="base" aria-label="常规速度过渡"></button>
+        <span class="note"><code>base</code>（默认，180ms）</span>
+        <button class="icon-swap is-lg" data-icon-swap="ArrowRight|ArrowLeft" data-swap-speed="slow" aria-label="缓慢过渡"></button>
+        <span class="note"><code>slow</code>（280ms）</span>
+      </div>
     </div>
   </section>
 

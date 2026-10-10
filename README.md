@@ -306,7 +306,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `theme.js` | 零依赖交互脚本（Modal / Drawer / Toast / Tabs / Accordion，暴露 `window.XL`） |
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `assets/icons/morph.min.js` | 图标形变运行时（morphicons 1.7.1，MIT，vendored IIFE，约 16 KB） |
-| `assets/morph-icons.js` | 图标形变适配器（策展白名单 / 触发器 / 无障碍 / 动效映射） |
+| `assets/morph-icons.js` | 图标形变 + 换图标过渡适配器（策展白名单 / 触发器 / 无障碍 / 动效映射） |
 | `preview/index.html` | 主题总览预览页 |
 | `preview/component-*.html` | 27 个组件预览页 |
 | `preview/tokens.html` | 设计 Token 参考页（颜色/字号/间距/圆角/阴影/动效/断点） |
@@ -324,8 +324,8 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `audit-motion.mjs` | 动效 Token、控制入口、关键帧与浮层退出契约审计 |
 | `tests/visual.spec.mjs` | Playwright 桌面、手机、交互和减少动效回归 |
 | `docs/motion-system.md` | 动效 Token、控制方式和设计原则 |
-| `docs/icon-morph.md` | 图标形变用法、可用配对白名单与增补流程 |
-| `tests/morph.spec.mjs` | 图标形变回归（`file://` / 触发器 / 白名单 / 减少动效） |
+| `docs/icon-morph.md` | 图标形变与换图标过渡用法、配对白名单与增补流程 |
+| `tests/morph.spec.mjs` | 图标形变 + 换图标回归（`file://` / 触发器 / 白名单 / 减少动效） |
 | `docs/migration-1.5.md` | 1.x 到 1.5 的无破坏升级说明 |
 | `.github/workflows/audit.yml` | GitHub Actions 自动构建与审计 |
 | `specs/小亮主题-PRD.md` | 原始 PRD |
@@ -362,7 +362,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Badge | `preview/component-badge.html` | 计数 / 圆点 / 语义色 / 附着角标 |
 | Stepper | `preview/component-stepper.html` | 水平 / 垂直 / 已完成·进行中·未开始 |
 | Drawer | `preview/component-drawer.html` | 右 / 左 / 底部三向抽屉（依赖 theme.js） |
-| Icon Morph | `preview/component-morph-icon.html` | 图标路径形变：22 组策展配对 / 4 种触发器 / 5 档尺寸（依赖 morph.min.js） |
+| Icon Morph | `preview/component-morph-icon.html` | 图标路径形变：23 组策展配对 / 4 种触发器 / 5 档尺寸（依赖 morph.min.js） |
 
 组件样式已聚合到 `components.css`（类名规范：`.btn` / `.alert` / `.input` / `.card` / `.tag` 等），可直接引入或按需复制。各组件的结构化定义见 `components/*.json`。
 
@@ -383,12 +383,24 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 <i class="morph-icon" data-morph-icon="menu-x" aria-label="菜单与关闭"></i>
 ```
 
-- **配对只能取自 22 组策展白名单**——路径形变在子路径数量差异过大时中间态会塌陷，任意配对观感不可控；
+- **配对只能取自 23 组策展白名单**——路径形变在子路径数量差异过大时中间态会塌陷，任意配对观感不可控；
 - 触发器 `click`（默认）/ `hover` / `view` / `state`，尺寸 5 档（`is-xs`~`is-xl`）；
 - 速度映射到主题节奏：`base` ≈180ms、`slow` ≈280ms、`emphasis` ≈420ms；
 - 受 `<html data-motion="off">` 与系统 `prefers-reduced-motion: reduce` 双重约束（命中任一时立即跳变，但状态切换照常完成）。
 
-完整属性表、白名单、增补流程与审计纪律见 `docs/icon-morph.md`。
+### 换图标过渡（Icon Swap）
+
+同一运行时还提供**换图标过渡**：在两个**不同**图标之间淡入淡出（可带轻微缩放）。它不做路径插值，所以**不需要白名单**，任意 Lucide 图标名都能配对。
+
+```html
+<i class="icon-swap is-xl" data-icon-swap="Bell|BellOff" aria-label="通知开关"></i>
+```
+
+- 风格 `fade`（默认）/ `fade-scale` / `scale`；触发器 `click` / `hover` / `state`；尺寸 5 档；
+- 时长读 `--motion-duration-*`（`fast` 120ms / `base` 180ms / `slow` 280ms）；
+- 同样受 `data-motion="off"` 与 `prefers-reduced-motion` 约束，命中时**立即换、不播过渡**。
+
+完整属性表、关键帧与 JS API 见 `docs/icon-morph.md`。
 
 ## 可访问性
 

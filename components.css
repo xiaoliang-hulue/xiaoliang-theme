@@ -4,7 +4,7 @@
    如需修改，请编辑对应的 preview/component-*.html 后重新运行本脚本。
    ═══════════════════════════════════════════════════════════════ */
 
-/* 由 extract-components-css.mjs 聚合去重生成：共 326 条规则，合并完全重复 46 条。 */
+/* 由 extract-components-css.mjs 聚合去重生成：共 344 条规则，合并完全重复 46 条。 */
 
 .accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden }
 .accordion-item { border-bottom: 1px solid var(--color-border-subtle) }
@@ -194,6 +194,24 @@
 .morph-icon[aria-pressed="true"], .morph-icon.is-accent { color: var(--color-primary) }
 .morph-icon:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }
 .btn .morph-icon, .alert .morph-icon { --morph-icon-size: 18px }
+.icon-swap { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: var(--swap-icon-size, 24px); height: var(--swap-icon-size, 24px); padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: 0; cursor: default; border-radius: var(--radius-sm) }
+.icon-swap svg { display: block; width: 100%; height: 100% }
+.icon-swap svg path, .icon-swap svg line, .icon-swap svg circle, .icon-swap svg rect, .icon-swap svg polyline, .icon-swap svg polygon { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
+.icon-swap.is-xs { --swap-icon-size: 16px }
+.icon-swap.is-sm { --swap-icon-size: 18px }
+.icon-swap.is-lg { --swap-icon-size: 28px }
+.icon-swap.is-xl { --swap-icon-size: 40px }
+.icon-swap[role="button"], button.icon-swap { cursor: pointer }
+.icon-swap[aria-pressed="true"], .icon-swap.is-accent { color: var(--color-primary) }
+.icon-swap:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }
+.btn .icon-swap, .alert .icon-swap { --swap-icon-size: 18px }
+.icon-swap.is-out, .icon-swap.is-in { animation-duration: var(--swap-dur, 180ms); animation-timing-function: var(--motion-ease-standard); animation-fill-mode: backwards }
+.icon-swap.is-out { animation-name: xl-swap-out }
+.icon-swap.is-in { animation-name: xl-swap-in }
+.icon-swap.is-fade-scale.is-out { animation-name: xl-swap-out-scale }
+.icon-swap.is-fade-scale.is-in { animation-name: xl-swap-in-scale }
+.icon-swap.is-scale.is-out { animation-name: xl-swap-scale-out }
+.icon-swap.is-scale.is-in { animation-name: xl-swap-scale-in }
 .pagination { display: inline-flex; align-items: center; gap: var(--space-1); list-style: none; margin: 0; padding: 0 }
 .page-item { display: inline-flex }
 .page-link, .page-ellipsis { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 var(--space-2); font-size: var(--text-sm); font-weight: var(--font-medium); line-height: 1; color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: transform var(--motion-duration-base) var(--motion-ease-spring), background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); text-decoration: none; user-select: none }

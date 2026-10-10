@@ -4,12 +4,37 @@
 
 ---
 
+## [1.7.0] - 2026-10-10
+
+### 新增：换图标过渡（Icon Swap）
+
+- **第二路图标动效**。形变是「同一轮廓改变形状」，换图标过渡是「两个**不同**图标之间淡入淡出（可带轻微缩放）」。由**同一个适配器** `assets/morph-icons.js` 实现，共用 Lucide 取用、触发器、无障碍与 `data-motion` 接线，不新增运行时文件。
+- **不需要白名单**（与形变的关键区别）：形变必须策展是因为路径插值在子路径数差异过大时会塌陷；换图标只是换掉整个 SVG 再淡入淡出，无插值，故任意 Lucide 图标名均可配对。
+- **API**：`<span class="icon-swap" data-icon-swap="Bell|BellOff">`，配 `data-swap-trigger`（`click` 默认 / `hover` / `state`）、`data-swap-style`（`fade` 默认 / `fade-scale` / `scale`）、`data-swap-speed`（`fast` / `base` / `slow`）；尺寸 5 档 `is-xs`~`is-xl`，与 `.morph-icon` 同规格。编程式 `XLMorph.swapTo(el, name)`。
+- **多子路径正确性**：图标由 `LUCIDE.createElement(IconNode)` 构建（而非拼 `<path d>`），实测 `BellOff` 的 4 条子路径整体替换，不只换第一条；源码仍不留任何路径数据（守住图标审计纪律第 6 条）。
+- **关键帧**：`xl-swap-out` / `xl-swap-in` 及 `-scale` 变体共 6 个，定义在 `colors_and_type.css` 动效区（token 区外）。只用 `opacity` 与 `transform`——图标仅 24×24，缩放幅度复用 `--motion-scale-press`，避免过渡比图标本身还抢眼。
+- **Token 单一真值**：时长由 JS 读 `--motion-duration-fast/base/slow` 后写入 `--swap-dur`，CSS 只消费变量。
+- **减动效判定修在一处**：`show()` 内部判断 `swapReduced()`，使点击/悬停/状态/编程式四条路径一次覆盖。（初版只在编程式 API 里判断，被 `swap: reduce` 用例当场抓出「点击仍播过渡」。）
+
+### 变更：白名单开放 `copy ↔ check`（22 → 23 组）
+
+- 用户决定开放此前 C 档的 `copy ↔ check`（`Copy` 2 子路径 → `Check` 1 子路径，`blobRatio` 0.73，中间态有钩状伪影但人眼复核可接受）。
+- 注册表、`docs/icon-morph.md` 配对表、预览页网格、README 两处、SKILL.md 第 7 条约束同步更新为 23 组。
+- **测试里的硬编码配对数改为具名常量** `WHITELIST_SIZE`（`tests/morph.spec.mjs`）——原先 4 处散落的 `toBe(22)` 在增删配对时容易漏改，改名常量后配对数只在**一个地方**定义，且注释写明「改白名单必须同步此处」。
+
+### 验证
+
+- `npm run build` → components.css **344 条规则**（原 326，新增 18 条 `.icon-swap*`）
+- `npm run audit` 四门全绿：contrast 44 项 fail=0、a11y **31 页 error=0 warning=0**、icons 0 问题、motion 契约通过
+- `npx playwright test` → **19/19 全绿**（形变 7 + 换图标 6 + 既有用例 6）
+- 新增 6 条 swap 回归：多子路径挂载、click 过渡、state 双向同步、`prefers-reduced-motion` 立即换、`data-motion="off"` 立即换、非法配对拒绝并告警
+
 ## [1.6.0] - 2026-10-09
 
 - **新增：图标形变（Icon Morph），第 27 个组件**。在两个 Lucide 图标之间做**路径形变**（`menu ↔ x`、`play ↔ pause`、`lock ↔ unlock` 等），填补「静态图标」与「Lottie 动画图标」之间的空白。新增 `preview/component-morph-icon.html`、适配器 `assets/morph-icons.js`、用法文档 `docs/icon-morph.md` 与回归测试 `tests/morph.spec.mjs`。
 - **引擎选型：morphicons 1.7.1（MIT）**。它是「通用描边图标形变」库，**直接消费 Lucide 的 IconNode 数据**（类型定义原文：`Lucide is neither a dependency nor a peer`），因此**不新增任何图标文件**，图标源仍是 `assets/icons/lucide.min.js`（v1.8.0 锁版本不变）。零运行时依赖（5 个 peer 全部 `optional: true`），ESM-only 且无预打包产物，故按主题既有惯例**预打包为 vendored IIFE** `assets/icons/morph.min.js`（16,642 B，其中引擎 16,042 B / gzip 7,178 B），与 `lucide.min.js` 并列提交，消费者侧零构建。
 - **为什么不选 Lordicon（重要决策）**。其[主题授权条款](https://lordicon.com/docs/license/themes)明文禁止「把图标作为独立文件包含进产品」「允许用户改颜色/描边/尺寸或自定义触发」「用在以图标为核心的产品（含开源插件/库/图标包）」——本主题是 MIT 分发且用户在 HTML/CSS 中换图标改色，**三条同时命中**；免费档另禁止 `otherwise transfer or distribute the icons … (even for free)` 且强制署名。技术侧同样不兼容：实测自托管运行时在 `file://` 下报 `Fetch API cannot load file:///… URL scheme "file" is not supported.`，严格 CSP 需放宽 `style-src`，且包内 `prefers-reduced-motion` 出现 **0 次**。完整论证见 `outputs/icon-feasibility/可行性验证报告.md`。
-- **白名单是硬约束，不是建议**。路径形变**不保证观感**：子路径数量差异过大时中间态会塌成实心块或细碎斑点。批量实测 28 组语义成对图标后（`poc-pairs.mjs` + `blobRatio = max(ink@34%, ink@67%) / max(ink@0%, ink@100%)` + 人眼复核关键帧对比图），确定开放 **22 组 A 档**；`sun↔moon`(9↔1 子路径, blob 1.68)、`loader↔loader-2`(8↔1, blob 1.70)、`grid↔list`(5↔6, blob 0.41) **禁止开放**；`chevron` 两向虽技术正确但中间态塌成折角（旋转更合适），同样不开放。适配器对表外配对**拒绝挂载并告警**，`tests/morph.spec.mjs` 对此有断言。
+- **白名单是硬约束，不是建议**。路径形变**不保证观感**：子路径数量差异过大时中间态会塌成实心块或细碎斑点。批量实测 28 组语义成对图标后（`poc-pairs.mjs` + `blobRatio = max(ink@34%, ink@67%) / max(ink@0%, ink@100%)` + 人眼复核关键帧对比图），确定开放 **23 组**（A 档 22 组 + C 档 `copy↔check` 经人眼复核后开放）；`sun↔moon`(9↔1 子路径, blob 1.68)、`loader↔loader-2`(8↔1, blob 1.70)、`grid↔list`(5↔6, blob 0.41) **禁止开放**；`chevron` 两向虽技术正确但中间态塌成折角（旋转更合适），同样不开放。适配器对表外配对**拒绝挂载并告警**，`tests/morph.spec.mjs` 对此有断言。
 - **动效标定（按 90% 时刻对齐主题节奏，而非库的 settle 判据）**：`fast`/`base` = `{stiffness:420, damping:30}` → 134ms（对齐 `--motion-duration-base` 180ms）；`slow` = `{300, 30}` → 200ms（对齐 280ms）；`emphasis` = `{170, 26}` → 300ms（对齐 420ms）。**刻意剔除库自带的 `bouncy`**（过冲到 `x=1.244` 后来回振荡近 1 秒，图标形变会「弹坏」）。库自身 `settle()` 判据（`|1−x| < 0.001 && |v| < 0.02`）尾段极长且不可感知（`base` 约 450ms），不作为设计依据。
 - **无障碍接线（必须显式覆盖库默认值）**：morphicons 的 `reducedMotion` 默认是 `"never"`（**不跟随系统**），适配器无条件改为——`<html data-motion="off">` → `"always"`，其余 → `"user"`（跟随系统）；两种情况均**立即跳变但状态切换照常完成**。属性变化实时生效，无需刷新。装饰性用法自动 `aria-hidden="true"`，交互式用法必须有可访问名，非按钮宿主自动补 `role="button"` / `tabindex="0"` 并接管 `Enter`/`Space`。
 - **CSP 与审计均通过（实测）**：IIFE 内无 `eval` / `new Function` / `innerHTML` / `.style.` / `fetch` / `XMLHttpRequest`，核心只做 `el.setAttribute("d", …)`，在 `default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'` 下零 console 错误/告警。图标审计的三条新纪律已写入 `docs/icon-morph.md`：源码中不得出现形变用 `<path d>`、不得留空 `<svg>` 字面量、`outputs/` 也在扫描范围内（含非 Lucide `<svg>` 的 Demo 会让 `audit:icons` 变红）。

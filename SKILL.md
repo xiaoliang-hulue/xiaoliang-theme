@@ -23,8 +23,9 @@ user-invocable: true
   4. 升级图标库时，必须**全量**重新抽取所有内联路径（含 CSS mask），禁止只更新部分图标。
   5. 提交前用 `npm run audit:icons` 校验：任何非 Lucide 路径、版本不符、emoji 引用都会报错（与 `audit:a11y` 并列，可用 `npm run audit` 一次跑全）。
   6. **图标形变（`docs/icon-morph.md`）只允许用 `assets/icons/morph.min.js`**（morphicons 1.7.1，MIT，vendored 产物）配合 `assets/morph-icons.js` 适配器；**禁止**引入 GSAP / flubber / SVG Morpheus / Lottie / Lordicon 或任何远程资源（Lordicon 的授权条款明确禁止本主题的用法）。
-  7. 形变配对**只能取自 `assets/morph-icons.js` 内的策展白名单**（22 组）。表外配对的中间态观感不可控（`sun↔moon`、`loader↔loader-2`、`grid↔list` 实测会塌陷），新增配对必须先跑 `outputs/icon-feasibility/morph-poc/poc-pairs.mjs` 的批量关键帧 + `blobRatio` 指标 + 人眼复核流程。
+  7. 形变配对**只能取自 `assets/morph-icons.js` 内的策展白名单**（23 组）。表外配对的中间态观感不可控（`sun↔moon`、`loader↔loader-2`、`grid↔list` 实测会塌陷），新增配对必须先跑 `outputs/icon-feasibility/morph-poc/poc-pairs.mjs` 的批量关键帧 + `blobRatio` 指标 + 人眼复核流程。
   8. 形变图标的 `<path d>` **不得出现在源码中**（适配器在运行时用 `createElementNS` 建 SVG）；源码里只留 `[data-morph-icon]` 声明。形变只受白名单、`data-morph-speed`（≤420ms）、`data-motion="off"` 与 `prefers-reduced-motion` 四重约束，详见 `docs/motion-system.md` 的形变例外条款。
+  9. **换图标过渡用 `data-icon-swap="A|B"`（同一适配器 `assets/morph-icons.js`），不要另起 GSAP / anime.js 等动画库**。它与形变的区别必须分清：形变是「同一轮廓改形状」故**必须走白名单**，换图标是「两个不同图标间淡入淡出」故**任意 Lucide 图标名均可**。同样受 `data-motion="off"` 与 `prefers-reduced-motion` 约束（此时立即换、不播过渡）。
 - 正文对比度需 ≥ 4.5:1，禁用文字按规范豁免。
 - **深色 Token 硬性约束（引用/派生本主题时必须遵守）**：
   1. **深色主色阶是倒序的**：`--primary-50` 最暗（`#0f1f4d`）、`--primary-950` 最亮（`#eef4ff`）。派生浅底类语义别名（`--color-primary-subtle`）时必须映射到 **50 端**，映射到 950 端会得到近白色块（幽灵按钮悬停、`.tag-primary`、`.avatar.primary`、激活导航项都会炸）。

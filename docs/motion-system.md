@@ -40,3 +40,9 @@
 - 不使用会过冲振荡的弹性档（已剔除 `bouncy`）；
 - 同样受 `<html data-motion="off">` 与系统 `prefers-reduced-motion: reduce` 双重约束，命中任一时**立即跳变、不播放补间**，但状态切换必须照常完成；
 - 只改写 `d`，不改变元素尺寸与文档流，因此不引起重排。
+
+## 换图标过渡不算例外
+
+换图标过渡（`data-icon-swap`，见 `docs/icon-morph.md`）**回到本节的第一条原则**：它只动 `opacity` 与 `transform`，不碰 `d`，因此**不属例外**，也无需白名单（不存在子路径插值塌陷问题）。
+
+约束：时长读 `--motion-duration-*`（`fast` 120ms / `base` 180ms / `slow` 280ms，**不得超过 420ms**）；缩放幅度复用 `--motion-scale-press`；`data-motion="off"` 与 `prefers-reduced-motion: reduce` 命中时**立即换图标、不播过渡**。

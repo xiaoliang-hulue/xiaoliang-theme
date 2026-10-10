@@ -48,6 +48,7 @@
     'panel-left-right': { from: 'PanelLeft', to: 'PanelRight' },  /* 布局方向 */
     'toggle-left-right': { from: 'ToggleLeft', to: 'ToggleRight' }, /* 开关方向 */
     'check-alert': { from: 'CircleCheck', to: 'AlertCircle' },    /* 校验状态 */
+    'copy-check': { from: 'Copy', to: 'Check' },                   /* 复制 / 已复制（C 档经人眼复核后开放） */
     'trending-up-down': { from: 'TrendingUp', to: 'TrendingDown' }, /* 指标升降 */
     'mic-mic-off': { from: 'Mic', to: 'MicOff' },                 /* 麦克风 */
     'wifi-wifi-off': { from: 'Wifi', to: 'WifiOff' },             /* 网络状态 */
@@ -65,6 +66,9 @@
   };
 
   var instances = [];
+  var swapInstances = [];
+  /* 最近一次 init 的挂载数，供测试与调试查看（形变数 / 换图标数） */
+  var lastCounts = { morph: 0, swap: 0 };
 
   function warn(message) {
     if (window.console && window.console.warn) window.console.warn('[XLMorph] ' + message);
@@ -233,6 +237,124 @@
     }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-motion'] });
   }
 
+  /* ===== 换图标过渡（Icon Swap） =====
+   * 与形变互补：形变是「同一轮廓改变形状」，换图标是「两个不同图标之间过渡」。
+   * 交叉淡化不做子路径插值，因此**不需要白名单**——任意 Lucide 图标名均可配对
+   * （形变必须策展是因为中间态会塌陷，换图标没有这个风险）。
+   * 之所以放在本文件而非另起一个运行时：Lucide 取用、触发器、无障碍、
+   * data-motion 接线全部共用，省掉一整套重复基建。 */
+
+  /* 时长直接读主题 motion token，保持 Token 单一真值 */
+  var SWAP_SPEED_TOKEN = {
+    fast: '--motion-duration-fast',
+    base: '--motion-duration-base',
+    slow: '--motion-duration-slow'
+  };
+
+  function swapDuration(el) {
+    var speed = el.getAttribute('data-swap-speed') || 'base';
+    var token = SWAP_SPEED_TOKEN[speed] || SWAP_SPEED_TOKEN.base;
+    var n = parseFloat(window.getComputedStyle(el).getPropertyValue(token));
+    return isNaN(n) ? 180 : n;
+  }
+
+  /* 与引擎的 motionMode() 同源：data-motion="off" 或系统 reduce 时立即跳变 */
+  function swapReduced() {
+    if (document.documentElement.getAttribute('data-motion') === 'off') return true;
+    return typeof window.matchMedia === 'function'
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function mountSwap(el) {
+    if (el.__xlSwap) return true;
+    var names = (el.getAttribute('data-icon-swap') || '').split('|');
+    if (names.length !== 2 || !LUCIDE[names[0]] || !LUCIDE[names[1]]) {
+      warn('data-icon-swap 需要「图标A|图标B」两个有效的 Lucide 图标名，已跳过。');
+      return false;
+    }
+
+    var trigger = el.getAttribute('data-swap-trigger') || 'click';
+    var style = el.getAttribute('data-swap-style') || 'fade';
+    var interactive = trigger === 'click' || trigger === 'state';
+    var showing = 0;
+
+    function build(name) {
+      /* 交给 Lucide 运行时构建，源码里不出现任何 <path d>（见 SKILL.md 图标纪律
+       * 第 6 条）；createElement 自带 Lucide 默认属性与 viewBox。 */
+      var node = LUCIDE.createElement(LUCIDE[name]);
+      node.setAttribute('aria-hidden', 'true');
+      node.setAttribute('focusable', 'false');
+      return node;
+    }
+
+    el.classList.add('icon-swap');
+    if (style !== 'fade') el.classList.add('is-' + style);
+    var current = build(names[0]);
+    el.appendChild(current);
+
+    function show(idx, animate) {
+      if (idx === showing) return;
+      showing = idx;
+      var next = build(names[idx]);
+      /* reduced-motion 判定放在这里而不是各调用点：触发器与编程式 API 一次覆盖，
+       * 避免「点击仍播过渡」这类漏判（曾由测试 swap: reduce 用例抓到）。 */
+      if (!animate || swapReduced()) {
+        el.replaceChild(next, current);
+        current = next;
+        return;
+      }
+      var dur = swapDuration(el);
+      el.style.setProperty('--swap-dur', dur + 'ms');
+      el.classList.add('is-out');
+      window.setTimeout(function () {
+        el.classList.remove('is-out');
+        el.replaceChild(next, current);
+        current = next;
+        el.classList.add('is-in');
+        window.setTimeout(function () { el.classList.remove('is-in'); }, dur);
+      }, dur / 2);
+    }
+
+    if (trigger === 'hover') {
+      el.addEventListener('pointerenter', function () { show(1, true); });
+      el.addEventListener('pointerleave', function () { show(0, true); });
+      /* 键盘焦点与 hover 等效，避免只有鼠标用户能看到状态变化 */
+      el.addEventListener('focusin', function () { show(1, true); });
+      el.addEventListener('focusout', function () { show(0, true); });
+    } else if (trigger === 'state') {
+      if (!el.hasAttribute('aria-pressed')) el.setAttribute('aria-pressed', 'false');
+      var syncFromPressed = function () {
+        show(el.getAttribute('aria-pressed') === 'true' ? 1 : 0, true);
+      };
+      makeInteractive(el, function () {
+        el.setAttribute('aria-pressed', el.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      });
+      new MutationObserver(syncFromPressed).observe(el, { attributes: true, attributeFilter: ['aria-pressed'] });
+      syncFromPressed();
+    } else {
+      makeInteractive(el, function () { show(showing === 0 ? 1 : 0, true); });
+    }
+
+    applyA11y(el, { interactive: interactive });
+
+    el.__xlSwap = {
+      el: el,
+      names: names,
+      showing: function () { return showing; },
+      to: function (iconName, animate) {
+        var idx = names.indexOf(iconName);
+        if (idx < 0) {
+          warn('XLMorph.swapTo：图标「' + iconName + '」不在 data-icon-swap 的配对内。');
+          return false;
+        }
+        show(idx, animate !== false);
+        return true;
+      }
+    };
+    swapInstances.push(el.__xlSwap);
+    return el.__xlSwap;
+  }
+
   function init(root) {
     if (!ENGINE || !LUCIDE) {
       warn(depsHint() + 'XLMorph.init 已跳过。');
@@ -244,13 +366,24 @@
     Array.prototype.forEach.call(nodes, function (el) {
       if (mount(el)) count++;
     });
+    var swapNodes = scope.querySelectorAll('[data-icon-swap]');
+    var swapCount = 0;
+    Array.prototype.forEach.call(swapNodes, function (el) {
+      if (mountSwap(el)) swapCount++;
+    });
     watchMotion();
-    return count;
+    lastCounts.morph = count;
+    lastCounts.swap = swapCount;
+    return count + swapCount;
   }
 
   function refresh(root) {
-    Array.prototype.forEach.call((root || document).querySelectorAll('[data-morph-icon]'), function (el) {
+    var scope = root || document;
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-morph-icon]'), function (el) {
       if (!el.__xlMorph) mount(el);
+    });
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-icon-swap]'), function (el) {
+      if (!el.__xlSwap) mountSwap(el);
     });
     return init(root);
   }
@@ -270,10 +403,23 @@
     return true;
   }
 
+  /* 编程式控制：换图标过渡。XLMorph.swapTo(el, 'BellOff') —— 与 to() 同构，
+   * 但换图标不走形变引擎，图标名只需在 data-icon-swap 的配对内即可。 */
+  function swapTo(el, iconName, animate) {
+    var record = el && el.__xlSwap;
+    if (!record) {
+      warn('XLMorph.swapTo 需要已挂载的换图标元素（data-icon-swap）。');
+      return false;
+    }
+    return record.to(iconName, animate);
+  }
+
   window.XLMorph = {
     init: init,
     refresh: refresh,
     to: to,
+    swapTo: swapTo,
+    counts: lastCounts,
     pairs: PAIRS,
     version: 'morphicons@1.7.1'
   };

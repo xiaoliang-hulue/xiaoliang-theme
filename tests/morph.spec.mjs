@@ -9,6 +9,11 @@ import { pathToFileURL } from 'node:url';
 const root = path.resolve(import.meta.dirname, '..');
 const pageUrl = pathToFileURL(path.join(root, 'preview', 'component-morph-icon.html')).href;
 
+/* 白名单配对数。**改动白名单时必须同步这里**，否则下面的断言会在「注册表 / 预览页
+ * 格子 / 网格」三者数量不一致时报错——这正是这道守卫的用途：
+ * 2026-10-10 开放 copy-check 后由 22 改为 23。 */
+const WHITELIST_SIZE = 23;
+
 async function open(page, options = {}) {
   const errors = [];
   page.on('pageerror', (error) => errors.push(String(error)));
@@ -60,8 +65,8 @@ test('file:// 下所有形变图标全部挂载，且无控制台错误', async 
 
   expect(stats.hosts).toBeGreaterThanOrEqual(30);
   expect(stats.mounted).toBe(stats.hosts);
-  expect(stats.cells).toBe(22);
-  expect(stats.grid).toBe(22);
+  expect(stats.cells).toBe(WHITELIST_SIZE);
+  expect(stats.grid).toBe(WHITELIST_SIZE);
   expect(stats.version).toBe('morphicons@1.7.1');
   expect(stats.engine).toBe('function');
   expect(errors).toEqual([]);
@@ -153,13 +158,13 @@ test('白名单：图标全部来自 Lucide v1.8.0，表外配对会被拒绝并
     return bad;
   });
   expect(unknownIcons).toEqual([]);
-  expect(await page.evaluate(() => Object.keys(window.XLMorph.pairs).length)).toBe(22);
+  expect(await page.evaluate(() => Object.keys(window.XLMorph.pairs).length)).toBe(WHITELIST_SIZE);
 
   const gridKeys = await page.evaluate(() =>
     Array.from(document.querySelectorAll('.grid [data-morph-icon]')).map((el) => el.getAttribute('data-morph-icon'))
   );
   expect(gridKeys.filter((key) => !gridKeys.includes(key))).toEqual([]);
-  expect(new Set(gridKeys).size).toBe(22);
+  expect(new Set(gridKeys).size).toBe(WHITELIST_SIZE);
 
   // sun-moon 是实测会塌陷的组合，必须被拒绝挂载而不是悄悄渲染
   const rejected = await page.evaluate(() => {
@@ -210,5 +215,107 @@ test('data-motion="off" 时立即跳到目标，且切换后无需重载页面',
   );
   await page.waitForTimeout(300);
   expect(await distinctSamples(page)).toBeLessThanOrEqual(2);
+  expect(errors).toEqual([]);
+});
+
+/* ===== 换图标过渡（Icon Swap）=====
+   与形变共用 Lucide / 触发器 / 无障碍基建，但走的是「换 SVG」而非「补间 path」。 */
+
+test('swap: 全部换图标元素挂载出多子路径 SVG，且无控制台错误', async ({ page }) => {
+  const errors = await open(page);
+  const stats = await page.evaluate(() => {
+    const hosts = Array.from(document.querySelectorAll('[data-icon-swap]'));
+    return {
+      hosts: hosts.length,
+      withSvg: hosts.filter((el) => el.querySelector('svg')).length,
+      // 多子路径图标（如 BellOff 有 4 条）必须整体换掉，不能只换第一条
+      multiChild: Array.from(document.querySelectorAll('[data-icon-swap="Bell|BellOff"] svg'))
+        .every((svg) => svg.children.length > 1),
+      counts: window.XLMorph.counts,
+    };
+  });
+  expect(stats.hosts).toBeGreaterThanOrEqual(12);
+  expect(stats.withSvg).toBe(stats.hosts);
+  expect(stats.multiChild).toBe(true);
+  expect(stats.counts.swap).toBe(stats.hosts);
+  expect(errors).toEqual([]);
+});
+
+test('swap: click 触发在两个图标间过渡', async ({ page }) => {
+  const errors = await open(page);
+  const btn = page.locator('[data-icon-swap="Bell|BellOff"]').first();
+  const before = await btn.innerHTML();
+  await btn.click();
+  // 过渡中途应先淡出（.is-out），结束后换上新图标并淡入（.is-in）
+  await page.waitForFunction(
+    () => document.querySelector('[data-icon-swap="Bell|BellOff"]').classList.contains('is-in'),
+    undefined,
+    { timeout: 5000 }
+  );
+  await page.waitForTimeout(300);
+  const after = await btn.innerHTML();
+  expect(after).not.toBe(before);
+  expect(errors).toEqual([]);
+});
+
+test('swap: state 触发与 aria-pressed 双向同步', async ({ page }) => {
+  const errors = await open(page);
+  const btn = page.locator('[data-icon-swap="Star|Heart"]').first();
+  await expect(btn).toHaveAttribute('aria-pressed', 'false');
+  const before = await btn.innerHTML();
+  await btn.click();
+  await expect(btn).toHaveAttribute('aria-pressed', 'true');
+  await page.waitForTimeout(400);
+  expect(await btn.innerHTML()).not.toBe(before);
+  // 外部改属性也要跟上
+  await page.evaluate(() => document.querySelector('[data-icon-swap="Star|Heart"]').setAttribute('aria-pressed', 'false'));
+  await page.waitForTimeout(400);
+  expect(await btn.innerHTML()).toBe(before);
+  expect(errors).toEqual([]);
+});
+
+test('swap: prefers-reduced-motion: reduce 时立即换，不播过渡', async ({ page }) => {
+  const errors = await open(page, { reducedMotion: 'reduce' });
+  const btn = page.locator('[data-icon-swap="Bell|BellOff"]').first();
+  const before = await btn.innerHTML();
+  await btn.click();
+  // 立即完成：既没进入 is-out，也没有动画类残留
+  expect(await btn.getAttribute('class')).not.toContain('is-out');
+  await page.waitForTimeout(250);
+  expect(await btn.innerHTML()).not.toBe(before);
+  expect(errors).toEqual([]);
+});
+
+test('swap: data-motion="off" 时立即换，且切换后无需重载页面', async ({ page }) => {
+  const errors = await open(page);
+  const btn = page.locator('[data-icon-swap="Bell|BellOff"]').first();
+  await page.evaluate(() => document.documentElement.setAttribute('data-motion', 'off'));
+  const before = await btn.innerHTML();
+  await btn.click();
+  await page.waitForTimeout(250);
+  expect(await btn.innerHTML()).not.toBe(before);
+  expect(await btn.getAttribute('class')).not.toContain('is-out');
+  expect(errors).toEqual([]);
+});
+
+test('swap: 配对非法时拒绝挂载并告警', async ({ page }) => {
+  const errors = [];
+  const warns = [];
+  page.on('pageerror', (error) => errors.push(String(error)));
+  page.on('console', (m) => {
+    if (m.type() === 'error') errors.push(m.text());
+    if (m.type() === 'warning' && m.text().includes('[XLMorph]')) warns.push(m.text());
+  });
+  await page.goto(pageUrl);
+  await page.waitForFunction(() => window.XLMorph);
+  const rejected = await page.evaluate(() => {
+    const el = document.createElement('span');
+    el.setAttribute('data-icon-swap', 'Bell|NotARealIconName');
+    document.body.appendChild(el);
+    const n = window.XLMorph.refresh();
+    return { mounted: !!el.querySelector('svg'), total: n };
+  });
+  expect(rejected.mounted).toBe(false);
+  expect(warns.some((w) => w.includes('data-icon-swap'))).toBe(true);
   expect(errors).toEqual([]);
 });
