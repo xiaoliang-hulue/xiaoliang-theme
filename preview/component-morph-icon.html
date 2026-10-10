@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>图标形变 Icon Morph · 小亮主题</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<script src="../assets/icons/lucide.min.js"></script>
+<style>
+/* Page scaffold — 本页演示图标形变，脚手架样式不进入 components.css 聚合 */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--color-background); color: var(--color-text); font-family: var(--font-sans); line-height: 1.6; }
+.container { max-width: var(--container-max); margin: 0 auto; padding: var(--space-8) var(--space-6); }
+.header { margin-bottom: var(--space-10); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
+.header h1 { margin: 0; font-size: var(--text-3xl); font-weight: var(--font-semibold); }
+.header p { margin: var(--space-2) 0 0; color: var(--color-text-secondary); }
+.section { margin-bottom: var(--space-12); }
+.section h2 { margin: 0 0 var(--space-2); font-size: var(--text-2xl); font-weight: var(--font-semibold); }
+.section > p { margin: 0 0 var(--space-5); font-size: var(--text-sm); color: var(--color-text-secondary); }
+.rowline { display: flex; align-items: center; gap: var(--space-4); padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border-subtle); flex-wrap: wrap; }
+.rowline:last-child { border-bottom: none; }
+.rowline .name { width: 150px; flex-shrink: 0; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-secondary); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: var(--space-2); }
+.cell { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); padding: var(--space-3) var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.cell .key { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-text-secondary); }
+.cell .desc { font-size: var(--text-xs); color: var(--color-text-muted); text-align: center; }
+.stack { display: flex; flex-direction: column; gap: var(--space-4); }
+.tip { margin: 0 0 var(--space-4); padding: var(--space-3) var(--space-4); border: 1px dashed var(--color-border); border-radius: var(--radius-md); }
+.note { margin: 0; font-size: var(--text-sm); color: var(--color-text-muted); }
+.tip .note + .note { margin-top: var(--space-1); }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+.morph-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: var(--morph-icon-size, 24px); height: var(--morph-icon-size, 24px); padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: 0; cursor: default; border-radius: var(--radius-sm); }
+.morph-icon svg { display: block; width: 100%; height: 100%; }
+.morph-icon svg path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.morph-icon.is-xs { --morph-icon-size: 16px; }
+.morph-icon.is-sm { --morph-icon-size: 18px; }
+.morph-icon.is-lg { --morph-icon-size: 28px; }
+.morph-icon.is-xl { --morph-icon-size: 40px; }
+.morph-icon[role="button"], button.morph-icon { cursor: pointer; }
+.morph-icon[aria-pressed="true"], .morph-icon.is-accent { color: var(--color-primary); }
+.morph-icon:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.btn .morph-icon, .alert .morph-icon { --morph-icon-size: 18px; }
+/* @component-css-end */
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <h1>图标形变 Icon Morph</h1>
+    <p>在两个 Lucide 图标之间做路径形变，介于静态图标与 Lottie 动画图标之间 · 图标源仍只有 assets/icons/lucide.min.js（v1.8.0）</p>
+  </header>
+
+  <section class="section">
+    <h2>尺寸档位</h2>
+    <p>尺寸由 <code>--morph-icon-size</code> 控制，内置 <code>.is-xs</code>(16px) / <code>.is-sm</code>(18px) / 默认(24px) / <code>.is-lg</code>(28px) / <code>.is-xl</code>(40px) 五档；颜色继承当前的 <code>color</code>，因此放进主色按钮会自动跟随按钮前景色。</p>
+    <div class="rowline">
+      <span class="name">is-xs → is-xl</span>
+      <span class="morph-icon is-xs" data-morph-icon="menu-x" data-morph-trigger="hover"></span>
+      <span class="morph-icon is-sm" data-morph-icon="menu-x" data-morph-trigger="hover"></span>
+      <span class="morph-icon" data-morph-icon="menu-x" data-morph-trigger="hover"></span>
+      <span class="morph-icon is-lg" data-morph-icon="menu-x" data-morph-trigger="hover"></span>
+      <span class="morph-icon is-xl" data-morph-icon="menu-x" data-morph-trigger="hover"></span>
+      <span class="note">鼠标悬停或键盘聚焦即可预览</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>触发器</h2>
+    <p><code>data-morph-trigger</code> 四选一：<code>click</code>（默认）、<code>hover</code>、<code>view</code>（进入视口播放一次）、<code>state</code>（与 <code>aria-pressed</code> 双向绑定）。<code>data-morph-speed</code> 可选 <code>fast</code> / <code>base</code>（默认）/ <code>slow</code> / <code>emphasis</code>。</p>
+    <div class="rowline">
+      <span class="name">click（默认）</span>
+      <button class="morph-icon is-xl" id="morph-demo-click" data-morph-icon="menu-x" aria-label="菜单与关闭图标切换"></button>
+      <span class="note">点击在两侧图标间来回形变；Enter / Space 等效。非按钮元素会被自动补上 <code>role="button"</code> 与 <code>tabindex="0"</code>。</span>
+    </div>
+    <div class="rowline">
+      <span class="name">hover</span>
+      <span class="morph-icon is-xl" id="morph-demo-hover" data-morph-icon="bell-bell-off" data-morph-trigger="hover"></span>
+      <span class="note">悬停进入目标图标，移出返回起始图标；键盘聚焦同样生效。</span>
+    </div>
+    <div class="rowline">
+      <span class="name">view</span>
+      <span class="morph-icon is-xl" id="morph-demo-view" data-morph-icon="star-heart" data-morph-trigger="view"></span>
+      <span class="note">首次进入视口时播放一次，播放后停止观察，适合列表项与卡片。</span>
+    </div>
+    <div class="rowline">
+      <span class="name">state</span>
+      <button class="morph-icon is-xl" id="morph-demo-state" data-morph-icon="volume-volume-x" data-morph-trigger="state" aria-label="静音开关"></button>
+      <span class="note">点击翻转 <code>aria-pressed</code>，形变与语义状态同步；外部直接改属性也会跟着动。</span>
+    </div>
+    <div class="rowline">
+      <span class="name">&lt;i&gt; + click</span>
+      <i class="morph-icon is-xl" data-morph-icon="eye-eye-off" data-morph-label="密码可见性切换"></i>
+      <span class="note">这里用 <code>&lt;i&gt;</code> 承载；<code>data-morph-label</code> 会在运行时写成 <code>aria-label</code>，等价于直接写 <code>aria-label</code>。</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>可用配对（白名单）</h2>
+    <p>只有下面 22 组经过策展。子路径数量差异过大时路径形变会塌陷成实心块或细碎斑点，因此<strong>不要在表外随意配对</strong>，判定流程见 <a href="../docs/icon-morph.md">docs/icon-morph.md</a>。</p>
+    <div class="grid">
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="menu-x" aria-label="菜单与关闭图标形变演示"></button><span class="key">menu-x</span><span class="desc">菜单 / 关闭</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="plus-minus" aria-label="加号与减号图标形变演示"></button><span class="key">plus-minus</span><span class="desc">展开 / 折叠</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="play-pause" aria-label="播放与暂停图标形变演示"></button><span class="key">play-pause</span><span class="desc">播放 / 暂停</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="lock-unlock" aria-label="锁定与解锁图标形变演示"></button><span class="key">lock-unlock</span><span class="desc">锁定 / 解锁</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="eye-eye-off" aria-label="显示与隐藏图标形变演示"></button><span class="key">eye-eye-off</span><span class="desc">显示 / 隐藏</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="bell-bell-off" aria-label="通知开启与关闭图标形变演示"></button><span class="key">bell-bell-off</span><span class="desc">通知 / 免打扰</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="volume-volume-x" aria-label="有声与静音图标形变演示"></button><span class="key">volume-volume-x</span><span class="desc">有声 / 静音</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="download-upload" aria-label="下载与上传图标形变演示"></button><span class="key">download-upload</span><span class="desc">下载 / 上传</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="maximize-minimize" aria-label="放大与缩小图标形变演示"></button><span class="key">maximize-minimize</span><span class="desc">放大 / 缩小</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="smile-frown" aria-label="满意与不满意图标形变演示"></button><span class="key">smile-frown</span><span class="desc">满意 / 不满意</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="star-heart" aria-label="收藏与喜欢图标形变演示"></button><span class="key">star-heart</span><span class="desc">收藏 / 喜欢</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="square-circle" aria-label="方形与圆形图标形变演示"></button><span class="key">square-circle</span><span class="desc">方形 / 圆形</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="rotate-ccw-cw" aria-label="逆时针与顺时针图标形变演示"></button><span class="key">rotate-ccw-cw</span><span class="desc">撤销 / 重做</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="folder-folder-open" aria-label="目录收起与展开图标形变演示"></button><span class="key">folder-folder-open</span><span class="desc">目录 收起 / 展开</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="panel-left-right" aria-label="左右面板图标形变演示"></button><span class="key">panel-left-right</span><span class="desc">左栏 / 右栏</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="toggle-left-right" aria-label="开关左右图标形变演示"></button><span class="key">toggle-left-right</span><span class="desc">开关 左 / 右</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="check-alert" aria-label="通过与警示图标形变演示"></button><span class="key">check-alert</span><span class="desc">通过 / 警示</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="trending-up-down" aria-label="上升与下降图标形变演示"></button><span class="key">trending-up-down</span><span class="desc">上升 / 下降</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="mic-mic-off" aria-label="麦克风开启与静音图标形变演示"></button><span class="key">mic-mic-off</span><span class="desc">开麦 / 闭麦</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="wifi-wifi-off" aria-label="联网与断网图标形变演示"></button><span class="key">wifi-wifi-off</span><span class="desc">联网 / 断网</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="user-users" aria-label="单人与多人图标形变演示"></button><span class="key">user-users</span><span class="desc">单人 / 多人</span></div>
+      <div class="cell"><button class="morph-icon is-lg" data-morph-icon="arrow-right-left" aria-label="前进与后退图标形变演示"></button><span class="key">arrow-right-left</span><span class="desc">前进 / 后退</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>与既有组件组合</h2>
+    <p>形变图标本身就是 Lucide v1.8.0 的图标，因此可以和 <code>data-lucide</code> 静态图标并存于同一页，也可以直接嵌进按钮、提示条等既有组件。</p>
+    <div class="stack">
+      <div class="rowline">
+        <span class="name">按钮内</span>
+        <button class="btn btn-md btn-primary"><span class="morph-icon" data-morph-icon="plus-minus" data-morph-trigger="view"></span>新建项目</button>
+        <button class="btn btn-md btn-secondary"><span class="morph-icon" data-morph-icon="download-upload" data-morph-trigger="hover"></span>导出数据</button>
+        <span class="note">按钮内的形变图标由 <code>.btn .morph-icon</code> 统一为 18px，颜色继承按钮前景色。</span>
+      </div>
+      <div class="rowline">
+        <span class="name">提示条内</span>
+        <div class="alert success" role="alert">
+          <span class="morph-icon" data-morph-icon="check-alert" data-morph-trigger="view"></span>
+          <span class="message">校验通过：形变图标沿用 <code>.alert</code> 的 18px 尺寸约定，不需要额外样式。</span>
+        </div>
+      </div>
+      <div class="rowline">
+        <span class="name">与静态图标并存</span>
+        <i data-lucide="search" aria-hidden="true"></i>
+        <span class="morph-icon is-lg" data-morph-icon="menu-x" data-morph-trigger="hover"></span>
+        <span class="note">左侧是 <code>data-lucide</code> 运行时图标，右侧是形变图标，图标源同为 assets/icons/lucide.min.js。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>动效与无障碍</h2>
+    <div class="tip">
+      <p class="note">系统 <code>prefers-reduced-motion: reduce</code> 或 <code>&lt;html data-motion="off"&gt;</code> 时，形变直接跳到目标图标，不播放补间（与主题动效契约一致）。</p>
+      <p class="note">形变只改写 <code>&lt;path d&gt;</code>，不产生布局位移、不改变元素尺寸，因此不会引起重排或滚动锚点跳动。</p>
+      <p class="note">装饰性用法自动获得 <code>aria-hidden="true"</code>；交互式用法必须提供可访问名（<code>aria-label</code> 或 <code>data-morph-label</code>），缺失时控制台会给出警告。</p>
+      <p class="note"><code>data-morph-speed</code> 映射到主题节奏：<code>fast</code> / <code>base</code> 约 180ms，<code>slow</code> 约 280ms，<code>emphasis</code> 约 420ms，不使用会过冲的弹性档。</p>
+    </div>
+    <p class="note">运行时是 vendored 的 morphicons@1.7.1（MIT，min 16 KB），不含任何网络请求，可在 <code>file://</code> 与严格 CSP（<code>connect-src 'none'</code>）下工作。</p>
+  </section>
+</div>
+<script>lucide.createIcons();</script>
+<script src="../assets/icons/morph.min.js"></script>
+<script src="../assets/morph-icons.js"></script>
+<script src="_theme.js"></script>
+</body>
+</html>

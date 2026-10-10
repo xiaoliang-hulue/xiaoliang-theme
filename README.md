@@ -300,13 +300,15 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 |------|------|
 | `colors_and_type.css` | Token 定义与排版工具类（浅色/深色双模式） |
 | `css.json` | Token 的 JSON 投影（含 light / dark） |
-| `components.css` | 聚合后的组件样式（26 个组件，类名 `.btn` / `.alert` 等） |
+| `components.css` | 聚合后的组件样式（27 个组件，类名 `.btn` / `.alert` 等） |
 | `utilities.css` | 工具类（间距/圆角/阴影/容器/弹性/栅格，由 `build-utilities.mjs` 生成） |
 | `components/` | 各组件的结构化定义（`index.json` + `*.json`） |
 | `theme.js` | 零依赖交互脚本（Modal / Drawer / Toast / Tabs / Accordion，暴露 `window.XL`） |
 | `assets/icons/README.md` | Lucide 图标使用说明 |
+| `assets/icons/morph.min.js` | 图标形变运行时（morphicons 1.7.1，MIT，vendored IIFE，约 16 KB） |
+| `assets/morph-icons.js` | 图标形变适配器（策展白名单 / 触发器 / 无障碍 / 动效映射） |
 | `preview/index.html` | 主题总览预览页 |
-| `preview/component-*.html` | 26 个组件预览页 |
+| `preview/component-*.html` | 27 个组件预览页 |
 | `preview/tokens.html` | 设计 Token 参考页（颜色/字号/间距/圆角/阴影/动效/断点） |
 | `audit-a11y.mjs` | 组件级 / 页面级 ARIA 审计脚本（启发式静态检查） |
 | `component-a11y-report.json` | 组件级 ARIA 审计报告 |
@@ -322,13 +324,15 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `audit-motion.mjs` | 动效 Token、控制入口、关键帧与浮层退出契约审计 |
 | `tests/visual.spec.mjs` | Playwright 桌面、手机、交互和减少动效回归 |
 | `docs/motion-system.md` | 动效 Token、控制方式和设计原则 |
+| `docs/icon-morph.md` | 图标形变用法、可用配对白名单与增补流程 |
+| `tests/morph.spec.mjs` | 图标形变回归（`file://` / 触发器 / 白名单 / 减少动效） |
 | `docs/migration-1.5.md` | 1.x 到 1.5 的无破坏升级说明 |
 | `.github/workflows/audit.yml` | GitHub Actions 自动构建与审计 |
 | `specs/小亮主题-PRD.md` | 原始 PRD |
 
 ## 组件清单
 
-已提供预览页的组件（共 26 个）：
+已提供预览页的组件（共 27 个）：
 
 | 组件 | 预览文件 | 说明 |
 |------|----------|------|
@@ -358,16 +362,39 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Badge | `preview/component-badge.html` | 计数 / 圆点 / 语义色 / 附着角标 |
 | Stepper | `preview/component-stepper.html` | 水平 / 垂直 / 已完成·进行中·未开始 |
 | Drawer | `preview/component-drawer.html` | 右 / 左 / 底部三向抽屉（依赖 theme.js） |
+| Icon Morph | `preview/component-morph-icon.html` | 图标路径形变：22 组策展配对 / 4 种触发器 / 5 档尺寸（依赖 morph.min.js） |
 
 组件样式已聚合到 `components.css`（类名规范：`.btn` / `.alert` / `.input` / `.card` / `.tag` 等），可直接引入或按需复制。各组件的结构化定义见 `components/*.json`。
 
 UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件，覆盖组件总览、表单示例、数据看板 3 个屏幕，可作为真实页面布局参考。
 
+## 图标形变
+
+除静态 Lucide 图标外，主题还提供**图标路径形变**（如 `menu ↔ x`、`play ↔ pause`、`lock ↔ unlock`）。运行时是 vendored 的 morphicons 1.7.1（MIT，约 16 KB 经典脚本 IIFE），**不引入任何图标文件**——图标源仍然是 `assets/icons/lucide.min.js`，因此没有网络请求、无需打包器，可在 `file://` 与严格 CSP（`connect-src 'none'`）下使用。
+
+```html
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="components.css">
+
+<script src="assets/icons/lucide.min.js"></script>
+<script src="assets/icons/morph.min.js"></script>
+<script src="assets/morph-icons.js"></script>
+
+<i class="morph-icon" data-morph-icon="menu-x" aria-label="菜单与关闭"></i>
+```
+
+- **配对只能取自 22 组策展白名单**——路径形变在子路径数量差异过大时中间态会塌陷，任意配对观感不可控；
+- 触发器 `click`（默认）/ `hover` / `view` / `state`，尺寸 5 档（`is-xs`~`is-xl`）；
+- 速度映射到主题节奏：`base` ≈180ms、`slow` ≈280ms、`emphasis` ≈420ms；
+- 受 `<html data-motion="off">` 与系统 `prefers-reduced-motion: reduce` 双重约束（命中任一时立即跳变，但状态切换照常完成）。
+
+完整属性表、白名单、增补流程与审计纪律见 `docs/icon-morph.md`。
+
 ## 可访问性
 
 已基于 WCAG 2.1 AA 执行对比度检查，完整结果见 `accessibility-report.json`。正文、按钮、链接、表格等核心文字与背景组合均达到 ≥ 4.5:1，禁用文字按规范豁免。
 
-组件级与页面级 ARIA 检查另由 `audit-a11y.mjs` 覆盖（扫描 `preview/component-*.html` 与 `preview/page-*.html`，检查可访问名、role 结构、地标、装饰性图标隐藏、标题层级等），结果见 `component-a11y-report.json`，当前 30 个预览页全部通过（error / warning / info 均为 0）。运行：`npm run audit:a11y`。
+组件级与页面级 ARIA 检查另由 `audit-a11y.mjs` 覆盖（扫描 `preview/component-*.html` 与 `preview/page-*.html`，检查可访问名、role 结构、地标、装饰性图标隐藏、标题层级等），结果见 `component-a11y-report.json`，当前 31 个预览页全部通过（error / warning / info 均为 0）。运行：`npm run audit:a11y`。
 
 `colors_and_type.css` 额外提供无障碍兜底：打印场景隐藏浮层与装饰图标；`[dir="rtl"]` 基础镜像；`@media (prefers-contrast: more)` 加强边框与文本对比；已含 `prefers-reduced-motion` 与 `forced-colors` 支持。
 
@@ -375,7 +402,7 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 
 - 页面模板（列表页、详情页、表单页、仪表盘）—— 已完成
 - UI Kit 展示页 —— 已完成
-- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Drawer、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb、Progress、Avatar、Badge、Stepper（共 26 个）—— 已完成
+- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Drawer、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb、Progress、Avatar、Badge、Stepper、Icon Morph（共 27 个）—— 已完成
 - 可访问性补强：组件级 ARIA 审计脚本与报告、设计 Token 参考页、打印 / RTL / 高对比兜底 —— 已完成
 
 ## 许可

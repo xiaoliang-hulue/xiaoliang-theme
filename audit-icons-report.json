@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-04T04:43:38.191Z",
-  "scanned": 42,
+  "generatedAt": "2026-10-10T02:34:49.098Z",
+  "scanned": 54,
   "dirs": [
     "D:\\workbuddy_workspace\\小亮主题"
   ],
@@ -146,6 +146,18 @@
       "emoji": []
     },
     {
+      "file": "preview\\component-morph-icon.html",
+      "inline": [],
+      "ref": [
+        {
+          "name": "search",
+          "inLib": true,
+          "scriptRefsLucide": true
+        }
+      ],
+      "emoji": []
+    },
+    {
       "file": "preview\\component-select.html",
       "inline": [
         {
@@ -238,11 +250,11 @@
         },
         {
           "name": "Sun",
-          "loc": 17038
+          "loc": 17116
         },
         {
           "name": "Moon",
-          "loc": 17499
+          "loc": 17577
         }
       ],
       "ref": [],

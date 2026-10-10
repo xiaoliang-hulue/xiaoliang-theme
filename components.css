@@ -4,7 +4,7 @@
    如需修改，请编辑对应的 preview/component-*.html 后重新运行本脚本。
    ═══════════════════════════════════════════════════════════════ */
 
-/* 由 extract-components-css.mjs 聚合去重生成：共 315 条规则，合并完全重复 46 条。 */
+/* 由 extract-components-css.mjs 聚合去重生成：共 326 条规则，合并完全重复 46 条。 */
 
 .accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden }
 .accordion-item { border-bottom: 1px solid var(--color-border-subtle) }
@@ -183,6 +183,17 @@
 .modal-overlay:not([hidden]) .modal { animation: xl-pop-in var(--motion-duration-slow) var(--motion-ease-emphasized) backwards }
 .modal-overlay.is-closing { animation: xl-fade-in var(--motion-duration-base) var(--motion-ease-standard) reverse both }
 .modal-overlay.is-closing .modal { animation: xl-pop-in var(--motion-duration-base) var(--motion-ease-standard) reverse both }
+.morph-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: var(--morph-icon-size, 24px); height: var(--morph-icon-size, 24px); padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: 0; cursor: default; border-radius: var(--radius-sm) }
+.morph-icon svg { display: block; width: 100%; height: 100% }
+.morph-icon svg path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round }
+.morph-icon.is-xs { --morph-icon-size: 16px }
+.morph-icon.is-sm { --morph-icon-size: 18px }
+.morph-icon.is-lg { --morph-icon-size: 28px }
+.morph-icon.is-xl { --morph-icon-size: 40px }
+.morph-icon[role="button"], button.morph-icon { cursor: pointer }
+.morph-icon[aria-pressed="true"], .morph-icon.is-accent { color: var(--color-primary) }
+.morph-icon:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px }
+.btn .morph-icon, .alert .morph-icon { --morph-icon-size: 18px }
 .pagination { display: inline-flex; align-items: center; gap: var(--space-1); list-style: none; margin: 0; padding: 0 }
 .page-item { display: inline-flex }
 .page-link, .page-ellipsis { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 var(--space-2); font-size: var(--text-sm); font-weight: var(--font-medium); line-height: 1; color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); cursor: pointer; transition: transform var(--motion-duration-base) var(--motion-ease-spring), background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-base) var(--motion-ease-standard); text-decoration: none; user-select: none }

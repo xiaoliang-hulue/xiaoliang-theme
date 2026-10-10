@@ -4,6 +4,20 @@
 
 ---
 
+## [1.6.0] - 2026-10-09
+
+- **新增：图标形变（Icon Morph），第 27 个组件**。在两个 Lucide 图标之间做**路径形变**（`menu ↔ x`、`play ↔ pause`、`lock ↔ unlock` 等），填补「静态图标」与「Lottie 动画图标」之间的空白。新增 `preview/component-morph-icon.html`、适配器 `assets/morph-icons.js`、用法文档 `docs/icon-morph.md` 与回归测试 `tests/morph.spec.mjs`。
+- **引擎选型：morphicons 1.7.1（MIT）**。它是「通用描边图标形变」库，**直接消费 Lucide 的 IconNode 数据**（类型定义原文：`Lucide is neither a dependency nor a peer`），因此**不新增任何图标文件**，图标源仍是 `assets/icons/lucide.min.js`（v1.8.0 锁版本不变）。零运行时依赖（5 个 peer 全部 `optional: true`），ESM-only 且无预打包产物，故按主题既有惯例**预打包为 vendored IIFE** `assets/icons/morph.min.js`（16,642 B，其中引擎 16,042 B / gzip 7,178 B），与 `lucide.min.js` 并列提交，消费者侧零构建。
+- **为什么不选 Lordicon（重要决策）**。其[主题授权条款](https://lordicon.com/docs/license/themes)明文禁止「把图标作为独立文件包含进产品」「允许用户改颜色/描边/尺寸或自定义触发」「用在以图标为核心的产品（含开源插件/库/图标包）」——本主题是 MIT 分发且用户在 HTML/CSS 中换图标改色，**三条同时命中**；免费档另禁止 `otherwise transfer or distribute the icons … (even for free)` 且强制署名。技术侧同样不兼容：实测自托管运行时在 `file://` 下报 `Fetch API cannot load file:///… URL scheme "file" is not supported.`，严格 CSP 需放宽 `style-src`，且包内 `prefers-reduced-motion` 出现 **0 次**。完整论证见 `outputs/icon-feasibility/可行性验证报告.md`。
+- **白名单是硬约束，不是建议**。路径形变**不保证观感**：子路径数量差异过大时中间态会塌成实心块或细碎斑点。批量实测 28 组语义成对图标后（`poc-pairs.mjs` + `blobRatio = max(ink@34%, ink@67%) / max(ink@0%, ink@100%)` + 人眼复核关键帧对比图），确定开放 **22 组 A 档**；`sun↔moon`(9↔1 子路径, blob 1.68)、`loader↔loader-2`(8↔1, blob 1.70)、`grid↔list`(5↔6, blob 0.41) **禁止开放**；`chevron` 两向虽技术正确但中间态塌成折角（旋转更合适），同样不开放。适配器对表外配对**拒绝挂载并告警**，`tests/morph.spec.mjs` 对此有断言。
+- **动效标定（按 90% 时刻对齐主题节奏，而非库的 settle 判据）**：`fast`/`base` = `{stiffness:420, damping:30}` → 134ms（对齐 `--motion-duration-base` 180ms）；`slow` = `{300, 30}` → 200ms（对齐 280ms）；`emphasis` = `{170, 26}` → 300ms（对齐 420ms）。**刻意剔除库自带的 `bouncy`**（过冲到 `x=1.244` 后来回振荡近 1 秒，图标形变会「弹坏」）。库自身 `settle()` 判据（`|1−x| < 0.001 && |v| < 0.02`）尾段极长且不可感知（`base` 约 450ms），不作为设计依据。
+- **无障碍接线（必须显式覆盖库默认值）**：morphicons 的 `reducedMotion` 默认是 `"never"`（**不跟随系统**），适配器无条件改为——`<html data-motion="off">` → `"always"`，其余 → `"user"`（跟随系统）；两种情况均**立即跳变但状态切换照常完成**。属性变化实时生效，无需刷新。装饰性用法自动 `aria-hidden="true"`，交互式用法必须有可访问名，非按钮宿主自动补 `role="button"` / `tabindex="0"` 并接管 `Enter`/`Space`。
+- **CSP 与审计均通过（实测）**：IIFE 内无 `eval` / `new Function` / `innerHTML` / `.style.` / `fetch` / `XMLHttpRequest`，核心只做 `el.setAttribute("d", …)`，在 `default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'none'` 下零 console 错误/告警。图标审计的三条新纪律已写入 `docs/icon-morph.md`：源码中不得出现形变用 `<path d>`、不得留空 `<svg>` 字面量、`outputs/` 也在扫描范围内（含非 Lucide `<svg>` 的 Demo 会让 `audit:icons` 变红）。
+- **文档同步**：`docs/motion-system.md` 新增「例外：图标形变」条款（原原则是「只动画 transform 和 opacity」）；`SKILL.md` 图标约束扩到 8 条（第 6~8 条为形变专用）；`assets/icons/README.md` 补 `morph.min.js` 的来源/许可/勿手改说明；README 补用法段与文件清单；组件计数 26 → 27。
+- **依赖缺失告警精确化**（转接复盘 §4.2）：`init()` 原先在引擎或 Lucide 任一缺失时统一打印「引擎未加载」，曾把排查方向带偏（实际缺的是 Lucide）。新增 `depsHint()` 分别点名缺失项，实测输出：缺 Lucide → `缺少 assets/icons/lucide.min.js（Lucide 图标数据）。XLMorph.init 已跳过。`；缺引擎 → `缺少 assets/icons/morph.min.js（形变引擎）。…`。`mount()` 的同类告警同步改用同一 helper。
+- **顺带修复既有测试缺陷**（转接复盘 §4.3）：`tests/visual.spec.mjs` 仍在点击 v1.5.7 已按用户要求移除的「轻柔/关闭」动效开关按钮，自 `bfc8c6b` 起一直失败。改为「主题切换按钮照旧验证 + `[data-motion]` 钩子直接写属性验证」，断言语义不变（时长/延迟归零仍由 `full motion is active and off mode removes delays` 覆盖）。
+- **升级方式**：`npm run build:morph`（= `build-morph-runtime.mjs`）在 `outputs/.morph-build/` 临时装 morphicons + esbuild 重打包，**不写入本仓依赖**；产物是构建物，勿手工编辑，重新生成后必须重跑 `npm run audit` 与 `npm run test:visual`。
+
 ## [1.5.11] - 2026-10-04
 
 - **深色模式进一步压黑（应「不够黑，还是不够黑」的反馈）**。上一版虽已去掉蓝偏，但浮层相对底色抬升偏大（亮度约 2.7 倍），整体读起来是「深灰面板」而非「黑」。

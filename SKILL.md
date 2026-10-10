@@ -1,6 +1,6 @@
 ---
 name: "小亮主题 (Xiao Liang Theme)"
-description: 个人极简干净设计系统，提供浅色/深色双模式、纯 CSS 变量 Token 与 26 个基础组件规范。激活此 Skill 后，可直接使用小亮主题生成页面、组件或视觉方案。
+description: 个人极简干净设计系统，提供浅色/深色双模式、纯 CSS 变量 Token、图标形变与 27 个基础组件规范。激活此 Skill 后，可直接使用小亮主题生成页面、组件或视觉方案。
 user-invocable: true
 ---
 
@@ -22,6 +22,9 @@ user-invocable: true
   3. **严禁** emoji（🌙 / 📊 等）、字符箭头（→ / ← 作图标用途）、手绘 polyline 或 Feather 画法充当图标；文本说明里的方向键提示（如「← / →」）不受限。
   4. 升级图标库时，必须**全量**重新抽取所有内联路径（含 CSS mask），禁止只更新部分图标。
   5. 提交前用 `npm run audit:icons` 校验：任何非 Lucide 路径、版本不符、emoji 引用都会报错（与 `audit:a11y` 并列，可用 `npm run audit` 一次跑全）。
+  6. **图标形变（`docs/icon-morph.md`）只允许用 `assets/icons/morph.min.js`**（morphicons 1.7.1，MIT，vendored 产物）配合 `assets/morph-icons.js` 适配器；**禁止**引入 GSAP / flubber / SVG Morpheus / Lottie / Lordicon 或任何远程资源（Lordicon 的授权条款明确禁止本主题的用法）。
+  7. 形变配对**只能取自 `assets/morph-icons.js` 内的策展白名单**（22 组）。表外配对的中间态观感不可控（`sun↔moon`、`loader↔loader-2`、`grid↔list` 实测会塌陷），新增配对必须先跑 `outputs/icon-feasibility/morph-poc/poc-pairs.mjs` 的批量关键帧 + `blobRatio` 指标 + 人眼复核流程。
+  8. 形变图标的 `<path d>` **不得出现在源码中**（适配器在运行时用 `createElementNS` 建 SVG）；源码里只留 `[data-morph-icon]` 声明。形变只受白名单、`data-morph-speed`（≤420ms）、`data-motion="off"` 与 `prefers-reduced-motion` 四重约束，详见 `docs/motion-system.md` 的形变例外条款。
 - 正文对比度需 ≥ 4.5:1，禁用文字按规范豁免。
 - **深色 Token 硬性约束（引用/派生本主题时必须遵守）**：
   1. **深色主色阶是倒序的**：`--primary-50` 最暗（`#0f1f4d`）、`--primary-950` 最亮（`#eef4ff`）。派生浅底类语义别名（`--color-primary-subtle`）时必须映射到 **50 端**，映射到 950 端会得到近白色块（幽灵按钮悬停、`.tag-primary`、`.avatar.primary`、激活导航项都会炸）。
@@ -245,7 +248,7 @@ user-invocable: true
 ```
 小亮主题/
 ├── colors_and_type.css      # Token 与排版工具类（浅色/深色双模式）
-├── components.css           # 26 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
+├── components.css           # 27 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
 ├── utilities.css           # 工具类（间距/圆角/阴影/容器/弹性/栅格，由 build-utilities.mjs 生成）
 ├── css.json                 # Token 的 JSON 投影（light / dark）
 ├── theme.js                # 零依赖交互脚本（Modal / Drawer / Toast / Tabs，暴露 window.XL）
@@ -255,9 +258,11 @@ user-invocable: true
 ├── build-a11y-report.mjs    # 重新生成 accessibility-report.json（WCAG 2.1 AA 对比度校验）
 ├── audit-a11y.mjs           # 组件级/页面级 ARIA 审计（启发式静态检查）
 ├── components/              # 各组件结构化定义（index.json + *.json）
-├── preview/                 # 预览页（index.html + 26 个组件页 + 4 个页面模板 + tokens.html）
+├── preview/                 # 预览页（index.html + 27 个组件页 + 4 个页面模板 + tokens.html）
 ├── ui_kits/website/         # UI Kit 展示页与质量报告
-├── assets/icons/            # 图标说明（Lucide）
+├── assets/icons/            # 图标运行时（Lucide v1.8.0 + morphicons 1.7.1，均为 vendored 产物）
+├── assets/morph-icons.js    # 图标形变适配器（白名单 + 触发器 + 无障碍 + 动效映射）
+├── docs/icon-morph.md       # 图标形变用法、白名单纪律与增补流程
 ├── specs/小亮主题-PRD.md     # 原始 PRD
 ├── README.md                # 使用说明
 ├── SKILL.md                 # 设计规范
