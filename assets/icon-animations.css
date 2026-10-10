@@ -1,0 +1,184 @@
+/* ============================================================================
+ * icon-animations.css —— 由 build-icon-animations.mjs 生成，请勿手工编辑
+ *
+ * 动画规格来源：lucide-animated@1.0.5（MIT），经脚本提取 VARIANTS 后翻译为 CSS
+ * keyframes。运行时不需要任何动画 JS。
+ *
+ * 用法：<i class="anim-icon" data-anim="LoaderCircle"></i>
+ *   · 悬停播放；也可用 [aria-pressed="true"] 或 .is-playing 触发
+ *   · 描边画线类动画（pathLength）依赖 JS 端给路径加 pathLength="1"
+ *   · prefers-reduced-motion: reduce 由本主题全局兜底强制降级
+ *
+ * 可用图标（15 个，data-anim 的值）：
+ *   LoaderCircle、CircleCheck、Wifi、Battery、Download、Upload、Copy、Plus、Sparkles、Zap、Heart、Flame、TrendingUp、Activity、Bell
+ * 未收录：含 d 路径形变的图标（需 SMIL/CSS d），以及包内无同名动画的图标。
+ * ========================================================================== */
+
+.anim-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: var(--anim-icon-size, 24px); height: var(--anim-icon-size, 24px); color: inherit; line-height: 0; }
+.anim-icon svg { display: block; width: 100%; height: 100%; }
+.anim-icon svg > * { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.anim-icon.is-xs { --anim-icon-size: 16px; }
+.anim-icon.is-sm { --anim-icon-size: 18px; }
+.anim-icon.is-lg { --anim-icon-size: 28px; }
+.anim-icon.is-xl { --anim-icon-size: 40px; }
+.anim-icon[role="button"], button.anim-icon { cursor: pointer; }
+.anim-icon:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+
+@keyframes la-loader-circle {
+  0% { transform: rotate(360deg) }
+  100% { transform: none }
+}
+[data-anim="LoaderCircle"]:hover svg > *,
+[data-anim="LoaderCircle"][aria-pressed="true"] svg > *,
+[data-anim="LoaderCircle"].is-playing svg > * {
+  animation: la-loader-circle 800ms linear 0ms infinite both;
+}
+
+@keyframes la-circle-check {
+  0% { opacity: 0; stroke-dasharray: 0; stroke-dashoffset: 1 }
+  100% { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0 }
+}
+[data-anim="CircleCheck"]:hover svg > *,
+[data-anim="CircleCheck"][aria-pressed="true"] svg > *,
+[data-anim="CircleCheck"].is-playing svg > * {
+  animation: la-circle-check 400ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-wifi {
+  0% { opacity: 0; stroke-dasharray: 0; stroke-dashoffset: 1 }
+  100% { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0 }
+}
+[data-anim="Wifi"]:hover svg > *,
+[data-anim="Wifi"][aria-pressed="true"] svg > *,
+[data-anim="Wifi"].is-playing svg > * {
+  animation: la-wifi 600ms cubic-bezier(0.2, 0, 0, 1) 100ms both;
+}
+
+@keyframes la-battery {
+  0% { opacity: 0; stroke-dasharray: 0; stroke-dashoffset: 1 }
+  100% { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0 }
+}
+[data-anim="Battery"]:hover svg > *,
+[data-anim="Battery"][aria-pressed="true"] svg > *,
+[data-anim="Battery"].is-playing svg > * {
+  animation: la-battery 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-download {
+  0% { transform: translateY(2px) }
+  100% { transform: none }
+}
+[data-anim="Download"]:hover svg > *,
+[data-anim="Download"][aria-pressed="true"] svg > *,
+[data-anim="Download"].is-playing svg > * {
+  animation: la-download 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-upload {
+  0% { transform: translateY(-2px) }
+  100% { transform: none }
+}
+[data-anim="Upload"]:hover svg > *,
+[data-anim="Upload"][aria-pressed="true"] svg > *,
+[data-anim="Upload"].is-playing svg > * {
+  animation: la-upload 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-copy {
+  0% { transform: scale(1) }
+  50% { transform: scale(1.08) }
+  100% { transform: none }
+}
+[data-anim="Copy"]:hover svg > *,
+[data-anim="Copy"][aria-pressed="true"] svg > *,
+[data-anim="Copy"].is-playing svg > * {
+  animation: la-copy 950ms cubic-bezier(0.42, 0, 0.58, 1) 0ms both;
+}
+
+@keyframes la-plus {
+  0% { opacity: 1 }
+  50% { opacity: 0.4 }
+  100% { opacity: 1 }
+}
+[data-anim="Plus"]:hover svg > *,
+[data-anim="Plus"][aria-pressed="true"] svg > *,
+[data-anim="Plus"].is-playing svg > * {
+  animation: la-plus 1000ms cubic-bezier(0.42, 0, 0.58, 1) 0ms infinite both;
+}
+
+@keyframes la-sparkles {
+  0% { transform: rotate(0deg) }
+  20% { transform: rotate(-5deg) }
+  40% { transform: rotate(5deg) }
+  60% { transform: rotate(-5deg) }
+  80% { transform: rotate(5deg) }
+  100% { transform: none }
+}
+[data-anim="Sparkles"]:hover svg > *,
+[data-anim="Sparkles"][aria-pressed="true"] svg > *,
+[data-anim="Sparkles"].is-playing svg > * {
+  animation: la-sparkles 400ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-zap {
+  0% { opacity: 0; stroke-dasharray: 0; stroke-dashoffset: 1 }
+  100% { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0 }
+}
+[data-anim="Zap"]:hover svg > *,
+[data-anim="Zap"][aria-pressed="true"] svg > *,
+[data-anim="Zap"].is-playing svg > * {
+  animation: la-zap 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-heart {
+  0% { transform: translateY(-1px) }
+  100% { transform: none }
+}
+[data-anim="Heart"]:hover svg > *,
+[data-anim="Heart"][aria-pressed="true"] svg > *,
+[data-anim="Heart"].is-playing svg > * {
+  animation: la-heart 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-flame {
+  0% { opacity: 0; stroke-dasharray: 0; stroke-dashoffset: 1 }
+  100% { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0 }
+}
+[data-anim="Flame"]:hover svg > *,
+[data-anim="Flame"][aria-pressed="true"] svg > *,
+[data-anim="Flame"].is-playing svg > * {
+  animation: la-flame 400ms cubic-bezier(0.2, 0, 0, 1) 100ms both;
+}
+
+@keyframes la-trending-up {
+  0% { transform: translateX(0px) translateY(0px) }
+  100% { transform: none }
+}
+[data-anim="TrendingUp"]:hover svg > *,
+[data-anim="TrendingUp"][aria-pressed="true"] svg > *,
+[data-anim="TrendingUp"].is-playing svg > * {
+  animation: la-trending-up 500ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}
+
+@keyframes la-activity {
+  0% { opacity: 0; stroke-dasharray: 0; stroke-dashoffset: 1 }
+  100% { opacity: 1; stroke-dasharray: 1; stroke-dashoffset: 0 }
+}
+[data-anim="Activity"]:hover svg > *,
+[data-anim="Activity"][aria-pressed="true"] svg > *,
+[data-anim="Activity"].is-playing svg > * {
+  animation: la-activity 600ms linear 0ms both;
+}
+
+@keyframes la-bell {
+  0% { transform: rotate(0deg) }
+  25% { transform: rotate(-10deg) }
+  50% { transform: rotate(10deg) }
+  75% { transform: rotate(-10deg) }
+  100% { transform: none }
+}
+[data-anim="Bell"]:hover svg > *,
+[data-anim="Bell"][aria-pressed="true"] svg > *,
+[data-anim="Bell"].is-playing svg > * {
+  animation: la-bell 600ms cubic-bezier(0.2, 0, 0, 1) 0ms both;
+}

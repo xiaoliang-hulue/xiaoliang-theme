@@ -319,3 +319,95 @@ test('swap: 配对非法时拒绝挂载并告警', async ({ page }) => {
   expect(warns.some((w) => w.includes('data-icon-swap'))).toBe(true);
   expect(errors).toEqual([]);
 });
+
+/* ===== 动画图标（Icon Animation · lucide-animated 提取转 CSS）=====
+   关键不变量：动画规格只存在于 CSS，运行时 JS 只负责建 SVG 与设 pathLength="1"。 */
+
+test('anim: 全部动画图标挂载出 SVG 且描边元素带 pathLength="1"', async ({ page }) => {
+  const errors = await open(page);
+  const stats = await page.evaluate(() => {
+    const hosts = Array.from(document.querySelectorAll('[data-anim]'));
+    const strokes = hosts.flatMap((el) => Array.from(el.querySelectorAll('svg > *')));
+    return {
+      hosts: hosts.length,
+      withSvg: hosts.filter((el) => el.querySelector('svg')).length,
+      strokes: strokes.length,
+      withPathLength: strokes.filter((n) => n.getAttribute('pathLength') === '1').length,
+      hasApi: typeof window.XLAnim === 'object',
+    };
+  });
+  expect(stats.hosts).toBeGreaterThanOrEqual(10);
+  expect(stats.withSvg).toBe(stats.hosts);
+  expect(stats.hasApi).toBe(true);
+  // pathLength 归一化是画线类动画成立的前提，少一个就会画不出
+  expect(stats.strokes).toBeGreaterThan(0);
+  expect(stats.withPathLength).toBe(stats.strokes);
+  expect(errors).toEqual([]);
+});
+
+test('anim: 悬停触发 CSS 动画，animation-name 来自生成的 keyframes', async ({ page }) => {
+  const errors = await open(page);
+  const el = page.locator('[data-anim="CircleCheck"]').first();
+  const idle = await el.evaluate((n) => getComputedStyle(n.querySelector('svg > *')).animationName);
+  expect(idle).toBe('none');
+
+  await el.hover();
+  await page.waitForTimeout(120);
+  const playing = await el.evaluate((n) => getComputedStyle(n.querySelector('svg > *')).animationName);
+  expect(playing).toBe('la-circle-check');
+  expect(errors).toEqual([]);
+});
+
+test('anim: aria-pressed="true" 也能触发（无脚本介入动画）', async ({ page }) => {
+  const errors = await open(page);
+  const el = page.locator('[data-anim="Heart"]').first();
+  await el.evaluate((n) => n.setAttribute('aria-pressed', 'true'));
+  await page.waitForTimeout(120);
+  const name = await el.evaluate((n) => getComputedStyle(n.querySelector('svg > *')).animationName);
+  expect(name).toBe('la-heart');
+  expect(errors).toEqual([]);
+});
+
+test('anim: prefers-reduced-motion: reduce 时动画时长被压到 0', async ({ page }) => {
+  const errors = await open(page, { reducedMotion: 'reduce' });
+  const el = page.locator('[data-anim="CircleCheck"]').first();
+  await el.hover();
+  await page.waitForTimeout(120);
+  const dur = await el.evaluate((n) => parseFloat(getComputedStyle(n.querySelector('svg > *')).animationDuration));
+  // 全局兜底用 animation-duration: 0.001ms !important，这里断言「被压到极短」
+  expect(dur).toBeLessThan(0.01);
+  expect(errors).toEqual([]);
+});
+
+test('anim: XLAnim.play() 可主动重播一次', async ({ page }) => {
+  const errors = await open(page);
+  const ok = await page.evaluate(() => {
+    const el = document.querySelector('#anim-play-btn [data-anim]');
+    window.XLAnim.play(el);
+    return el.classList.contains('is-playing');
+  });
+  expect(ok).toBe(true);
+  expect(errors).toEqual([]);
+});
+
+test('anim: 图标名非法时拒绝挂载并告警', async ({ page }) => {
+  const errors = [];
+  const warns = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  page.on('console', (m) => {
+    if (m.type() === 'error') errors.push(m.text());
+    if (m.type() === 'warning' && m.text().includes('[XLAnim]')) warns.push(m.text());
+  });
+  await page.goto(pageUrl);
+  await page.waitForFunction(() => window.XLAnim);
+  const mounted = await page.evaluate(() => {
+    const el = document.createElement('span');
+    el.setAttribute('data-anim', 'NotARealIconName');
+    document.body.appendChild(el);
+    window.XLAnim.init();
+    return !!el.querySelector('svg');
+  });
+  expect(mounted).toBe(false);
+  expect(warns.some((w) => w.includes('data-anim'))).toBe(true);
+  expect(errors).toEqual([]);
+});

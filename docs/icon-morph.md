@@ -245,3 +245,66 @@ XLMorph.counts                     // { morph, swap } 最近一次 init 的挂�
 ## 关键帧
 
 `xl-swap-out` / `xl-swap-in` 及其 `-scale` 变体共 6 个，定义在 `colors_and_type.css` 的动效区（token 区之外，`build:tokens` 不覆盖）。只用 `opacity` 与 `transform`——图标只有 24×24，位移与缩放必须克制，否则过渡比图标本身还抢眼。
+
+---
+
+# 动画图标（Icon Animation）
+
+第三路图标动效：**悬停/状态变化时按状态播放动画**（描边画线、旋转、位移、缩放）。
+
+规格来源是 [`lucide-animated`](https://www.npmjs.com/package/lucide-animated)（MIT）。**这个库本身不能直接引入**：它是 React 组件库，`peerDependencies` 是 `react >= 18` + `motion >= 11`（都非可选），dist 1.44 MB；而本主题无 React、无打包器、全程 `file://`（ESM 在 `file://` 下会被 CORS 拦），与 morph 当初选择 vendored IIFE 的理由一致。
+
+但它的动效本质是**声明式数据**——每个图标一份 `VARIANTS`，词汇只有 `opacity` / `pathLength` / `pathOffset` / `rotate` / `x` / `y` / `scale`，这些**都能 1:1 映射到 CSS**。所以：
+
+> `build-icon-animations.mjs` 把规格从包里**提取并翻译**成 `@keyframes` + 触发规则，
+> 产物是 `assets/icon-animations.css`，**运行时没有任何动画 JS**。
+
+## 用法
+
+```html
+<link rel="stylesheet" href="assets/icon-animations.css">
+<script src="assets/icons/lucide.min.js"></script>
+<script src="assets/icon-animations.js"></script>
+
+<i class="anim-icon is-xl" data-anim="CircleCheck"></i>
+```
+
+| 属性 | 说明 |
+|---|---|
+| `data-anim` | **必填**，Lucide 图标名（必须是已收录的，见 CSS 文件头清单） |
+| 触发 | `:hover` / `[aria-pressed="true"]` / `.is-playing`，**纯 CSS** |
+| 尺寸 | `.is-xs` / `.is-sm` / `.is-lg` / `.is-xl`，与前两路同名 |
+
+编程式重播：`XLAnim.play(el)`。
+
+## 为什么运行时还需要一个 JS
+
+只有两件事 CSS 做不到：
+
+1. **构建 SVG**：按图标名生成多子路径 `<svg>`（走 `LUCIDE.createElement(IconNode)`，源码不留 `<path d>`）；
+2. **加 `pathLength="1"`**：CSS 的 `stroke-dasharray` / `stroke-dashoffset` 用的是用户单位，而每个图标的路径周长不同。SVG 的 `pathLength` 属性把周长**归一化成 1**，于是同一套 keyframes 对所有图标都成立，不必逐个算周长。
+
+动画本身（含 `prefers-reduced-motion` 降级）完全由 CSS 负责，JS 绕不过去也无需绕过。
+
+## 收录范围与取舍
+
+包内 439 个组件中，**402 个的动画可纯 CSS 化**，8 个含 `d` 路径形变（需 SMIL 或 CSS `d` 属性，且与本主题自己的 morph 能力重叠，**不纳入**）。
+
+实际收录 **15 个**（`build-icon-animations.mjs` 顶部的 `CURATED`）——刻意不做全量：其余多为货币符号、品牌图标与长尾别名，收益低于维护成本。完整清单见 `assets/icon-animations.css` 文件头。
+
+## 重新生成
+
+```bash
+npm pack lucide-animated@1.0.5        # 解包到 outputs/la-probe/
+npm run build:anim                     # 产出 assets/icon-animations.css
+```
+
+`icon-animations.css` 是**构建物，勿手工编辑**。清单同时写到 `outputs/icon-animations-manifest.json`（含每个图标的属性、时长、缓动、帧数）。
+
+## 与另两路的区别
+
+| | 形变 | 换图标 | 动画图标 |
+|---|---|---|---|
+| 改什么 | `<path>` 的 `d`（补间） | 换掉整个 SVG | `opacity`/`transform`/`dashoffset` |
+| 白名单 | **必须**（子路径数差异会塌陷） | 不需要 | 需要（收录清单） |
+| 运行时 | morphicons IIFE | 适配器 JS | 仅建 SVG（动画全在 CSS） |

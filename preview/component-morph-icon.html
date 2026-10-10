@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../colors_and_type.css">
 <link rel="stylesheet" href="../components.css">
 <script src="../assets/icons/lucide.min.js"></script>
+<link rel="stylesheet" href="../assets/icon-animations.css">
 <style>
 /* Page scaffold — 本页演示图标形变，脚手架样式不进入 components.css 聚合 */
 * { box-sizing: border-box; }
@@ -193,6 +194,49 @@ body { margin: 0; background: var(--color-background); color: var(--color-text);
   </section>
 
   <section class="section">
+    <h2>动画图标（Icon Animation）</h2>
+    <p>第三路图标动效：<strong>悬停时按状态播放动画</strong>（描边画线、旋转、位移）。规格由 <code>build-icon-animations.mjs</code> 从 <code>lucide-animated</code>（MIT）提取后翻译成 CSS keyframes，<strong>运行时不需要动画 JS</strong>，因此天然跟随 <code>prefers-reduced-motion</code>。选中 15 个对设计系统有用的图标，未做全量收录。</p>
+    <div class="stack">
+      <div class="rowline">
+        <span class="name">悬停播放</span>
+        <span class="anim-icon is-xl" data-anim="CircleCheck"></span>
+        <span class="note">画线 + 淡入（描边由 dashoffset 推进）</span>
+        <span class="anim-icon is-xl" data-anim="Wifi"></span>
+        <span class="note">分段画线（带 100ms 延迟）</span>
+        <span class="anim-icon is-xl" data-anim="Download"></span>
+        <span class="note">下移位移</span>
+        <span class="anim-icon is-xl" data-anim="LoaderCircle"></span>
+        <span class="note">持续旋转（<code>repeat: Infinity</code>）</span>
+      </div>
+      <div class="rowline">
+        <span class="name">按钮态触发</span>
+        <button class="btn btn-md btn-secondary" aria-pressed="false" onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed')==='true'?'false':'true')">
+          <span class="anim-icon" data-anim="Heart"></span>点赞
+        </button>
+        <span class="note">切换 <code>aria-pressed</code> 即可触发，无脚本介入动画</span>
+      </div>
+      <div class="rowline">
+        <span class="name">尺寸档位</span>
+        <span class="anim-icon is-xs" data-anim="Zap"></span>
+        <span class="anim-icon is-sm" data-anim="Zap"></span>
+        <span class="anim-icon" data-anim="Zap"></span>
+        <span class="anim-icon is-lg" data-anim="Zap"></span>
+        <span class="anim-icon is-xl" data-anim="Zap"></span>
+        <span class="note">与形变、换图标图标同一套档位命名</span>
+      </div>
+      <div class="rowline">
+        <span class="name">编程式播放</span>
+        <button class="btn btn-md btn-ghost" id="anim-play-btn"><span class="anim-icon" data-anim="Sparkles"></span>点我播放</button>
+        <span class="note"><code>XLAnim.play(el)</code> 重播一次</span>
+      </div>
+      <div class="rowline">
+        <span class="name">本页演示到</span>
+        <span class="note" id="anim-list"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <h2>与既有组件组合</h2>
     <p>形变图标本身就是 Lucide v1.8.0 的图标，因此可以和 <code>data-lucide</code> 静态图标并存于同一页，也可以直接嵌进按钮、提示条等既有组件。</p>
     <div class="stack">
@@ -230,8 +274,21 @@ body { margin: 0; background: var(--color-background); color: var(--color-text);
   </section>
 </div>
 <script>lucide.createIcons();</script>
+<script>
+  // 动画图标演示：填清单 + 绑定「点我播放」
+  (function () {
+    var names = Array.from(document.querySelectorAll('[data-anim]'))
+      .map(function (el) { return el.getAttribute('data-anim'); })
+      .filter(function (v, i, a) { return a.indexOf(v) === i; }).sort();
+    var list = document.getElementById('anim-list');
+    if (list) list.textContent = names.length + ' 个（完整清单见 icon-animations.css 文件头与 docs）：' + names.join('、');
+    var btn = document.getElementById('anim-play-btn');
+    if (btn) btn.addEventListener('click', function () { window.XLAnim.play(btn.querySelector('[data-anim]')); });
+  })();
+</script>
 <script src="../assets/icons/morph.min.js"></script>
 <script src="../assets/morph-icons.js"></script>
+<script src="../assets/icon-animations.js"></script>
 <script src="_theme.js"></script>
 </body>
 </html>

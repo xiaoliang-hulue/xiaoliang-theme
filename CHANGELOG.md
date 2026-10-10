@@ -4,6 +4,24 @@
 
 ---
 
+## [1.8.0] - 2026-10-10
+
+### 新增：动画图标（Icon Animation）——第三路图标动效
+
+- **悬停/状态变化时按状态播放动画**（描边画线、旋转、位移）。用法 `<i class="anim-icon" data-anim="CircleCheck">`，触发方式 `:hover` / `[aria-pressed="true"]` / `.is-playing`。
+- **为什么不是直接引入 lucide-animated**：它是 **React 组件库**，`peerDependencies` 为 `react >= 18` + `motion >= 11`（**均非可选**），dist **1.44 MB**；而本主题无 React、无打包器、全程 `file://`（ESM 在 `file://` 下会被 CORS 拦）——与当初 morph 选择 vendored IIFE 的理由一致。
+- **但它的动效是声明式数据**，每个图标一份 `VARIANTS`，词汇只有 `opacity` / `pathLength` / `pathOffset` / `rotate` / `x` / `y` / `scale`，**可 1:1 映射到 CSS**。故新增 `build-icon-animations.mjs`（`npm run build:anim`）把规格从包里**提取并翻译**成 `@keyframes` + 触发规则，产物 `assets/icon-animations.css`。**运行时没有任何动画 JS**，`prefers-reduced-motion` 因此天然生效。
+- **运行时 JS 只做两件 CSS 做不到的事**（`assets/icon-animations.js`）：① 按图标名构建多子路径 SVG（走 `LUCIDE.createElement(IconNode)`，源码不留 `<path d>`）；② 给描边元素加 `pathLength="1"`——CSS 的 `stroke-dasharray/dashoffset` 用用户单位，而各图标周长不同，归一化成 1 后同一套 keyframes 适配全部图标。
+- **收录范围**：包内 439 个组件，**402 个动画可纯 CSS 化**；8 个含 `d` 路径形变（需 SMIL/CSS `d`，且与本主题自己的 morph 能力重叠）**不纳入**。实际收录 **15 个**——刻意不做全量，其余多为货币符号/品牌图标/长尾别名。清单写在 CSS 文件头与 `outputs/icon-animations-manifest.json`。
+- **提取器踩的两个坑（已修）**：① `DEFAULT_TRANSITION24` 这类**非变体常量**因「离组件更近」会顶掉真正的变体 → 改为只认含 `animate:` 的定义；② 部分图标用 `variants: XXX` **引用**远处定义而非内联 → 改为先解析引用、回退到就近内联。另 `repeat: Number.POSITIVE_INFINITY` 必须识别，否则**加载图标转一圈就停**（已修为 `infinite`）。
+
+### 验证
+
+- `npx playwright test` → **25/25 全绿**（形变 7 + 换图标 6 + 动画图标 6 + 既有用例 6）
+- 动画真实发生的硬证据：中途帧 `stroke-dashoffset: 0.183` / `dasharray: 0.817` / `opacity: 0.817` → 结束帧 `0px` / `1px` / `1`（归一化在 0~1 区间，证明 `pathLength="1"` 生效）
+- `npm run audit` 四门全绿：contrast 44 项 fail=0、a11y 31 页 error=0 **warning=0**、icons 0 问题、motion 契约通过
+- `components.css` 344 条规则不变（动画图标样式在独立的 `icon-animations.css`，不进组件聚合）
+
 ## [1.7.0] - 2026-10-10
 
 ### 新增：换图标过渡（Icon Swap）

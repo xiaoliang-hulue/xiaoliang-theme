@@ -307,6 +307,8 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `assets/icons/README.md` | Lucide 图标使用说明 |
 | `assets/icons/morph.min.js` | 图标形变运行时（morphicons 1.7.1，MIT，vendored IIFE，约 16 KB） |
 | `assets/morph-icons.js` | 图标形变 + 换图标过渡适配器（策展白名单 / 触发器 / 无障碍 / 动效映射） |
+| `assets/icon-animations.css` | 动画图标 CSS（**生成物**，勿手改；由 `build-icon-animations.mjs` 从 lucide-animated 提取转写） |
+| `assets/icon-animations.js` | 动画图标极薄运行时（仅建 SVG 与设 `pathLength="1"`，动画全在 CSS） |
 | `preview/index.html` | 主题总览预览页 |
 | `preview/component-*.html` | 27 个组件预览页 |
 | `preview/tokens.html` | 设计 Token 参考页（颜色/字号/间距/圆角/阴影/动效/断点） |
@@ -324,7 +326,8 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `audit-motion.mjs` | 动效 Token、控制入口、关键帧与浮层退出契约审计 |
 | `tests/visual.spec.mjs` | Playwright 桌面、手机、交互和减少动效回归 |
 | `docs/motion-system.md` | 动效 Token、控制方式和设计原则 |
-| `docs/icon-morph.md` | 图标形变与换图标过渡用法、配对白名单与增补流程 |
+| `build-icon-animations.mjs` | 从 lucide-animated 提取动画规格并生成 `icon-animations.css`（`npm run build:anim`） |
+| `docs/icon-morph.md` | 图标形变 / 换图标过渡 / 动画图标三路用法、配对白名单与增补流程 |
 | `tests/morph.spec.mjs` | 图标形变 + 换图标回归（`file://` / 触发器 / 白名单 / 减少动效） |
 | `docs/migration-1.5.md` | 1.x 到 1.5 的无破坏升级说明 |
 | `.github/workflows/audit.yml` | GitHub Actions 自动构建与审计 |
@@ -400,7 +403,23 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 - 时长读 `--motion-duration-*`（`fast` 120ms / `base` 180ms / `slow` 280ms）；
 - 同样受 `data-motion="off"` 与 `prefers-reduced-motion` 约束，命中时**立即换、不播过渡**。
 
-完整属性表、关键帧与 JS API 见 `docs/icon-morph.md`。
+### 动画图标（Icon Animation）
+
+第三路：**悬停/状态变化时按状态播放动画**（描边画线、旋转、位移）。规格由 `build-icon-animations.mjs` 从 [lucide-animated](https://www.npmjs.com/package/lucide-animated)（MIT）提取后翻译成 CSS keyframes——**该库是 React + Motion 组件库（peer 依赖 react/motion，dist 1.44 MB），本主题无 React 无打包器，不可直接引入**，但其声明式动画数据可完整映射到 CSS。
+
+```html
+<link rel="stylesheet" href="assets/icon-animations.css">
+<script src="assets/icons/lucide.min.js"></script>
+<script src="assets/icon-animations.js"></script>
+
+<i class="anim-icon is-xl" data-anim="CircleCheck"></i>
+```
+
+- 悬停 / `[aria-pressed="true"]` / `.is-playing` 触发，**纯 CSS**，运行时无动画 JS；
+- 收录 15 个（包内 439 个中 402 个可 CSS 化，刻意只收设计系统用得上的）；
+- 运行时 JS 只做两件 CSS 做不到的事：构建 SVG、给描边元素加 `pathLength="1"`（把周长归一化成 1，同一套 keyframes 适配所有图标）。
+
+完整属性表、收录清单与三路对比见 `docs/icon-morph.md`。
 
 ## 可访问性
 
