@@ -48,7 +48,7 @@ test('core previews have no horizontal overflow at desktop and mobile widths', a
   }
 });
 
-test('theme and motion controls switch visible states without reload', async ({ page }) => {
+test('theme control switches visible states without reload, motion hook stays writable', async ({ page }) => {
   await page.goto(fileUrl('preview', 'index.html'));
   const root = page.locator('html');
   const body = page.locator('body');
@@ -58,9 +58,11 @@ test('theme and motion controls switch visible states without reload', async ({ 
   await expect(root).toHaveAttribute('data-theme', 'dark');
   expect(await body.evaluate((element) => getComputedStyle(element).backgroundColor)).not.toBe(lightBackground);
 
-  await page.getByRole('button', { name: '轻柔' }).click();
+  // v1.5.7 起 preview/index.html 不再提供用户侧动效开关按钮，只保留 [data-motion] 后台钩子。
+  // 时长/延迟归零的实际效果由下一条用例（full motion is active and off mode removes delays）覆盖。
+  await root.evaluate((element) => element.setAttribute('data-motion', 'subtle'));
   await expect(root).toHaveAttribute('data-motion', 'subtle');
-  await page.getByRole('button', { name: '关闭' }).click();
+  await root.evaluate((element) => element.setAttribute('data-motion', 'off'));
   await expect(root).toHaveAttribute('data-motion', 'off');
 });
 
