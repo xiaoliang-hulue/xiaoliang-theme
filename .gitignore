@@ -53,3 +53,6 @@ agent-reports/
 # Local reports / temporary demos (not part of the published theme)
 outputs/
 _saturation_change_log.md
+
+# 发布应用元数据（sites 生成，不入库）
+.wbapp_*.genie

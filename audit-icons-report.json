@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-10T04:08:30.080Z",
-  "scanned": 57,
+  "generatedAt": "2026-10-25T15:10:12.670Z",
+  "scanned": 59,
   "dirs": [
     "D:\\workbuddy_workspace\\小亮主题"
   ],
@@ -26,6 +26,43 @@
         }
       ],
       "ref": [],
+      "emoji": []
+    },
+    {
+      "file": "outputs\\icon-motion-lab.html",
+      "inline": [],
+      "ref": [
+        {
+          "name": "sun",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "moon",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "git-branch",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "download",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "x",
+          "inLib": true,
+          "scriptRefsLucide": true
+        },
+        {
+          "name": "star",
+          "inLib": true,
+          "scriptRefsLucide": true
+        }
+      ],
       "emoji": []
     },
     {
