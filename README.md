@@ -14,16 +14,22 @@
 
 ## 安装使用
 
-### npm 安装（推荐，需先发布到 npm）
+> **尚未发布到 npm**，当前请从 GitHub 获取。发布后本节会同步更新。
+
+### 下载 zip（最快）
+
+[下载 main 分支压缩包](https://github.com/xiaoliang-hulue/xiaoliang-theme/archive/refs/heads/main.zip)，解压后按下方「引入样式」使用。
+
+### 克隆仓库
 
 ```bash
-npm install xiaoliang-theme
+git clone https://github.com/xiaoliang-hulue/xiaoliang-theme.git
 ```
 
-### 从 Gitee 安装
+### 作为 git 依赖安装
 
 ```bash
-npm install git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git
+npm install git+https://github.com/xiaoliang-hulue/xiaoliang-theme.git
 ```
 
 或在 `package.json` 中：
@@ -31,7 +37,7 @@ npm install git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git
 ```json
 {
   "dependencies": {
-    "xiaoliang-theme": "git+https://gitee.com/huluexiaoliang/xiaoliang-theme.git#main"
+    "xiaoliang-theme": "git+https://github.com/xiaoliang-hulue/xiaoliang-theme.git#main"
   }
 }
 ```
