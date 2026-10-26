@@ -163,7 +163,8 @@
 }
 
 @keyframes la-trending-up {
-  0% { transform: none }
+  0% { transform: translateX(0px) translateY(0px) }
+  50% { transform: translateX(2px) translateY(-2px) }
   100% { transform: translateX(0px) translateY(0px) }
 }
 [data-anim="TrendingUp"]:hover svg > *,

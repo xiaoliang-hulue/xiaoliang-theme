@@ -90,7 +90,9 @@ function parseAnimate(body) {
   }
   const ez = seg.match(/ease:\s*"([^"]+)"/);
   if (ez) out.ease = ez[1];
-  for (const k of ['opacity', 'pathLength', 'pathOffset', 'scale', 'rotate', 'x', 'y']) {
+  /* translateX/translateY 必须一起收：lucide-animated 里 x/y 常是 0 占位，
+   * 真正的往返位移写在 translateX/translateY 数组里（TrendingUp 就是这种）。 */
+  for (const k of ['opacity', 'pathLength', 'pathOffset', 'scale', 'rotate', 'x', 'y', 'translateX', 'translateY']) {
     const re = new RegExp('(^|[\\s,{])' + k + '\\s*:\\s*(\\[[^\\]]*\\]|[-\\d.]+)');
     const r = seg.match(re);
     if (r) {
@@ -116,10 +118,13 @@ const EASE = {
 };
 const easeOf = (n) => EASE[n] || 'cubic-bezier(0.2, 0, 0, 1)';
 
-/* 把 scale/rotate/x/y 合成一条 transform。返回 '' 表示本帧无变换。
+/* 把 scale/rotate/x/y/translateX/translateY 合成一条 transform。返回 '' 表示本帧无变换。
  * 两种语义要分清：
  *   数组值（如 `rotate: [0, -60, 0]`）= 显式关键帧，逐帧取用；
- *   单值  （如 `rotate: 360`）        = 从 normal 态（恒等）动到该值，故只有末帧带它。 */
+ *   单值  （如 `rotate: 360`）        = 从 normal 态（恒等）动到该值，故只有末帧带它。
+ * lucide-animated 里 x/y 与 translateX/translateY 两种写法并存：
+ *   x/y 常是 `0` 占位，真正的往返位移在 translateX/translateY 的数组里（如 TrendingUp）。
+ *   故数组键优先；translateX/translateY 存在时不再叠加 x/y，避免生成两条同名位移。 */
 function transformOf(p, key, isLast) {
   const t = [];
   const pick = (k, unit) => {
@@ -128,8 +133,12 @@ function transformOf(p, key, isLast) {
     if (Array.isArray(v)) return v[Math.min(key, v.length - 1)] + unit;
     return isLast ? v + unit : null;
   };
-  const x = pick('x', 'px'); if (x !== null) t.push('translateX(' + x + ')');
-  const y = pick('y', 'px'); if (y !== null) t.push('translateY(' + y + ')');
+  const tx = pick('translateX', 'px');
+  const ty = pick('translateY', 'px');
+  const x = tx !== null ? tx : pick('x', 'px');
+  const y = ty !== null ? ty : pick('y', 'px');
+  if (x !== null) t.push('translateX(' + x + ')');
+  if (y !== null) t.push('translateY(' + y + ')');
   const sc = pick('scale', ''); if (sc !== null) t.push('scale(' + sc + ')');
   const ro = pick('rotate', 'deg'); if (ro !== null) t.push('rotate(' + ro + ')');
   return t.join(' ');
@@ -156,7 +165,7 @@ for (const name of CURATED) {
 
   // 关键帧序列：数组型属性按其长度展开，否则两帧
   const len = Math.max(
-    ...['opacity', 'pathLength', 'pathOffset', 'scale', 'rotate', 'x', 'y']
+    ...['opacity', 'pathLength', 'pathOffset', 'scale', 'rotate', 'x', 'y', 'translateX', 'translateY']
       .filter((k) => Array.isArray(p[k]))
       .map((k) => p[k].length),
     2
@@ -164,7 +173,7 @@ for (const name of CURATED) {
   const frames = [];
   let hasTransform = false;
   /* 该图标是否含 transform 类属性（决定要不要写 transform-origin 中心修正） */
-  const wantsTransform = ['x', 'y', 'scale', 'rotate'].some((k) => p[k] !== undefined);
+  const wantsTransform = ['x', 'y', 'scale', 'rotate', 'translateX', 'translateY'].some((k) => p[k] !== undefined);
   for (let i = 0; i < len; i++) {
     const decl = [];
     if (p.opacity !== undefined) {
