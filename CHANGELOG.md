@@ -4,6 +4,14 @@
 
 ---
 
+## [1.8.2] - 2026-10-28
+
+- **首次发布到 npm**：`npm install xiaoliang-theme`（包名 `xiaoliang-theme`，发布前的安装说明一律以 GitHub 为准）。
+- **文档修正**：README「安装使用」重写为 npm 优先，新增 CDN 直接引用（`unpkg.com`，附 `gcore.jsdelivr.net` 国内节点）与 GitHub zip / clone / git 依赖三条备选路径；移除「尚未发布到 npm」的过期提示。
+- **CDN 端点按实测选定**：`unpkg.com` 与本机可达的 `gcore.jsdelivr.net` 均返回 200；`cdn.jsdelivr.net` 在国内网络下连接超时，故不作首选推荐。`registry.npmmirror.com` 的文件直链返回 403（未同步该包），未写入文档。
+- **发布流程记录**：2026 年起 npm 已限制 bypass-2FA token 直接发布，`npm publish` 会转入 staged 队列并生成 `0.0.0-stage` 占位版，实测约 4 分钟后自动转正（`dist-tags.latest` 变为真实版本）。占位版无法用 bypass token `unpublish`，需网页端 2FA 手动删除。
+- 本版**仅文档变更**，CSS / JS / Token 产物与 1.8.1 完全一致，无功能改动。
+
 ## [1.8.1] - 2026-10-10
 
 - **修复：动画图标的旋转/缩放绕左上角而非图标中心**。用户指出「持续旋转（`repeat: Infinity`）」的旋转圆心不对。

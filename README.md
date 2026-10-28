@@ -14,25 +14,40 @@
 
 ## 安装使用
 
-> **尚未发布到 npm**，当前请从 GitHub 获取。发布后本节会同步更新。
+### npm 安装（推荐）
 
-### 下载 zip（最快）
+```bash
+npm install xiaoliang-theme
+```
 
-[下载 main 分支压缩包](https://github.com/xiaoliang-hulue/xiaoliang-theme/archive/refs/heads/main.zip)，解压后按下方「引入样式」使用。
+包地址：[npmjs.com/package/xiaoliang-theme](https://www.npmjs.com/package/xiaoliang-theme)
 
-### 克隆仓库
+### CDN 直接引用（无需构建）
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/xiaoliang-theme@1.8.2/colors_and_type.css">
+<link rel="stylesheet" href="https://unpkg.com/xiaoliang-theme@1.8.2/components.css">
+<link rel="stylesheet" href="https://unpkg.com/xiaoliang-theme@1.8.2/utilities.css">
+```
+
+国内访问 jsDelivr 的 `cdn.jsdelivr.net` 时常超时，可换同源的 gcore 节点：
+
+```html
+<link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/xiaoliang-theme@1.8.2/components.css">
+```
+
+### 从 GitHub 获取（不想用 npm 时）
+
+下载 zip：[main 分支压缩包](https://github.com/xiaoliang-hulue/xiaoliang-theme/archive/refs/heads/main.zip)
+
+或克隆 / 作为 git 依赖：
 
 ```bash
 git clone https://github.com/xiaoliang-hulue/xiaoliang-theme.git
-```
-
-### 作为 git 依赖安装
-
-```bash
 npm install git+https://github.com/xiaoliang-hulue/xiaoliang-theme.git
 ```
 
-或在 `package.json` 中：
+`package.json` 中：
 
 ```json
 {

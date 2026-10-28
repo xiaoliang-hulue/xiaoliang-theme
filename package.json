@@ -1,6 +1,6 @@
 {
   "name": "xiaoliang-theme",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "小亮主题 — 兼容旧项目的高级设计系统，含海蓝青绿暖金配色、完整动效、浅色/深色双模式、图标形变、图标形变/换图标过渡/动画图标与 27 个基础组件",
   "main": "colors_and_type.css",
   "style": "colors_and_type.css",
@@ -43,7 +43,7 @@
     "type": "git",
     "url": "git+https://github.com/xiaoliang-hulue/xiaoliang-theme.git"
   },
-  "homepage": "https://xiaoliang-hulue.github.io/xiaoliang-theme/",
+  "homepage": "https://github.com/xiaoliang-hulue/xiaoliang-theme#readme",
   "bugs": {
     "url": "https://github.com/xiaoliang-hulue/xiaoliang-theme/issues"
   },
