@@ -149,6 +149,10 @@ import 'xiaoliang-theme/utilities.css';
 ### 卡片
 
 ```html
+<!-- 基类自带 16px 内边距，单独使用不会贴边 -->
+<div class="card">…</div>
+
+<!-- 更宽松的 24px -->
 <div class="card card-default">
   <h3 class="xl-h4">卡片标题</h3>
   <p class="xl-body">卡片内容描述文字。</p>
@@ -161,12 +165,21 @@ import 'xiaoliang-theme/utilities.css';
   background: var(--color-surface-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  padding: var(--space-4);   /* 基类兜底：裸用不破版 */
 }
 
-.card-default {
-  padding: var(--space-6);
-}
+.card-default { padding: var(--space-6); }
+.card-compact { padding: var(--space-4); }
 ```
+
+| 类 | 内边距 | 用途 |
+|---|---|---|
+| `.card` | 16px | 基础卡片，可直接使用 |
+| `.card-default` | 24px | 常规内容卡片 |
+| `.card-compact` | 16px | 紧凑列表、指标格 |
+| `.card-interactive` | 24px | 可点击卡片，含悬停/焦点反馈 |
+
+需要内容完全贴边（表格、通栏列表）时，在元素上覆写 `style="padding: 0"` 即可。
 
 ### 输入框
 

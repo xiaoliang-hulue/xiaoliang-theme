@@ -13,7 +13,9 @@
     .divider { border: none; border-top: 1px solid var(--color-border); margin: var(--space-3) 0; }
     /* @component-css-start */
     /* Component definitions — extracted to components.css by deterministic script */
-    .card { width: 100%; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+    /* 基类自带默认内边距（16px），裸用 class="card" 不再破版；
+       需要更宽松的留白用 .card-default。 */
+    .card { width: 100%; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-4); }
     .card-default { padding: var(--space-6); }
     .card-compact { padding: var(--space-4); }
 .card-interactive { padding: var(--space-6); cursor: pointer; transition: filter .15s; }
@@ -61,6 +63,15 @@
     <div class="card card-default card-disabled">
       <div class="card-header">禁用卡片</div>
       <div class="card-body">当前状态不可用，视觉降权显示。</div>
+      <div class="card-footer">2024-01-15</div>
+    </div>
+  </div>
+  <hr class="divider">
+  <div class="row">
+    <span class="label">Bare</span>
+    <div class="card">
+      <div class="card-header">裸卡片（基类默认 16px）</div>
+      <div class="card-body">只写 class="card" 也有内边距，不会贴边。</div>
       <div class="card-footer">2024-01-15</div>
     </div>
   </div>

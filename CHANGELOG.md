@@ -4,6 +4,19 @@
 
 ---
 
+## [1.8.3] - 2026-10-28
+
+**修复：`.card` 基类缺少默认内边距（裸用破版）**
+
+- **现象**：只写 `class="card"` 时内容贴边，看起来像样式没加载。用户在实际项目（毕设前端设备卡）中踩到。
+- **根因**：padding 只定义在修饰类上（`.card-default` 24px / `.card-compact` 16px / `.card-interactive` 24px），基类 `.card` 只给了背景、描边、圆角。基类无法被安全地单独使用，属设计 footgun。
+- **修复**：`.card` 增加 `padding: var(--space-4)`（16px）作为兜底；`.card-default` / `.card-interactive` 的 24px 覆盖保持不变，`card-compact` 与基类同为 16px。**对已有使用修饰类的写法零视觉变化**，只影响此前裸用 `.card` 的场景。
+- **实测**：无头浏览器读 computed padding —— 裸 `.card` 16px、`.card-default` 24px、`.card-compact` 16px、`.card-interactive` 24px，深浅两模式一致。
+- **preview 增补**：`preview/component-card.html` 新增 `Bare` 样例，裸 `.card` 有可见留白，防止后续回归。
+- **文档**：README 卡片小节改为「基类自带 16px」+ 变体对照表，并说明需要完全贴边时可覆写 `padding: 0`。
+- **波及面核查**：实验室内联的展示柜与自身样式均未使用 `.card`；题库下游 `build_xl.py` 自带一份独立 `.card` 定义，不受影响。
+- 未新增 `.card-flush` 之类的贴边变体——`components/card.json` 明确 `doNotInvent: ["media cards", "image cards"]`，贴边需求用行内 `padding: 0` 覆写即可。
+
 ## [1.8.2] - 2026-10-28
 
 - **首次发布到 npm**：`npm install xiaoliang-theme`（包名 `xiaoliang-theme`，发布前的安装说明一律以 GitHub 为准）。

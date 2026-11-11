@@ -88,7 +88,7 @@
 .btn:hover:not(:disabled) { transform: translateY(calc(-1 * var(--motion-distance-sm))); box-shadow: var(--shadow-sm) }
 .btn:active:not(:disabled) { transform: translateY(0) scale(var(--motion-scale-press)); box-shadow: none }
 .btn-loading::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, .2) 50%, transparent 75%); animation: xl-shimmer 1.2s linear infinite; pointer-events: none }
-.card { width: 100%; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-sizing: border-box }
+.card { width: 100%; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-4); box-sizing: border-box }
 .card-default { padding: var(--space-6) }
 .card-compact { padding: var(--space-4) }
 .card-interactive { padding: var(--space-6); cursor: pointer; transition: transform var(--motion-duration-slow) var(--motion-ease-emphasized), border-color var(--motion-duration-base) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized) }
