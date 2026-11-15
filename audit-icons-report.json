@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-26T15:46:34.461Z",
-  "scanned": 59,
+  "generatedAt": "2026-11-15T06:22:56.070Z",
+  "scanned": 60,
   "dirs": [
     "D:\\workbuddy_workspace\\小亮主题"
   ],
@@ -18,11 +18,11 @@
         },
         {
           "name": "ChevronRight",
-          "loc": 7887
+          "loc": 8427
         },
         {
           "name": "ChevronRight",
-          "loc": 8154
+          "loc": 8694
         }
       ],
       "ref": [],
@@ -33,19 +33,19 @@
       "inline": [
         {
           "name": "ChevronDown",
-          "loc": 52407
+          "loc": 53621
         },
         {
           "name": "ChevronDown",
-          "loc": 52673
+          "loc": 53887
         },
         {
           "name": "ChevronRight",
-          "loc": 58850
+          "loc": 60064
         },
         {
           "name": "ChevronRight",
-          "loc": 59117
+          "loc": 60331
         }
       ],
       "ref": [
@@ -80,6 +80,29 @@
           "scriptRefsLucide": true
         }
       ],
+      "emoji": []
+    },
+    {
+      "file": "outputs\\_og.html",
+      "inline": [
+        {
+          "name": "ChevronDown",
+          "loc": 17337
+        },
+        {
+          "name": "ChevronDown",
+          "loc": 17603
+        },
+        {
+          "name": "ChevronRight",
+          "loc": 23780
+        },
+        {
+          "name": "ChevronRight",
+          "loc": 24047
+        }
+      ],
+      "ref": [],
       "emoji": []
     },
     {
@@ -144,11 +167,11 @@
       "inline": [
         {
           "name": "Bell",
-          "loc": 4655
+          "loc": 5752
         },
         {
           "name": "Send",
-          "loc": 5201
+          "loc": 6298
         }
       ],
       "ref": [],
@@ -269,27 +292,27 @@
       "inline": [
         {
           "name": "CheckCircle2",
-          "loc": 2995
+          "loc": 3389
         },
         {
           "name": "X",
-          "loc": 3478
+          "loc": 3872
         },
         {
           "name": "Info",
-          "loc": 3795
+          "loc": 4189
         },
         {
           "name": "X",
-          "loc": 4296
+          "loc": 4690
         },
         {
           "name": "CircleX",
-          "loc": 4614
+          "loc": 5008
         },
         {
           "name": "X",
-          "loc": 5116
+          "loc": 5510
         }
       ],
       "ref": [],
