@@ -250,7 +250,8 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 - `--color-surface-muted`：次级表面
 - `--color-text`：主要文字
 - `--color-text-secondary`：次要文字
-- `--color-text-muted`：禁用/占位符
+- `--color-text-muted`：弱化文字 / 占位符
+- `--color-text-disabled`：禁用态文字（浅色 `#c2bbb3` / 深色 `#585858`，对比度有意压低；WCAG 1.4.3 对禁用控件豁免）
 - `--color-border`：默认边框
 - `--color-border-subtle`：弱边框
 
@@ -396,7 +397,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Breadcrumb | `preview/component-breadcrumb.html` | 默认 / Chevron 分隔符 |
 | Progress | `preview/component-progress.html` | 尺寸 / 语义色 / 带标签 / 不确定进度 |
 | Avatar | `preview/component-avatar.html` | 5 档尺寸 / 圆形方形 / 图片文字 / 状态点 / 头像组 |
-| Badge | `preview/component-badge.html` | 计数 / 圆点 / 语义色 / 附着角标 |
+| Badge | `preview/component-badge.html` | 计数 / 圆点 / 语义色（`.badge.success` 或 `.badge--success` 别名）/ 附着角标 |
 | Stepper | `preview/component-stepper.html` | 水平 / 垂直 / 已完成·进行中·未开始 |
 | Drawer | `preview/component-drawer.html` | 右 / 左 / 底部三向抽屉（依赖 theme.js） |
 | Icon Morph | `preview/component-morph-icon.html` | 图标路径形变：23 组策展配对 / 4 种触发器 / 5 档尺寸（依赖 morph.min.js） |

@@ -245,6 +245,44 @@ user-invocable: true
 
 ---
 
+## 项目级扩展边界
+
+主题只吸收「跨项目复用 + 与业务无关」的东西。判断一个类该不该进主题，只问两句：**换个项目还要吗？跟业务有关吗？** 两句都是「要 / 无关」才进主题，否则留在项目里自建。
+
+### 允许在项目内自建（不要回头改主题）
+
+| 类型 | 例子 |
+|---|---|
+| 整页骨架 | 侧栏 + 主区栅格、满屏高度容器（`.app-shell`、`.agent-layout`、`.view-chat`） |
+| 业务复合块 | 设备卡、告警行、事件时间线、趋势图、OTA 进度条 |
+| 业务动效 | 录音渐变光圈、朗读波形、状态点呼吸 |
+| 项目密度参数 | `--ctl-h`（控件行高）、`--mic-level`（运行时音量）这类本项目专用变量 |
+
+### 禁止（会与主题升级互相打架）
+
+| 禁止 | 原因 | 正确做法 |
+|---|---|---|
+| 重定义主题已有组件的几何 / 动画 | 例：项目覆写 `.form-item` 的 `animation`，会吃掉主题的 `xl-rise-in` 入场 | 要改留白或布局，新增项目类或行内 style，别改写主题类本体 |
+| 重复定义主题已有的工具类 | `.sr-only`、`.btn-sm` 主题已有，重复定义后主题升级不会跟着走 | 直接用 `utilities.css` / `components.css` 里的 |
+| 发明近似 token 名 | `--color-bg` / `--color-success` 主题没有，`var()` 取到空值且不报错 | 用 `--color-background` / `--success`，全量清单见 `colors_and_type.css` |
+| 挪用状态类改语义 | `.is-out` 主题用于图标换出 | 组件内成对定义自己的状态类；toast 退场自 1.8.3 起用 `.toast.is-out` |
+
+### 命名：复合类优先，BEM 走别名
+
+主题规范写法是复合类（`.badge.success`）。项目若坚持 BEM，用主题提供的别名（`.badge--success`），**不要自造第三套命名**——两者计算样式等价，别名只是兼容层。
+
+### 已登记的项目级扩展（毕设 RAG-Agent 物联网运维系统，2026-11-15 审计）
+
+| 项目侧自建 | 处理 |
+|---|---|
+| `.app-shell` / `.agent-layout` / `.conv-sidebar` / `.composer` 等整页骨架 | 留在项目，不进主题 |
+| `.modal-mask` / `.xl-dialog-*` / `.xl-tooltip` 替代主题 modal 与 tooltip | 若确认主题版能力不足，单独提需求，不要在项目里长期双轨 |
+| `.badge--{success,error,warning,info,muted}` | 已由主题补别名，无需自造 |
+| `.toast.is-out` 自造退场 keyframes | 已由主题补 `.toast.is-out`，可删除自造版本 |
+| `.card-compact` + `.metric-cell` 补 16px 内边距 | 1.8.3 起基类自带 16px，补丁可删 |
+
+---
+
 ## 文件结构
 
 ```

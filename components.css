@@ -4,7 +4,7 @@
    如需修改，请编辑对应的 preview/component-*.html 后重新运行本脚本。
    ═══════════════════════════════════════════════════════════════ */
 
-/* 由 extract-components-css.mjs 聚合去重生成：共 344 条规则，合并完全重复 46 条。 */
+/* 由 extract-components-css.mjs 聚合去重生成：共 352 条规则，合并完全重复 46 条。 */
 
 .accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden }
 .accordion-item { border-bottom: 1px solid var(--color-border-subtle) }
@@ -49,6 +49,12 @@
 .badge.warning { background: var(--warning); color: var(--color-background) }
 .badge.neutral { background: var(--color-surface-muted); color: var(--color-text-secondary); border: 1px solid var(--color-border) }
 .badge.dot { min-width: 8px; width: 8px; height: 8px; padding: 0 }
+.badge--primary { background: var(--color-primary); color: var(--color-on-primary) }
+.badge--success { background: var(--success); color: var(--color-background) }
+.badge--warning { background: var(--warning); color: var(--color-background) }
+.badge--error { background: var(--error); color: var(--color-background) }
+.badge--info { background: var(--info); color: var(--color-background) }
+.badge--neutral, .badge--muted { background: var(--color-surface-muted); color: var(--color-text-secondary); border: 1px solid var(--color-border) }
 .badge-wrap { position: relative; display: inline-flex }
 .badge-wrap > .badge { position: absolute; top: 0; right: 0; transform: translate(50%, -50%); border: 2px solid var(--color-surface) }
 .badge-wrap > .badge.dot { transform: translate(25%, -25%) }
@@ -343,6 +349,9 @@
 .toast-close:hover { background: var(--color-surface-muted); color: var(--color-text) }
 .toast-container { position: fixed; right: var(--space-6); bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); z-index: 200; pointer-events: none; max-width: calc(100vw - var(--space-12)) }
 .toast-container .toast { pointer-events: auto }
+@keyframes xl-toast-out {from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(var(--motion-distance-md)); }}
+.toast.is-out { animation: xl-toast-out var(--motion-duration-base) var(--motion-ease-standard) forwards; pointer-events: none }
 .toast.is-toast-closing { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-standard) reverse both }
 .tooltip { position: relative; display: inline-flex }
 .tooltip-bubble { position: absolute; bottom: calc(100% + var(--space-2)); left: 50%; transform: translateX(-50%) translateY(4px); padding: var(--space-1) var(--space-2); background: var(--gray-900); color: var(--gray-0); font-size: var(--text-xs); line-height: 18px; border-radius: var(--radius-md); white-space: nowrap; z-index: 40; opacity: 0; visibility: hidden; transition: opacity var(--motion-duration-base) var(--motion-ease-standard), transform var(--motion-duration-base) var(--motion-ease-emphasized), visibility 0s linear var(--motion-duration-base); pointer-events: none }

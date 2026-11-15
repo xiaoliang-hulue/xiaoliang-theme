@@ -17,6 +17,18 @@
 - **波及面核查**：实验室内联的展示柜与自身样式均未使用 `.card`；题库下游 `build_xl.py` 自带一份独立 `.card` 定义，不受影响。
 - 未新增 `.card-flush` 之类的贴边变体——`components/card.json` 明确 `doNotInvent: ["media cards", "image cards"]`，贴边需求用行内 `padding: 0` 覆写即可。
 
+### 同版本追加（2026-11-15，A 批主题能力补齐）
+
+来源：毕设前端与主题的差异审计。只补「真缺 + 零风险」的部分，布局骨架等 app 层内容不进主题。
+
+- **`.toast` 补退场动画**：此前主题 toast 只有入场 `xl-rise-in`、没有退场，调用方（毕设前端）被迫自造 `xl-toast-out`。现补 `@keyframes xl-toast-out` 与 `.toast.is-out`——`--motion-duration-base`（180ms）+ `--motion-ease-standard` + `forwards`，退场期间 `pointer-events: none` 防误点。实测：`animationName` 命中 `xl-toast-out`，opacity 1 → 0。
+- **新增 token `--color-text-disabled`**：浅色 `#c2bbb3`（白底 1.90:1）、深色 `#585858`（`#0a0a0a` 底 2.78:1），均低于 `--color-text-muted`（2.52:1 / 5.81:1），专用于不可用控件。禁用控件按 WCAG 1.4.3 豁免最低对比度要求。
+- **`.badge` 补 BEM 别名**：`.badge--{primary,success,warning,error,info,neutral,muted}`，与复合类 `.badge.success` 等等价——实测背景色、文字色、描边宽度完全一致。规范写法仍是复合类，别名只作兼容层，供沿用 BEM 命名的项目直接接入。
+- **SKILL.md 新增「项目级扩展边界」**：把整页骨架、业务复合块、业务动效、项目密度参数明确划为**项目自建、不进主题**；并列出四条禁止——改写主题组件本体的几何/动画、重复定义 `.sr-only`/`.btn-sm` 这类已有工具类、发明 `--color-bg` 这类近似 token、挪用 `.is-out` 这类状态类改变语义。附毕设审计的 5 条登记与处理结论。
+- **README 同步**：Token 章节补 `--color-text-disabled`，Badge 行补别名说明。
+- 验证：`npm run audit` 四门绿（对比度 44 项检查，42 通过 2 豁免 0 失败；icons 0 问题；motion 契约通过）；`npx playwright test` 26/26 全绿。
+- 说明：1.8.3 尚未发布到 npm，本批内容并入同一版本号，不额外升版。
+
 ## [1.8.2] - 2026-10-28
 
 - **首次发布到 npm**：`npm install xiaoliang-theme`（包名 `xiaoliang-theme`，发布前的安装说明一律以 GitHub 为准）。

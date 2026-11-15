@@ -26,6 +26,16 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 .toast-container { position: fixed; right: var(--space-6); bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); z-index: 200; pointer-events: none; max-width: calc(100vw - var(--space-12)); }
 .toast-container .toast { pointer-events: auto; }
 .toast { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-emphasized) backwards; }
+/* 退场：调用方给 .toast 加 .is-out，动画结束后再移除 DOM。
+   入场走主题统一的 xl-rise-in；此前主题只有入场没有退场，调用方只能自造 keyframes。 */
+@keyframes xl-toast-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(var(--motion-distance-md)); }
+}
+.toast.is-out {
+  animation: xl-toast-out var(--motion-duration-base) var(--motion-ease-standard) forwards;
+  pointer-events: none;
+}
 .toast.is-toast-closing { animation: xl-rise-in var(--motion-duration-slow) var(--motion-ease-standard) reverse both; }
 /* @component-css-end */
 </style>

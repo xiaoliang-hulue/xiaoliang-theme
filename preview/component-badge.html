@@ -50,6 +50,16 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 /* 圆点（无数字） */
 .badge.dot { min-width: 8px; width: 8px; height: 8px; padding: 0; }
 
+/* BEM 别名：与 .badge.success 等等价，供沿用 .badge--x 命名的项目直接接入。
+   规范写法仍是复合类（.badge.success）；别名只是兼容层，不引入新语义、不新增变体。 */
+.badge--primary { background: var(--color-primary); color: var(--color-on-primary); }
+.badge--success { background: var(--success); color: var(--color-background); }
+.badge--warning { background: var(--warning); color: var(--color-background); }
+.badge--error   { background: var(--error); color: var(--color-background); }
+.badge--info    { background: var(--info); color: var(--color-background); }
+.badge--neutral,
+.badge--muted   { background: var(--color-surface-muted); color: var(--color-text-secondary); border: 1px solid var(--color-border); }
+
 /* 附着容器：把徽标定位到宿主右上角 */
 .badge-wrap { position: relative; display: inline-flex; }
 .badge-wrap > .badge {
@@ -84,6 +94,15 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 <span class="badge success">已完成</span>
 <span class="badge warning">待处理</span>
 <span class="badge neutral">草稿</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="bem"><span class="story-label">BEM 别名（等价）</span><div class="rail">
+<span class="badge badge--primary">5</span>
+<span class="badge badge--success">已完成</span>
+<span class="badge badge--warning">待处理</span>
+<span class="badge badge--error">失败</span>
+<span class="badge badge--info">提示</span>
+<span class="badge badge--muted">草稿</span>
 </div></section>
 <hr class="divider">
 <section class="story" data-evidence-sample="attached"><span class="story-label">附着角标</span><div class="rail">
