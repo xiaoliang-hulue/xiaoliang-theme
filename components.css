@@ -322,7 +322,7 @@
 .tabpanel { padding: var(--space-4); color: var(--color-text-subtle); font-size: var(--text-sm); line-height: 1.6 }
 .tabpanel[hidden] { display: none }
 .tabpanel:not([hidden]) { animation: xl-fade-in var(--motion-duration-slow) var(--motion-ease-emphasized) both }
-.tag { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 24px; height: 24px; padding: var(--space-1) var(--space-2); border: 1px solid transparent; font-size: var(--text-xs); font-weight: var(--font-medium); line-height: 16px; white-space: nowrap; transition: transform var(--motion-duration-base) var(--motion-ease-spring), background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), filter var(--motion-duration-fast) var(--motion-ease-standard); cursor: default }
+.tag { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 24px; height: 24px; padding: var(--space-1) var(--space-2); border: 1px solid transparent; border-radius: var(--radius-md); font-size: var(--text-xs); font-weight: var(--font-medium); line-height: 16px; white-space: nowrap; transition: transform var(--motion-duration-base) var(--motion-ease-spring), background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), filter var(--motion-duration-fast) var(--motion-ease-standard); cursor: default }
 .tag-rounded { border-radius: var(--radius-md) }
 .tag-pill { border-radius: var(--radius-full) }
 .tag-default { background: var(--color-surface-muted); color: var(--color-text-secondary); border-color: var(--color-border) }

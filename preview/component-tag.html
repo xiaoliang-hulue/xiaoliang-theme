@@ -14,7 +14,9 @@
 
     /* @component-css-start */
     /* Component definitions — extracted to components.css by deterministic script */
-    .tag { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 24px; height: 24px; padding: var(--space-1) var(--space-2); border: 1px solid transparent; font-size: var(--text-xs); font-weight: var(--font-medium); line-height: 16px; white-space: nowrap; transition: filter .15s; cursor: default; }
+    /* 基类自带 8px 圆角，裸用 .tag 不会渲成方角；
+       更圆的胶囊用 .tag-pill 覆盖。 */
+    .tag { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; min-width: 24px; height: 24px; padding: var(--space-1) var(--space-2); border: 1px solid transparent; border-radius: var(--radius-md); font-size: var(--text-xs); font-weight: var(--font-medium); line-height: 16px; white-space: nowrap; transition: filter .15s; cursor: default; }
     .tag-rounded { border-radius: var(--radius-md); }
     .tag-pill { border-radius: var(--radius-full); }
     .tag-default { background: var(--color-surface-muted); color: var(--color-text-secondary); border-color: var(--color-border); }
@@ -41,6 +43,12 @@
   <div class="row">
     <span class="label">Pill</span>
     <span class="tag tag-pill tag-primary">主要</span>
+  </div>
+  <hr class="divider">
+  <div class="row">
+    <span class="label">Bare</span>
+    <span class="tag tag-primary">裸标签（基类 8px）</span>
+    <span class="tag tag-default">未挂修饰符</span>
   </div>
   <script src="_theme.js"></script>
 </body>

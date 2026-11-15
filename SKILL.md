@@ -226,7 +226,7 @@ user-invocable: true
 - Select
 - Checkbox / Radio / Switch（分组用 `.field-group` + `.field-group-title`）
 - Card（基类 `.card` 自带 16px 内边距，可直接单独使用；常规留白加 `.card-default`（24px），紧凑加 `.card-compact`（16px），可点击加 `.card-interactive`（24px）；需要内容贴边时覆写 `style="padding:0"`。**禁止**假定 `.card` 无内边距而额外套一层 padding 容器）
-- Tag（独立内容标签）
+- Tag（独立内容标签；基类 `.tag` 自带 8px 圆角，可直接单独使用；胶囊用 `.tag-pill`，`.tag-rounded` 与基类等价，保留兼容）
 - Badge（附着计数 / 圆点角标，配 `.badge-wrap` 定位）
 - Avatar（5 档尺寸 / 圆形方形 / 状态点 / `.avatar-group` 堆叠）
 - Alert（Info / Success / Warning / Error）

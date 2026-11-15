@@ -379,7 +379,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Textarea | `preview/component-textarea.html` | 默认 / 错误 / 禁用 |
 | Select | `preview/component-select.html` | 默认 / 错误 / 禁用 |
 | Card | `preview/component-card.html` | 默认 / 紧凑 / 可交互 |
-| Tag | `preview/component-tag.html` | Default / Primary / Success / Warning / Error / Rounded / Pill |
+| Tag | `preview/component-tag.html` | Default / Primary / Success / Warning / Error / Rounded / Pill（基类自带 8px 圆角，`tag-pill` 为胶囊） |
 | Alert | `preview/component-alert.html` | Info / Success / Warning / Error |
 | Table | `preview/component-table.html` | 默认 / 斑马纹 / Hover |
 | Form | `preview/component-form.html` | 垂直 / 水平 / 行内布局 / 错误 / 成功 / 禁用 |

@@ -23,7 +23,9 @@
 
 - **`.toast` 补退场动画**：此前主题 toast 只有入场 `xl-rise-in`、没有退场，调用方（毕设前端）被迫自造 `xl-toast-out`。现补 `@keyframes xl-toast-out` 与 `.toast.is-out`——`--motion-duration-base`（180ms）+ `--motion-ease-standard` + `forwards`，退场期间 `pointer-events: none` 防误点。实测：`animationName` 命中 `xl-toast-out`，opacity 1 → 0。
 - **新增 token `--color-text-disabled`**：浅色 `#c2bbb3`（白底 1.90:1）、深色 `#585858`（`#0a0a0a` 底 2.78:1），均低于 `--color-text-muted`（2.52:1 / 5.81:1），专用于不可用控件。禁用控件按 WCAG 1.4.3 豁免最低对比度要求。
+- **`--color-text-disabled` 暂不接管组件禁用态**（有意为之）：`.btn-*[disabled]`、`.input:disabled`、`.textarea:disabled`、`.select-trigger:disabled` 目前统一用 `--color-text-muted`，而它们的禁用底色是 `#e5dfd9` / `#f7f5f2`；换成更淡的 `#c2bbb3` 会把对比度从 1.55:1 压到约 1.35:1，属于「越修越糊」。故该 token 定位为 app 级显式禁用文本，主题组件暂不消费，统一接管留待大更新时连同禁用态整体标定。
 - **`.badge` 补 BEM 别名**：`.badge--{primary,success,warning,error,info,neutral,muted}`，与复合类 `.badge.success` 等等价——实测背景色、文字色、描边宽度完全一致。规范写法仍是复合类，别名只作兼容层，供沿用 BEM 命名的项目直接接入。
+- **`.tag` 基类补默认圆角**：此前 `.tag` 只有盒模型，圆角靠 `tag-rounded` / `tag-pill` 修饰符，漏写就静默渲成方角（展示柜里实际踩过）。现基类直接给 `var(--radius-md)`，`.tag-pill` 仍覆盖为胶囊；`.tag-rounded` 与基类等价，保留兼容。实测：裸 `.tag` 8px、`.tag-pill` 9999px。
 - **SKILL.md 新增「项目级扩展边界」**：把整页骨架、业务复合块、业务动效、项目密度参数明确划为**项目自建、不进主题**；并列出四条禁止——改写主题组件本体的几何/动画、重复定义 `.sr-only`/`.btn-sm` 这类已有工具类、发明 `--color-bg` 这类近似 token、挪用 `.is-out` 这类状态类改变语义。附毕设审计的 5 条登记与处理结论。
 - **README 同步**：Token 章节补 `--color-text-disabled`，Badge 行补别名说明。
 - 验证：`npm run audit` 四门绿（对比度 44 项检查，42 通过 2 豁免 0 失败；icons 0 问题；motion 契约通过）；`npx playwright test` 26/26 全绿。
