@@ -403,7 +403,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Icon Morph | `preview/component-morph-icon.html` | 图标路径形变：23 组策展配对 / 4 种触发器 / 5 档尺寸（依赖 morph.min.js） |
 | Status Dot | `preview/component-status-dot.html` | 语义色 5 种 / 三档尺寸 / 呼吸（`--pulse`）|
 | Empty | `preview/component-empty.html` | 图标＋标题＋说明＋操作 / 紧凑 / 错误态 |
-| Loading | `preview/component-loading.html` | 行内 / 区块居中 / 骨架条（复用 `btn-spin` 与 `xl-shimmer`）|
+| Loading | `preview/component-loading.html` | 行内 / 区块居中 / 三点跳动 `.loading-dots` / 骨架条（复用 `btn-spin` 与 `xl-shimmer`）|
 | Segmented | `preview/component-segmented.html` | 互斥切换 / 小尺寸 / 撑满等分 / 禁用（`role=group` + `aria-pressed`）|
 
 组件样式已聚合到 `components.css`（类名规范：`.btn` / `.alert` / `.input` / `.card` / `.tag` 等），可直接引入或按需复制。各组件的结构化定义见 `components/*.json`。

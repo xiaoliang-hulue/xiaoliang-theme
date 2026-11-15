@@ -244,7 +244,7 @@ user-invocable: true
 - Breadcrumb（面包屑导航，纯 CSS）
 - StatusDot（状态点，纯色圆点配 `aria-hidden`，语义必须由旁侧文字承载）
 - Empty（空状态：图标＋标题＋说明＋可选操作，`.empty--sm` 紧凑、`.empty--error` 错误态）
-- Loading（`.loading` 行内／`.loading--block` 区块居中／`.skeleton` 骨架条，`role="status"` + `aria-live`）
+- Loading（`.loading` 行内／`.loading--block` 区块居中／`.loading-dots` 三点跳动／`.skeleton` 骨架条，`role="status"` + `aria-live`）
 - Segmented（互斥视图切换，`role="group"` + `aria-pressed`，**不要冒充 tablist**）
 
 ---

@@ -53,6 +53,27 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
   padding: var(--space-6) var(--space-4);
 }
 
+/* 三点跳动：与 spinner 并列的另一种「无确定进度」表达，
+   适合窄容器/行内文字后，不建议与 spinner 同时出现在同一屏 */
+.loading-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  animation: xl-dot-blink 1s var(--motion-ease-standard) infinite;
+}
+.loading-dots span:nth-child(2) { animation-delay: calc(var(--motion-stagger-step) * 3); }
+.loading-dots span:nth-child(3) { animation-delay: calc(var(--motion-stagger-step) * 6); }
+@keyframes xl-dot-blink {
+  0%, 80%, 100% { opacity: .25; transform: scale(.85); }
+  40%           { opacity: 1;   transform: scale(1); }
+}
+
 /* 骨架条：内容未到时占位，宽度由行内 style 控制 */
 .skeleton {
   display: block;
@@ -67,6 +88,7 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
 
 @media (prefers-reduced-motion: reduce) {
   .loading-spinner { animation: none; border-top-color: var(--color-border); }
+  .loading-dots span { animation: none; opacity: .6; }
   .skeleton { animation: none; background: var(--color-surface-muted); }
 }
 @media (forced-colors: active) {
@@ -98,6 +120,19 @@ body { margin: 0; padding: var(--space-3); background: var(--color-surface); fon
     <span class="loading-spinner" aria-hidden="true"></span>
     <span class="loading-text">正在读取设备列表…</span>
   </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="dots"><span class="story-label">三点</span><div class="rail">
+<div class="box" style="display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center">
+  <span class="loading" role="status" aria-live="polite">
+    <span class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="loading-text">正在思考…</span>
+  </span>
+  <span class="loading loading--sm" role="status" aria-live="polite">
+    <span class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="loading-text">等待响应</span>
+  </span>
 </div>
 </div></section>
 <hr class="divider">
