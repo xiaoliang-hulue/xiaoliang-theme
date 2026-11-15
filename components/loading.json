@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Loading",
+  "slug": "loading",
+  "confidence": "high",
+  "semanticTypeCandidates": ["feedback", "status"],
+  "variantDimensions": ["layout", "size", "type"],
+  "representativeVariants": [
+    { "layout": "inline", "size": "md", "type": "spinner" },
+    { "layout": "inline", "size": "sm", "type": "spinner" },
+    { "layout": "block", "size": "md", "type": "spinner" },
+    { "layout": "inline", "size": "md", "type": "skeleton" }
+  ],
+  "anatomy": ["root", "spinner", "text", "skeleton"],
+  "structurePatterns": [
+    "role-status-with-aria-live",
+    "spinner-reuses-btn-spin-keyframes",
+    "skeleton-width-set-inline"
+  ],
+  "usageHints": ["请求进行中", "列表首次载入", "内容占位"],
+  "doNotInvent": ["progress percentage inside spinner", "full-page blocking overlay", "skeleton with fake text content"],
+  "unknowns": []
+}

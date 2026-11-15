@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; flex-direction: column; min-width: 0; gap: var(--space-3); align-items: stretch; padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.box { border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); padding: var(--space-3); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+
+/* 分段控件：互斥视图切换。语义用 role="group" + aria-pressed，不冒充 tabs */
+.segmented {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 2px;
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.segmented-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 28px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: calc(var(--radius-md) - 2px);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--motion-duration-fast) var(--motion-ease-standard),
+              color var(--motion-duration-fast) var(--motion-ease-standard),
+              box-shadow var(--motion-duration-fast) var(--motion-ease-standard);
+}
+.segmented-item:hover { color: var(--color-text); }
+/* 选中项沿用主题的 active 约定：primary-subtle 底 + 主色字
+   （深色下 surface-elevated 与 surface-muted 只差 4 级，纯抬升几乎不可见） */
+.segmented-item.is-active {
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+.segmented-item:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+.segmented-item[disabled] { color: var(--color-text-muted); cursor: not-allowed; }
+
+/* 尺寸 */
+.segmented--sm .segmented-item { min-height: 24px; padding: 0 var(--space-2); font-size: var(--text-xs); }
+
+/* 撑满容器：等分 */
+.segmented--block { display: flex; width: 100%; }
+.segmented--block .segmented-item { flex: 1 1 0; }
+
+@media (forced-colors: active) {
+  .segmented { border-color: CanvasText; }
+  .segmented-item.is-active { background: Highlight; color: HighlightText; outline: 1px solid Highlight; }
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail">
+<div class="box">
+  <div class="segmented" role="group" aria-label="时间范围">
+    <button class="segmented-item is-active" type="button" aria-pressed="true">近 24 小时</button>
+    <button class="segmented-item" type="button" aria-pressed="false">近 7 天</button>
+    <button class="segmented-item" type="button" aria-pressed="false">近 30 天</button>
+  </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="small"><span class="story-label">小尺寸</span><div class="rail">
+<div class="box">
+  <div class="segmented segmented--sm" role="group" aria-label="图表粒度">
+    <button class="segmented-item is-active" type="button" aria-pressed="true">分钟</button>
+    <button class="segmented-item" type="button" aria-pressed="false">小时</button>
+    <button class="segmented-item" type="button" aria-pressed="false">天</button>
+  </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="block"><span class="story-label">撑满</span><div class="rail">
+<div class="box">
+  <div class="segmented segmented--block" role="group" aria-label="设备筛选">
+    <button class="segmented-item is-active" type="button" aria-pressed="true">全部</button>
+    <button class="segmented-item" type="button" aria-pressed="false">在线</button>
+    <button class="segmented-item" type="button" aria-pressed="false">离线</button>
+  </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="disabled"><span class="story-label">禁用</span><div class="rail">
+<div class="box">
+  <div class="segmented" role="group" aria-label="历史区间（无权限）">
+    <button class="segmented-item is-active" type="button" aria-pressed="true">本周</button>
+    <button class="segmented-item" type="button" aria-pressed="false" disabled>本月</button>
+    <button class="segmented-item" type="button" aria-pressed="false" disabled>本年</button>
+  </div>
+</div>
+</div></section>
+</div>
+</main>
+  <script src="_theme.js"></script>
+</body>
+</html>

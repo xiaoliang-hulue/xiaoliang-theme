@@ -4,7 +4,7 @@
    如需修改，请编辑对应的 preview/component-*.html 后重新运行本脚本。
    ═══════════════════════════════════════════════════════════════ */
 
-/* 由 extract-components-css.mjs 聚合去重生成：共 352 条规则，合并完全重复 46 条。 */
+/* 由 extract-components-css.mjs 聚合去重生成：共 395 条规则，合并完全重复 46 条。 */
 
 .accordion { border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); overflow: hidden }
 .accordion-item { border-bottom: 1px solid var(--color-border-subtle) }
@@ -153,6 +153,16 @@
 .dropdown-item:last-child { border-radius: 0 0 var(--radius-md) var(--radius-md) }
 .dropdown-item:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px }
 .dropdown-divider { height: 1px; margin: var(--space-1) 0; background: var(--color-border-subtle) }
+.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-8) var(--space-4); text-align: center }
+.empty-icon { width: 40px; height: 40px; color: var(--color-text-subtle); flex-shrink: 0 }
+.empty-title { font-size: var(--text-base); line-height: 24px; font-weight: var(--font-medium); color: var(--color-text-secondary) }
+.empty-hint { max-width: 44ch; font-size: var(--text-sm); line-height: 22px; color: var(--color-text-muted) }
+.empty-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center; margin-top: var(--space-2) }
+.empty--sm { padding: var(--space-5) var(--space-3) }
+.empty--sm .empty-icon { width: 28px; height: 28px }
+.empty--sm .empty-title { font-size: var(--text-sm) }
+.empty--error .empty-icon, .empty--error .empty-title { color: var(--error) }
+@media (forced-colors: active) {.empty-icon { forced-color-adjust: none; color: CanvasText; }}
 .form-field { display: flex; flex-direction: column; gap: var(--space-1) }
 .form-field-label { font-size: var(--text-sm); line-height: 22px; color: var(--color-text); font-weight: var(--font-medium) }
 .form-field-row { display: flex; align-items: center; gap: var(--space-3) }
@@ -176,6 +186,19 @@
 .input-hint.error { color: var(--error) }
 .input.error:focus { box-shadow: 0 0 0 3px var(--error-bg) }
 .input.success:focus { box-shadow: 0 0 0 3px var(--success-bg) }
+.loading { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); line-height: 22px; color: var(--color-text-secondary) }
+.loading-spinner { flex-shrink: 0; width: 16px; height: 16px; border: 2px solid var(--color-border); border-top-color: var(--color-primary); border-radius: var(--radius-full); animation: btn-spin var(--motion-duration-slow) linear infinite }
+.loading-text { color: var(--color-text-secondary) }
+.loading--sm { font-size: var(--text-xs) }
+.loading--sm .loading-spinner { width: 12px; height: 12px }
+.loading--block { display: flex; width: 100%; justify-content: center; padding: var(--space-6) var(--space-4) }
+.skeleton { display: block; height: 12px; border-radius: var(--radius-sm); background: linear-gradient(90deg, var(--color-surface-muted) 25%, var(--color-border-subtle) 50%, var(--color-surface-muted) 75%); background-size: 200% 100%; animation: xl-shimmer 1.2s linear infinite }
+.skeleton--text { height: 10px }
+.skeleton--title { height: 16px; border-radius: var(--radius-md) }
+@media (prefers-reduced-motion: reduce) {.loading-spinner { animation: none; border-top-color: var(--color-border); }
+  .skeleton { animation: none; background: var(--color-surface-muted); }}
+@media (forced-colors: active) {.loading-spinner { border-color: CanvasText; border-top-color: Highlight; forced-color-adjust: none; }
+  .skeleton { background: Canvas; border: 1px solid CanvasText; }}
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: flex; align-items: center; justify-content: center; padding: var(--space-6); z-index: 100 }
 .modal-overlay[hidden] { display: none }
 .modal { width: 100%; max-width: 480px; background: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-xl) }
@@ -244,6 +267,17 @@
   .progress.indeterminate .progress-bar { animation: none; width: 100%; opacity: .55; }}
 @media (forced-colors: active) {.progress { border: 1px solid CanvasText; }
   .progress-bar { background: Highlight; }}
+.segmented { display: inline-flex; align-items: stretch; gap: 2px; padding: 2px; background: var(--color-surface-muted); border: 1px solid var(--color-border); border-radius: var(--radius-md) }
+.segmented-item { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); min-height: 28px; padding: 0 var(--space-3); border: 0; border-radius: calc(var(--radius-md) - 2px); background: transparent; color: var(--color-text-secondary); font-family: var(--font-sans); font-size: var(--text-sm); font-weight: var(--font-medium); line-height: 1; white-space: nowrap; cursor: pointer; transition: background-color var(--motion-duration-fast) var(--motion-ease-standard), color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-fast) var(--motion-ease-standard) }
+.segmented-item:hover { color: var(--color-text) }
+.segmented-item.is-active { background: var(--color-primary-subtle); color: var(--color-primary) }
+.segmented-item:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px }
+.segmented-item[disabled] { color: var(--color-text-muted); cursor: not-allowed }
+.segmented--sm .segmented-item { min-height: 24px; padding: 0 var(--space-2); font-size: var(--text-xs) }
+.segmented--block { display: flex; width: 100% }
+.segmented--block .segmented-item { flex: 1 1 0 }
+@media (forced-colors: active) {.segmented { border-color: CanvasText; }
+  .segmented-item.is-active { background: Highlight; color: HighlightText; outline: 1px solid Highlight; }}
 .select-wrap { position: relative; display: inline-block; vertical-align: middle }
 .select-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--space-2); width: 100%; height: 40px; min-width: 200px; padding: 0 var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); font-size: var(--text-sm); outline: none; cursor: pointer; box-sizing: border-box; text-align: left; transition: border-color var(--motion-duration-fast) var(--motion-ease-standard), box-shadow var(--motion-duration-slow) var(--motion-ease-emphasized), background-color var(--motion-duration-fast) var(--motion-ease-standard) }
 .select-trigger:hover { border-color: var(--color-border-strong) }
@@ -272,6 +306,19 @@
 .sidenav-section:nth-of-type(2) .sidenav-section-title { animation-delay: calc(4 * var(--motion-stagger-step)) }
 .sidenav-section:nth-of-type(2) .sidenav-link:nth-of-type(1) { animation-delay: calc(5 * var(--motion-stagger-step)) }
 .sidenav-section:nth-of-type(2) .sidenav-link:nth-of-type(2) { animation-delay: calc(6 * var(--motion-stagger-step)) }
+.status-dot { display: inline-block; flex-shrink: 0; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--color-text-muted) }
+.status-dot--ok { background: var(--success) }
+.status-dot--warn { background: var(--warning) }
+.status-dot--err { background: var(--error) }
+.status-dot--info { background: var(--info) }
+.status-dot--muted { background: var(--color-text-muted) }
+.status-dot--sm { width: 6px; height: 6px }
+.status-dot--lg { width: 10px; height: 10px }
+.status-dot--pulse { animation: xl-dot-breathe var(--motion-duration-emphasis) var(--motion-ease-standard) infinite }
+@keyframes xl-dot-breathe {0%, 100% { opacity: 1; }
+  50%      { opacity: .4; }}
+@media (prefers-reduced-motion: reduce) {.status-dot--pulse { animation: none; opacity: 1; }}
+@media (forced-colors: active) {.status-dot { border: 1px solid CanvasText; forced-color-adjust: none; background: Highlight; }}
 .stepper { display: flex; align-items: flex-start; width: 100%; margin: 0; padding: 0; list-style: none; font-family: var(--font-sans) }
 .step { position: relative; display: flex; flex: 1 1 0; flex-direction: column; align-items: center; gap: var(--space-1); min-width: 0; text-align: center; animation: xl-rise-in var(--motion-duration-emphasis) var(--motion-ease-emphasized) backwards; animation-delay: calc(var(--reveal-index, 0) * var(--motion-stagger-step)) }
 .step:not(:last-child)::after { content: ""; position: absolute; top: 13px; left: calc(50% + 22px); right: calc(-50% + 22px); height: 2px; background: var(--color-border) }

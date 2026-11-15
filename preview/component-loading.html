@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; flex-direction: column; min-width: 0; gap: var(--space-3); align-items: stretch; padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.box { border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); padding: var(--space-3); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+
+/* 加载态：旋转指示器 + 文字；骨架条用于列表占位 */
+.loading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  line-height: 22px;
+  color: var(--color-text-secondary);
+}
+.loading-spinner {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  /* 复用按钮的旋转关键帧，避免两套同样的 360° 动画 */
+  animation: btn-spin var(--motion-duration-slow) linear infinite;
+}
+.loading-text { color: var(--color-text-secondary); }
+
+/* 尺寸 */
+.loading--sm { font-size: var(--text-xs); }
+.loading--sm .loading-spinner { width: 12px; height: 12px; }
+
+/* 区块居中：占满容器、垂直留白 */
+.loading--block {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+/* 骨架条：内容未到时占位，宽度由行内 style 控制 */
+.skeleton {
+  display: block;
+  height: 12px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--color-surface-muted) 25%, var(--color-border-subtle) 50%, var(--color-surface-muted) 75%);
+  background-size: 200% 100%;
+  animation: xl-shimmer 1.2s linear infinite;
+}
+.skeleton--text { height: 10px; }
+.skeleton--title { height: 16px; border-radius: var(--radius-md); }
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner { animation: none; border-top-color: var(--color-border); }
+  .skeleton { animation: none; background: var(--color-surface-muted); }
+}
+@media (forced-colors: active) {
+  .loading-spinner { border-color: CanvasText; border-top-color: Highlight; forced-color-adjust: none; }
+  .skeleton { background: Canvas; border: 1px solid CanvasText; }
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="inline"><span class="story-label">行内</span><div class="rail">
+<div class="box" style="display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center">
+  <span class="loading" role="status" aria-live="polite">
+    <span class="loading-spinner" aria-hidden="true"></span>
+    <span class="loading-text">加载中…</span>
+  </span>
+  <span class="loading loading--sm" role="status" aria-live="polite">
+    <span class="loading-spinner" aria-hidden="true"></span>
+    <span class="loading-text">同步中…</span>
+  </span>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="block"><span class="story-label">区块</span><div class="rail">
+<div class="box">
+  <div class="loading loading--block" role="status" aria-live="polite">
+    <span class="loading-spinner" aria-hidden="true"></span>
+    <span class="loading-text">正在读取设备列表…</span>
+  </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="skeleton"><span class="story-label">骨架</span><div class="rail">
+<div class="box" style="display:flex;flex-direction:column;gap:var(--space-2)">
+  <span class="skeleton skeleton--title" style="width:45%"></span>
+  <span class="skeleton skeleton--text" style="width:92%"></span>
+  <span class="skeleton skeleton--text" style="width:78%"></span>
+</div>
+</div></section>
+</div>
+</main>
+  <script src="_theme.js"></script>
+</body>
+</html>

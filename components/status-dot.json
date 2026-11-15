@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "StatusDot",
+  "slug": "status-dot",
+  "confidence": "high",
+  "semanticTypeCandidates": ["status", "indicator"],
+  "variantDimensions": ["tone", "size", "pulse"],
+  "representativeVariants": [
+    { "tone": "ok", "size": "md" },
+    { "tone": "warn", "size": "md" },
+    { "tone": "err", "size": "md" },
+    { "tone": "info", "size": "md" },
+    { "tone": "muted", "size": "md" },
+    { "tone": "ok", "size": "sm" },
+    { "tone": "ok", "size": "lg" },
+    { "tone": "ok", "size": "md", "pulse": true }
+  ],
+  "anatomy": ["root"],
+  "structurePatterns": [
+    "decorative-aria-hidden-dot-next-to-text",
+    "never-carries-meaning-alone"
+  ],
+  "usageHints": ["设备在线状态", "任务进行中", "实时数据指示"],
+  "doNotInvent": ["icon-based status", "multi-color gradient dot", "dot with count"],
+  "unknowns": []
+}

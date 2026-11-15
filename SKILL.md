@@ -1,6 +1,6 @@
 ---
 name: "小亮主题 (Xiao Liang Theme)"
-description: 个人极简干净设计系统，提供浅色/深色双模式、纯 CSS 变量 Token、图标形变与 27 个基础组件规范。激活此 Skill 后，可直接使用小亮主题生成页面、组件或视觉方案。
+description: 个人极简干净设计系统，提供浅色/深色双模式、纯 CSS 变量 Token、图标形变与 31 个基础组件规范。激活此 Skill 后，可直接使用小亮主题生成页面、组件或视觉方案。
 user-invocable: true
 ---
 
@@ -242,6 +242,10 @@ user-invocable: true
 - Tabs（ARIA 标签切换，依赖 theme.js 的 XL.initTabs）
 - Accordion（原生 details/summary；引入 theme.js 后增加高度过渡）
 - Breadcrumb（面包屑导航，纯 CSS）
+- StatusDot（状态点，纯色圆点配 `aria-hidden`，语义必须由旁侧文字承载）
+- Empty（空状态：图标＋标题＋说明＋可选操作，`.empty--sm` 紧凑、`.empty--error` 错误态）
+- Loading（`.loading` 行内／`.loading--block` 区块居中／`.skeleton` 骨架条，`role="status"` + `aria-live`）
+- Segmented（互斥视图切换，`role="group"` + `aria-pressed`，**不要冒充 tablist**）
 
 ---
 
@@ -288,7 +292,7 @@ user-invocable: true
 ```
 小亮主题/
 ├── colors_and_type.css      # Token 与排版工具类（浅色/深色双模式）
-├── components.css           # 27 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
+├── components.css           # 31 个组件样式聚合（类名 .btn / .alert / .input / .card / .tag 等）
 ├── utilities.css           # 工具类（间距/圆角/阴影/容器/弹性/栅格，由 build-utilities.mjs 生成）
 ├── css.json                 # Token 的 JSON 投影（light / dark）
 ├── theme.js                # 零依赖交互脚本（Modal / Drawer / Toast / Tabs，暴露 window.XL）
@@ -298,7 +302,7 @@ user-invocable: true
 ├── build-a11y-report.mjs    # 重新生成 accessibility-report.json（WCAG 2.1 AA 对比度校验）
 ├── audit-a11y.mjs           # 组件级/页面级 ARIA 审计（启发式静态检查）
 ├── components/              # 各组件结构化定义（index.json + *.json）
-├── preview/                 # 预览页（index.html + 27 个组件页 + 4 个页面模板 + tokens.html）
+├── preview/                 # 预览页（index.html + 31 个组件页 + 4 个页面模板 + tokens.html）
 ├── ui_kits/website/         # UI Kit 展示页与质量报告
 ├── assets/icons/            # 图标运行时（Lucide v1.8.0 + morphicons 1.7.1，均为 vendored 产物）
 ├── assets/morph-icons.js    # 图标形变适配器（白名单 + 触发器 + 无障碍 + 动效映射）

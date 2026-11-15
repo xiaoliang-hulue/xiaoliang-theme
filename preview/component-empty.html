@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; flex-direction: column; min-width: 0; gap: var(--space-3); align-items: stretch; padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.box { border: 1px dashed var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+
+/* 空状态：图标 + 标题 + 说明 + 可选操作。标题必填，说明与操作可选。 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+}
+.empty-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-text-subtle);
+  flex-shrink: 0;
+}
+.empty-title {
+  font-size: var(--text-base);
+  line-height: 24px;
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+}
+.empty-hint {
+  max-width: 44ch;
+  font-size: var(--text-sm);
+  line-height: 22px;
+  color: var(--color-text-muted);
+}
+.empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+/* 紧凑版：用于卡片内、表格内 */
+.empty--sm { padding: var(--space-5) var(--space-3); }
+.empty--sm .empty-icon { width: 28px; height: 28px; }
+.empty--sm .empty-title { font-size: var(--text-sm); }
+
+/* 错误态：把图标与标题压到危险色，其余不变 */
+.empty--error .empty-icon,
+.empty--error .empty-title { color: var(--error); }
+@media (forced-colors: active) {
+  .empty-icon { forced-color-adjust: none; color: CanvasText; }
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="default"><span class="story-label">默认</span><div class="rail">
+<div class="box">
+  <div class="empty">
+    <i data-lucide="inbox" class="empty-icon" aria-hidden="true"></i>
+    <p class="empty-title">还没有设备</p>
+    <p class="empty-hint">接入第一个传感器后，这里会显示实时数据与在线状态。</p>
+    <div class="empty-actions">
+      <button class="btn btn-primary btn-sm" type="button">添加设备</button>
+    </div>
+  </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="title-only"><span class="story-label">仅标题</span><div class="rail">
+<div class="box">
+  <div class="empty">
+    <p class="empty-title">暂无告警</p>
+  </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="compact"><span class="story-label">紧凑</span><div class="rail">
+<div class="box">
+  <div class="empty empty--sm">
+    <p class="empty-title">没有匹配的记录</p>
+    <p class="empty-hint">换个关键词，或清空筛选条件。</p>
+  </div>
+</div>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="error"><span class="story-label">错误</span><div class="rail">
+<div class="box">
+  <div class="empty empty--error">
+    <p class="empty-title">加载失败</p>
+    <p class="empty-hint">网络请求超时，请稍后重试。</p>
+    <div class="empty-actions">
+      <button class="btn btn-secondary btn-sm" type="button">重试</button>
+    </div>
+  </div>
+</div>
+</div></section>
+</div>
+</main>
+  <script src="../assets/icons/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+  <script src="_theme.js"></script>
+</body>
+</html>

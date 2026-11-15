@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+/* Page scaffold — NOT extracted */
+body { margin: 0; padding: var(--space-3); background: var(--color-surface); font-family: var(--font-sans); color: var(--color-text); }
+.specimen { max-width: 100%; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+.stage { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-3); background: var(--color-surface-muted); }
+.story { display: grid; grid-template-columns: 92px minmax(0,1fr); align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }
+.story-label { font-size: var(--text-xs); color: var(--color-text-secondary); text-transform: uppercase; width: 92px; min-width: 0; max-width: 92px; flex-shrink: 0; white-space: normal; overflow: hidden; overflow-wrap: anywhere; line-height: 1.25; }
+.rail { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; padding: var(--space-2); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface-muted); }
+.rail-col { flex-direction: column; align-items: stretch; }
+.status-line { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text-secondary); }
+.divider { border: none; border-top: 1px solid var(--color-border-subtle); margin: var(--space-1) 0; }
+@media(max-width:460px) { .story { grid-template-columns: 1fr; gap: var(--space-2); } .story-label { width: auto; max-width: none; } }
+
+/* @component-css-start */
+/* Component definitions — extracted to components.css by deterministic script */
+
+/* 状态点：纯色圆点，语义只靠颜色 + 文字，不单独承载信息（配 aria-hidden，旁侧必有文字） */
+.status-dot {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-text-muted);
+}
+.status-dot--ok    { background: var(--success); }
+.status-dot--warn  { background: var(--warning); }
+.status-dot--err   { background: var(--error); }
+.status-dot--info  { background: var(--info); }
+.status-dot--muted { background: var(--color-text-muted); }
+
+/* 尺寸 */
+.status-dot--sm { width: 6px; height: 6px; }
+.status-dot--lg { width: 10px; height: 10px; }
+
+/* 呼吸：用于「实时数据」这类持续状态，静态截图无意义，需同时提供文字状态 */
+.status-dot--pulse { animation: xl-dot-breathe var(--motion-duration-emphasis) var(--motion-ease-standard) infinite; }
+@keyframes xl-dot-breathe {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot--pulse { animation: none; opacity: 1; }
+}
+@media (forced-colors: active) {
+  .status-dot { border: 1px solid CanvasText; forced-color-adjust: none; background: Highlight; }
+}
+/* @component-css-end */
+</style>
+</head>
+<body>
+<main class="specimen">
+<div class="stage">
+<section class="story" data-evidence-sample="semantic"><span class="story-label">语义</span><div class="rail">
+<span class="status-line"><span class="status-dot status-dot--ok" aria-hidden="true"></span>在线</span>
+<span class="status-line"><span class="status-dot status-dot--warn" aria-hidden="true"></span>延迟偏高</span>
+<span class="status-line"><span class="status-dot status-dot--err" aria-hidden="true"></span>离线</span>
+<span class="status-line"><span class="status-dot status-dot--info" aria-hidden="true"></span>同步中</span>
+<span class="status-line"><span class="status-dot status-dot--muted" aria-hidden="true"></span>未启用</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="sizes"><span class="story-label">尺寸</span><div class="rail">
+<span class="status-line"><span class="status-dot status-dot--ok status-dot--sm" aria-hidden="true"></span>sm 6px</span>
+<span class="status-line"><span class="status-dot status-dot--ok" aria-hidden="true"></span>md 8px</span>
+<span class="status-line"><span class="status-dot status-dot--ok status-dot--lg" aria-hidden="true"></span>lg 10px</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="pulse"><span class="story-label">呼吸</span><div class="rail">
+<span class="status-line"><span class="status-dot status-dot--ok status-dot--pulse" aria-hidden="true"></span>实时采集中</span>
+</div></section>
+<hr class="divider">
+<section class="story" data-evidence-sample="list"><span class="story-label">列表</span><div class="rail rail-col">
+<span class="status-line"><span class="status-dot status-dot--ok" aria-hidden="true"></span>温湿度传感器 · 在线</span>
+<span class="status-line"><span class="status-dot status-dot--warn" aria-hidden="true"></span>烟感传感器 · 信号弱</span>
+<span class="status-line"><span class="status-dot status-dot--err" aria-hidden="true"></span>网关 A3 · 离线 12 分钟</span>
+</div></section>
+</div>
+</main>
+  <script src="_theme.js"></script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-15T06:36:08.719Z",
+  "generatedAt": "2026-11-15T06:46:01.375Z",
   "scope": "preview/component-*.html + preview/page-*.html",
   "summary": {
-    "filesScanned": 31,
+    "filesScanned": 35,
     "findings": {
       "error": 0,
       "warning": 0,

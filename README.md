@@ -335,7 +335,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 |------|------|
 | `colors_and_type.css` | Token 定义与排版工具类（浅色/深色双模式） |
 | `css.json` | Token 的 JSON 投影（含 light / dark） |
-| `components.css` | 聚合后的组件样式（27 个组件，类名 `.btn` / `.alert` 等） |
+| `components.css` | 聚合后的组件样式（31 个组件，类名 `.btn` / `.alert` 等） |
 | `utilities.css` | 工具类（间距/圆角/阴影/容器/弹性/栅格，由 `build-utilities.mjs` 生成） |
 | `components/` | 各组件的结构化定义（`index.json` + `*.json`） |
 | `theme.js` | 零依赖交互脚本（Modal / Drawer / Toast / Tabs / Accordion，暴露 `window.XL`） |
@@ -345,7 +345,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | `assets/icon-animations.css` | 动画图标 CSS（**生成物**，勿手改；由 `build-icon-animations.mjs` 从 lucide-animated 提取转写） |
 | `assets/icon-animations.js` | 动画图标极薄运行时（仅建 SVG 与设 `pathLength="1"`，动画全在 CSS） |
 | `preview/index.html` | 主题总览预览页 |
-| `preview/component-*.html` | 27 个组件预览页 |
+| `preview/component-*.html` | 31 个组件预览页 |
 | `preview/tokens.html` | 设计 Token 参考页（颜色/字号/间距/圆角/阴影/动效/断点） |
 | `audit-a11y.mjs` | 组件级 / 页面级 ARIA 审计脚本（启发式静态检查） |
 | `component-a11y-report.json` | 组件级 ARIA 审计报告 |
@@ -370,7 +370,7 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 
 ## 组件清单
 
-已提供预览页的组件（共 27 个）：
+已提供预览页的组件（共 31 个）：
 
 | 组件 | 预览文件 | 说明 |
 |------|----------|------|
@@ -401,6 +401,10 @@ document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 | Stepper | `preview/component-stepper.html` | 水平 / 垂直 / 已完成·进行中·未开始 |
 | Drawer | `preview/component-drawer.html` | 右 / 左 / 底部三向抽屉（依赖 theme.js） |
 | Icon Morph | `preview/component-morph-icon.html` | 图标路径形变：23 组策展配对 / 4 种触发器 / 5 档尺寸（依赖 morph.min.js） |
+| Status Dot | `preview/component-status-dot.html` | 语义色 5 种 / 三档尺寸 / 呼吸（`--pulse`）|
+| Empty | `preview/component-empty.html` | 图标＋标题＋说明＋操作 / 紧凑 / 错误态 |
+| Loading | `preview/component-loading.html` | 行内 / 区块居中 / 骨架条（复用 `btn-spin` 与 `xl-shimmer`）|
+| Segmented | `preview/component-segmented.html` | 互斥切换 / 小尺寸 / 撑满等分 / 禁用（`role=group` + `aria-pressed`）|
 
 组件样式已聚合到 `components.css`（类名规范：`.btn` / `.alert` / `.input` / `.card` / `.tag` 等），可直接引入或按需复制。各组件的结构化定义见 `components/*.json`。
 
@@ -468,7 +472,7 @@ UI Kit 展示页 `ui_kits/website/index.html` 综合使用了上述全部组件�
 
 - 页面模板（列表页、详情页、表单页、仪表盘）—— 已完成
 - UI Kit 展示页 —— 已完成
-- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Drawer、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb、Progress、Avatar、Badge、Stepper、Icon Morph（共 27 个）—— 已完成
+- 组件覆盖：Button、Input、Textarea、Select、Card、Tag、Alert、Table、Form、Checkbox、Radio、Switch、Pagination、Dropdown、Modal、Drawer、Tooltip、Toast、TopNav、SideNav、Tabs、Accordion、Breadcrumb、Progress、Avatar、Badge、Stepper、Icon Morph（共 31 个）—— 已完成
 - 可访问性补强：组件级 ARIA 审计脚本与报告、设计 Token 参考页、打印 / RTL / 高对比兜底 —— 已完成
 
 ## 许可

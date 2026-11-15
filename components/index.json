@@ -28,6 +28,10 @@
     { "slug": "avatar", "name": "Avatar", "semanticType": "media" },
     { "slug": "badge", "name": "Badge", "semanticType": "status" },
     { "slug": "stepper", "name": "Stepper", "semanticType": "navigation" },
-    { "slug": "drawer", "name": "Drawer", "semanticType": "overlay" }
+    { "slug": "drawer", "name": "Drawer", "semanticType": "overlay" },
+    { "slug": "status-dot", "name": "StatusDot", "semanticType": "status" },
+    { "slug": "empty", "name": "Empty", "semanticType": "feedback" },
+    { "slug": "loading", "name": "Loading", "semanticType": "feedback" },
+    { "slug": "segmented", "name": "Segmented", "semanticType": "navigation" }
   ]
 }

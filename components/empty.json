@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "sourceKind": "structured-spec",
+  "name": "Empty",
+  "slug": "empty",
+  "confidence": "high",
+  "semanticTypeCandidates": ["feedback", "placeholder"],
+  "variantDimensions": ["size", "tone"],
+  "representativeVariants": [
+    { "size": "md", "tone": "default" },
+    { "size": "sm", "tone": "default" },
+    { "size": "md", "tone": "error" }
+  ],
+  "anatomy": ["root", "icon", "title", "hint", "actions"],
+  "structurePatterns": [
+    "icon-title-hint-stacked-center",
+    "title-required-hint-optional",
+    "actions-optional"
+  ],
+  "usageHints": ["列表无数据", "首次使用引导", "搜索无结果", "加载失败"],
+  "doNotInvent": ["illustration-style empty art", "animated empty state", "empty with form inside"],
+  "unknowns": []
+}

@@ -4,6 +4,18 @@
 
 ---
 
+## [1.9.0] - 2026-11-15
+
+**新增 4 个通用原子组件**（来源：毕设前端自造、主题空缺的那四个）。全部为纯新增，不改动任何既有组件的既有规则，升级无破坏性。
+
+- **StatusDot `.status-dot`**：5 种语义色（`--ok` / `--warn` / `--err` / `--info` / `--muted`）、三档尺寸（`--sm` 6px / 默认 8px / `--lg` 10px）、`--pulse` 呼吸（`xl-dot-breathe`，reduced-motion 下自动停）。契约：圆点必须配 `aria-hidden="true"`，语义由旁侧文字承载，不允许单靠颜色传达状态。
+- **Empty `.empty`**：图标＋标题＋说明＋可选操作；`.empty--sm` 紧凑版用于卡片/表格内，`.empty--error` 错误态。图标走 `data-lucide`，不自造 SVG。
+- **Loading `.loading` / `.skeleton`**：行内（`.loading`）、区块居中（`.loading--block`）、骨架条（`.skeleton` / `--text` / `--title`，宽度行内控制）。复用既有的 `btn-spin` 与 `xl-shimmer` 关键帧，不新增重复动画；容器 `role="status"` + `aria-live="polite"`；reduced-motion 下停转并降级为静态灰。
+- **Segmented `.segmented`**：互斥视图切换，`.segmented-item` + `.is-active`；小尺寸 `.segmented--sm`、撑满等分 `.segmented--block`、`[disabled]` 项。语义用 `role="group"` + `aria-pressed`，**刻意不冒充 `tablist`**（不是标签页）。
+- **深色下的选中态返工**：初版 `.is-active` 用 `surface-elevated` 抬升，实测深色轨道 `#1a1a1a` 与选中 `#1e1e1e` 只差 4 级、几乎不可见。改为主题既有的 active 约定——`primary-subtle` 底 + 主色字（深色实测 `#162b66` 底 / `#6ea8ff` 字），与导航 active 一致。
+- **登记**：`components/{status-dot,empty,loading,segmented}.json` 规格 + `components/index.json` 注册（26 → 30 条）；组件预览页 27 → **31**，README / SKILL 计数同步。
+- **验证**：`npm run audit` 四门绿（ARIA 扫描 35 页，error/warning/info 全 0；对比度 44 项 42 通过 2 豁免）；`npx playwright test` 26/26；四个组件深浅两版逐页截图目视确认。
+
 ## [1.8.3] - 2026-10-28
 
 **修复：`.card` 基类缺少默认内边距（裸用破版）**
